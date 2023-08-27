@@ -1,0 +1,19 @@
+:root { 
+  background-color: #ec9a9a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+ 
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center; 
+   background-color: aqua;
+}
+
+ 
