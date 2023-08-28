@@ -1,8 +1,8 @@
- import DropDownBookList from "../components/drop-down-list/dropDownList";
+import BookList from "../components/book-list/bookList";
 const Home: React.FC = () => {
   return (
     <>
-      <DropDownBookList/> 
+      <BookList />
     </>
   );
 };
