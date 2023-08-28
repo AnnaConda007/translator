@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { List, ListItem, ListItemText, Divider } from "@mui/material";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { SET_SELECTED_BOOK } from "../../redux/bookReduser";
 interface IBooks {
   [key: string]: string;
 }
-const DropDownList: React.FC = () => {
+const DropDownBookList: React.FC = () => {
   const dispatch = useDispatch();
   const [books, setBooks] = useState<IBooks>({});
 
@@ -33,16 +35,19 @@ const DropDownList: React.FC = () => {
     });
   };
   return (
-    <div>
-      <ul>
-        {Object.keys(books).map((bookName) => (
-          <li key={bookName} onClick={() => handleBookClick(bookName)}>
-            {bookName}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <List>
+      {Object.keys(books).map((bookName) => (
+        <React.Fragment key={bookName}>
+          <ListItem onClick={() => handleBookClick(bookName)}>
+            <ListItemText primary={bookName} />
+          </ListItem>
+          <Divider />
+        </React.Fragment>
+      ))}
+    </List>
   );
 };
 
-export default DropDownList;
+export default DropDownBookList;
+
+ 

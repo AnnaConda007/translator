@@ -1,16 +1,17 @@
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./routes/Home";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import DropDownList from "./components/drop-down-list/dropDownList";
-import NewsText from "./components/selected-Book-content/SelectedBookContent";
-import AddNewBookInput from "./components/add-new-book-Input/AddNewBookInput";
 function App() {
   return (
     <>
       <Provider store={store}>
-        <DropDownList />
-        <NewsText />
-        <AddNewBookInput />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
     </>
   );
