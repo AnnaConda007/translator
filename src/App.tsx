@@ -1,11 +1,13 @@
 import "./App.css";
-import NewsText from "./components/NewsText/NewsText";
-import InputFile from "./components/inputFile/inputFile";
+import DropDownList from "./components/drop-down-list/dropDownList";
+import NewsText from "./components/selected-Book-content/SelectedBookContent";
+import AddNewBookInput from "./components/add-new-book-Input/AddNewBookInput";
 function App() {
   return (
     <>
+      <DropDownList />
       <NewsText />
-      <InputFile />
+      <AddNewBookInput />
     </>
   );
 }

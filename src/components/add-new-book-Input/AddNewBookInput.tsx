@@ -1,4 +1,4 @@
-const InputFile: React.FC = () => {
+const AddNewBookInput: React.FC = () => {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files: FileList | null = event.target.files;
     if (!files || files.length < 0) return;
@@ -9,11 +9,15 @@ const InputFile: React.FC = () => {
       const arrayBuffer = e.target.result as ArrayBuffer;
       const decoder = new TextDecoder("windows-1251");
       const content = decoder.decode(arrayBuffer);
-      fetch("https://books-31eba-default-rtdb.firebaseio.com/books/.json", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(content),
-      });
+      const titleBook = prompt();
+      fetch(
+        `https://books-31eba-default-rtdb.firebaseio.com/books/${titleBook}.json`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(content),
+        }
+      );
     };
     reader.readAsArrayBuffer(file);
   };
@@ -21,4 +25,4 @@ const InputFile: React.FC = () => {
   return <input type="file" accept=".txt" onChange={handleFileUpload} />;
 };
 
-export default InputFile;
+export default AddNewBookInput;
