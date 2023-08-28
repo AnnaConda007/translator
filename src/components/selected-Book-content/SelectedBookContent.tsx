@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 const NewsText: React.FC = () => {
-  const selectedBook = "";
+  const selectedBook = useSelector((state) => state.book.selectedBook);
+
   return (
     <div>
       {selectedBook.split("\n").map((paragraph, idx1) => (

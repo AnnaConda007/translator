@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { SET_SELECTED_BOOK } from "../../redux/bookReduser";
 interface IBooks {
   [key: string]: string;
 }
 const DropDownList: React.FC = () => {
+  const dispatch = useDispatch();
   const [books, setBooks] = useState<IBooks>({});
-  const [selectedBook, setSelectedBook] = useState<string>("");
 
   useEffect(() => {
     const getBooks = async (): Promise<void> => {
@@ -26,8 +27,10 @@ const DropDownList: React.FC = () => {
   }, []);
 
   const handleBookClick = (bookName: string) => {
-    setSelectedBook(books[bookName]);
-    console.log(books[bookName]);
+    dispatch({
+      type: SET_SELECTED_BOOK,
+      payload: books[bookName],
+    });
   };
   return (
     <div>
