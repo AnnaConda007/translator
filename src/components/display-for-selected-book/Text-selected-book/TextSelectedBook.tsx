@@ -4,7 +4,7 @@ type TextSelectedTextProps = {
 const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   currentPageText,
 }) => {
-  return (
+   return (
     <div>
       {currentPageText.split("\n").map((paragraph, idx1) => (
         <span key={idx1}>

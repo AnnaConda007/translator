@@ -23,6 +23,10 @@ const useFetchBooksFromDatabase = () => {
           }
           const bookList: IBooks = await fetchBookList.json();
           dispatch(setBooks(bookList));
+             
+          console.log(bookList);
+          console.log(bookList["Гарри поттер"]);
+
           dispatch(setTitleList(Object.keys(bookList)));
         } catch (error) {
           console.error("Ошибка при получении данных с книгами");

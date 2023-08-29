@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
 import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
+import PaginateButton from "./paginate-button/PaginateButton";
+import { ButtonDirection } from "./enum";
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };
 const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
   loadedBook,
 }) => {
+  const lastSavedPageFromlocalStorage: string | null =
+    localStorage.getItem("currentPageNumber");
+  const lastSavedBoorTitleFromlocalStorage: string | null =
+    localStorage.getItem("currentBook");
+  const lastSavedPage: number =
+    lastSavedPageFromlocalStorage && lastSavedBoorTitleFromlocalStorage
+      ? parseInt(lastSavedPageFromlocalStorage)
+      : 0;
   const [bookPages, setBookPages] = useState<string[]>([]);
-  const [currentPageNumber, setСurrentPageNumber] = useState<number>(0);
+  const [currentPageNumber, setCurrentPageNumber] =
+    useState<number>(lastSavedPage);
   const [currentPageText, setCurrentPageText] = useState<string>("");
-
   useEffect(() => {
     if (!loadedBook) return;
     const pages: string[] = paginateText(loadedBook);
@@ -26,12 +36,18 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
     <>
       <TextSelectedBook currentPageText={currentPageText} />
       <div>
-        <button onClick={() => setСurrentPageNumber(currentPageNumber - 1)}>
-          назад
-        </button>
-        <button onClick={() => setСurrentPageNumber(currentPageNumber + 1)}>
-          вперед
-        </button>
+        <PaginateButton
+          setCurrentPageNumber={setCurrentPageNumber}
+          buttonValue={"back"}
+          buttonDirection={ButtonDirection.BACK}
+          currentPageNumber={currentPageNumber}
+        />
+        <PaginateButton
+          setCurrentPageNumber={setCurrentPageNumber}
+          buttonValue={"next"}
+          buttonDirection={ButtonDirection.NEXT}
+          currentPageNumber={currentPageNumber}
+        />
       </div>
     </>
   );

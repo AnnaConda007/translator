@@ -13,6 +13,7 @@ const BookTitlesList: React.FC = () => {
   );
   const handleBookClick = (bookName: string) => {
     navigate(`/${bookName}`);
+    localStorage.setItem("currentBook", bookName);
   };
   return (
     <List>
