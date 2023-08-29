@@ -1,20 +1,18 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { List, ListItem, ListItemText, Divider } from "@mui/material";
-import { setBook } from "../../../redux/selectedBookSlice";
 import useFetchBooksFromDatabase from "../../../hooks/useFetchBooksFromDatabase";
 
 const BookTitlesList: React.FC = () => {
-  const dispatch = useDispatch();
-  const loadedBooks = useSelector((state: RootStoreState) => state.books);
+  useFetchBooksFromDatabase();
+  const navigate = useNavigate();
   const filteredBookTitles = useSelector(
     (state: RootStoreState) => state.titleList
   );
-  useFetchBooksFromDatabase();
-
   const handleBookClick = (bookName: string) => {
-    dispatch(setBook(loadedBooks[bookName]));
+    navigate(`/${bookName}`);
   };
   return (
     <List>
