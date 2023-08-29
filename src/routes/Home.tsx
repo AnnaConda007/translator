@@ -1,11 +1,8 @@
-import BookList from "../components/book-list/bookList";
-import InputSearchingByBookTitle from '../components/input-searching-by-book-title/inputSearchingByBookTitle';
+import BooksLibrary from "../components/books-library/BooksLibrary";
 const Home: React.FC = () => {
   return (
     <>
-    <InputSearchingByBookTitle/>
-      <BookList />
-      
+      <BooksLibrary />
     </>
   );
 };

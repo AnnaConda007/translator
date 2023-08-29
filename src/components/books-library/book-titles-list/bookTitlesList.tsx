@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootStoreState } from "../../redux/store";
+import { RootStoreState } from "../../../redux/store";
 import { List, ListItem, ListItemText, Divider } from "@mui/material";
-import { setBook } from "../../redux/selectedBookSlice";
-import useFetchBooksFromDatabase from "../../hooks/useFetchBooksFromDatabase";
+import { setBook } from "../../../redux/selectedBookSlice";
+import useFetchBooksFromDatabase from "../../../hooks/useFetchBooksFromDatabase";
 
-const BookList: React.FC = () => {
+const BookTitlesList: React.FC = () => {
   const dispatch = useDispatch();
   const loadedBooks = useSelector((state: RootStoreState) => state.books);
   const filteredBookTitles = useSelector(
@@ -30,4 +30,4 @@ const BookList: React.FC = () => {
   );
 };
 
-export default BookList;
+export default BookTitlesList;

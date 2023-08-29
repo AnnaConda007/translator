@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootStoreState } from "../../redux/store";
-import { setTitleList } from "../../redux/listOfBookTitlesSlice";
+import { RootStoreState } from "../../../redux/store";
+import { setTitleList } from "../../../redux/listOfBookTitlesSlice";
 import { TextField } from "@mui/material";
 
 const InputSearchingByBookTitle: React.FC = () => {
@@ -21,7 +21,7 @@ const InputSearchingByBookTitle: React.FC = () => {
   return (
     <TextField
       id="standard-basic"
-      label="Standard"
+      label="Найти книгу"
       variant="standard"
       value={inputValue}
       onChange={(e) => filterBooksByTitle(e.target.value)}
