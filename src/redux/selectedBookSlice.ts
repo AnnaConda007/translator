@@ -4,7 +4,7 @@ interface IState {
   selectedBook: string;
 }
 const initialState: IState = {
-  selectedBook: ""
+  selectedBook: "",
 };
 
 const selectedBookSlice = createSlice({
@@ -19,3 +19,7 @@ const selectedBookSlice = createSlice({
 
 export const { setBook } = selectedBookSlice.actions;
 export default selectedBookSlice.reducer;
+
+
+
+

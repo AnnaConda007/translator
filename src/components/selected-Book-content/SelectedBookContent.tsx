@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
-
-const NewsText: React.FC = () => {
-  const selectedBook = useSelector((state) => state.book.selectedBook);
+import { RootStoreState } from "../../redux/store";
+const SelectedBook: React.FC = () => {
+  const selectedBook = useSelector(
+    (state: RootStoreState) => state.book.selectedBook
+  );
 
   return (
     <div>
@@ -24,4 +26,4 @@ const NewsText: React.FC = () => {
   );
 };
 
-export default NewsText;
+export default SelectedBook;

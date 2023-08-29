@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
- import { IBooks } from "../redux/allLoadedBooksSlice";
-import { setBooks } from '../redux/allLoadedBooksSlice';
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { IBooks } from "../redux/allLoadedBooksSlice";
+import { setBooks } from "../redux/allLoadedBooksSlice";
+import { setTitleList } from "../redux/listOfBookTitlesSlice";
+
 const useFetchBooksFromDatabase = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -15,8 +17,7 @@ const useFetchBooksFromDatabase = () => {
         }
         const bookList: IBooks = await fetchBookList.json();
         dispatch(setBooks(bookList));
-
-       
+        dispatch(setTitleList(Object.keys(bookList)));
       } catch (error) {
         console.error("Ошибка при получении данных с книгами");
       }

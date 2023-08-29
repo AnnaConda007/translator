@@ -1,25 +1,24 @@
-import { useSelector } from "react-redux";
-import { List, ListItem, ListItemText, Divider } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
- import { setBook } from '../../redux/selectedBookSlice';
+import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../redux/store";
+import { List, ListItem, ListItemText, Divider } from "@mui/material";
+import { setBook } from "../../redux/selectedBookSlice";
 import useFetchBooksFromDatabase from "../../hooks/useFetchBooksFromDatabase";
 
 const BookList: React.FC = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state: RootStoreState) => state.books);
-
+  const loadedBooks = useSelector((state: RootStoreState) => state.books);
+  const filteredBookTitles = useSelector(
+    (state: RootStoreState) => state.titleList
+  );
   useFetchBooksFromDatabase();
 
   const handleBookClick = (bookName: string) => {
-    console.log(books[bookName])
-    dispatch(setBook(books[bookName]));
-
+    dispatch(setBook(loadedBooks[bookName]));
   };
   return (
     <List>
-      {Object.keys(books).map((bookName) => (
+      {filteredBookTitles.map((bookName) => (
         <React.Fragment key={bookName}>
           <ListItem onClick={() => handleBookClick(bookName)}>
             <ListItemText primary={bookName} />
