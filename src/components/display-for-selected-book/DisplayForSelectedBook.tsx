@@ -1,9 +1,10 @@
-import { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
+import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };
-const DisplayForSelectedBook: FC<DisplayForSelectedBookProps> = ({
+const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
   loadedBook,
 }) => {
   const [bookPages, setBookPages] = useState<string[]>([]);
@@ -12,7 +13,6 @@ const DisplayForSelectedBook: FC<DisplayForSelectedBookProps> = ({
 
   useEffect(() => {
     if (!loadedBook) return;
-    console.log(1);
     const pages: string[] = paginateText(loadedBook);
     setBookPages(pages);
   }, [loadedBook]);
@@ -20,29 +20,11 @@ const DisplayForSelectedBook: FC<DisplayForSelectedBookProps> = ({
   useEffect(() => {
     if (!bookPages.length) return;
     setCurrentPageText(bookPages[currentPageNumber]);
-    console.log(2);
   }, [bookPages, currentPageNumber]);
- 
 
   return (
-    <div>
-         {currentPageText.split("\n").map((paragraph, idx1) => (
-        <span key={idx1}>
-          {paragraph.split(/\s+/).map((word, idx2) => (
-            <span
-              key={idx2}
-              onClick={() => console.log(word)}
-              style={{ cursor: "pointer", marginRight: "5px" }}
-            >
-              {word}
-              &nbsp;
-            </span>
-          ))}
-          <br />
-        </span>
-      ))}
-      <div> 
-      </div>
+    <>
+      <TextSelectedBook currentPageText={currentPageText} />
       <div>
         <button onClick={() => setСurrentPageNumber(currentPageNumber - 1)}>
           назад
@@ -51,7 +33,7 @@ const DisplayForSelectedBook: FC<DisplayForSelectedBookProps> = ({
           вперед
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

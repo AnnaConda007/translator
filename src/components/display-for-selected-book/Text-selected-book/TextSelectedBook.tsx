@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import { RootStoreState } from "../../redux/store";
-const SelectedBook: React.FC = () => {
-  const selectedBook = useSelector(
-    (state: RootStoreState) => state.book.selectedBook
-  );
-
+type TextSelectedTextProps = {
+  currentPageText: string;
+};
+const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
+  currentPageText,
+}) => {
   return (
     <div>
-      {selectedBook.split("\n").map((paragraph, idx1) => (
+      {currentPageText.split("\n").map((paragraph, idx1) => (
         <span key={idx1}>
           {paragraph.split(/\s+/).map((word, idx2) => (
             <span
@@ -25,5 +24,4 @@ const SelectedBook: React.FC = () => {
     </div>
   );
 };
-
-export default SelectedBook;
+export default TextSelectedBook;
