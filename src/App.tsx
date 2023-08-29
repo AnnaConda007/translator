@@ -2,16 +2,16 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import { Provider } from "react-redux";
-import SelectedBookConten from "./routes/SelectedBookConten";
+import SelectedBookContent from "./routes/SelectedBookContent";
 import store from "./redux/store";
- function App() {
-   return (
+function App() {
+  return (
     <>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/:bookTitle" element={<SelectedBookConten />} />
+            <Route path="/:bookTitle" element={<SelectedBookContent />} />
           </Routes>
         </BrowserRouter>
       </Provider>
