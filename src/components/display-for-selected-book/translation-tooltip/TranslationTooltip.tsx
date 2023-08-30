@@ -1,24 +1,35 @@
 import { Popover } from "@mui/material";
-
+import { useState } from "react";
+import Button from "@mui/material/Button/Button";
+import AdditionalTranslationInput from './additional-translation-input/AdditionalTranslationInput';
 interface ITranslationPopover {
-  anchorEl: Element | null
-  setAnchorEl  :(el:HTMLSpanElement | null)=> void,
-  translatedWord:string
+  anchorEl: Element | null;
+  setAnchorEl: (el: HTMLSpanElement | null) => void;
+  translatedWord: string;
 }
 
 const TranslationPopover: React.FC<ITranslationPopover> = ({
-  anchorEl, setAnchorEl, translatedWord
+  anchorEl,
+  setAnchorEl,
+  translatedWord,
 }) => {
-  const handleClose = () => {
+  const [clickedNewTranslate, setClickedNewTranslate] = useState(false);
+
+  const handleClosePopover = () => {
     setAnchorEl(null);
+    setClickedNewTranslate(false)
   };
-  
-   return (
+
+  const handleNewTranslation = () => {
+    setClickedNewTranslate(true);
+  };
+
+  return (
     <>
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
-        onClose={handleClose}
+        onClose={handleClosePopover}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",
@@ -29,10 +40,13 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
         }}
       >
         <div>
-          <button> записать в словарь</button>
-          <button> перевести другое слово</button>
+          <Button variant="outlined"> записать в словарь</Button>
+          <Button variant="outlined" onClick={() => handleNewTranslation()}>
+             перевести другое слово
+          </Button>
           {translatedWord}
         </div>
+        {clickedNewTranslate ? <AdditionalTranslationInput /> : null}
       </Popover>
     </>
   );
