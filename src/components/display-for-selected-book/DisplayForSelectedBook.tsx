@@ -35,7 +35,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
 
   return (
     <>
-      <TextSelectedBook currentPageText={currentPageText} />
+      <TextSelectedBook currentPageText={currentPageText}/>
       <div>
         <PaginateButton
           setCurrentPageNumber={setCurrentPageNumber}

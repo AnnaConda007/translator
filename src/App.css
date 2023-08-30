@@ -1,6 +1,6 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto; 
-  padding: 0
+  /* основной котнейнер*/
+  max-width: 1120px;
+  height: 100%;
+  margin: 0 auto;
 }
- 

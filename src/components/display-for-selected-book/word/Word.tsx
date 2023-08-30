@@ -1,7 +1,6 @@
 import { translate } from "../../../utils/tranlslateAPI";
 interface IWord {
   word: string;
-  idx2: number;
   setTranslatedWord: (arg: string) => void;
   setclickedWord: (arg: string) => void;
   setAnchorEl: (arg: HTMLSpanElement) => void;
@@ -9,8 +8,7 @@ interface IWord {
 
 const Word: React.FC<IWord> = ({
   word,
-  idx2,
-  setTranslatedWord,
+   setTranslatedWord,
   setclickedWord,
   setAnchorEl,
 }) => {
@@ -28,8 +26,7 @@ const Word: React.FC<IWord> = ({
 
   return (
     <span
-      key={idx2}
-      style={{
+       style={{
         cursor: "pointer",
         marginRight: "5px",
         display: "inline-block",

@@ -19,8 +19,8 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
           <span key={idx1}>
             {paragraph.split(/\s+/).map((word, idx2) => (
               <Word
+                key={idx2}
                 word={word}
-                idx2={idx2}
                 setTranslatedWord={setTranslatedWord}
                 setclickedWord={setclickedWord}
                 setAnchorEl={setAnchorEl}
