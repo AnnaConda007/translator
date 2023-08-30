@@ -1,33 +1,41 @@
-interface ITranslationTooltip{ 
+import { Popover } from "@mui/material";
+
+interface ITranslationPopover {
+  anchorEl: Element | null
+  setAnchorEl  :(el:HTMLSpanElement | null)=> void,
   translatedWord:string
 }
-const TranslationTooltip : React.FC <ITranslationTooltip>= ({ translatedWord })=>{
-  return(
+
+const TranslationPopover: React.FC<ITranslationPopover> = ({
+  anchorEl, setAnchorEl, translatedWord
+}) => {
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+   return (
     <>
-      
-      <div
-        style={{
-          position: "absolute",
-          top: "-15px",
-          left: "0",
-          backgroundColor: "red",
-          border: "1px solid black",
-          zIndex: 1,
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
         }}
       >
-         <button> записать в словарь</button>
-         <button> перевести другое слово</button>
-        {translatedWord}
-      </div>
+        <div>
+          <button> записать в словарь</button>
+          <button> перевести другое слово</button>
+          {translatedWord}
+        </div>
+      </Popover>
     </>
- 
-  )
-}
+  );
+};
 
-
-
-export default TranslationTooltip 
-
-
-
- 
+export default TranslationPopover;

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { translate } from "../../../utils/tranlslateAPI";
-import TranslationTooltip from "../translation-tooltip/TranslationTooltip";
+import TranslationPopover from "../translation-tooltip/TranslationTooltip";
+import { Paper, Typography } from "@mui/material";
+import Word from "../word/Word";
 type TextSelectedTextProps = {
   currentPageText: string;
 };
@@ -9,39 +10,34 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
 }) => {
   const [translatedWord, setTranslatedWord] = useState<string>("");
   const [clickedWord, setclickedWord] = useState<string>("");
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
-  const handleWord = async (word: string) => {
-    const translation: string | null = await translate(word);
-    if (!translation) return;
-    setTranslatedWord(translation);
-    setclickedWord(word);
-  };
   return (
-    <div>
-      {currentPageText.split("\n").map((paragraph, idx1) => (
-        <span key={idx1}>
-          {paragraph.split(/\s+/).map((word, idx2) => (
-            <span
-              key={idx2}
-              style={{
-                cursor: "pointer",
-                marginRight: "5px",
-                display: "inline-block",
-                position: "relative",
-              }}
-              onClick={async () => handleWord(word)}
-            >
-              {word === clickedWord && translatedWord ? (
-                <TranslationTooltip translatedWord={translatedWord} />
-              ) : null}
-              {word}
-              &nbsp;
-            </span>
-          ))}
-          <br />
-        </span>
-      ))}
-    </div>
+    <Paper>
+      <Typography variant="body1">
+        {currentPageText.split("\n").map((paragraph, idx1) => (
+          <span key={idx1}>
+            {paragraph.split(/\s+/).map((word, idx2) => (
+              <Word
+                word={word}
+                idx2={idx2}
+                setTranslatedWord={setTranslatedWord}
+                setclickedWord={setclickedWord}
+                setAnchorEl={setAnchorEl}
+              />
+            ))}
+            <br />
+          </span>
+        ))}
+      </Typography>
+      {clickedWord && translatedWord ? (
+        <TranslationPopover
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          translatedWord={translatedWord}
+        />
+      ) : null}
+    </Paper>
   );
 };
 export default TextSelectedBook;

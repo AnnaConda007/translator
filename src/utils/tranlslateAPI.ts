@@ -20,17 +20,17 @@ interface ItranslationData {
 
 export const translate = async (word: string): Promise<string | null> => {
   try {
+    const formattedWord = word.replace(/[.,!?;]+/g, "").toLowerCase();
     const email: string = "annahrulkova@yandex.ru";
     const sourceLanguage: string = "ru";
     const targetLanguage: string = "en";
-    const url: string = `https://api.mymemory.translated.net/get?q=${word}&langpair=${sourceLanguage}|${targetLanguage}&de=${email}.ru`;
+    const url: string = `https://api.mymemory.translated.net/get?q=${formattedWord}&langpair=${sourceLanguage}|${targetLanguage}&de=${email}.ru`;
     const translationResponse: Response = await fetch(url);
     const translationData: ItranslationData = await translationResponse.json();
     const translatedWord: string = translationData.responseData.translatedText;
-
     return translatedWord;
   } catch (error) {
     console.error("Ошибка при запросе к API перевода ", error);
-    return null
+    return null;
   }
 };
