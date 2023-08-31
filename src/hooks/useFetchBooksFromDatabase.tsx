@@ -5,7 +5,7 @@ import { setBooks } from "../redux/allLoadedBooksSlice";
 import { setTitleList } from "../redux/listOfBookTitlesSlice";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
-
+import { dataBaseURL } from '../contains';
 const useFetchBooksFromDatabase = () => {
   const dispatch = useDispatch();
   const loadedBooks: IBooks = useSelector(
@@ -16,7 +16,7 @@ const useFetchBooksFromDatabase = () => {
       const fetchBooks = async () => {
         try {
           const fetchBookList: Response | null = await fetch(
-            `https://books-31eba-default-rtdb.firebaseio.com/books/.json`
+            `${dataBaseURL}books/.json`
           );
           if (!fetchBookList.ok) {
             throw new Error("Статус ответа при запросе к БД отличен от 'ок'");

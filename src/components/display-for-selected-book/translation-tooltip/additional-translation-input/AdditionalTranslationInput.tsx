@@ -1,26 +1,25 @@
 import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { translate } from "../../../../utils/tranlslateAPI";
-import { useDispatch } from "react-redux";
-import { addWord } from "../../../../redux/dictionarySlice";
-
-const AdditionalTranslationInput: React.FC = () => {
-  const dispatch = useDispatch();
+import ButtonAddToAddDtionary from "../../button-add-to-dictionary/ButtonAddTodiDtionary";
+import { useDispatch } from 'react-redux';
+import { setTranslationWord , setTranslatedWord} from '../../../../redux/translatedWordSlice';
+ const AdditionalTranslationInput: React.FC = () => {
+   const dispatch = useDispatch()
   const [value, setValue] = useState<string>("");
-  const [translatedWord, setTranslatedWord] = useState<string>("");
-
+  const [additionTranslatedWord, setAdditionTranslatedWord] = useState<string>(""); 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
   const handleTranslate = async (value: string) => {
     const translateResult: string | null = await translate(value);
     if (!translateResult) return;
-    setTranslatedWord(translateResult);
+    setAdditionTranslatedWord(translateResult);
+    dispatch(setTranslationWord(value))
+    dispatch(setTranslatedWord(translateResult))
+
   };
 
-  const handleAddWord = () => {
-    dispatch(addWord({ [value]: translatedWord }));
-  };
   return (
     <div>
       <div>
@@ -39,10 +38,8 @@ const AdditionalTranslationInput: React.FC = () => {
         </Button>
       </div>
       <div>
-        {translatedWord}
-        {translatedWord ? (
-          <Button variant="outlined" onClick={handleAddWord}>добавить в словарь</Button>
-        ) : null}
+        {additionTranslatedWord}
+        {additionTranslatedWord ? <ButtonAddToAddDtionary /> : null}
       </div>
     </div>
   );

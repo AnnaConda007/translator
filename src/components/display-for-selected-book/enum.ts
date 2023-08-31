@@ -1,4 +1,8 @@
- export enum ButtonDirection {
+export enum ButtonDirection {
   NEXT = "next",
-  BACK = "back"
+  BACK = "back",
+}
+export enum TypeAction {
+  REMOOVE = "remoove",
+  ADD = "add",
 }

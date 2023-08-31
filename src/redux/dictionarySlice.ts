@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-interface IEntry {
+export interface IEntry {
   [key: string]: string;
 }
 

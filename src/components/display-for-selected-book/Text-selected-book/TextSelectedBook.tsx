@@ -1,17 +1,20 @@
 import { useState } from "react";
 import TranslationPopover from "../translation-tooltip/TranslationPopover";
 import { Paper, Typography } from "@mui/material";
-import Word from "../word/Word";
+import Word from "../word/Word"; 
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { RootStoreState } from "../../../redux/store";
 type TextSelectedTextProps = {
   currentPageText: string;
 };
 const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   currentPageText,
 }) => {
-  const [translatedWord, setTranslatedWord] = useState<string>("");
   const [clickedWord, setclickedWord] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-
+   const translationWord = useSelector(
+    (state: RootStoreState) => state.translator.translationWord
+  );
   return (
     <Paper>
       <Typography variant="body1">
@@ -21,7 +24,6 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
               <Word
                 key={idx2}
                 word={word}
-                setTranslatedWord={setTranslatedWord}
                 setclickedWord={setclickedWord}
                 setAnchorEl={setAnchorEl}
               />
@@ -30,13 +32,8 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
           </span>
         ))}
       </Typography>
-      {clickedWord && translatedWord ? (
-        <TranslationPopover
-          anchorEl={anchorEl}
-          setAnchorEl={setAnchorEl}
-          translatedWord={translatedWord}
-           translationWord={clickedWord}
-        />
+      {clickedWord && translationWord ? (
+        <TranslationPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
       ) : null}
     </Paper>
   );
