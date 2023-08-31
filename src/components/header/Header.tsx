@@ -1,5 +1,8 @@
-const Header: React.FC = () => {
-  return <div>header</div>;
-};
+const Header : React.FC = ()=>{
+  return(
+    <div style={{backgroundColor:"pink"}}>header</div>
+  )
 
-export default Header;
+}
+
+export default Header

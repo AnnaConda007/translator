@@ -8,11 +8,16 @@ const AdditionalTranslationInput: React.FC = () => {
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
-  const handleButton = async (value: string) => {
+  const handleButtonTranslation = async (value: string) => {
     const translateResult: string | null = await translate(value);
     if (!translateResult) return;
     setTranslatedWord(translateResult);
   };
+
+  const handleButtonAddInDictionary = ()=>{
+    const dictionary = {}
+    
+  }
 
   return (
     <div>
@@ -27,7 +32,7 @@ const AdditionalTranslationInput: React.FC = () => {
             changeValue(e);
           }}
         />
-        <Button variant="outlined" onClick={() => handleButton(value)}>
+        <Button variant="outlined" onClick={() => handleButtonTranslation(value)}>
           перевести{" "}
         </Button>
       </div>

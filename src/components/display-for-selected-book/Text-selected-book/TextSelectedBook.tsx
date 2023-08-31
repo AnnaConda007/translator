@@ -35,6 +35,7 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
           anchorEl={anchorEl}
           setAnchorEl={setAnchorEl}
           translatedWord={translatedWord}
+           translationWord={clickedWord}
         />
       ) : null}
     </Paper>
