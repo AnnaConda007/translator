@@ -1,8 +1,8 @@
-import BooksLibrary from "../components/books-library/BooksLibrary";
+import Nav from "../components/nav/Nav";
 const Home: React.FC = () => {
   return (
     <>
-      <BooksLibrary />
+      <Nav />
     </>
   );
 };

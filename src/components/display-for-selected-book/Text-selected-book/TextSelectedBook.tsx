@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TranslationPopover from "../translation-tooltip/TranslationTooltip";
+import TranslationPopover from "../translation-tooltip/TranslationPopover";
 import { Paper, Typography } from "@mui/material";
 import Word from "../word/Word";
 type TextSelectedTextProps = {

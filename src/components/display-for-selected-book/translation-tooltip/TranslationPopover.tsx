@@ -20,6 +20,7 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
 }) => {
   const [clickedNewTranslate, setClickedNewTranslate] = useState(false);
   const dispatch = useDispatch();
+  
   const handleClosePopover = () => {
     setAnchorEl(null);
     setClickedNewTranslate(false);
@@ -56,7 +57,7 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
             записать в словарь
           </Button>
           <Button variant="outlined" onClick={() => handleNewTranslation()}>
-            перевести другое слово
+            перевести другое слово на английский 
           </Button>
           {translatedWord}
         </div>

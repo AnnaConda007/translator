@@ -1,23 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-export interface IDictionary {
+interface IEntry {
   [key: string]: string;
 }
-const initialState: IDictionary = {};
+
+export type IDictionary = Array<IEntry>;
+
+const initialState: IDictionary = [{ mama: "mama" }, { mama: "mama" }];
 
 const dictionary = createSlice({
   name: "dictionary",
   initialState,
   reducers: {
-    addWord: (state, action: PayloadAction<IDictionary>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    addWord: (state, action: PayloadAction<IEntry>) => {
+      state.push(action.payload);
+    },
+    removeWord: (state, action: PayloadAction<number>) => {
+      state.splice(action.payload, 1);
     },
   },
 });
 
-export const { addWord } = dictionary.actions;
+export const { addWord , removeWord} = dictionary.actions;
 export default dictionary.reducer;
