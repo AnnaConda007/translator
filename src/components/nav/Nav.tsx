@@ -16,7 +16,7 @@ const Nav: React.FC = () => {
   );
   const selectedMenuItem = useSelector(
     (state: RootStoreState) => state.visibility.menuItem
-    );
+  );
   const nawElemets: Array<INavElements> = [
     { библиотека: <BooksLibrary /> },
     { словарь: <Dictionary /> },
@@ -39,6 +39,7 @@ const Nav: React.FC = () => {
           const keyName = Object.keys(elem)[0];
           return (
             <ListItemButton
+              onClick={() => handleNavElem(keyName)}
               key={index}
               dense
               disabled={
@@ -49,9 +50,9 @@ const Nav: React.FC = () => {
                 primary={keyName}
                 onClick={() => handleNavElem(keyName)}
               />
-              {selectedMenuItem && selectedMenuItem === keyName
-                ? elem[keyName]
-                : null}
+              {selectedMenuItem && selectedMenuItem === keyName ? (
+                <div onClick={(e) => e.stopPropagation()}>{elem[keyName]}</div>
+              ) : null}
             </ListItemButton>
           );
         })}

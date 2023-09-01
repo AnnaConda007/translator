@@ -1,5 +1,5 @@
 import CheckIcon from "@mui/icons-material/Check";
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 import { setLanguage } from "../../redux/languageSlice";
 import { useDispatch } from "react-redux";
 import { updateLanguagetoBdAndLS } from "../../utils/updateLanguagetoBdAndLS";
@@ -35,7 +35,7 @@ const ChooseLanguage: React.FC = () => {
         const keyName = Object.keys(language)[0];
         const languageCode = language[keyName];
         return (
-          <ListItem key={languageCode} dense>
+          <ListItemButton key={languageCode} dense>
             <ListItemText
               primary={keyName}
               onClick={() => handleListItemText(languageCode)}
@@ -43,7 +43,7 @@ const ChooseLanguage: React.FC = () => {
             {selectedLanguage && selectedLanguage == languageCode ? (
               <CheckIcon />
             ) : null}
-          </ListItem>
+          </ListItemButton>
         );
       })}
     </List>

@@ -5,7 +5,7 @@ import {
   setTranslationWord,
 } from "../../../redux/translatedWordSlice";
 import { RootStoreState } from "../../../redux/store";
-
+import { cleanAndNormalize } from '../../../utils/cleanAndNormalizeWord';
 interface IWord {
   word: string;
   setClickedWord: (arg: string) => void;
@@ -24,7 +24,7 @@ const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
   ) => {
     if (!selectedLanguage) return;
     const target = currentTarget;
-    const translation: string | null = await translate(selectedLanguage, word);
+    const translation: string | null = await translate(selectedLanguage, cleanAndNormalize(word));
     if (!translation) return;
     dispatch(setTranslatedWord(translation));
     dispatch(setTranslationWord(word));
