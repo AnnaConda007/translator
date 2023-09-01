@@ -3,7 +3,7 @@ export enum ButtonDirection {
   BACK = "back",
 }
 export enum TypeAction {
-  REMOOVE = "remoove",
+  REMOVE = "REMOVE",
   ADD = "add",
 }
 

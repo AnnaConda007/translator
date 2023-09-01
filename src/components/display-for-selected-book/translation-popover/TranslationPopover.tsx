@@ -1,10 +1,10 @@
 import { Popover } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button/Button";
-import AdditionalTranslationInput from "./additional-translation-input/AdditionalTranslationInput";
+import TranslationInput from "../../translation-input/translationInput";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
-import ButtonAddToAddDtionary from "../button-add-to-dictionary/ButtonAddTodiDtionary";
+import ButtonAddToDictionary from "../button-add-to-dictionary/ButtonAddToDictionary";
 interface ITranslationPopover {
   anchorEl: Element | null;
   setAnchorEl: (el: HTMLSpanElement | null) => void;
@@ -14,16 +14,17 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
   anchorEl,
   setAnchorEl,
 }) => {
-  const [openAddTranslator, setOpenAddTranslator] = useState(false);
+  const [openAdditionalTranslation, setOpenAdditionalTranslation] =
+    useState(false);
   const translatedWord = useSelector(
     (state: RootStoreState) => state.translator.translatedWord
   );
   const handleClosePopover = () => {
     setAnchorEl(null);
-    setOpenAddTranslator(false);
+    setOpenAdditionalTranslation(false);
   };
   const handleNewTranslation = () => {
-    setOpenAddTranslator(true);
+    setOpenAdditionalTranslation(true);
   };
 
   return (
@@ -42,13 +43,13 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
         }}
       >
         <div>
-          <ButtonAddToAddDtionary />
+          <ButtonAddToDictionary />
           <Button variant="outlined" onClick={() => handleNewTranslation()}>
             перевести другое слово на английский
           </Button>
           {translatedWord}
         </div>
-        {openAddTranslator ? <AdditionalTranslationInput /> : null}
+        {openAdditionalTranslation ? <TranslationInput /> : null}
       </Popover>
     </>
   );

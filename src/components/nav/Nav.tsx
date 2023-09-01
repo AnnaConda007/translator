@@ -1,5 +1,5 @@
 import BooksLibrary from "../books-library/BooksLibrary";
-import { setMenuItem } from "../../redux/menuItemSlice";
+import { toggleVisibilityMenuItem } from "../../redux/visibilitySlice ";
 import { List, ListItemText, ListItemButton } from "@mui/material";
 import Dictionary from "../dictionary/Dictionary";
 import ChooseLanguage from "../choose-language/ChooseLanguage";
@@ -15,8 +15,8 @@ const Nav: React.FC = () => {
     (state: RootStoreState) => state.language
   );
   const selectedMenuItem = useSelector(
-    (state: RootStoreState) => state.menuItem
-  );
+    (state: RootStoreState) => state.visibility.menuItem
+    );
   const nawElemets: Array<INavElements> = [
     { библиотека: <BooksLibrary /> },
     { словарь: <Dictionary /> },
@@ -26,10 +26,10 @@ const Nav: React.FC = () => {
 
   const handleNavElem = (elem: string) => {
     if (elem === selectedMenuItem) {
-      dispatch(setMenuItem(""));
+      dispatch(toggleVisibilityMenuItem(""));
       return;
     }
-    dispatch(setMenuItem(elem));
+    dispatch(toggleVisibilityMenuItem(elem));
   };
 
   return (

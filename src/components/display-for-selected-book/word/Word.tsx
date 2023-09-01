@@ -5,19 +5,20 @@ import {
   setTranslationWord,
 } from "../../../redux/translatedWordSlice";
 import { RootStoreState } from "../../../redux/store";
+
 interface IWord {
   word: string;
-  setclickedWord: (arg: string) => void;
+  setClickedWord: (arg: string) => void;
   setAnchorEl: (arg: HTMLSpanElement) => void;
 }
 
-const Word: React.FC<IWord> = ({ word, setclickedWord, setAnchorEl }) => {
+const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
 
-  const handleWord = async (
+  const handleWordClick = async (
     word: string,
     { currentTarget }: React.MouseEvent<HTMLSpanElement>
   ) => {
@@ -27,7 +28,7 @@ const Word: React.FC<IWord> = ({ word, setclickedWord, setAnchorEl }) => {
     if (!translation) return;
     dispatch(setTranslatedWord(translation));
     dispatch(setTranslationWord(word));
-    setclickedWord(word);
+    setClickedWord(word);
     setAnchorEl(target);
   };
 
@@ -38,7 +39,7 @@ const Word: React.FC<IWord> = ({ word, setclickedWord, setAnchorEl }) => {
         marginRight: "5px",
         display: "inline-block",
       }}
-      onClick={async (e) => handleWord(word, e)}
+      onClick={async (e) => handleWordClick(word, e)}
     >
       {word}
       &nbsp;

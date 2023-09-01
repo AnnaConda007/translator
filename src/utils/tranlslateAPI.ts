@@ -1,5 +1,5 @@
 import axios from "axios";
- let IAM_TOKEN: string = "";
+let IAM_TOKEN: string = "";
 const getIAMToken = async () => {
   try {
     const response = await axios.post(`http://localhost:3000/getIAMToken`);
@@ -13,19 +13,22 @@ const getIAMToken = async () => {
 };
 setInterval(getIAMToken, 60 * 60 * 1000);
 
- 
-export const translate = async ( targetLanguage:string, translationWords: string ) => {
+export const translate = async (
+  sourceLanguage: string,
+  translationWords: string
+) => {
   try {
     if (!IAM_TOKEN) {
       await getIAMToken();
     }
     const response = await axios.post(`http://localhost:3000/translate`, {
       IAM_TOKEN: IAM_TOKEN,
-      targetLanguage: targetLanguage,
+      sourceLanguage: sourceLanguage,
+      targetLanguage: "ru",
       word: translationWords,
     });
-    const translatedtranslationWords = response.data.translatedWord
-    console.log(translatedtranslationWords)
+    const translatedtranslationWords = response.data.translatedWord;
+    console.log(translatedtranslationWords);
     return translatedtranslationWords;
   } catch (error) {
     console.error("Ошибка при обращении к API Яндекс.Переводчик  ", error);
