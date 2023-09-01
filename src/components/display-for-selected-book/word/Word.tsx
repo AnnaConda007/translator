@@ -13,6 +13,7 @@ interface IWord {
 
 const Word: React.FC<IWord> = ({ word, setclickedWord, setAnchorEl }) => {
   const dispatch = useDispatch();
+  
   const handleWord = async (
     word: string,
     { currentTarget }: React.MouseEvent<HTMLSpanElement>

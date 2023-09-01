@@ -14,16 +14,16 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
   anchorEl,
   setAnchorEl,
 }) => {
-  const [clickedNewTranslate, setClickedNewTranslate] = useState(false);
+  const [openAddTranslator, setOpenAddTranslator] = useState(false);
   const translatedWord = useSelector(
     (state: RootStoreState) => state.translator.translatedWord
   );
   const handleClosePopover = () => {
     setAnchorEl(null);
-    setClickedNewTranslate(false);
+    setOpenAddTranslator(false);
   };
   const handleNewTranslation = () => {
-    setClickedNewTranslate(true);
+    setOpenAddTranslator(true);
   };
 
   return (
@@ -48,7 +48,7 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
           </Button>
           {translatedWord}
         </div>
-        {clickedNewTranslate ? <AdditionalTranslationInput /> : null}
+        {openAddTranslator ? <AdditionalTranslationInput /> : null}
       </Popover>
     </>
   );

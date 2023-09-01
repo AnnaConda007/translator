@@ -2,15 +2,17 @@ import BooksLibrary from "../books-library/BooksLibrary";
 import { useState } from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 import Dictionary from "../dictionary/Dictionary";
+import ChooseLanguage from '../choose-language/ChooseLanguage';
 interface INavElements {
   [key: string]: React.ReactElement;
 }
 
 const Nav: React.FC = () => {
   const nawElemets: Array<INavElements> = [
-    { библиотека: <BooksLibrary /> },
-    { словарь: <Dictionary /> },
-    { тестирование: <BooksLibrary /> },
+    { "библиотека": <BooksLibrary /> },
+    { "словарь": <Dictionary /> },
+    { "тестирование": <BooksLibrary /> }, 
+    { "выбрать язык": <ChooseLanguage /> },
   ];
   const [selectedKey, setSelectedKey] = useState<string>("");
 

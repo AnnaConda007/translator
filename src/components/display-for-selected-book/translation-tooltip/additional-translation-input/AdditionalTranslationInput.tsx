@@ -2,22 +2,25 @@ import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { translate } from "../../../../utils/tranlslateAPI";
 import ButtonAddToAddDtionary from "../../button-add-to-dictionary/ButtonAddTodiDtionary";
-import { useDispatch } from 'react-redux';
-import { setTranslationWord , setTranslatedWord} from '../../../../redux/translatedWordSlice';
- const AdditionalTranslationInput: React.FC = () => {
-   const dispatch = useDispatch()
-  const [value, setValue] = useState<string>("");
-  const [additionTranslatedWord, setAdditionTranslatedWord] = useState<string>(""); 
+import { useDispatch } from "react-redux";
+import {
+  setTranslationWord,
+  setTranslatedWord,
+} from "../../../../redux/translatedWordSlice";
+
+const AdditionalTranslationInput: React.FC = () => {
+  const dispatch = useDispatch();
+  const [inputValue, setinputValue] = useState<string>("");
+  const [translatedWors, setTranslatedWors] = useState<string>("");
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setinputValue(e.target.value);
   };
   const handleTranslate = async (value: string) => {
     const translateResult: string | null = await translate(value);
     if (!translateResult) return;
-    setAdditionTranslatedWord(translateResult);
-    dispatch(setTranslationWord(value))
-    dispatch(setTranslatedWord(translateResult))
-
+    setTranslatedWors(translateResult);
+    dispatch(setTranslationWord(inputValue));
+    dispatch(setTranslatedWord(translateResult));
   };
 
   return (
@@ -25,21 +28,22 @@ import { setTranslationWord , setTranslatedWord} from '../../../../redux/transla
       <div>
         <TextField
           type="search"
+          autoComplete ="off"
           label="перевести"
           variant="outlined"
           fullWidth
-          value={value}
+          value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             changeValue(e);
           }}
         />
-        <Button variant="outlined" onClick={() => handleTranslate(value)}>
+        <Button variant="outlined" onClick={() => handleTranslate(inputValue)}>
           перевести
         </Button>
       </div>
       <div>
-        {additionTranslatedWord}
-        {additionTranslatedWord ? <ButtonAddToAddDtionary /> : null}
+        {translatedWors}
+        {translatedWors ? <ButtonAddToAddDtionary /> : null}
       </div>
     </div>
   );
