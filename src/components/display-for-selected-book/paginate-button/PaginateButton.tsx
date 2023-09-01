@@ -1,4 +1,4 @@
-import { ButtonDirection } from "../enum";
+import { ButtonDirection } from "../../enum";
 import { Button } from "@mui/material";
 
 type PaginateButtonProps = {

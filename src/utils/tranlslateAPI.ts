@@ -1,36 +1,34 @@
-interface ItranslationData {
-  exception_code: null | number | string;
-  matches: Array<{
-    id: string;
-    segment: string;
-    translation: string;
-    source: string;
-    target: string;
-  }>;
-  mtLangSupported: null | number | string;
-  quotaFinished: boolean;
-  responderId: number;
-  responseData: {
-    match: number;
-    translatedText: string;
-  };
-  responseDetails: string;
-  responseStatus: number;
-}
-
-export const translate = async (word: string): Promise<string | null> => {
+import axios from "axios";
+ let IAM_TOKEN: string = "";
+const getIAMToken = async () => {
   try {
-    const formattedWord = word.replace(/[.,!?;]+/g, "").toLowerCase();
-    const email: string = "annahrulkova@yandex.ru";
-    const sourceLanguage: string = "ru";
-    const targetLanguage: string = "en";
-    const url: string = `https://api.mymemory.translated.net/get?q=${formattedWord}&langpair=${sourceLanguage}|${targetLanguage}&de=${email}.ru`;
-    const translationResponse: Response = await fetch(url);
-    const translationData: ItranslationData = await translationResponse.json();
-    const translatedWord: string = translationData.responseData.translatedText;
-    return translatedWord;
+    const response = await axios.post(`http://localhost:3000/getIAMToken`);
+    IAM_TOKEN = response.data.iamToken;
   } catch (error) {
-    console.error("Ошибка при запросе к API перевода ", error);
+    console.error(
+      "Ошибка при попытке получения токена API Яндекс.Переводчик",
+      error
+    );
+  }
+};
+setInterval(getIAMToken, 60 * 60 * 1000);
+
+ 
+export const translate = async ( targetLanguage:string, translationWords: string ) => {
+  try {
+    if (!IAM_TOKEN) {
+      await getIAMToken();
+    }
+    const response = await axios.post(`http://localhost:3000/translate`, {
+      IAM_TOKEN: IAM_TOKEN,
+      targetLanguage: targetLanguage,
+      word: translationWords,
+    });
+    const translatedtranslationWords = response.data.translatedWord
+    console.log(translatedtranslationWords)
+    return translatedtranslationWords;
+  } catch (error) {
+    console.error("Ошибка при обращении к API Яндекс.Переводчик  ", error);
     return null;
   }
 };

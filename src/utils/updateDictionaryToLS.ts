@@ -1,6 +1,6 @@
 import { IEntry } from "../redux/dictionarySlice";
 
-import { TypeAction } from "../components/display-for-selected-book/enum";
+import { TypeAction } from "../components/enum";
 export const updateDictionaryToLS = (
   dictionaryEntry: IEntry,
   action: TypeAction,

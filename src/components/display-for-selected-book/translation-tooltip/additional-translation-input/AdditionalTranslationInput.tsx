@@ -7,16 +7,25 @@ import {
   setTranslationWord,
   setTranslatedWord,
 } from "../../../../redux/translatedWordSlice";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { RootStoreState } from "../../../../redux/store";
 const AdditionalTranslationInput: React.FC = () => {
   const dispatch = useDispatch();
   const [inputValue, setinputValue] = useState<string>("");
   const [translatedWors, setTranslatedWors] = useState<string>("");
+  const selectedLanguage = useSelector(
+    (state: RootStoreState) => state.language
+  );
+
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setinputValue(e.target.value);
   };
   const handleTranslate = async (value: string) => {
-    const translateResult: string | null = await translate(value);
+    if (!value || !selectedLanguage) return;
+     const translateResult: string | null = await translate(
+      selectedLanguage,
+       value);
+
     if (!translateResult) return;
     setTranslatedWors(translateResult);
     dispatch(setTranslationWord(inputValue));
@@ -28,7 +37,7 @@ const AdditionalTranslationInput: React.FC = () => {
       <div>
         <TextField
           type="search"
-          autoComplete ="off"
+          autoComplete="off"
           label="перевести"
           variant="outlined"
           fullWidth

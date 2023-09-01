@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { updateLanguagetoBdAndLS } from "../../utils/updateLanguagetoBdAndLS";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
+import { setMenuItem } from '../../redux/menuItemSlice';
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector(
@@ -23,9 +24,9 @@ const ChooseLanguage: React.FC = () => {
   ];
 
   const handleListItemText = (languageCode: string) => {
-    console.log(languageCode);
-    dispatch(setLanguage(languageCode));
+     dispatch(setLanguage(languageCode));
     updateLanguagetoBdAndLS(languageCode);
+    dispatch(setMenuItem(""))
   };
 
   return (

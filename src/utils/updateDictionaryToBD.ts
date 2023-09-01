@@ -1,5 +1,5 @@
 import { dataBaseURL } from "../contains";
-import { TypeAction } from "../components/display-for-selected-book/enum";
+import { TypeAction } from "../components/enum";
 import { IEntry } from "../redux/dictionarySlice";
 
 export const updateDictionaryToBD = async (
@@ -18,7 +18,7 @@ export const updateDictionaryToBD = async (
       });
     } else {
       const key = Object.keys(dictionaryEntry)[0];
-      const url = `${dataBaseURL}/dictionary/${dictionaryEntry[key]}.json`;
+      const url = `${dataBaseURL}/dictionary/${key}.json`;
       await fetch(url, {
         method: "DELETE",
         headers: {

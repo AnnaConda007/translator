@@ -1,17 +1,26 @@
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { IDictionary } from "../../redux/dictionarySlice";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { removeWord } from "../../redux/dictionarySlice";
+import { updateDictionaryToBD } from "../../utils/updateDictionaryToBD";
+import { TypeAction } from "../enum";
+ import { getDictionaryFromBD } from "../../utils/getDictionaryFromBD";
+import { setDictionary } from "../../redux/dictionarySlice";
+import { useEffect } from "react";
 const Dictionary: React.FC = () => {
   const dispatch = useDispatch();
   const dictionary: IDictionary = useSelector(
     (state: RootStoreState) => state.dictionary
   );
-
-  const handleDelite = (index: number) => {
+  useEffect(() => {
+    getDictionaryFromBD(dispatch, setDictionary);
+  }, [dispatch]);
+   localStorage.setItem("dictionary", JSON.stringify(dictionary));
+  const handleDelite = (index: number, word: string, translation: string) => {
     dispatch(removeWord(index));
-  };
+    updateDictionaryToBD({ [word]: translation }, TypeAction.REMOOVE);  
+   };
   return (
     <List>
       {dictionary.map((entry, index) => {
@@ -19,7 +28,13 @@ const Dictionary: React.FC = () => {
         return (
           <ListItem key={index} dense>
             <ListItemText primary={`${keyName} : ${entry[keyName]}`} />
-            <button onClick={() => handleDelite(index)}>delete</button>
+            <button
+              onClick={() =>
+                handleDelite(index, `${keyName}`, `${entry[keyName]}`)
+              }
+            >
+              delete
+            </button>
           </ListItem>
         );
       })}

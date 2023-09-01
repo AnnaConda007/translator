@@ -4,6 +4,7 @@ import listOfBookTitlesSlice from "./listOfBookTitlesSlice";
 import dictionarySlice from "./dictionarySlice";
 import wordsSlice from "./translatedWordSlice";
 import selectedLanguageSlice from "./languageSlice";
+import menuItemSlice from "./menuItemSlice";
 const store = configureStore({
   reducer: {
     books: allLoadedBooksSlice,
@@ -11,6 +12,7 @@ const store = configureStore({
     dictionary: dictionarySlice,
     translator: wordsSlice,
     language: selectedLanguageSlice,
+    menuItem: menuItemSlice,
   },
 });
 export type RootStoreState = ReturnType<typeof store.getState>;

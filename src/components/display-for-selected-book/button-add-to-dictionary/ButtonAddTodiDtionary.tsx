@@ -1,6 +1,6 @@
 import { updateDictionaryToBD } from '../../../utils/updateDictionaryToBD';
 import { updateDictionaryToLS } from '../../../utils/updateDictionaryToLS';
-import { TypeAction } from '../enum';
+import { TypeAction } from '../../enum';
 import { useDispatch } from 'react-redux';
 import {  useSelector } from 'react-redux/es/hooks/useSelector';
 import Button from "@mui/material/Button/Button";
@@ -15,6 +15,7 @@ const translatedWord:string = useSelector((state:RootStoreState)=> state.transla
 
 
   const handleButtonAddInDictionary = async () => {
+    console.log(translationWord, translatedWord)
     await updateDictionaryToBD(
       { [translationWord]: translatedWord },
       TypeAction.ADD

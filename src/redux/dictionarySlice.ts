@@ -7,12 +7,16 @@ export interface IEntry {
 
 export type IDictionary = Array<IEntry>;
 
-const initialState: IDictionary = [{ mama: "mama" }, { mama: "mama" }];
+ 
+const initialState: IDictionary = [];
 
 const dictionary = createSlice({
   name: "dictionary",
   initialState,
   reducers: {
+    setDictionary: (state, action: PayloadAction<Array<IEntry>>) => {
+      return action.payload;
+    },
     addWord: (state, action: PayloadAction<IEntry>) => {
       state.push(action.payload);
     },
@@ -22,5 +26,5 @@ const dictionary = createSlice({
   },
 });
 
-export const { addWord , removeWord} = dictionary.actions;
+export const { setDictionary, addWord, removeWord } = dictionary.actions;
 export default dictionary.reducer;
