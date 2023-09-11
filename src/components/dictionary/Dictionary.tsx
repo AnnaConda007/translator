@@ -17,25 +17,30 @@ const Dictionary: React.FC = () => {
 
   useEffect(() => {
     getDictionaryFromBD(dispatch, setDictionary);
-    localStorage.setItem("dictionary", JSON.stringify(dictionary));
-  }, [dispatch, dictionary]);
+  }, [dispatch]);
 
   const handleDelete = (index: number, word: string, translation: string) => {
     dispatch(removeWord(index));
-    updateDictionaryToBD({ [word]: translation }, TypeAction.REMOVE);
+    updateDictionaryToBD({
+      russianWord: word,
+      translatedWord: translation,
+      actionType: TypeAction.REMOVE,
+    });
   };
+
+
+  console.log(dictionary)
   return (
     <>
       <TranslationInput />
       <List>
         {dictionary.map((entry, index) => {
-          const keyName = Object.keys(entry)[0];
           return (
-            <ListItem key={entry[keyName]} dense>
-              <ListItemText primary={`${keyName} : ${entry[keyName]}`} />
+            <ListItem key={entry.translatedWord} dense>
+              <ListItemText primary={`${entry.translatedWord} : ${entry.russianWord}`} />
               <button
                 onClick={() =>
-                  handleDelete(index, `${keyName}`, `${entry[keyName]}`)
+                  handleDelete(index, `${entry.russianWord}`, `${entry.translatedWord}`)
                 }
               >
                 delete

@@ -5,6 +5,7 @@ import dictionarySlice from "./dictionarySlice";
 import wordsSlice from "./translatedWordSlice";
 import selectedLanguageSlice from "./languageSlice";
 import visibilitySlice from "./visibilitySlice ";
+import testSlice from "./testSlice";
 const store = configureStore({
   reducer: {
     books: allLoadedBooksSlice,
@@ -13,6 +14,7 @@ const store = configureStore({
     translator: wordsSlice,
     language: selectedLanguageSlice,
     visibility: visibilitySlice,
+    test: testSlice,
   },
 });
 export type RootStoreState = ReturnType<typeof store.getState>;

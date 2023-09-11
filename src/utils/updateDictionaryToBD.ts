@@ -1,24 +1,36 @@
 import { dataBaseURL } from "../contains";
-import { TypeAction } from "../components/enum";
-import { IEntry } from "../redux/dictionarySlice";
+import { TypeAction } from "../components/enum"; 
 
-export const updateDictionaryToBD = async (
-  dictionaryEntry: IEntry,
-  actionType: TypeAction
-) => {
+interface updateDictionaryToBdArgs {
+  russianWord: string;
+  translatedWord: string;
+  actionType: TypeAction;
+}
+
+export const updateDictionaryToBD = async ({
+  russianWord = "",
+  translatedWord,
+  actionType,
+}: updateDictionaryToBdArgs) => {
   const url = `${dataBaseURL}/dictionary/.json`;
   try {
     if (actionType === TypeAction.ADD) {
+      const newEntryInDictionary = {
+        [translatedWord]: {
+          translatedWord,
+          russianWord,
+          counter: 0,
+        },
+      };
       await fetch(url, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(dictionaryEntry),
+        body: JSON.stringify(newEntryInDictionary),
       });
     } else {
-      const key = Object.keys(dictionaryEntry)[0];
-      const url = `${dataBaseURL}/dictionary/${key}.json`;
+      const url = `${dataBaseURL}/dictionary/${translatedWord}.json`;
       await fetch(url, {
         method: "DELETE",
         headers: {

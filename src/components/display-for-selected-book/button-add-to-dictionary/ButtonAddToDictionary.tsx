@@ -18,11 +18,14 @@ const ButtonAddToDictionary: React.FC = () => {
   );
 
   const handleButtonAddInDictionary = async () => {
-    await updateDictionaryToBD(
-      { [translationWord]: translatedWord },
-      TypeAction.ADD
+    await updateDictionaryToBD({
+      russianWord: translatedWord,
+      translatedWord: translationWord,
+      actionType: TypeAction.ADD,
+    });
+    dispatch(
+      addWord({ russianWord: translationWord, translatedWord, counter: 0 })
     );
-    dispatch(addWord({ [translationWord]: translatedWord }));
     dispatch(toggleTranslationInputVisibility(false));
   };
 

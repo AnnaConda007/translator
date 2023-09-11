@@ -18,3 +18,12 @@ export enum LanguageCode {
   TR = "tr",
   KO = "ko",
 }
+
+
+
+export enum CountAction {
+  INCREASE = +1,
+  DECREASE = -1
+}
+
+

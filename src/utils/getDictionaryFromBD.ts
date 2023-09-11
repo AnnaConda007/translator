@@ -11,8 +11,8 @@ export const getDictionaryFromBD = async (dispatch:Dispatch<Action >, setDiction
     const reponse = await fetch(url, {
       method: "GET",
     });
-    const data:  { [key: string]: string }   = await reponse.json();
-    const dictionary: Array<IEntry> = Object.entries(data).map(([key, value]) => ({ [key]: value }));
+    const data = await reponse.json();
+    const dictionary: Array<IEntry> = Object.values(data)
      dispatch(setDictionary(dictionary))
   } catch (error) {
     console.error("Ошибка при получении словаря", error);
