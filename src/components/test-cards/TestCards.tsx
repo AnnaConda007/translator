@@ -3,15 +3,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
-import { IEntry, IDictionary } from "../../redux/dictionarySlice";
-import { useEffect } from "react";
-import { getDictionaryFromBD } from "../../utils/getDictionaryFromBD";
-import { useDispatch } from "react-redux";
-import { setDictionary } from "../../redux/dictionarySlice";
-import CardWithResult from "./card-with-result/CardWithResult";
+ import CardWithResult from "./card-with-result/CardWithResult";
 import AnswerOptions from "./answer-options/AnswerOptions";
 import { amountOfTestCard } from "../../contains";
 import { randomForeignWords } from "../../utils/shuffleArr";
+import { useEffect } from "react";
+import { setCurrentCards } from "../../redux/testSlice";
+import { useDispatch } from "react-redux";
+import { shuffleArr } from "../../utils/shuffleArr";
+import { IEntry } from '../../redux/dictionarySlice';
 
 export interface TestCardData {
   russianWord: string;
@@ -24,30 +24,33 @@ const TestCards = () => {
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-  const dictionary: IDictionary = useSelector(
-    (state: RootStoreState) => state.dictionary
+  const currentCards = useSelector(
+    (state: RootStoreState) => state.test.currentCards
   );
-  const foreignWords: Array<string> = dictionary.map(
-    (entry) => entry.translatedWord
+  const dictionary: Array<IEntry> = useSelector(
+    (state: RootStoreState) => state.dictionary.words
   );
-  console.log(dictionary)
 
-  useEffect(() => {
-    getDictionaryFromBD(dispatch, setDictionary);
-  }, [dispatch]);
-  if (!dictionary.length) return;
+  useEffect(() => { 
+    console.log("**")
+    const foreignWords: Array<string> = dictionary.map(
+      (entry) => entry.translatedWord
+    );
+    const testCardData: Array<TestCardData> = dictionary.map((entry) => {
+      return {
+        russianWord: entry.russianWord,
+        answerOptionsInForeign: randomForeignWords(
+          foreignWords,
+          entry.translatedWord
+        ),
+        correctAnswer: entry.translatedWord,
+      };
+    });
+    console.log("testCardData", testCardData)
+    dispatch(setCurrentCards(shuffleArr(testCardData)));
+  }, [dictionary, dispatch]);
 
-  const testCardData: Array<TestCardData> = dictionary.map((entry: IEntry) => {
-    return {
-      russianWord: entry.russianWord,
-      answerOptionsInForeign: randomForeignWords(
-        foreignWords,
-        entry.translatedWord
-      ),
-      correctAnswer: entry.translatedWord,
-    };
-  });
-
+  if (!currentCards.length) return null;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
@@ -55,7 +58,7 @@ const TestCards = () => {
           {activeCardNumber === amountOfTestCard ? (
             <CardWithResult />
           ) : (
-            <AnswerOptions testCardData={testCardData} />
+            <AnswerOptions testCardData={currentCards} />
           )}
         </Typography>
       </CardContent>

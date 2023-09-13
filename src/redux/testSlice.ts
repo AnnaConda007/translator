@@ -7,16 +7,24 @@ export interface TestResult {
   mistake: string;
 }
 
+export interface TestCardData {
+  russianWord: string;
+  answerOptionsInForeign: Array<string>;
+  correctAnswer: string;
+}
+
 interface InitialState {
   activeCardNumber: number;
   selectedAnswerOption: string;
   testResult: Array<TestResult>;
+  currentCards: Array<TestCardData>
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
   selectedAnswerOption: "",
   testResult: [],
+  currentCards:[]
 };
 
 const test = createSlice({
@@ -38,6 +46,12 @@ const test = createSlice({
     setTestResult: (state, action: PayloadAction<TestResult>) => {
       state.testResult = [...state.testResult, action.payload];
     },
+    resetTestResult: (state ) => {
+      state.testResult = [ ];
+    },
+    setCurrentCards : (state, action: PayloadAction<Array<TestCardData>>) => {
+      state.currentCards=  action.payload
+    },
   },
 });
 
@@ -47,5 +61,7 @@ export const {
   setSelectedAnswerOption,
   resetSelectedAnswerOption,
   setTestResult,
+  setCurrentCards,
+  resetTestResult
 } = test.actions;
 export default test.reducer;

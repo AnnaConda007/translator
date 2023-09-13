@@ -1,35 +1,28 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../redux/store";
-import { IDictionary } from "../../redux/dictionarySlice";
+import { IEntry } from "../../redux/dictionarySlice";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { removeWord } from "../../redux/dictionarySlice";
-import { updateDictionaryToBD } from "../../utils/updateDictionaryToBD";
+import { addNewWordInBD } from "../../utils/updateDictionaryToBD";
 import { TypeAction } from "../enum";
-import { getDictionaryFromBD } from "../../utils/getDictionaryFromBD";
-import { setDictionary } from "../../redux/dictionarySlice";
-import { useEffect } from "react";
 import TranslationInput from "../translation-input/TranslationInput";
-const Dictionary: React.FC = () => {
-  const dispatch = useDispatch();
-  const dictionary: IDictionary = useSelector(
-    (state: RootStoreState) => state.dictionary
-  );
+import { AppDispatch } from "../../redux/store";
 
-  useEffect(() => {
-    getDictionaryFromBD(dispatch, setDictionary);
-  }, [dispatch]);
+const Dictionary: React.FC = () => {
+  const dictionary: Array<IEntry> = useSelector(
+    (state: RootStoreState) => state.dictionary.words
+  );
+  const dispatch: AppDispatch = useDispatch();
 
   const handleDelete = (index: number, word: string, translation: string) => {
     dispatch(removeWord(index));
-    updateDictionaryToBD({
+    addNewWordInBD({
       russianWord: word,
       translatedWord: translation,
       actionType: TypeAction.REMOVE,
     });
   };
 
-
-  console.log(dictionary)
   return (
     <>
       <TranslationInput />
@@ -37,10 +30,16 @@ const Dictionary: React.FC = () => {
         {dictionary.map((entry, index) => {
           return (
             <ListItem key={entry.translatedWord} dense>
-              <ListItemText primary={`${entry.translatedWord} : ${entry.russianWord}`} />
+              <ListItemText
+                primary={`${entry.translatedWord} : ${entry.russianWord}`}
+              />
               <button
                 onClick={() =>
-                  handleDelete(index, `${entry.russianWord}`, `${entry.translatedWord}`)
+                  handleDelete(
+                    index,
+                    `${entry.russianWord}`,
+                    `${entry.translatedWord}`
+                  )
                 }
               >
                 delete

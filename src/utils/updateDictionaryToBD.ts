@@ -1,18 +1,17 @@
-import { dataBaseURL } from "../contains";
-import { TypeAction } from "../components/enum"; 
-
-interface updateDictionaryToBdArgs {
+import { dictionary_dataBaseURL } from "../contains";
+import { TypeAction } from "../components/enum";
+ 
+interface addNewWordInBDArgs {
   russianWord: string;
   translatedWord: string;
   actionType: TypeAction;
 }
 
-export const updateDictionaryToBD = async ({
+export const addNewWordInBD = async ({
   russianWord = "",
   translatedWord,
   actionType,
-}: updateDictionaryToBdArgs) => {
-  const url = `${dataBaseURL}/dictionary/.json`;
+}: addNewWordInBDArgs) => { 
   try {
     if (actionType === TypeAction.ADD) {
       const newEntryInDictionary = {
@@ -22,15 +21,16 @@ export const updateDictionaryToBD = async ({
           counter: 0,
         },
       };
-      await fetch(url, {
+      const response = await fetch(dictionary_dataBaseURL, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newEntryInDictionary),
       });
+      return response;
     } else {
-      const url = `${dataBaseURL}/dictionary/${translatedWord}.json`;
+      const url = `${dictionary_dataBaseURL}${translatedWord}.json`;
       await fetch(url, {
         method: "DELETE",
         headers: {
@@ -40,5 +40,27 @@ export const updateDictionaryToBD = async ({
     }
   } catch (error) {
     console.error("Ошибка при обновлении словаря", error);
+  }
+};
+
+export interface IDataToUpdateDictionaryBD {
+  [key: string]: {
+    counter: number;
+    russianWord: string;
+    translatedWord: string;
+  };
+}
+
+export const updateDictionaryInBD = async (dictionaryEntries: IDataToUpdateDictionaryBD) => {
+  try {
+    await fetch(dictionary_dataBaseURL, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dictionaryEntries),
+    });
+  } catch (error) {
+    console.error(error);
   }
 };

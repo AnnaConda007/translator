@@ -1,15 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import allLoadedBooksSlice from "./allLoadedBooksSlice";
-import listOfBookTitlesSlice from "./listOfBookTitlesSlice";
+import librarySlice from './librarySlice';   
 import dictionarySlice from "./dictionarySlice";
-import wordsSlice from "./translatedWordSlice";
+import wordsSlice from "./translationWordSlice";
 import selectedLanguageSlice from "./languageSlice";
 import visibilitySlice from "./visibilitySlice ";
 import testSlice from "./testSlice";
+
 const store = configureStore({
   reducer: {
-    books: allLoadedBooksSlice,
-    titleList: listOfBookTitlesSlice,
+    library: librarySlice, 
     dictionary: dictionarySlice,
     translator: wordsSlice,
     language: selectedLanguageSlice,
@@ -18,5 +17,6 @@ const store = configureStore({
   },
 });
 export type RootStoreState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;

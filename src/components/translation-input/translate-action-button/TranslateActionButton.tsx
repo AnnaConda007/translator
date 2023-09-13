@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStoreState } from '../../../redux/store';
 import { translate } from '../../../utils/tranlslateAPI';
-import { setTranslationWord, setTranslatedWord } from '../../../redux/translatedWordSlice';
+import { setTranslationWord, setTranslatedWord } from '../../../redux/translationWordSlice';
   import { toggleTranslationInputVisibility } from '../../../redux/visibilitySlice ';
 interface ITranslateActionButtonProps {
   value: string,

@@ -1,6 +1,6 @@
 import { amountAnswerOption } from "../contains";
 
-const shuffleArr = (array: Array<string>): Array<string> => {
+export const shuffleArr = <T>(array: Array<T>) => {
   const shuffleArray = [...array];
   for (let i = 0; i < shuffleArray.length; i++) {
     const randomIndex: number = Math.floor(Math.random() * (i + 1));
@@ -21,7 +21,7 @@ export const randomForeignWords = (
   );
   const shuffledForeignWords: Array<string> = shuffleArr(
     filteredForeignWords
-  ).slice(0, amountAnswerOption-1);
+  ).slice(0, amountAnswerOption - 1);
   const answerOptions = [...shuffledForeignWords, correctAnswer];
   return shuffleArr(answerOptions);
 };

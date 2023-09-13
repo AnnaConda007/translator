@@ -11,7 +11,7 @@ import { RootStoreState } from "../../../redux/store";
 import { amountOfTestCard } from "../../../contains";
 import { updateCounter } from "../../../redux/dictionarySlice";
 import { CountAction } from "../../enum";
-
+import { batch } from "react-redux";
 interface AnswerOptionsProp {
   testCardData: Array<TestCardData>;
 }
@@ -24,36 +24,49 @@ const AnswerOptions: React.FC<AnswerOptionsProp> = ({ testCardData }) => {
   const selectedAnswerOption = useSelector(
     (state: RootStoreState) => state.test.selectedAnswerOption
   );
-  const handleRadio = (
-    testAnswer: string,
-    currentForeignWord: string,
-    currentRussianWord: string
+
+  const state = (
+    currentRussianWord,
+    correctForeignAnswer,
+    selectedTestAnswer
   ) => {
-    if (activeCardNumber === amountOfTestCard) return;
-    dispatch(setSelectedAnswerOption(testAnswer));
-    dispatch(resetSelectedAnswerOption());
+    dispatch(setSelectedAnswerOption(selectedTestAnswer));
     dispatch(increaseActiveCardNumber());
     dispatch(
       setTestResult({
         russianWord: currentRussianWord,
-        foreignWord: currentForeignWord,
-        mistake: testAnswer === currentForeignWord ? "+" : "-",
+        foreignWord: correctForeignAnswer,
+        mistake: selectedTestAnswer === correctForeignAnswer ? "+" : "-",
       })
     );
-    if (testAnswer === currentForeignWord) {
+  };
+  const counter = (selectedTestAnswer, correctForeignAnswer) => {
+    if (selectedTestAnswer === correctForeignAnswer) {
       dispatch(
         updateCounter({
-          translatedWord: currentForeignWord,
+          translatedWord: correctForeignAnswer,
           count: CountAction.INCREASE,
         })
       );
     } else
       dispatch(
         updateCounter({
-          translatedWord: currentForeignWord,
+          translatedWord: correctForeignAnswer,
           count: CountAction.DECREASE,
         })
       );
+  };
+ 
+  const handleRadio = (
+    selectedTestAnswer: string,
+    correctForeignAnswer: string,
+    currentRussianWord: string
+  ) => {
+    if (activeCardNumber === amountOfTestCard) return;
+    batch(() => {
+      state(currentRussianWord, correctForeignAnswer, selectedTestAnswer);
+      counter(selectedTestAnswer, correctForeignAnswer);
+    });
   };
 
   return (

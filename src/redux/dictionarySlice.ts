@@ -1,39 +1,56 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-export interface IEntry {
+export interface dataFromBD {
   counter: number;
   russianWord: string;
   translatedWord: string;
 }
+export interface IEntry {
+  russianWord: string;
+  translatedWord: string;
+}
 
-interface IUpdatecounterAction {
+interface updateCounterAction {
   translatedWord: string;
   count: number;
 }
 
-export type IDictionary = Array<IEntry>;
+export type IDictionary = {
+  words: Array<IEntry>;
+  counters: { [translatedWord: string]: number };
+};
 
-const initialState: IDictionary = [];
+const initialState: IDictionary = {
+  words: [],
+  counters: {},
+};
 
 const dictionary = createSlice({
   name: "dictionary",
   initialState,
   reducers: {
-    setDictionary: (state, action: PayloadAction<Array<IEntry>>) => {
-      return action.payload;
+    setDictionary: (state, action: PayloadAction<Array<dataFromBD>>) => {
+      action.payload.forEach((action) => {
+        const entry: IEntry = {
+          russianWord: action.russianWord,
+          translatedWord: action.translatedWord,
+        };
+        state.words.push(entry);
+        state.counters[action.translatedWord] = action.counter;
+      });
     },
     addWord: (state, action: PayloadAction<IEntry>) => {
-      state.push(action.payload);
+      state.words.push(action.payload);
+      state.counters[action.payload.translatedWord] = 0;
     },
     removeWord: (state, action: PayloadAction<number>) => {
-      state.splice(action.payload, 1);
+      const wordToRemove = state.words[action.payload].translatedWord;
+        state.words.splice(action.payload, 1);
+        delete state.counters[wordToRemove]
     },
-    updateCounter: (state, action: PayloadAction<IUpdatecounterAction>) => {
-      const entry = state.find((entry:IEntry) => entry.translatedWord === action.payload.translatedWord); 
-      if (entry) {
-          entry.counter  += action.payload.count;
-      }
+    updateCounter: (state, action: PayloadAction<updateCounterAction>) => {
+      state.counters[action.payload.translatedWord] +=action.payload.count
     },
   },
 });

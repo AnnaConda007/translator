@@ -1,9 +1,10 @@
 import axios from "axios";
+import { serverUrl } from '../contains';
 let IAM_TOKEN: string = "";
 
 const getIAMToken = async () => {
   try {
-    const response = await axios.post(`http://localhost:3000/getIAMToken`);
+    const response = await axios.post(`${serverUrl}/getIAMToken`);
     IAM_TOKEN = response.data.iamToken;
   } catch (error) {
     console.error(
@@ -22,7 +23,7 @@ export const translate = async (
     if (!IAM_TOKEN) {
       await getIAMToken();
     }
-    const response = await axios.post(`http://localhost:3000/translate`, {
+    const response = await axios.post(`${serverUrl}/translate`, {
       IAM_TOKEN: IAM_TOKEN,
       sourceLanguage: sourceLanguage,
       targetLanguage: "ru",
