@@ -5,7 +5,7 @@ import Dictionary from "../dictionary/Dictionary";
 import ChooseLanguage from "../choose-language/ChooseLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
-import TestCards from "../test-cards/TestCards";
+import TestCards from '../flashCards/test-cards/TestCards';
 import { AppDispatch } from '../../redux/store'; 
  import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase'; 
 

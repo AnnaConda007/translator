@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-
+import { CountAction } from '../components/enum';
 export interface dataFromBD {
   counter: number;
   russianWord: string;
@@ -13,7 +13,7 @@ export interface IEntry {
 
 interface updateCounterAction {
   translatedWord: string;
-  count: number;
+  count: CountAction;
 }
 
 export type IDictionary = {

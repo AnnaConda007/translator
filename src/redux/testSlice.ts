@@ -17,14 +17,16 @@ interface InitialState {
   activeCardNumber: number;
   selectedAnswerOption: string;
   testResult: Array<TestResult>;
-  currentCards: Array<TestCardData>
+  currentCards: Array<TestCardData>;
+  mistake: boolean;
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
   selectedAnswerOption: "",
   testResult: [],
-  currentCards:[]
+  currentCards: [],
+  mistake: false,
 };
 
 const test = createSlice({
@@ -46,11 +48,14 @@ const test = createSlice({
     setTestResult: (state, action: PayloadAction<TestResult>) => {
       state.testResult = [...state.testResult, action.payload];
     },
-    resetTestResult: (state ) => {
-      state.testResult = [ ];
+    resetTestResult: (state) => {
+      state.testResult = [];
     },
-    setCurrentCards : (state, action: PayloadAction<Array<TestCardData>>) => {
-      state.currentCards=  action.payload
+    setCurrentCards: (state, action: PayloadAction<Array<TestCardData>>) => {
+      state.currentCards = action.payload;
+    },
+    setMistake: (state, action: PayloadAction<boolean>) => {
+      state.mistake = action.payload;
     },
   },
 });
@@ -62,6 +67,7 @@ export const {
   resetSelectedAnswerOption,
   setTestResult,
   setCurrentCards,
-  resetTestResult
+  resetTestResult,
+  setMistake,
 } = test.actions;
 export default test.reducer;
