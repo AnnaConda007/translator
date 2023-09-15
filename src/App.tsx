@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import { Provider } from "react-redux";
-import SelectedBookContent from "./routes/SelectedBookContent";
+import SelectedBookContent from "./routes/SelectedBookPage";
 import store from "./redux/store";
 function App() {
   return (

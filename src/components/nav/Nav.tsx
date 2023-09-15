@@ -5,12 +5,19 @@ import Dictionary from "../dictionary/Dictionary";
 import ChooseLanguage from "../choose-language/ChooseLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
+import TestCards from '../flashCards/test-cards/TestCards';
+import { AppDispatch } from '../../redux/store'; 
+ import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase'; 
+
 interface INavElements {
+
   [key: string]: React.ReactElement;
 }
 
-const Nav: React.FC = () => {
-  const dispatch = useDispatch();
+const Nav: React.FC = () => { 
+  const dispatch: AppDispatch = useDispatch();
+  useFetchBookAndDictionaryFromDatabase()
+
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
@@ -20,7 +27,7 @@ const Nav: React.FC = () => {
   const nawElemets: Array<INavElements> = [
     { библиотека: <BooksLibrary /> },
     { словарь: <Dictionary /> },
-    { тестирование: <BooksLibrary /> },
+    { тестирование: <TestCards /> },
     { "выбрать язык": <ChooseLanguage /> },
   ];
 
