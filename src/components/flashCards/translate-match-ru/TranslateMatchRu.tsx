@@ -6,8 +6,9 @@ import { increaseActiveCardNumber } from "../../../redux/testSlice";
 import { setSelectedAnswerOption, setMistake } from "../../../redux/testSlice";
 import useAddTestResult from "../../../hooks/useAddTestResult";
 import useCheckMatchAnswer from "../../../hooks/checkMatchAnswer";
+import { testCardsProp } from "../test-cards/TestCards";
 
-const TranslateMatchRu: React.FC = () => {
+const TranslateMatchRu: React.FC<testCardsProp> = ({ testCardData }) => {
   const dispatch = useDispatch();
   const updateTestResult = useAddTestResult();
   const checkAnswer = useCheckMatchAnswer();
@@ -17,9 +18,6 @@ const TranslateMatchRu: React.FC = () => {
   );
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
-  );
-  const dictionary = useSelector(
-    (state: RootStoreState) => state.dictionary.words
   );
 
   const handleChange = (value: string) => {
@@ -42,7 +40,7 @@ const TranslateMatchRu: React.FC = () => {
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {dictionary[activeCardNumber].translatedWord}
+          {testCardData[activeCardNumber].correctAnswer}
         </Typography>
         <TextField
           id="standard-basic"
@@ -53,7 +51,7 @@ const TranslateMatchRu: React.FC = () => {
           autoComplete="off"
         />
         <ArrowForwardIosRoundedIcon />
-        {mistake && dictionary[activeCardNumber].russianWord}
+        {mistake && testCardData[activeCardNumber].russianWord}
       </List>
     </>
   );

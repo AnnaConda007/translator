@@ -1,4 +1,3 @@
-import { TestCardData } from "../TestCards";
 import { List, ListItemText, ListItemButton, Radio } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../../../redux/store";
@@ -9,12 +8,9 @@ import {
   resetSelectedAnswerOption,
 } from "../../../../redux/testSlice";
 import useAddTestResult from "../../../../hooks/useAddTestResult";
+import { testCardsProp } from "../TestCards";
 
-interface AnswerOptionsProp {
-  testCardData: Array<TestCardData>;
-}
-
-const AnswerOptions: React.FC<AnswerOptionsProp> = ({ testCardData }) => {
+const AnswerOptions: React.FC<testCardsProp> = ({ testCardData }) => {
   const dispatch = useDispatch();
   const checkAnsver = useCheckMatchAnswer();
   const updateTestResult = useAddTestResult();
