@@ -19,7 +19,7 @@ const useCheckMatchAnswer = () => {
     if (check) {
       dispatch(
         updateCounter({
-          translatedWord: currentCards[activeCardNumber].correctAnswer,
+          foreignWord: currentCards[activeCardNumber].correctAnswer,
           count: CountAction.INCREASE,
         })
       );
@@ -27,7 +27,7 @@ const useCheckMatchAnswer = () => {
       dispatch(setMistake(true));
       dispatch(
         updateCounter({
-          translatedWord: currentCards[activeCardNumber].correctAnswer,
+          foreignWord: currentCards[activeCardNumber].correctAnswer,
           count: CountAction.DECREASE,
         })
       );

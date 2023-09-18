@@ -7,7 +7,7 @@ export interface TestResult {
   mistake: string;
 }
 
-export interface TestCardData {
+export interface FlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
   correctAnswer: string;
@@ -17,7 +17,7 @@ interface InitialState {
   activeCardNumber: number;
   selectedAnswerOption: string;
   testResult: Array<TestResult>;
-  currentCards: Array<TestCardData>;
+  currentCards: Array<FlashCardData>;
   mistake: boolean;
 }
 
@@ -51,7 +51,7 @@ const test = createSlice({
     resetTestResult: (state) => {
       state.testResult = [];
     },
-    setCurrentCards: (state, action: PayloadAction<Array<TestCardData>>) => {
+    setCurrentCards: (state, action: PayloadAction<Array<FlashCardData>>) => {
       state.currentCards = action.payload;
     },
     setMistake: (state, action: PayloadAction<boolean>) => {

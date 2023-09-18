@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStoreState } from '../../../redux/store';
 import { translate } from '../../../utils/tranlslateAPI';
-import { setTranslationWord, setTranslatedWord } from '../../../redux/translationWordSlice';
+import { setForeignWord, setRussianWord } from '../../../redux/translatorSlice';
   import { toggleTranslationInputVisibility } from '../../../redux/visibilitySlice ';
 interface ITranslateActionButtonProps {
   value: string,
@@ -23,8 +23,8 @@ const dispatch = useDispatch()
       valueInput
     );
     if (!translateResult) return;
-    dispatch(setTranslationWord(valueInput));
-    dispatch(setTranslatedWord(translateResult));
+    dispatch(setForeignWord(valueInput));
+    dispatch(setRussianWord(translateResult));
     dispatch(toggleTranslationInputVisibility(true));
     setInputValue("");
   };

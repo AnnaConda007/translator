@@ -2,29 +2,29 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import { RootStoreState } from "../../../redux/store";
-import CardWithResult from "./card-with-result/CardWithResult";
-import AnswerOptions from "./answer-options/AnswerOptions";
-import { amountOfTestCard } from "../../../contains";
-import { randomForeignWords } from "../../../utils/shuffleArr";
+import { RootStoreState } from "../../redux/store";
+import CardWithResult from "./test-with-answer options/card-with-result/CardWithResult";
+import AnswerOptions from "./test-with-answer options/answer-options/AnswerOptions";
+import { amountOfTestCard } from "../../contains";
+import { randomForeignWords } from "../../utils/shuffleArr";
 import { useEffect } from "react";
-import { setCurrentCards } from "../../../redux/testSlice";
+import { setCurrentCards } from "../../redux/testSlice";
 import { useDispatch } from "react-redux";
-import { shuffleArr } from "../../../utils/shuffleArr";
-import { IEntry } from "../../../redux/dictionarySlice";
-import TranslateMatchRu from "../translate-match-ru/TranslateMatchRu";
+import { shuffleArr } from "../../utils/shuffleArr";
+import { IEntry } from "../../redux/dictionarySlice";
+import EnteredMatchRu from "./entered-match-ru/EnteredMatchRu";
 
-export interface TestCardData {
+export interface FlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
   correctAnswer: string;
 }
 
-export interface testCardsProp {
-  testCardData: Array<TestCardData>;
+export interface flashCardProp {
+  FlashCardData: Array<FlashCardData>;
 }
 
-const TestCards = () => {
+const FlashCards = () => {
   const dispatch = useDispatch();
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
@@ -40,24 +40,23 @@ const TestCards = () => {
   );
 
   const currentWord = currentCards[activeCardNumber]?.correctAnswer;
-   const currentCounte = counters[currentWord];
+  const currentCounte = counters[currentWord];
 
- 
   useEffect(() => {
     const foreignWords: Array<string> = dictionary.map(
-      (entry) => entry.translatedWord
+      (entry) => entry.foreignWord
     );
-    const testCardData: Array<TestCardData> = dictionary.map((entry) => {
+    const FlashCardData: Array<FlashCardData> = dictionary.map((entry) => {
       return {
         russianWord: entry.russianWord,
         answerOptionsInForeign: randomForeignWords(
           foreignWords,
-          entry.translatedWord
+          entry.foreignWord
         ),
-        correctAnswer: entry.translatedWord,
+        correctAnswer: entry.foreignWord,
       };
     });
-    dispatch(setCurrentCards(shuffleArr(testCardData)));
+    dispatch(setCurrentCards(shuffleArr(FlashCardData)));
   }, [dictionary, dispatch]);
 
   if (!currentCards.length) return null;
@@ -72,9 +71,9 @@ const TestCards = () => {
               {currentCounte !== undefined &&
               currentCounte !== undefined &&
               currentCounte >= 0 ? (
-                <TranslateMatchRu  testCardData={currentCards}/>
+                <EnteredMatchRu FlashCardData={currentCards} />
               ) : (
-                <AnswerOptions testCardData={currentCards} />
+                <AnswerOptions FlashCardData={currentCards} />
               )}
             </>
           )}
@@ -84,4 +83,4 @@ const TestCards = () => {
   );
 };
 
-export default TestCards;
+export default FlashCards;

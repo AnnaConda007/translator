@@ -6,9 +6,9 @@ import { increaseActiveCardNumber } from "../../../redux/testSlice";
 import { setSelectedAnswerOption, setMistake } from "../../../redux/testSlice";
 import useAddTestResult from "../../../hooks/useAddTestResult";
 import useCheckMatchAnswer from "../../../hooks/checkMatchAnswer";
-import { testCardsProp } from "../test-cards/TestCards";
+import { flashCardProp } from "../FlashCards";
 
-const TranslateMatchRu: React.FC<testCardsProp> = ({ testCardData }) => {
+const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
   const dispatch = useDispatch();
   const updateTestResult = useAddTestResult();
   const checkAnswer = useCheckMatchAnswer();
@@ -40,7 +40,7 @@ const TranslateMatchRu: React.FC<testCardsProp> = ({ testCardData }) => {
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {testCardData[activeCardNumber].correctAnswer}
+          {FlashCardData[activeCardNumber].correctAnswer}
         </Typography>
         <TextField
           id="standard-basic"
@@ -51,10 +51,10 @@ const TranslateMatchRu: React.FC<testCardsProp> = ({ testCardData }) => {
           autoComplete="off"
         />
         <ArrowForwardIosRoundedIcon />
-        {mistake && testCardData[activeCardNumber].russianWord}
+        {mistake && FlashCardData[activeCardNumber].russianWord}
       </List>
     </>
   );
 };
 
-export default TranslateMatchRu;
+export default EnteredMatchRu;

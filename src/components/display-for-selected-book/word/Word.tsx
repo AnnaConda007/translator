@@ -1,9 +1,9 @@
 import { translate } from "../../../utils/tranlslateAPI";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setTranslatedWord,
-  setTranslationWord,
-} from "../../../redux/translationWordSlice";
+  setRussianWord,
+  setForeignWord,
+} from "../../../redux/translatorSlice";
 import { RootStoreState } from "../../../redux/store";
 import { cleanAndNormalize } from '../../../utils/cleanAndNormalizeWord';
 interface IWord {
@@ -27,8 +27,8 @@ const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
     const formatedWord =  cleanAndNormalize(word)
     const translation: string | null = await translate(selectedLanguage,  formatedWord);
      if (!translation) return;
-    dispatch(setTranslatedWord(translation));
-    dispatch(setTranslationWord(formatedWord));
+    dispatch(setRussianWord(translation));
+    dispatch(setForeignWord(formatedWord));
     setClickedWord(word);
     setAnchorEl(target);
   };

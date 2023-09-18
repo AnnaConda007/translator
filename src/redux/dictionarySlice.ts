@@ -4,20 +4,20 @@ import { CountAction } from "../components/enum";
 export interface dataFromBD {
   counter: number;
   russianWord: string;
-  translatedWord: string;
+  foreignWord: string;
 }
 export interface IEntry {
   russianWord: string;
-  translatedWord: string;
+  foreignWord: string;
 }
 
 interface updateCounterAction {
-  translatedWord: string;
+  foreignWord: string;
   count: CountAction;
 }
 
 export interface ICounter {
-  [translatedWord: string]: number;
+  [foreignWord: string]: number;
 }
 export type IDictionary = {
   words: Array<IEntry>;
@@ -37,23 +37,23 @@ const dictionary = createSlice({
       action.payload.forEach((action) => {
         const entry: IEntry = {
           russianWord: action.russianWord,
-          translatedWord: action.translatedWord,
+          foreignWord: action.foreignWord,
         };
         state.words.push(entry);
-        state.counters[action.translatedWord] = action.counter;
+        state.counters[action.foreignWord] = action.counter;
       });
     },
     addWord: (state, action: PayloadAction<IEntry>) => {
       state.words.push(action.payload);
-      state.counters[action.payload.translatedWord] = 0;
+      state.counters[action.payload.foreignWord] = 0;
     },
     removeWord: (state, action: PayloadAction<number>) => {
-      const wordToRemove = state.words[action.payload].translatedWord;
+      const wordToRemove = state.words[action.payload].foreignWord;
       state.words.splice(action.payload, 1);
       delete state.counters[wordToRemove];
     },
     updateCounter: (state, action: PayloadAction<updateCounterAction>) => {
-      state.counters[action.payload.translatedWord] += action.payload.count;
+      state.counters[action.payload.foreignWord] += action.payload.count;
     },
   },
 });

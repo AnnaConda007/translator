@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import librarySlice from './librarySlice';   
 import dictionarySlice from "./dictionarySlice";
-import wordsSlice from "./translationWordSlice";
+import wordsSlice from "./translatorSlice";
 import selectedLanguageSlice from "./languageSlice";
 import visibilitySlice from "./visibilitySlice ";
 import testSlice from "./testSlice";

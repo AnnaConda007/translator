@@ -8,9 +8,9 @@ import {
   resetSelectedAnswerOption,
 } from "../../../../redux/testSlice";
 import useAddTestResult from "../../../../hooks/useAddTestResult";
-import { testCardsProp } from "../TestCards";
+import { flashCardProp } from "../../FlashCards";
 
-const AnswerOptions: React.FC<testCardsProp> = ({ testCardData }) => {
+const AnswerOptions: React.FC<flashCardProp> = ({ FlashCardData }) => {
   const dispatch = useDispatch();
   const checkAnsver = useCheckMatchAnswer();
   const updateTestResult = useAddTestResult();
@@ -32,9 +32,9 @@ const AnswerOptions: React.FC<testCardsProp> = ({ testCardData }) => {
   };
   return (
     <>
-      {testCardData[activeCardNumber].russianWord}
+      {FlashCardData[activeCardNumber].russianWord}
       <List>
-        {testCardData[activeCardNumber].answerOptionsInForeign.map(
+        {FlashCardData[activeCardNumber].answerOptionsInForeign.map(
           (answerOption: string) => (
             <ListItemButton key={answerOption}>
               <Radio

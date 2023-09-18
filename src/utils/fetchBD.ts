@@ -1,11 +1,10 @@
 import { dictionary_dataBaseURL, books_dataBaseURL } from "../contains";
-import { IDictionary } from '../redux/dictionarySlice';
 import { Dispatch } from "redux";
 import { setDictionary } from "../redux/dictionarySlice";
 import { setBooks } from "../redux/librarySlice";
 import { IBooks } from "../redux/librarySlice";
 import { setTitles } from "../redux/librarySlice";
-
+import { dataFromBD } from "../redux/dictionarySlice";
 export const fetchAndSetDictionary = () => {
   return async (dispatch: Dispatch) => {
     try {
@@ -25,7 +24,7 @@ const fetchDictionary = async () => {
   if (!data) {
     return [];
   }
-  const dictionary: IDictionary = Object.values(data);
+  const dictionary: Array<dataFromBD> = Object.values(data);
   return dictionary;
 };
 
