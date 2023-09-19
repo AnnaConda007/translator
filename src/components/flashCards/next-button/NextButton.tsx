@@ -30,8 +30,8 @@ const NextButton: React.FC = () => {
     (word) => {
       return {
         russianWord: word.russianWord,
-        translatedWord: word.translatedWord,
-        counter: dictionary.counters[word.translatedWord],
+        foreignWord: word.foreignWord,
+        counter: dictionary.counters[word.foreignWord],
       };
     }
   );
@@ -39,14 +39,14 @@ const NextButton: React.FC = () => {
     (dictionaryEntry: IEntry) =>
       testResults.some(
         (testResult: TestResult) =>
-          testResult.foreignWord === dictionaryEntry.translatedWord
+          testResult.foreignWord === dictionaryEntry.foreignWord
       )
   );
 
   const entriesObject: IDataToUpdateDictionaryBD =
     matchedDictionaryEntries.reduce(
       (acc: IDataToUpdateDictionaryBD, currentEntry: dataFromBD) => {
-        acc[currentEntry.translatedWord] = currentEntry;
+        acc[currentEntry.foreignWord] = currentEntry;
         return acc;
       },
       {}

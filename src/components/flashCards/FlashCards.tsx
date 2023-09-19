@@ -3,8 +3,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
-import CardWithResult from "./test-with-answer options/card-with-result/CardWithResult";
-import AnswerOptions from "./test-with-answer options/answer-options/AnswerOptions";
+import CardWithResult from "./card-with-result/CardWithResult";
+import AnswerOptions from "./tests-answer-options/AnswerOptions";
 import { amountOfTestCard } from "../../contains";
 import { randomForeignWords } from "../../utils/shuffleArr";
 import { useEffect } from "react";
@@ -35,6 +35,7 @@ const FlashCards = () => {
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
+  console.log("dictionary", dictionary)
   const counters = useSelector(
     (state: RootStoreState) => state.dictionary.counters
   );
@@ -46,6 +47,7 @@ const FlashCards = () => {
     const foreignWords: Array<string> = dictionary.map(
       (entry) => entry.foreignWord
     );
+
     const FlashCardData: Array<FlashCardData> = dictionary.map((entry) => {
       return {
         russianWord: entry.russianWord,
@@ -58,8 +60,7 @@ const FlashCards = () => {
     });
     dispatch(setCurrentCards(shuffleArr(FlashCardData)));
   }, [dictionary, dispatch]);
-
-  if (!currentCards.length) return null;
+   if (!currentCards.length) return null;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>

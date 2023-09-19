@@ -9,8 +9,8 @@ const useAddTestResult = () => {
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-  const dictionary = useSelector(
-    (state: RootStoreState) => state.dictionary.words
+  const currentCards = useSelector(
+    (state: RootStoreState) => state.test.currentCards
   );
 
   const mistake = useSelector((state: RootStoreState) => state.test.mistake);
@@ -18,8 +18,8 @@ const useAddTestResult = () => {
   const updateTestResult = () => {
     dispatch(
       setTestResult({
-        russianWord: dictionary[activeCardNumber].russianWord,
-        foreignWord: dictionary[activeCardNumber].translatedWord,
+        russianWord: currentCards[activeCardNumber].russianWord,
+        foreignWord: currentCards[activeCardNumber].correctAnswer,
         mistake: mistake ? "+" : "-",
       })
     );

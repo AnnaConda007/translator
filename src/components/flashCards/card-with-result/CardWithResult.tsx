@@ -1,7 +1,7 @@
 import { List, ListItemText, ListItem } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
-import NextButton from "../../next-button/NextButton";
+import NextButton from "../next-button/NextButton";
 
 const CardWithResult: React.FC = () => {
   const testResults = useSelector(
@@ -19,7 +19,7 @@ const CardWithResult: React.FC = () => {
           </ListItem>
         ))}
       </List>
-      <NextButton />{" "}
+      <NextButton />
     </>
   );
 };

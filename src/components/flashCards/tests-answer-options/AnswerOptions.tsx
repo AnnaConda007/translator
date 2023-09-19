@@ -1,17 +1,17 @@
 import { List, ListItemText, ListItemButton, Radio } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStoreState } from "../../../../redux/store";
-import useCheckMatchAnswer from "../../../../hooks/checkMatchAnswer";
+import { RootStoreState } from "../../../redux/store";
+import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
 import {
   increaseActiveCardNumber,
   setSelectedAnswerOption,
   resetSelectedAnswerOption,
-} from "../../../../redux/testSlice";
-import useAddTestResult from "../../../../hooks/useAddTestResult";
-import { flashCardProp } from "../../FlashCards";
+} from "../../../redux/testSlice";
+import useAddTestResult from "../../../hooks/useAddTestResult";
+import { flashCardProp } from "../FlashCards";
 
 const AnswerOptions: React.FC<flashCardProp> = ({ FlashCardData }) => {
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
   const checkAnsver = useCheckMatchAnswer();
   const updateTestResult = useAddTestResult();
   const activeCardNumber = useSelector(

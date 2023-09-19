@@ -8,7 +8,7 @@ import useAddTestResult from "../../../hooks/useAddTestResult";
 import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
 import { flashCardProp } from "../FlashCards";
 
-const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
+const EnteredMatchForeign: React.FC<flashCardProp> = ({ FlashCardData }) => {
   const dispatch = useDispatch();
   const updateTestResult = useAddTestResult();
   const checkAnswer = useCheckMatchAnswer();
@@ -24,7 +24,6 @@ const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
     if (!value) return;
     dispatch(setSelectedAnswerOption(value.toLowerCase().trim()));
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key != "Enter") return;
     setTimeout(() => {
@@ -40,7 +39,7 @@ const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {FlashCardData[activeCardNumber].correctAnswer}
+          {FlashCardData[activeCardNumber].russianWord}
         </Typography>
         <TextField
           id="standard-basic"
@@ -51,10 +50,10 @@ const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
           autoComplete="off"
         />
         <ArrowForwardIosRoundedIcon />
-        {mistake && FlashCardData[activeCardNumber].russianWord}
+        {mistake && FlashCardData[activeCardNumber].correctAnswer}
       </List>
     </>
   );
 };
 
-export default EnteredMatchRu;
+export default EnteredMatchForeign;

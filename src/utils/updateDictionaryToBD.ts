@@ -47,7 +47,7 @@ export interface IDataToUpdateDictionaryBD {
   [key: string]: {
     counter: number;
     russianWord: string;
-    translatedWord: string;
+    foreignWord: string;
   };
 }
 
