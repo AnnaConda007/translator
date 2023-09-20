@@ -17,7 +17,7 @@ import EnteredMatchRu from "./entered-match-ru/EnteredMatchRu";
 export interface FlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
-  correctAnswer: string;
+  foreignWord : string;
 }
 
 export interface flashCardProp {
@@ -34,13 +34,12 @@ const FlashCards = () => {
   );
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
-  );
-  console.log("dictionary", dictionary)
+  ); 
   const counters = useSelector(
     (state: RootStoreState) => state.dictionary.counters
   );
 
-  const currentWord = currentCards[activeCardNumber]?.correctAnswer;
+   const currentWord = currentCards[activeCardNumber]?.foreignWord;
   const currentCounte = counters[currentWord];
 
   useEffect(() => {
@@ -55,12 +54,13 @@ const FlashCards = () => {
           foreignWords,
           entry.foreignWord
         ),
-        correctAnswer: entry.foreignWord,
+        foreignWord : entry.foreignWord,
       };
     });
     dispatch(setCurrentCards(shuffleArr(FlashCardData)));
   }, [dictionary, dispatch]);
    if (!currentCards.length) return null;
+   
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>

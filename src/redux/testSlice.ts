@@ -4,29 +4,27 @@ import { PayloadAction } from "@reduxjs/toolkit";
 export interface TestResult {
   russianWord: string;
   foreignWord: string;
-  mistake: string;
+  correctAnswer: boolean;
 }
 
 export interface FlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
-  correctAnswer: string;
+  foreignWord: string;
 }
 
 interface InitialState {
   activeCardNumber: number;
-  selectedAnswerOption: string;
   testResult: Array<TestResult>;
   currentCards: Array<FlashCardData>;
-  mistake: boolean;
+  correctAnswer: boolean;
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
-  selectedAnswerOption: "",
   testResult: [],
   currentCards: [],
-  mistake: false,
+  correctAnswer: false,
 };
 
 const test = createSlice({
@@ -39,12 +37,6 @@ const test = createSlice({
     resetActiveCardNumber: (state) => {
       state.activeCardNumber = 0;
     },
-    setSelectedAnswerOption: (state, action: PayloadAction<string>) => {
-      state.selectedAnswerOption = action.payload;
-    },
-    resetSelectedAnswerOption: (state) => {
-      state.selectedAnswerOption = "";
-    },
     setTestResult: (state, action: PayloadAction<TestResult>) => {
       state.testResult = [...state.testResult, action.payload];
     },
@@ -54,8 +46,8 @@ const test = createSlice({
     setCurrentCards: (state, action: PayloadAction<Array<FlashCardData>>) => {
       state.currentCards = action.payload;
     },
-    setMistake: (state, action: PayloadAction<boolean>) => {
-      state.mistake = action.payload;
+    setCorrectAnswer: (state, action: PayloadAction<boolean>) => {
+      state.correctAnswer = action.payload;
     },
   },
 });
@@ -63,11 +55,9 @@ const test = createSlice({
 export const {
   increaseActiveCardNumber,
   resetActiveCardNumber,
-  setSelectedAnswerOption,
-  resetSelectedAnswerOption,
   setTestResult,
   setCurrentCards,
   resetTestResult,
-  setMistake,
+  setCorrectAnswer,
 } = test.actions;
 export default test.reducer;

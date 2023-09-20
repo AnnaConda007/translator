@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
-import { updateCounter } from "../redux/dictionarySlice";
-import { CountAction } from "../components/enum";
-import { setMistake } from "../redux/testSlice";
+import useAddTestResult from "./useAddTestResult";
 
 const useCheckMatchAnswer = () => {
-  const dispatch = useDispatch();
+  const updateTestResult = useAddTestResult();
   const currentCards = useSelector(
     (state: RootStoreState) => state.test.currentCards
   );
@@ -15,25 +13,9 @@ const useCheckMatchAnswer = () => {
   const checkAnswer = (selectedAnswerOption: string) => {
     const check =
       currentCards[activeCardNumber].russianWord === selectedAnswerOption ||
-      currentCards[activeCardNumber].correctAnswer === selectedAnswerOption;
-    if (check) {
-      dispatch(
-        updateCounter({
-          foreignWord: currentCards[activeCardNumber].correctAnswer,
-          count: CountAction.INCREASE,
-        })
-      );
-    } else {
-      dispatch(setMistake(true));
-      dispatch(
-        updateCounter({
-          foreignWord: currentCards[activeCardNumber].correctAnswer,
-          count: CountAction.DECREASE,
-        })
-      );
-    }
+      currentCards[activeCardNumber].foreignWord === selectedAnswerOption;
+    updateTestResult(check);
   };
-
   return checkAnswer;
 };
 

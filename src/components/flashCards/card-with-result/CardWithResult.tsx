@@ -14,7 +14,7 @@ const CardWithResult: React.FC = () => {
         {testResults.map((result, index) => (
           <ListItem key={`${result.foreignWord}${index}`}>
             <ListItemText
-              primary={`${result.foreignWord} : ${result.russianWord}   ${result.mistake}`}
+              primary={`${result.foreignWord} : ${result.russianWord}   ${result.correctAnswer}`}
             />
           </ListItem>
         ))}

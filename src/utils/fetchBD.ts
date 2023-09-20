@@ -25,7 +25,6 @@ const fetchDictionary = async () => {
     return [];
   }
   const dictionary: Array<dataFromBD> = Object.values(data);
-  console.log(dictionary)
   return dictionary;
 };
 

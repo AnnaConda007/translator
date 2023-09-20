@@ -13,6 +13,7 @@ import {
 } from "../../../redux/testSlice";
 import { shuffleArr } from "../../../utils/shuffleArr";
 import { dataFromBD } from "../../../redux/dictionarySlice";
+import { updateCounter } from "../../../redux/dictionarySlice";
 const NextButton: React.FC = () => {
   const dispatch = useDispatch();
   const currentCards = useSelector(
@@ -57,6 +58,7 @@ const NextButton: React.FC = () => {
     dispatch(setCurrentCards(shuffledCards));
     dispatch(resetActiveCardNumber());
     dispatch(resetTestResult());
+    dispatch(updateCounter(testResults));
     await updateDictionaryInBD(entriesObject);
   };
 

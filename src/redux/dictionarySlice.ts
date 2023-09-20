@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { CountAction } from "../components/enum";
+import { TestResult } from './testSlice';
 export interface dataFromBD {
   counter: number;
   russianWord: string;
@@ -11,11 +12,7 @@ export interface IEntry {
   foreignWord: string;
 }
 
-interface updateCounterAction {
-  foreignWord: string;
-  count: CountAction;
-}
-
+ 
 export interface ICounter {
   [foreignWord: string]: number;
 }
@@ -52,8 +49,11 @@ const dictionary = createSlice({
       state.words.splice(action.payload, 1);
       delete state.counters[wordToRemove];
     },
-    updateCounter: (state, action: PayloadAction<updateCounterAction>) => {
-      state.counters[action.payload.foreignWord] += action.payload.count;
+    updateCounter: (state, action: PayloadAction<Array<TestResult>>) => {
+      action.payload.forEach((result)=>{
+        const foreignWord = result.foreignWord;
+        state.counters[foreignWord] += result.correctAnswer ? 1 : -1
+      })
     },
   },
 });

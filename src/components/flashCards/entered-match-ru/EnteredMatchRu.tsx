@@ -3,55 +3,54 @@ import { RootStoreState } from "../../../redux/store";
 import { List, TextField, Typography } from "@mui/material";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { increaseActiveCardNumber } from "../../../redux/testSlice";
-import { setSelectedAnswerOption, setMistake } from "../../../redux/testSlice";
-import useAddTestResult from "../../../hooks/useAddTestResult";
 import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
 import { flashCardProp } from "../FlashCards";
-
+import { useState } from "react";
+import { batch } from "react-redux";
 const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
   const dispatch = useDispatch();
-  const updateTestResult = useAddTestResult();
+  const [enter, setEnter] = useState(false);
   const checkAnswer = useCheckMatchAnswer();
-  const mistake = useSelector((state: RootStoreState) => state.test.mistake);
-  const selectedAnswerOption = useSelector(
-    (state: RootStoreState) => state.test.selectedAnswerOption
-  );
+  const [answerValue, setAnswerValue] = useState("");
+
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
 
   const handleChange = (value: string) => {
-    if (!value) return;
-    dispatch(setSelectedAnswerOption(value.toLowerCase().trim()));
+    setAnswerValue(value.toLowerCase());
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key != "Enter") return;
-    setTimeout(() => {
-      dispatch(setMistake(false));
-    }, 1000);
-    updateTestResult();
-    checkAnswer(selectedAnswerOption);
-    dispatch(increaseActiveCardNumber());
-    dispatch(setSelectedAnswerOption(""));
+    setEnter(true);
+    batch(() => {
+      checkAnswer(answerValue);
+      setTimeout(() => {
+        dispatch(increaseActiveCardNumber());
+        setAnswerValue("");
+      }, 500);
+    });
   };
 
   return (
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {FlashCardData[activeCardNumber].correctAnswer}
+          {FlashCardData[activeCardNumber].foreignWord}
         </Typography>
         <TextField
           id="standard-basic"
           variant="standard"
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyPress}
-          value={selectedAnswerOption}
+          value={answerValue}
           autoComplete="off"
         />
         <ArrowForwardIosRoundedIcon />
-        {mistake && FlashCardData[activeCardNumber].russianWord}
+        {enter && FlashCardData[activeCardNumber].foreignWord != answerValue ? (
+          <span>{FlashCardData[activeCardNumber].foreignWord} </span>
+        ) : null}
       </List>
     </>
   );

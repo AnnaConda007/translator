@@ -2,34 +2,30 @@ import { List, ListItemText, ListItemButton, Radio } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
-import {
-  increaseActiveCardNumber,
-  setSelectedAnswerOption,
-  resetSelectedAnswerOption,
-} from "../../../redux/testSlice";
-import useAddTestResult from "../../../hooks/useAddTestResult";
+import { increaseActiveCardNumber } from "../../../redux/testSlice";
 import { flashCardProp } from "../FlashCards";
+import { batch } from "react-redux";
+import { useState } from "react";
 
 const AnswerOptions: React.FC<flashCardProp> = ({ FlashCardData }) => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const checkAnsver = useCheckMatchAnswer();
-  const updateTestResult = useAddTestResult();
+  const [selectedAnswerOption, setSelectedAnswerOption] = useState("");
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-  const selectedAnswerOption = useSelector(
-    (state: RootStoreState) => state.test.selectedAnswerOption
-  );
 
   const handleRadio = (answerOption: string) => {
-    setTimeout(() => {
-      dispatch(resetSelectedAnswerOption());
-      dispatch(increaseActiveCardNumber());
-    }, 500);
-    dispatch(setSelectedAnswerOption(answerOption));
+    setSelectedAnswerOption(answerOption);
     checkAnsver(answerOption);
-    updateTestResult();
+    batch(() => {
+      setTimeout(() => {
+        dispatch(increaseActiveCardNumber());
+        setSelectedAnswerOption("")
+      }, 500);
+    });
   };
+
   return (
     <>
       {FlashCardData[activeCardNumber].russianWord}

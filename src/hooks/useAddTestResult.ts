@@ -13,14 +13,12 @@ const useAddTestResult = () => {
     (state: RootStoreState) => state.test.currentCards
   );
 
-  const mistake = useSelector((state: RootStoreState) => state.test.mistake);
-
-  const updateTestResult = () => {
+  const updateTestResult = (mistake: boolean) => {
     dispatch(
       setTestResult({
         russianWord: currentCards[activeCardNumber].russianWord,
-        foreignWord: currentCards[activeCardNumber].correctAnswer,
-        mistake: mistake ? "+" : "-",
+        foreignWord: currentCards[activeCardNumber].foreignWord,
+        correctAnswer: mistake ? true : false,
       })
     );
   };

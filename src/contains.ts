@@ -3,5 +3,5 @@ export const dataBaseURL = "https://books-31eba-default-rtdb.firebaseio.com/";
 export const books_dataBaseURL = `${dataBaseURL}books/.json`;
 export const dictionary_dataBaseURL = `${dataBaseURL}dictionary/.json`;
 export const serverUrl = "http://localhost:3000";
-export const amountOfTestCard = 3;
+export const amountOfTestCard = 6;
 export const amountAnswerOption = 4;
