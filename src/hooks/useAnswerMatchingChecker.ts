@@ -1,22 +1,23 @@
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
-import useAddTestResult from "./useAddTestResult";
+import useUpdateTestResult from "./useUpdateTestResult";
 
-const useCheckMatchAnswer = () => {
-  const updateTestResult = useAddTestResult();
+const useAnswerMatchingChecker = () => {
+  const updateTestResult = useUpdateTestResult();
   const currentCards = useSelector(
     (state: RootStoreState) => state.test.currentCards
   );
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
+
   const checkAnswer = (selectedAnswerOption: string) => {
-    const check =
+    const isAnswerCorrect =
       currentCards[activeCardNumber].russianWord === selectedAnswerOption ||
       currentCards[activeCardNumber].foreignWord === selectedAnswerOption;
-    updateTestResult(check);
+    updateTestResult(isAnswerCorrect);
   };
   return checkAnswer;
 };
 
-export default useCheckMatchAnswer;
+export default useAnswerMatchingChecker;

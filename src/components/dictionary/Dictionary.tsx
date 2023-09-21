@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, batch } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { IEntry } from "../../redux/dictionarySlice";
 import { List, ListItem, ListItemText } from "@mui/material";
@@ -7,19 +7,22 @@ import { add_deliteWordInBD } from "../../utils/updateDictionaryToBD";
 import { TypeAction } from "../enum";
 import TranslationInput from "../translation-input/TranslationInput";
 import { AppDispatch } from "../../redux/store";
-
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 const Dictionary: React.FC = () => {
+  batch;
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
   const dispatch: AppDispatch = useDispatch();
 
-  const handleDelete = (index: number, word: string, translation: string) => {
-    dispatch(removeWord(index));
-    add_deliteWordInBD({
-      russianWord: word,
-      foreignWord: translation,
-      actionType: TypeAction.REMOVE,
+  const handleDelete = (word: string, translation: string) => {
+    batch(() => {
+      dispatch(removeWord(translation));
+      add_deliteWordInBD({
+        russianWord: word,
+        foreignWord: translation,
+        actionType: TypeAction.REMOVE,
+      });
     });
   };
 
@@ -27,7 +30,7 @@ const Dictionary: React.FC = () => {
     <>
       <TranslationInput />
       <List>
-        {dictionary.map((entry, index) => {
+        {dictionary.map((entry) => {
           return (
             <ListItem key={entry.foreignWord} dense>
               <ListItemText
@@ -35,14 +38,10 @@ const Dictionary: React.FC = () => {
               />
               <button
                 onClick={() =>
-                  handleDelete(
-                    index,
-                    `${entry.russianWord}`,
-                    `${entry.foreignWord}`
-                  )
+                  handleDelete(`${entry.russianWord}`, `${entry.foreignWord}`)
                 }
               >
-                delete
+                <DeleteForeverIcon />
               </button>
             </ListItem>
           );

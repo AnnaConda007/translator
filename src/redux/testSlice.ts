@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-export interface TestResult {
+export interface ITestResult {
   russianWord: string;
   foreignWord: string;
   correctAnswer: boolean;
 }
 
-export interface FlashCardData {
+export interface IFlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
   foreignWord: string;
@@ -15,16 +15,14 @@ export interface FlashCardData {
 
 interface InitialState {
   activeCardNumber: number;
-  testResult: Array<TestResult>;
-  currentCards: Array<FlashCardData>;
-  correctAnswer: boolean;
+  testResult: Array<ITestResult>;
+  currentCards: Array<IFlashCardData>
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
   testResult: [],
-  currentCards: [],
-  correctAnswer: false,
+  currentCards: []
 };
 
 const test = createSlice({
@@ -37,18 +35,15 @@ const test = createSlice({
     resetActiveCardNumber: (state) => {
       state.activeCardNumber = 0;
     },
-    setTestResult: (state, action: PayloadAction<TestResult>) => {
-      state.testResult = [...state.testResult, action.payload];
+    setTestResult: (state, action: PayloadAction<ITestResult>) => {
+      state.testResult.push(action.payload);
     },
     resetTestResult: (state) => {
       state.testResult = [];
     },
-    setCurrentCards: (state, action: PayloadAction<Array<FlashCardData>>) => {
+    setCurrentCards: (state, action: PayloadAction<Array<IFlashCardData>>) => {
       state.currentCards = action.payload;
-    },
-    setCorrectAnswer: (state, action: PayloadAction<boolean>) => {
-      state.correctAnswer = action.payload;
-    },
+    }
   },
 });
 

@@ -1,49 +1,51 @@
-import { List, ListItemText, ListItemButton, Radio } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { List, ListItemButton, Radio, FormControlLabel } from "@mui/material";
+import { useDispatch, useSelector, batch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
-import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
+import useAnswerMatchingChecker from "../../../hooks/useAnswerMatchingChecker";
 import { increaseActiveCardNumber } from "../../../redux/testSlice";
 import { flashCardProp } from "../FlashCards";
-import { batch } from "react-redux";
 import { useState } from "react";
 
-const AnswerOptions: React.FC<flashCardProp> = ({ FlashCardData }) => {
+const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
   const dispatch = useDispatch();
-  const checkAnsver = useCheckMatchAnswer();
+  const checkAnswer = useAnswerMatchingChecker();
   const [selectedAnswerOption, setSelectedAnswerOption] = useState("");
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
 
   const handleRadio = (answerOption: string) => {
-    setSelectedAnswerOption(answerOption);
-    checkAnsver(answerOption);
     batch(() => {
+      setSelectedAnswerOption(answerOption);
+      checkAnswer(answerOption);
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
-        setSelectedAnswerOption("")
+        setSelectedAnswerOption("");
       }, 500);
     });
   };
 
   return (
     <>
-      {FlashCardData[activeCardNumber].russianWord}
+      {flashCardData[activeCardNumber].russianWord}
       <List>
-        {FlashCardData[activeCardNumber].answerOptionsInForeign.map(
+        {flashCardData[activeCardNumber].answerOptionsInForeign.map(
           (answerOption: string) => (
             <ListItemButton key={answerOption}>
-              <Radio
-                edge="start"
-                id={answerOption}
+              <FormControlLabel
                 value={answerOption}
-                checked={selectedAnswerOption === answerOption}
-                tabIndex={-1}
-                onChange={() => handleRadio(answerOption)}
+                control={
+                  <Radio
+                    edge="start"
+                    id={answerOption}
+                    value={answerOption}
+                    checked={selectedAnswerOption === answerOption}
+                    tabIndex={-1}
+                    onChange={() => handleRadio(answerOption)}
+                  />
+                }
+                label={answerOption}
               />
-              <label htmlFor={answerOption}>
-                <ListItemText primary={answerOption} />
-              </label>
             </ListItemButton>
           )
         )}

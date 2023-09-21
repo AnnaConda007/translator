@@ -1,43 +1,46 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, batch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { List, TextField, Typography } from "@mui/material";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { increaseActiveCardNumber } from "../../../redux/testSlice";
-import useCheckMatchAnswer from "../../../hooks/useCheckMatchAnswer";
+import useAnswerMatchingChecker from "../../../hooks/useAnswerMatchingChecker";
 import { flashCardProp } from "../FlashCards";
 import { useState } from "react";
-import { batch } from "react-redux";
-const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
-  const dispatch = useDispatch();
-  const [enter, setEnter] = useState(false);
-  const checkAnswer = useCheckMatchAnswer();
-  const [answerValue, setAnswerValue] = useState("");
+import CorrectAnswer from "../correct-answer/CorrectAnswer";
 
+const EnteredMatchRu: React.FC<flashCardProp> = ({ flashCardData }) => {
+  const dispatch = useDispatch();
+  const checkAnswer = useAnswerMatchingChecker();
+  const [answerButtonClicked, setAnswerButtonClicked] = useState(false);
+  const [answerValue, setAnswerValue] = useState("");
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-
   const handleChange = (value: string) => {
     setAnswerValue(value.toLowerCase());
   };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key != "Enter") return;
-    setEnter(true);
+  const handleAnswer = () => {
     batch(() => {
+      setAnswerButtonClicked(true);
       checkAnswer(answerValue);
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
         setAnswerValue("");
-      }, 500);
+        setAnswerButtonClicked(false);
+      }, 1500);
     });
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key !== "Enter") return;
+    handleAnswer();
   };
 
   return (
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {FlashCardData[activeCardNumber].foreignWord}
+          {flashCardData[activeCardNumber].foreignWord}
         </Typography>
         <TextField
           id="standard-basic"
@@ -47,10 +50,18 @@ const EnteredMatchRu: React.FC<flashCardProp> = ({ FlashCardData }) => {
           value={answerValue}
           autoComplete="off"
         />
-        <ArrowForwardIosRoundedIcon />
-        {enter && FlashCardData[activeCardNumber].foreignWord != answerValue ? (
-          <span>{FlashCardData[activeCardNumber].foreignWord} </span>
-        ) : null}
+        <button aria-label="Submit Answer" onClick={handleAnswer}>
+          <ArrowForwardIosRoundedIcon />
+        </button>
+
+        {answerButtonClicked && (
+          <CorrectAnswer
+            flashCardData={flashCardData}
+            activeCardNumber={activeCardNumber}
+            answerValue={answerValue}
+            ruWord={true}
+          />
+        )}
       </List>
     </>
   );

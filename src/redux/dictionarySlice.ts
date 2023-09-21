@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CountAction } from "../components/enum";
-import { TestResult } from './testSlice';
+import { ITestResult } from "./testSlice";
 export interface dataFromBD {
   counter: number;
   russianWord: string;
@@ -12,7 +11,6 @@ export interface IEntry {
   foreignWord: string;
 }
 
- 
 export interface ICounter {
   [foreignWord: string]: number;
 }
@@ -31,29 +29,28 @@ const dictionary = createSlice({
   initialState,
   reducers: {
     setDictionary: (state, action: PayloadAction<Array<dataFromBD>>) => {
-      action.payload.forEach((action) => {
+      action.payload.forEach((dataEntry) => {
         const entry: IEntry = {
-          russianWord: action.russianWord,
-          foreignWord: action.foreignWord,
+          russianWord: dataEntry.russianWord,
+          foreignWord: dataEntry.foreignWord,
         };
         state.words.push(entry);
-        state.counters[action.foreignWord] = action.counter;
+        state.counters[dataEntry.foreignWord] = dataEntry.counter;
       });
     },
     addWord: (state, action: PayloadAction<IEntry>) => {
       state.words.push(action.payload);
       state.counters[action.payload.foreignWord] = 0;
     },
-    removeWord: (state, action: PayloadAction<number>) => {
-      const wordToRemove = state.words[action.payload].foreignWord;
-      state.words.splice(action.payload, 1);
-      delete state.counters[wordToRemove];
+    removeWord: (state, action: PayloadAction<string>) => {
+      state.words= state.words.filter((word) => (word.foreignWord !== action.payload));
+      delete state.counters[action.payload];
     },
-    updateCounter: (state, action: PayloadAction<Array<TestResult>>) => {
-      action.payload.forEach((result)=>{
+    updateCounter: (state, action: PayloadAction<Array<ITestResult>>) => {
+      action.payload.forEach((result) => {
         const foreignWord = result.foreignWord;
-        state.counters[foreignWord] += result.correctAnswer ? 1 : -1
-      })
+        state.counters[foreignWord] += result.correctAnswer ? 1 : -1;
+      });
     },
   },
 });
