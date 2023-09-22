@@ -28,3 +28,8 @@ export enum languageMatchTested {
   RUSSIAN = "russian",
   FOREIGN = "foreign",
 }
+
+export enum PAGINATE {
+  NEXT = "next",
+  BACK = "back",
+}
