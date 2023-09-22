@@ -3,8 +3,7 @@ export const dataBaseURL = "https://books-31eba-default-rtdb.firebaseio.com/";
 export const books_dataBaseURL = `${dataBaseURL}books/.json`;
 export const dictionary_dataBaseURL = `${dataBaseURL}dictionary/.json`;
 export const serverUrl = "http://localhost:3000";
-export const amountOfTestCard = 6;
+export const amountOfTestCard = 2;
 export const amountAnswerOption = 4;
-export const counterForTest = 7;
-export const counterForEnteredMatchRu = 14;
-export const counterForEnteredMatchForeign = 21;
+export const determineOfTypeTest = 2;
+ 

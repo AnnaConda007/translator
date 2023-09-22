@@ -14,7 +14,7 @@ import { IFlashCardData } from "../../redux/testSlice";
 import { createFlashCardData } from "../../utils/createFlashCardData";
 import CardIdentifier from "./card-identifier/CardIdentifier";
 
-export interface flashCardProp {
+ export interface flashCardProp {
   flashCardData: Array<IFlashCardData>;
 }
 
@@ -34,12 +34,12 @@ const FlashCards = () => {
     const flashCardData = createFlashCardData(words);
     dispatch(setCurrentCards(shuffleArr(flashCardData)));
   }, [words, dispatch]);
-  if (!currentCards.length) return null;
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
+          {!currentCards.length && <p> нет слов для теста </p>}
           {activeCardNumber === amountOfTestCard ? (
             <CardWithResult />
           ) : (

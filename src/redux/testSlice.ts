@@ -16,13 +16,13 @@ export interface IFlashCardData {
 interface InitialState {
   activeCardNumber: number;
   testResult: Array<ITestResult>;
-  currentCards: Array<IFlashCardData>
+  currentCards: Array<IFlashCardData>;
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
   testResult: [],
-  currentCards: []
+  currentCards: [],
 };
 
 const test = createSlice({
@@ -43,7 +43,7 @@ const test = createSlice({
     },
     setCurrentCards: (state, action: PayloadAction<Array<IFlashCardData>>) => {
       state.currentCards = action.payload;
-    }
+    },
   },
 });
 
@@ -53,6 +53,5 @@ export const {
   setTestResult,
   setCurrentCards,
   resetTestResult,
-  setCorrectAnswer,
 } = test.actions;
 export default test.reducer;

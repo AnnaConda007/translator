@@ -1,6 +1,6 @@
 import { dictionary_dataBaseURL } from "../contains";
 import { TypeAction } from "../components/enum";
-
+import { dataFromBD } from "../redux/dictionarySlice";
 interface add_deliteWordInBDArgs {
   russianWord: string;
   foreignWord: string;
@@ -48,12 +48,12 @@ export interface IDataToUpdateDictionaryBD {
     counter: number;
     russianWord: string;
     foreignWord: string;
-  };
+  } | null;
 }
 
-export const updateDictionaryInBD = async (
-  dictionaryEntries: IDataToUpdateDictionaryBD
-) => {
+export const updateDictionaryInBD = async (dictionaryEntries: {
+  [key: string]: dataFromBD | null;
+}) => {
   try {
     await fetch(dictionary_dataBaseURL, {
       method: "PATCH",

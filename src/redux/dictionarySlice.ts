@@ -43,14 +43,24 @@ const dictionary = createSlice({
       state.counters[action.payload.foreignWord] = 0;
     },
     removeWord: (state, action: PayloadAction<string>) => {
-      state.words= state.words.filter((word) => (word.foreignWord !== action.payload));
+      state.words = state.words.filter(
+        (word) => word.foreignWord !== action.payload
+      );
       delete state.counters[action.payload];
     },
     updateCounter: (state, action: PayloadAction<Array<ITestResult>>) => {
+      const wordsToDelete = new Set<string>();
       action.payload.forEach((result) => {
         const foreignWord = result.foreignWord;
         state.counters[foreignWord] += result.correctAnswer ? 1 : -1;
+        if (state.counters[foreignWord] > 3) {
+          delete state.counters[foreignWord];
+          wordsToDelete.add(foreignWord);
+        }
       });
+      state.words = state.words.filter(
+        (word) => !wordsToDelete.has(word.foreignWord)
+      );
     },
   },
 });

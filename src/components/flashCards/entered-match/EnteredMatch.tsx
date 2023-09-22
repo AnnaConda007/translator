@@ -2,13 +2,22 @@ import { useDispatch, useSelector, batch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { List, TextField, Typography } from "@mui/material";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { increaseActiveCardNumber } from "../../../redux/testSlice";
+import {
+  IFlashCardData,
+  increaseActiveCardNumber,
+} from "../../../redux/testSlice";
 import useAnswerMatchingChecker from "../../../hooks/useAnswerMatchingChecker";
-import { flashCardProp } from "../FlashCards";
 import { useState } from "react";
 import CorrectAnswer from "../correct-answer/CorrectAnswer";
-
-const EnteredlanguageTested: React.FC<flashCardProp> = ({ flashCardData }) => {
+import { languageMatchTested } from "../../enum";
+interface EnteredMatchProps {
+  flashCardData: Array<IFlashCardData>;
+  languageTested: languageMatchTested;
+}
+const EnteredMatch: React.FC<EnteredMatchProps> = ({
+  flashCardData,
+  languageTested,
+}) => {
   const dispatch = useDispatch();
   const checkAnswer = useAnswerMatchingChecker();
   const [answerButtonClicked, setAnswerButtonClicked] = useState(false);
@@ -40,7 +49,9 @@ const EnteredlanguageTested: React.FC<flashCardProp> = ({ flashCardData }) => {
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {flashCardData[activeCardNumber].foreignWord}
+          {languageTested === languageMatchTested.RUSSIAN
+            ? flashCardData[activeCardNumber].foreignWord
+            : flashCardData[activeCardNumber].russianWord}
         </Typography>
         <TextField
           id="standard-basic"
@@ -59,7 +70,7 @@ const EnteredlanguageTested: React.FC<flashCardProp> = ({ flashCardData }) => {
             flashCardData={flashCardData}
             activeCardNumber={activeCardNumber}
             answerValue={answerValue}
-            ruWord={true}
+            ruWord={languageTested}
           />
         )}
       </List>
@@ -67,4 +78,4 @@ const EnteredlanguageTested: React.FC<flashCardProp> = ({ flashCardData }) => {
   );
 };
 
-export default EnteredlanguageTested;
+export default EnteredMatch;

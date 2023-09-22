@@ -1,10 +1,10 @@
-import { IFlashCardData } from "../FlashCards";
-
+import { IFlashCardData } from "../../../redux/testSlice";
+import { languageMatchTested } from "../../enum";
 interface CorrectAnswerProps {
   flashCardData: Array<IFlashCardData>;
   activeCardNumber: number;
   answerValue: string;
-  ruWord: boolean;
+  ruWord: languageMatchTested;
 }
 
 const CorrectAnswer: React.FC<CorrectAnswerProps> = ({
@@ -13,12 +13,10 @@ const CorrectAnswer: React.FC<CorrectAnswerProps> = ({
   answerValue,
   ruWord,
 }) => {
-  const currentWord = ruWord
-    ? flashCardData[activeCardNumber].russianWord
-    : flashCardData[activeCardNumber].foreignWord;
-
-  console.log("currentWord", currentWord);
-  console.log("answerValue", answerValue);
+  const currentWord =
+    ruWord === languageMatchTested.RUSSIAN
+      ? flashCardData[activeCardNumber].russianWord
+      : flashCardData[activeCardNumber].foreignWord;
   return <>{currentWord !== answerValue && <p>{currentWord}</p>}</>;
 };
 

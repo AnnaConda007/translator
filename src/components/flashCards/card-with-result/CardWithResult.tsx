@@ -1,13 +1,20 @@
 import { List, ListItemText, ListItem } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import NextButton from "../next-button/NextButton";
 import { ITestResult } from "../../../redux/testSlice";
+import { useEffect } from "react";
+import { updateAndPullDictionary } from "../../../redux/thunks/dictionaryActions";
+import { AppDispatch } from "../../../redux/store";
 
 const CardWithResult: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const testResults: Array<ITestResult> = useSelector(
     (state: RootStoreState) => state.test.testResult
   );
+  useEffect(() => {
+    dispatch(updateAndPullDictionary(testResults));
+  }, [dispatch, testResults]);
 
   return (
     <>
