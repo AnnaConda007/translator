@@ -12,8 +12,16 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   const [clickedWord, setClickedWord] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
+  const selectedText = () : string=> {
+    const text = window.getSelection()?.toString().trim() || "";
+    return text;
+  };
+
   return (
-    <Paper>
+    <Paper
+      onMouseUp={selectedText}
+      onTouchEnd={selectedText}
+    >
       <Typography variant="body1">
         {currentPageText.split("\n").map((paragraph, idx1) => (
           <span key={idx1}>
@@ -23,6 +31,7 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
                 word={word}
                 setClickedWord={setClickedWord}
                 setAnchorEl={setAnchorEl}
+                getSelectedWords={selectedText}
               />
             ))}
             <br />
@@ -35,4 +44,5 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
     </Paper>
   );
 };
+
 export default TextSelectedBook;
