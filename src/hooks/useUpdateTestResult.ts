@@ -4,27 +4,25 @@ import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
 import { setTestResult } from "../redux/testSlice";
 
-const useAddTestResult = () => {
+const useUpdateTestResult = () => {
   const dispatch: AppDispatch = useDispatch();
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-  const dictionary = useSelector(
-    (state: RootStoreState) => state.dictionary.words
+  const currentCards = useSelector(
+    (state: RootStoreState) => state.test.currentCards
   );
 
-  const mistake = useSelector((state: RootStoreState) => state.test.mistake);
-
-  const updateTestResult = () => {
+  const updateTestResult = (isAnswerCorrect: boolean) => {
     dispatch(
       setTestResult({
-        russianWord: dictionary[activeCardNumber].russianWord,
-        foreignWord: dictionary[activeCardNumber].translatedWord,
-        mistake: mistake ? "+" : "-",
+        russianWord: currentCards[activeCardNumber].russianWord,
+        foreignWord: currentCards[activeCardNumber].foreignWord,
+        correctAnswer: isAnswerCorrect,
       })
     );
   };
   return updateTestResult;
 };
 
-export default useAddTestResult;
+export default useUpdateTestResult;

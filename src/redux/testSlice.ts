@@ -1,32 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-export interface TestResult {
+export interface ITestResult {
   russianWord: string;
   foreignWord: string;
-  mistake: string;
+  correctAnswer: boolean;
 }
 
-export interface TestCardData {
+export interface IFlashCardData {
   russianWord: string;
   answerOptionsInForeign: Array<string>;
-  correctAnswer: string;
+  foreignWord: string;
 }
 
 interface InitialState {
   activeCardNumber: number;
-  selectedAnswerOption: string;
-  testResult: Array<TestResult>;
-  currentCards: Array<TestCardData>;
-  mistake: boolean;
+  testResult: Array<ITestResult>;
+  currentCards: Array<IFlashCardData>;
 }
 
 const initialState: InitialState = {
   activeCardNumber: 0,
-  selectedAnswerOption: "",
   testResult: [],
   currentCards: [],
-  mistake: false,
 };
 
 const test = createSlice({
@@ -39,23 +35,14 @@ const test = createSlice({
     resetActiveCardNumber: (state) => {
       state.activeCardNumber = 0;
     },
-    setSelectedAnswerOption: (state, action: PayloadAction<string>) => {
-      state.selectedAnswerOption = action.payload;
-    },
-    resetSelectedAnswerOption: (state) => {
-      state.selectedAnswerOption = "";
-    },
-    setTestResult: (state, action: PayloadAction<TestResult>) => {
-      state.testResult = [...state.testResult, action.payload];
+    setTestResult: (state, action: PayloadAction<ITestResult>) => {
+      state.testResult.push(action.payload);
     },
     resetTestResult: (state) => {
       state.testResult = [];
     },
-    setCurrentCards: (state, action: PayloadAction<Array<TestCardData>>) => {
+    setCurrentCards: (state, action: PayloadAction<Array<IFlashCardData>>) => {
       state.currentCards = action.payload;
-    },
-    setMistake: (state, action: PayloadAction<boolean>) => {
-      state.mistake = action.payload;
     },
   },
 });
@@ -63,11 +50,8 @@ const test = createSlice({
 export const {
   increaseActiveCardNumber,
   resetActiveCardNumber,
-  setSelectedAnswerOption,
-  resetSelectedAnswerOption,
   setTestResult,
   setCurrentCards,
   resetTestResult,
-  setMistake,
 } = test.actions;
 export default test.reducer;

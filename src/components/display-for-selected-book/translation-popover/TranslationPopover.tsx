@@ -1,7 +1,7 @@
 import { Popover } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button/Button";
-import TranslationInput from "../../translation-input/translationInput";
+import TranslationInput from "../../translation-input/TranslationInput";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import ButtonAddToDictionary from "../button-add-to-dictionary/ButtonAddToDictionary";
@@ -17,7 +17,7 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
   const [openAdditionalTranslation, setOpenAdditionalTranslation] =
     useState(false);
   const translatedWord = useSelector(
-    (state: RootStoreState) => state.translator.translatedWord
+    (state: RootStoreState) => state.translator.russianWord
   );
   const handleClosePopover = () => {
     setAnchorEl(null);
@@ -26,7 +26,6 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
   const handleNewTranslation = () => {
     setOpenAdditionalTranslation(true);
   };
-
   return (
     <>
       <Popover

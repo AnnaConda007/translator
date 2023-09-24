@@ -19,11 +19,17 @@ export enum LanguageCode {
   KO = "ko",
 }
 
-
-
 export enum CountAction {
   INCREASE = +1,
-  DECREASE = -1
+  DECREASE = -1,
 }
 
+export enum languageMatchTested {
+  RUSSIAN = "russian",
+  FOREIGN = "foreign",
+}
 
+export enum PAGINATE {
+  NEXT = "next",
+  BACK = "back",
+}

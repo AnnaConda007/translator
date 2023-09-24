@@ -1,4 +1,4 @@
-import { addNewWordInBD } from "../../../utils/updateDictionaryToBD";
+import { add_deliteWordInBD } from "../../../utils/updateDictionaryToBD";
 import { TypeAction } from "../../enum";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -18,31 +18,31 @@ const ButtonAddToDictionary: React.FC = () => {
     (state: RootStoreState) => state.dictionary.words
   );
   const translationWord: string = useSelector(
-    (state: RootStoreState) => state.translator.translationWord
+    (state: RootStoreState) => state.translator.foreignWord
   );
   const translatedWord: string = useSelector(
-    (state: RootStoreState) => state.translator.translatedWord
+    (state: RootStoreState) => state.translator.russianWord
   );
 
   useEffect(() => {
     const checkExistenceInDictionary: IEntry | undefined = dictionary.find(
-      (entry: IEntry) => entry.translatedWord == translationWord
+      (entry: IEntry) => entry.foreignWord == translationWord
     );
     setDisabledSwitch(Boolean(checkExistenceInDictionary));
   }, [dictionary, translationWord]);
 
   const handleButtonAddInDictionary = async () => {
     setDisabledSwitch(true);
-    const fetchResponse = await addNewWordInBD({
+    const fetchResponse = await add_deliteWordInBD({
       russianWord: translatedWord,
-      translatedWord: translationWord,
+      foreignWord: translationWord,
       actionType: TypeAction.ADD,
     });
     if (fetchResponse?.ok !== true) return;
     dispatch(
       addWord({
         russianWord: translatedWord,
-        translatedWord: translationWord,
+        foreignWord: translationWord,
       })
     );
     dispatch(toggleTranslationInputVisibility(false));

@@ -7,7 +7,7 @@ const TranslationResultDisplay : React.FC = () => {
     (state: RootStoreState) => state.visibility.translationInput
   );
   const translatedWord = useSelector(
-    (state: RootStoreState) => state.translator.translatedWord
+    (state: RootStoreState) => state.translator.russianWord
   );
 
   return (

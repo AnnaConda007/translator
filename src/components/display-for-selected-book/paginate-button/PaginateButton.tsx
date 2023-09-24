@@ -1,5 +1,8 @@
 import { ButtonDirection } from "../../enum";
 import { Button } from "@mui/material";
+import { PAGINATE } from "../../enum";
+import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
 type PaginateButtonProps = {
   setCurrentPageNumber: (value: number) => void;
@@ -26,7 +29,11 @@ const PaginateButton: React.FC<PaginateButtonProps> = ({
 
   return (
     <Button variant="contained" onClick={() => handleButton()}>
-      {buttonValue}
+      {buttonValue === PAGINATE.NEXT ? (
+        <ArrowForwardIosOutlinedIcon />
+      ) : (
+        <ArrowBackIosNewOutlinedIcon />
+      )}
     </Button>
   );
 };

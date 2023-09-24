@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
-import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
+import TextSelectedBook from "./text-selected-book/TextSelectedBook";
 import PaginateButton from "./paginate-button/PaginateButton";
-import { ButtonDirection } from "../enum"; 
+import { ButtonDirection } from "../enum";
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };

@@ -1,37 +1,38 @@
-import { translate } from "../../../utils/tranlslateAPI";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setTranslatedWord,
-  setTranslationWord,
-} from "../../../redux/translationWordSlice";
-import { RootStoreState } from "../../../redux/store";
-import { cleanAndNormalize } from '../../../utils/cleanAndNormalizeWord';
+import useTranslate from "../../../hooks/useTranslate";
+import React from "react";
+
 interface IWord {
   word: string;
+  getSelectedWords: ()=>string;
   setClickedWord: (arg: string) => void;
   setAnchorEl: (arg: HTMLSpanElement) => void;
 }
 
-const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
-  const dispatch = useDispatch();
-  const selectedLanguage = useSelector(
-    (state: RootStoreState) => state.language
-  );
+const Word: React.FC<IWord> = ({
+  word,
+  getSelectedWords,
+  setClickedWord,
+  setAnchorEl,
+ }) => {
+  const toTranslate = useTranslate();
 
-  const handleWordClick = async (
+  const handleWordClick = (
     word: string,
-    { currentTarget }: React.MouseEvent<HTMLSpanElement>
+    {
+      currentTarget,
+    }: React.MouseEvent<HTMLSpanElement> | React.TouchEvent<HTMLSpanElement>
   ) => {
-    if (!selectedLanguage) return;
-    const target = currentTarget;
-    const formatedWord =  cleanAndNormalize(word)
-    const translation: string | null = await translate(selectedLanguage,  formatedWord);
-     if (!translation) return;
-    dispatch(setTranslatedWord(translation));
-    dispatch(setTranslationWord(formatedWord));
+    const selectedText = getSelectedWords();
+    const wordToTranslate = selectedText || word;
+  
+    console.log("word", word);
+    console.log("selectedText", selectedText);
+  
+    toTranslate(wordToTranslate);
     setClickedWord(word);
-    setAnchorEl(target);
+    setAnchorEl(currentTarget);
   };
+
 
   return (
     <span
@@ -40,7 +41,8 @@ const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
         marginRight: "5px",
         display: "inline-block",
       }}
-      onClick={async (e) => handleWordClick(word, e)}
+      onMouseUp ={async (e) => handleWordClick(word, e)}
+      onTouchStart={async (e) => handleWordClick(word, e)}
     >
       {word}
       &nbsp;
@@ -48,4 +50,6 @@ const Word: React.FC<IWord> = ({ word, setClickedWord, setAnchorEl }) => {
   );
 };
 
-export default Word;
+const MemoizedWord = React.memo(Word);
+
+export default MemoizedWord;
