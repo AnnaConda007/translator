@@ -1,4 +1,4 @@
-import { dictionary_dataBaseURL } from "../contains";
+import { dictionary_dataBaseURL, dictionary_libraryURL } from "../contains";
 import { TypeAction } from "../components/enum";
 import { dataFromBD } from "../redux/dictionarySlice";
 interface add_deliteWordInBDArgs {
@@ -66,3 +66,14 @@ export const updateDictionaryInBD = async (dictionaryEntries: {
     console.error(error);
   }
 };
+
+export const addNewBookInLibrary = async (titleBook: string, bookContent: string) => {
+  const url = `${dictionary_libraryURL}/${titleBook}.json`;
+  await fetch(url,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bookContent),
+    }
+  );
+}

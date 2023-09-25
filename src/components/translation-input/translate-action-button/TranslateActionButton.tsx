@@ -3,17 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootStoreState } from '../../../redux/store';
 import { translate } from '../../../utils/tranlslateAPI';
 import { setForeignWord, setRussianWord } from '../../../redux/translatorSlice';
-  import { toggleTranslationInputVisibility } from '../../../redux/visibilitySlice ';
+import { toggleTranslationInputVisibility } from '../../../redux/visibilitySlice ';
 interface ITranslateActionButtonProps {
   value: string,
-  setInputValue: (value:string) => void
+  setInputValue: (value: string) => void
 }
 
-const TranslateActionButton: React.FC<ITranslateActionButtonProps> = ({value, setInputValue}) => {
+const TranslateActionButton: React.FC<ITranslateActionButtonProps> = ({ value, setInputValue }) => {
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
 
   const handleTranslate = async (valueInput: string) => {
