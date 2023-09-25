@@ -31,7 +31,7 @@ const fetchDictionary = async () => {
 export const fetchAndSetLibrary = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const books = await fetchLibrary();
+      const books = await fetchLibrary() || {};
       const titles = Object.keys(books);
       dispatch(setBooks(books));
       dispatch(setTitles(titles));

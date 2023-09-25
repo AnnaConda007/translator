@@ -42,11 +42,18 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
         }}
       >
         <div>
-          <ButtonAddToDictionary />
-          <Button variant="outlined" onClick={() => handleNewTranslation()}>
-            перевести другое слово на английский
-          </Button>
-          {translatedWord}
+          {openAdditionalTranslation ? null : (
+            <>
+              <ButtonAddToDictionary />
+              <span>{translatedWord}</span>
+              <Button variant="outlined" onClick={() => handleNewTranslation()}>
+                перевести другое слово на английский
+              </Button></>
+          )}
+
+
+
+
         </div>
         {openAdditionalTranslation ? <TranslationInput /> : null}
       </Popover>
