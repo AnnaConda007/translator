@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
- import { TextField } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import { setTitles } from '../../../redux/librarySlice';
+import AddNewBookButton from '../addNewBooksButton/addNewBooksButton';
+
 const InputSearchingByBookTitle: React.FC = () => {
   const dispatch = useDispatch();
   const loadedBooks = useSelector((state: RootStoreState) => state.library.books);
@@ -24,6 +26,14 @@ const InputSearchingByBookTitle: React.FC = () => {
       variant="standard"
       value={inputValue}
       onChange={(e) => filterBooksByTitle(e.target.value)}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <AddNewBookButton />
+          </InputAdornment>
+
+        ),
+      }}
     />
   );
 };

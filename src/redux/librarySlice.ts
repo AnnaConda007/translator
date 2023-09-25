@@ -24,7 +24,12 @@ const librarySlice = createSlice({
     setTitles: (state, action: PayloadAction<Array<string>>) => {
       state.titlesBook = action.payload;
     },
-  },
+    addNewBook: (state, action: PayloadAction<{ title: string, bookContent: string }>) => {
+      const { title, bookContent } = action.payload;
+      state.books[title] = bookContent;
+      state.titlesBook.push(title);
+    },
+  }
 });
-export const { setBooks, setTitles } = librarySlice.actions;
+export const { setBooks, setTitles, addNewBook } = librarySlice.actions;
 export default librarySlice.reducer;

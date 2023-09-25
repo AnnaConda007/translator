@@ -16,7 +16,7 @@ const Word: React.FC<IWord> = ({
  }) => {
   const toTranslate = useTranslate();
 
-  const handleWordClick = (
+  const handleWordClick = async (
     word: string,
     {
       currentTarget,
@@ -24,11 +24,7 @@ const Word: React.FC<IWord> = ({
   ) => {
     const selectedText = getSelectedWords();
     const wordToTranslate = selectedText || word;
-  
-    console.log("word", word);
-    console.log("selectedText", selectedText);
-  
-    toTranslate(wordToTranslate);
+   await toTranslate(wordToTranslate);
     setClickedWord(word);
     setAnchorEl(currentTarget);
   };

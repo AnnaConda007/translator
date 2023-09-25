@@ -12,12 +12,12 @@ const useTranslate = () => {
   );
   const translateWord = async (word: string) => {
     if (!selectedLanguage) return;
-    console.log("translateWord", word)
     const formatedWord = cleanAndNormalize(word);
     const translation: string | null = await translate(
       selectedLanguage,
       formatedWord
     );
+
     if (!translation) return;
     dispatch(setRussianWord(translation));
     dispatch(setForeignWord(formatedWord));
