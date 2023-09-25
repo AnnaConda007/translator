@@ -48,7 +48,6 @@ const AddNewBookInput: React.FC = () => {
       }, 2000);
     };
     reader.readAsArrayBuffer(file);
-
   };
 
   const inputTextOnChange = (value: string) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
-import TextSelectedBook from "./text-selected-book/TextSelectedBook";
+import TextSelectedBook from './Text-selected-book/TextSelectedBook';
 import PaginateButton from "./paginate-button/PaginateButton";
 import { ButtonDirection } from "../enum";
 type DisplayForSelectedBookProps = {
@@ -11,16 +11,17 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
 }) => {
   const lastSavedPageFromlocalStorage: string | null =
     localStorage.getItem("currentPageNumber");
-  const lastSavedBoorTitleFromlocalStorage: string | null =
+  const lastSavedBookTitleFromlocalStorage: string | null =
     localStorage.getItem("currentBook");
   const lastSavedPage: number =
-    lastSavedPageFromlocalStorage && lastSavedBoorTitleFromlocalStorage
+    lastSavedPageFromlocalStorage && lastSavedBookTitleFromlocalStorage
       ? parseInt(lastSavedPageFromlocalStorage)
       : 0;
   const [bookPages, setBookPages] = useState<string[]>([]);
   const [currentPageNumber, setCurrentPageNumber] =
     useState<number>(lastSavedPage);
   const [currentPageText, setCurrentPageText] = useState<string>("");
+
   useEffect(() => {
     if (!loadedBook) return;
     const pages: string[] = paginateText(loadedBook);
@@ -29,7 +30,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
 
   useEffect(() => {
     if (!bookPages.length) return;
-    setCurrentPageText(bookPages[currentPageNumber]);
+    setCurrentPageText(bookPages[currentPageNumber - 1]);
   }, [bookPages, currentPageNumber]);
 
   return (

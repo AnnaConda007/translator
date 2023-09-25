@@ -11,10 +11,9 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
 }) => {
   const [clickedWord, setClickedWord] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-
-  const selectedText = () : string=> {
+   const selectedText = () : string=> {
     const text = window.getSelection()?.toString().trim() || "";
-    return text;
+     return text;
   };
 
   return (
