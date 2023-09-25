@@ -15,7 +15,8 @@ const AddNewBookInput: React.FC = () => {
   const [matchedTitle, setMatchedTitle] = useState(false)
   const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
   const titlesBooks = new Set(titles)
-
+  const titleMatchErrorText = "Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название"
+  const unrecognizedErrorText = "Текст содержит нераспознаваемые символы, проверьте текст и попробуйте еще раз"
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
@@ -44,7 +45,7 @@ const AddNewBookInput: React.FC = () => {
       if (!additionBook) return
       setTimeout(() => {
         dispatch(toggleAddNewBookInput(false))
-      }, 4000);
+      }, 2000);
     };
     reader.readAsArrayBuffer(file);
 
@@ -74,7 +75,6 @@ const AddNewBookInput: React.FC = () => {
   };
 
   return (
-
     <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -87,7 +87,7 @@ const AddNewBookInput: React.FC = () => {
         onChange={(e) => inputTextOnChange(e.target.value)}
         value={titleBook}
       />
-      {matchedTitle && (<span> Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название</span>)}
+      {matchedTitle && (<span> {titleMatchErrorText}</span>)}
       <input
         type="file"
         accept=".txt"
@@ -97,7 +97,7 @@ const AddNewBookInput: React.FC = () => {
         }}
       />
       <p>Перетащите файл сюда или нажмите, чтобы выбрать файл</p>
-      {errorLoad && (<span> Текст содержит нераспознаваемые символы, проверьте текст и попробуйте еще раз </span>)}
+      {errorLoad && (<span> {unrecognizedErrorText} </span>)}
     </div>
 
   );
