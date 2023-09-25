@@ -6,6 +6,7 @@ import { addNewBook } from '../../redux/librarySlice';
 import { addNewBookInLibrary } from '../../utils/updateDictionaryToBD';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
+import jschardet from 'jschardet';
 
 
 const AddNewBookInput: React.FC = () => {
@@ -16,14 +17,20 @@ const AddNewBookInput: React.FC = () => {
   const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
   const titlesBooks = new Set(titles)
   const titleMatchErrorText = "Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название"
-  const unrecognizedErrorText = "Текст содержит нераспознаваемые символы, проверьте текст и попробуйте еще раз"
+  const unrecognizedErrorText = "Текст содержит нераспознаваемые символы, проблема кодировки текста"
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       if (!e.target) return;
       const arrayBuffer = e.target.result as ArrayBuffer;
-      const decoder = new TextDecoder("UTF-8");
+      const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer));
+      const detectedCharset = charsetDetectionResult && charsetDetectionResult.encoding;
+      if (!detectedCharset) {
+        setErrorLoad(true);
+        return;
+      }
+      const decoder = new TextDecoder(detectedCharset);
       const content = decoder.decode(arrayBuffer);
       const matchTitle = titlesBooks.has(titleBook)
       if (matchTitle) {
