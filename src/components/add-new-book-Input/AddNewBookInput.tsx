@@ -23,6 +23,7 @@ const AddNewBookInput: React.FC = () => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       if (!e.target) return;
+
       const arrayBuffer = e.target.result as ArrayBuffer;
       const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer));
       const detectedCharset = charsetDetectionResult && charsetDetectionResult.encoding;
@@ -42,7 +43,7 @@ const AddNewBookInput: React.FC = () => {
       } else if (!titleBook) {
         alert("выделить красным")
         return
-      } else if (content.includes("\ufffd")) {
+      } else if (content.includes("\ufffd") || /¿½/g.test(content)) {
         setErrorLoad(true)
         return;
       }
