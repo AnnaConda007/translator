@@ -6,14 +6,16 @@ import { addNewBook } from '../../redux/librarySlice';
 import { addNewBookInLibrary } from '../../utils/updateDictionaryToBD';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
+
+
 const AddNewBookInput: React.FC = () => {
-  const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
-  const titlesBooks = new Set(titles)
-  console.log(titlesBooks)
   const dispatch = useDispatch()
   const [titleBook, setTitleBook] = useState("")
   const [errorLoad, setErrorLoad] = useState(false)
   const [matchedTitle, setMatchedTitle] = useState(false)
+  const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
+  const titlesBooks = new Set(titles)
+
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
@@ -27,7 +29,7 @@ const AddNewBookInput: React.FC = () => {
         setMatchedTitle(matchTitle)
         setTimeout(() => {
           dispatch(toggleAddNewBookInput(false))
-        }, 2000);
+        }, 4000);
         return
       } else if (!titleBook) {
         alert("выделить красным")
@@ -39,13 +41,13 @@ const AddNewBookInput: React.FC = () => {
       const additionBook = await addNewBookInLibrary(titleBook, content)
       setTitleBook("")
       dispatch(addNewBook({ title: titleBook, bookContent: content }))
-
       if (!additionBook) return
       setTimeout(() => {
         dispatch(toggleAddNewBookInput(false))
-      }, 2000);
+      }, 4000);
     };
     reader.readAsArrayBuffer(file);
+
   };
 
   const inputTextOnChange = (value: string) => {
@@ -86,7 +88,14 @@ const AddNewBookInput: React.FC = () => {
         value={titleBook}
       />
       {matchedTitle && (<span> Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название</span>)}
-      <input type="file" accept=".txt" onChange={handleInputChange} />
+      <input
+        type="file"
+        accept=".txt"
+        onChange={(e) => {
+          handleInputChange(e);
+          e.target.value = "";
+        }}
+      />
       <p>Перетащите файл сюда или нажмите, чтобы выбрать файл</p>
       {errorLoad && (<span> Текст содержит нераспознаваемые символы, проверьте текст и попробуйте еще раз </span>)}
     </div>
