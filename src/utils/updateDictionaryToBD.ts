@@ -67,13 +67,21 @@ export const updateDictionaryInBD = async (dictionaryEntries: {
   }
 };
 
-export const addNewBookInLibrary = async (titleBook: string, bookContent: string) => {
-  const url = `${dictionary_libraryURL}/${titleBook}.json`;
-  await fetch(url,
-    {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bookContent),
-    }
-  );
+export const addNewBookInLibrary = async (titleBook: string, bookContent: string): Promise<boolean> => {
+  try {
+    const url = `${dictionary_libraryURL}/${titleBook}.json`;
+    await fetch(url,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bookContent),
+      }
+    );
+    return true
+  } catch (error) {
+    console.log(error)
+    return false
+
+  }
+
 }

@@ -4,10 +4,16 @@ import { toggleAddNewBookInput } from '../../redux/visibilitySlice ';
 import { useDispatch } from 'react-redux';
 import { addNewBook } from '../../redux/librarySlice';
 import { addNewBookInLibrary } from '../../utils/updateDictionaryToBD';
-
+import { useSelector } from 'react-redux';
+import { RootStoreState } from '../../redux/store';
 const AddNewBookInput: React.FC = () => {
+  const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
+  const titlesBooks = new Set(titles)
+  console.log(titlesBooks)
   const dispatch = useDispatch()
   const [titleBook, setTitleBook] = useState("")
+  const [errorLoad, setErrorLoad] = useState(false)
+  const [matchedTitle, setMatchedTitle] = useState(false)
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
@@ -16,21 +22,32 @@ const AddNewBookInput: React.FC = () => {
       const arrayBuffer = e.target.result as ArrayBuffer;
       const decoder = new TextDecoder("UTF-8");
       const content = decoder.decode(arrayBuffer);
-      console.log(content)
-      if (!titleBook) {
-        alert("нет названия")
+      const matchTitle = titlesBooks.has(titleBook)
+      if (matchTitle) {
+        setMatchedTitle(matchTitle)
+        setTimeout(() => {
+          dispatch(toggleAddNewBookInput(false))
+        }, 2000);
         return
-      }else if (content.includes("\ufffd")) {
-        alert("Текст содержит нераспознаваемые символы.");
+      } else if (!titleBook) {
+        alert("выделить красным")
+        return
+      } else if (content.includes("\ufffd")) {
+        setErrorLoad(true)
         return;
       }
-      await addNewBookInLibrary(titleBook, content)
+      const additionBook = await addNewBookInLibrary(titleBook, content)
+      setTitleBook("")
       dispatch(addNewBook({ title: titleBook, bookContent: content }))
+
+      if (!additionBook) return
+      setTimeout(() => {
+        dispatch(toggleAddNewBookInput(false))
+      }, 2000);
     };
-    dispatch(toggleAddNewBookInput(false))
-    setTitleBook("")
     reader.readAsArrayBuffer(file);
   };
+
   const inputTextOnChange = (value: string) => {
     setTitleBook(value)
   }
@@ -68,8 +85,10 @@ const AddNewBookInput: React.FC = () => {
         onChange={(e) => inputTextOnChange(e.target.value)}
         value={titleBook}
       />
+      {matchedTitle && (<span> Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название</span>)}
       <input type="file" accept=".txt" onChange={handleInputChange} />
       <p>Перетащите файл сюда или нажмите, чтобы выбрать файл</p>
+      {errorLoad && (<span> Текст содержит нераспознаваемые символы, проверьте текст и попробуйте еще раз </span>)}
     </div>
 
   );
