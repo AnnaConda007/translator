@@ -1,3 +1,7 @@
+export enum routes {
+  HOME = "/",
+  AUTHORIZATION = "/authorization"
+}
 export enum ButtonDirection {
   NEXT = "next",
   BACK = "back",
@@ -33,3 +37,4 @@ export enum PAGINATE {
   NEXT = "next",
   BACK = "back",
 }
+

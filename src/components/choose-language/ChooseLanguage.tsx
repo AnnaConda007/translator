@@ -27,6 +27,7 @@ const ChooseLanguage: React.FC = () => {
      dispatch(setLanguage(languageCode));
     updateLanguagetoBdAndLS(languageCode);
     dispatch(toggleVisibilityMenuItem(""))
+    
   };
 
   return (
