@@ -1,5 +1,5 @@
-import { add_deliteWordInBD } from "../../../utils/updateDictionaryToBD";
-import { TypeAction } from "../../enum";
+import { addDeliteWordInBD } from '../../../utils/updateDB/addDeliteWordInDictionary';
+import { TypeActionWordDictionary } from "../../enum";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button/Button";
@@ -33,10 +33,10 @@ const ButtonAddToDictionary: React.FC = () => {
 
   const handleButtonAddInDictionary = async () => {
     setDisabledSwitch(true);
-    const fetchResponse = await add_deliteWordInBD({
+    const fetchResponse = await addDeliteWordInBD({
       russianWord: translatedWord,
       foreignWord: translationWord,
-      actionType: TypeAction.ADD,
+      actionType: TypeActionWordDictionary.ADD,
     });
     if (fetchResponse?.ok !== true) return;
     dispatch(

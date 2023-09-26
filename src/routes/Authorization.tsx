@@ -2,7 +2,7 @@ import { TextField, Box, Button, Typography } from '@mui/material';
 import { useState } from "react"
 import { registerWithEmail } from '../utils/firebase.utils';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '../components/enum';
+import { Routes } from '../components/enum';
 const Authorization = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const Authorization = () => {
       const user = await registerWithEmail(formData.login, formData.password);
       console.log("Пользователь успешно зарегистрирован:", user.uid);
       localStorage.setItem("userFairbaseId", user.uid)
-      navigate(routes.HOME)
+      navigate(Routes.HOME)
     } catch (error) {
       console.error("Ошибка при регистрации:", (error as Error).message);
 

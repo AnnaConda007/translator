@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
 import TextSelectedBook from './Text-selected-book/TextSelectedBook';
 import PaginateButton from "./paginate-button/PaginateButton";
-import { ButtonDirection } from "../enum";
+import { ButtonPaginnationDirection } from "../enum";
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };
@@ -40,7 +40,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
         <PaginateButton
           setCurrentPageNumber={setCurrentPageNumber}
           buttonValue={"back"}
-          buttonDirection={ButtonDirection.BACK}
+          ButtonPaginnationDirection={ButtonPaginnationDirection.BACK}
           currentPageNumber={currentPageNumber}
         />
         <span>
@@ -49,7 +49,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
         <PaginateButton
           setCurrentPageNumber={setCurrentPageNumber}
           buttonValue={"next"}
-          buttonDirection={ButtonDirection.NEXT}
+          ButtonPaginnationDirection={ButtonPaginnationDirection.NEXT}
           currentPageNumber={currentPageNumber}
         />
       </div>

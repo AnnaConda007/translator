@@ -1,4 +1,4 @@
-import { ButtonDirection } from "../../enum";
+import { ButtonPaginnationDirection } from "../../enum";
 import { Button } from "@mui/material";
 import { PAGINATE } from "../../enum";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
@@ -7,18 +7,18 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 type PaginateButtonProps = {
   setCurrentPageNumber: (value: number) => void;
   buttonValue: string;
-  buttonDirection: ButtonDirection;
+  ButtonPaginnationDirection: ButtonPaginnationDirection;
   currentPageNumber: number;
 };
 
 const PaginateButton: React.FC<PaginateButtonProps> = ({
   setCurrentPageNumber,
   buttonValue,
-  buttonDirection,
+  ButtonPaginnationDirection,
   currentPageNumber,
 }) => {
   const targetPageNumber: number =
-    buttonDirection === ButtonDirection.NEXT
+    ButtonPaginnationDirection === ButtonPaginnationDirection.NEXT
       ? currentPageNumber + 1
       : currentPageNumber - 1;
 

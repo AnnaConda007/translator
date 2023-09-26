@@ -1,7 +1,8 @@
-import { dataBaseURL } from "../contains";
+import { generateUserDatabaseURL_point } from '../../contains'; 
+import { DataBasePoints } from '../../components/enum';  
 
-export const updateLanguagetoBdAndLS = async (lang: string) => {
-  const url = `${dataBaseURL}/language/.json`;
+export const updateLanguage= async (lang: string) => {
+  const url = generateUserDatabaseURL_point(DataBasePoints.LANGUAGE)
   try {
     await fetch(url, {
       method: "PUT",
@@ -10,7 +11,6 @@ export const updateLanguagetoBdAndLS = async (lang: string) => {
       },
       body: JSON.stringify(lang),
     });
-    localStorage.setItem("selectedLanguage", lang);
   } catch (error) {
     console.error("Ошибка при обновлении словаря", error);
   }

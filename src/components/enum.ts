@@ -1,12 +1,23 @@
-export enum routes {
+export enum Routes {
   HOME = "/",
   AUTHORIZATION = "/authorization"
 }
-export enum ButtonDirection {
+
+export enum DataBasePoints {
+  LIBRARY = "books",
+  DICTIONARY = "dictionary",
+  COUNTERCOUNTER_IN_DB = "counter",
+  FOREIGN_WORD_IN_DB = "foreignWord",
+  RUSSIAN_WORD_IN_DB = "russianWord",
+  LANGUAGE = "language",
+}
+
+export enum ButtonPaginnationDirection {
   NEXT = "next",
   BACK = "back",
 }
-export enum TypeAction {
+
+export enum TypeActionWordDictionary {
   REMOVE = "REMOVE",
   ADD = "add",
 }

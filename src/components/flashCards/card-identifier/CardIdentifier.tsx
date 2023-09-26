@@ -3,7 +3,9 @@ import EnteredMatch from "../entered-match/EnteredMatch";
 import AnswerOptions from "../tests-answer-options/AnswerOptions";
 import { IFlashCardData } from "../../../redux/testSlice";
 import { RootStoreState } from "../../../redux/store";
-import { determineOfTypeTest } from "../../../contains";
+import {
+  stepToChangeTestType
+} from "../../../contains";
 import { languageMatchTested } from "../../enum";
 interface CardIdentifierProp {
   activeCardNumber: number;
@@ -20,13 +22,16 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
   const currentCount = counters[currentWord];
   return (
     <>
-      {currentCount !== undefined && currentCount < determineOfTypeTest && (
-        <AnswerOptions flashCardData={currentCards} />
-      )}
+      {currentCount !== undefined && currentCount < stepToChangeTestType
+        && (
+          <AnswerOptions flashCardData={currentCards} />
+        )}
 
       {currentCount !== undefined &&
-        currentCount >= determineOfTypeTest &&
-        currentCount < determineOfTypeTest * 2 && (
+        currentCount >= stepToChangeTestType
+        &&
+        currentCount < stepToChangeTestType
+        * 2 && (
           <EnteredMatch
             flashCardData={currentCards}
             languageTested={languageMatchTested.RUSSIAN}
@@ -34,7 +39,8 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
         )}
 
       {currentCount !== undefined &&
-        currentCount >= determineOfTypeTest * 2 && (
+        currentCount >= stepToChangeTestType
+        * 2 && (
           <EnteredMatch
             flashCardData={currentCards}
             languageTested={languageMatchTested.FOREIGN}

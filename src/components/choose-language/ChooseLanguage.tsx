@@ -2,7 +2,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { setLanguage } from "../../redux/languageSlice";
 import { useDispatch } from "react-redux";
-import { updateLanguagetoBdAndLS } from "../../utils/updateLanguagetoBdAndLS";
+import { updateLanguage } from '../../utils/updateDB/updateLanguage';
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
@@ -25,7 +25,7 @@ const ChooseLanguage: React.FC = () => {
 
   const handleListItemText = (languageCode: string) => {
      dispatch(setLanguage(languageCode));
-    updateLanguagetoBdAndLS(languageCode);
+     updateLanguage(languageCode);
     dispatch(toggleVisibilityMenuItem(""))
     
   };

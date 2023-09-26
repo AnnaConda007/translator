@@ -1,10 +1,13 @@
-import { dictionary_dataBaseURL, books_dataBaseURL } from "../contains";
+import { generateUserDatabaseURL_point, dataBaseURL_books } from "../contains";
 import { Dispatch } from "redux";
 import { setDictionary } from "../redux/dictionarySlice";
 import { setBooks } from "../redux/librarySlice";
 import { IBooks } from "../redux/librarySlice";
 import { setTitles } from "../redux/librarySlice";
 import { dataFromBD } from "../redux/dictionarySlice";
+import { DataBasePoints } from '../components/enum';
+
+
 export const fetchAndSetDictionary = () => {
   return async (dispatch: Dispatch) => {
     try {
@@ -16,7 +19,8 @@ export const fetchAndSetDictionary = () => {
   };
 };
 const fetchDictionary = async () => {
-  const response = await fetch(dictionary_dataBaseURL);
+  const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+  const response = await fetch(dictionaryUserURL);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
@@ -41,7 +45,7 @@ export const fetchAndSetLibrary = () => {
   };
 };
 const fetchLibrary = async () => {
-  const response = await fetch(books_dataBaseURL);
+  const response = await fetch(dataBaseURL_books);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
