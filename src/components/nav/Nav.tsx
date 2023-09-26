@@ -6,21 +6,22 @@ import ChooseLanguage from "../choose-language/ChooseLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import FlashCards from '../flashCards/FlashCards';
-import { AppDispatch } from '../../redux/store'; 
- import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase'; 
-
+import { AppDispatch } from '../../redux/store';
+import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase';
+import { DataBasePoints } from '../enum';
 interface INavElements {
 
   [key: string]: React.ReactElement;
 }
 
-const Nav: React.FC = () => { 
+const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   useFetchBookAndDictionaryFromDatabase()
-
+  const localSelectedLanguage = localStorage.getItem(`${DataBasePoints.LANGUAGE}`)
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
+  const language = localSelectedLanguage || selectedLanguage
   const selectedMenuItem = useSelector(
     (state: RootStoreState) => state.visibility.menuItem
   );
@@ -50,7 +51,7 @@ const Nav: React.FC = () => {
               key={index}
               dense
               disabled={
-                !selectedLanguage && keyName !== "выбрать язык" ? true : false
+                !language && keyName !== "выбрать язык" ? true : false
               }
             >
               <ListItemText

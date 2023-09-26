@@ -6,30 +6,35 @@ import { IBooks } from "../redux/librarySlice";
 import { setTitles } from "../redux/librarySlice";
 import { dataFromBD } from "../redux/dictionarySlice";
 import { DataBasePoints } from '../components/enum';
-
-
+import { batch } from 'react-redux';
+import { setLanguage } from '../redux/languageSlice';
 export const fetchAndSetDictionary = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const dictionary = await fetchDictionary();
-      dispatch(setDictionary(dictionary));
+      const dictionaryAndLanguage = await fetchDictionary();
+      const { dictionary, language } = dictionaryAndLanguage
+      batch(() => {
+        dispatch(setDictionary(dictionary));
+        dispatch(setLanguage(language))
+
+      })
     } catch (error) {
       console.error(error);
     }
   };
 };
+
 const fetchDictionary = async () => {
   const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
   const response = await fetch(dictionaryUserURL);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
-  const data = await response.json();
-  if (!data) {
-    return [];
-  }
-  const dictionary: Array<dataFromBD> = Object.values(data);
-  return dictionary;
+  const data = await response.json()
+  const language: string = data[DataBasePoints.LANGUAGE]
+  delete data.language;
+  const dictionary: Array<dataFromBD> = Object.values(data) || []
+  return { dictionary, language };
 };
 
 export const fetchAndSetLibrary = () => {

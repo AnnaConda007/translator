@@ -6,6 +6,7 @@ import { updateLanguage } from '../../utils/updateDB/updateLanguage';
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
+import { DataBasePoints } from '../enum';
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector(
@@ -24,10 +25,11 @@ const ChooseLanguage: React.FC = () => {
   ];
 
   const handleListItemText = (languageCode: string) => {
-     dispatch(setLanguage(languageCode));
-     updateLanguage(languageCode);
+    localStorage.setItem("language", DataBasePoints.LANGUAGE)
+    dispatch(setLanguage(languageCode));
+    updateLanguage(languageCode);
     dispatch(toggleVisibilityMenuItem(""))
-    
+
   };
 
   return (
