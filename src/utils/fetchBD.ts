@@ -5,7 +5,7 @@ import { setBooks } from "../redux/librarySlice";
 import { IBooks } from "../redux/librarySlice";
 import { setTitles } from "../redux/librarySlice";
 import { dataFromBD } from "../redux/dictionarySlice";
-import { DataBasePoints } from '../components/enum';
+import { DataBasePoints } from '../enums/enum';
 import { batch } from 'react-redux';
 import { setLanguage } from '../redux/languageSlice';
 export const fetchAndSetDictionary = () => {

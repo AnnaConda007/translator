@@ -1,6 +1,6 @@
-import { ButtonPaginnationDirection } from "../../enum";
+import { ButtonPaginnationDirection } from "../../../enums/enum";
 import { Button } from "@mui/material";
-import { PAGINATE } from "../../enum";
+import { PAGINATE } from "../../../enums/enum";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 

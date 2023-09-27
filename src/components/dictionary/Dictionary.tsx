@@ -4,7 +4,7 @@ import { IEntry } from "../../redux/dictionarySlice";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { removeWord } from "../../redux/dictionarySlice";
 import { addDeliteWordInBD } from '../../utils/updateDB/addDeliteWordInDictionary';
-import { TypeActionWordDictionary } from "../enum";
+import { TypeActionWordDictionary } from "../../enums/enum";
 import TranslationInput from "../translation-input/TranslationInput";
 import { AppDispatch } from "../../redux/store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";

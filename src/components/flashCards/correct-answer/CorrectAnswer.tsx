@@ -1,5 +1,5 @@
 import { IFlashCardData } from "../../../redux/testSlice";
-import { languageMatchTested } from "../../enum";
+import { languageMatchTested } from "../../../enums/enum";
 interface CorrectAnswerProps {
   flashCardData: Array<IFlashCardData>;
   activeCardNumber: number;

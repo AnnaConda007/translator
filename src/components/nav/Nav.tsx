@@ -8,7 +8,7 @@ import { RootStoreState } from "../../redux/store";
 import FlashCards from '../flashCards/FlashCards';
 import { AppDispatch } from '../../redux/store';
 import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase';
-import { DataBasePoints } from '../enum';
+import { DataBasePoints } from '../../enums/enum';
 interface INavElements {
 
   [key: string]: React.ReactElement;

@@ -1,5 +1,5 @@
 import { generateUserDatabaseURL_point } from '../../contains';
-import { DataBasePoints } from '../../components/enum';
+import { DataBasePoints } from '../../enums/enum';
 
 export const updateLanguage = async (lang: string) => {
   const url = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)

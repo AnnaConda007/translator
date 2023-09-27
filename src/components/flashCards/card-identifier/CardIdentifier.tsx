@@ -6,7 +6,7 @@ import { RootStoreState } from "../../../redux/store";
 import {
   stepToChangeTestType
 } from "../../../contains";
-import { languageMatchTested } from "../../enum";
+import { languageMatchTested } from "../../../enums/enum";
 interface CardIdentifierProp {
   activeCardNumber: number;
   currentCards: Array<IFlashCardData>;

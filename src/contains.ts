@@ -1,4 +1,4 @@
-import { DataBasePoints } from './components/enum';
+import { DataBasePoints } from './enums/enum';
 
 // адреса для обращения к базе данных
 export const userFairbaseId = localStorage.getItem("userFairbaseId")

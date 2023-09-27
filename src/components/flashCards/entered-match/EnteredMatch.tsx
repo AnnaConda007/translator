@@ -9,7 +9,7 @@ import {
 import useAnswerMatchingChecker from "../../../hooks/useAnswerMatchingChecker";
 import { useState } from "react";
 import CorrectAnswer from "../correct-answer/CorrectAnswer";
-import { languageMatchTested } from "../../enum";
+import { languageMatchTested } from "../../../enums/enum";
 interface EnteredMatchProps {
   flashCardData: Array<IFlashCardData>;
   languageTested: languageMatchTested;

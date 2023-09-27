@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { UserCredential, User } from 'firebase/auth/cordova';
+import { FirebaseError } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXGAcFyO4yWey26BgEkqAoeEq4rVA5e7k",
@@ -13,11 +15,15 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
-export const registerWithEmail = async (email: string, password: string) => {
+export const registerWithEmail = async (email: string, password: string): Promise<User> => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
-  } catch (error) {
-    throw new Error((error as Error).message);
+    const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential.user
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      throw error;
+    } else {
+      throw error;
+    }
   }
 };

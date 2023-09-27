@@ -1,4 +1,4 @@
-import { DataBasePoints } from '../../components/enum';
+import { DataBasePoints } from '../../enums/enum';
 import { generateUserDatabaseURL_point } from '../../contains';
 
 export const clearDictionaryAndUpdateLanguage = async (

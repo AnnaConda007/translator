@@ -1,4 +1,4 @@
-export enum Routes {
+export enum RoutesApp {
   HOME = "/",
   AUTHORIZATION = "/authorization"
 }

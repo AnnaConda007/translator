@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
 import { useState } from 'react';
-import { DataBasePoints } from '../enum';
+import { DataBasePoints } from '../../enums/enum';
 import UpdateLanguagePopover from './updateLanguagePopover/UpdateLanguagePopover';
 import { languages } from './languages';
 import { useCallback } from 'react';

@@ -1,5 +1,5 @@
 import { addDeliteWordInBD } from '../../../utils/updateDB/addDeliteWordInDictionary';
-import { TypeActionWordDictionary } from "../../enum";
+import { TypeActionWordDictionary } from "../../../enums/enum";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button/Button";
