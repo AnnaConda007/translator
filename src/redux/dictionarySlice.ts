@@ -38,6 +38,10 @@ const dictionary = createSlice({
         state.counters[dataEntry.foreignWord] = dataEntry.counter;
       });
     },
+    clearDictionary: (state) => {
+      state.words = [];
+      state.counters = {};
+    },
     addWord: (state, action: PayloadAction<IEntry>) => {
       state.words.push(action.payload);
       state.counters[action.payload.foreignWord] = 0;
@@ -65,6 +69,6 @@ const dictionary = createSlice({
   },
 });
 
-export const { setDictionary, addWord, removeWord, updateCounter } =
+export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary } =
   dictionary.actions;
 export default dictionary.reducer;

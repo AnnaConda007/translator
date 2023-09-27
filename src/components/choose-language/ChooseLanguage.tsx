@@ -6,31 +6,33 @@ import { updateLanguage } from '../../utils/updateDB/updateLanguage';
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
+import { useState } from 'react';
 import { DataBasePoints } from '../enum';
+import UpdateLanguagePopover from './updateLanguagePopover/UpdateLanguagePopover';
+import { languages } from './languages';
+import { useCallback } from 'react';
+
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
-  const selectedLanguage = useSelector(
-    (state: RootStoreState) => state.language
-  );
-  const languages: Array<{ [key: string]: string }> = [
-    { английский: "en" },
-    { грузинский: "ka" },
-    { испанский: "es" },
-    { итальянский: "it" },
-    { немецкий: "de" },
-    { французский: "fr" },
-    { украинский: "uk" },
-    { турецкий: "tr" },
-    { корейский: "ko" },
-  ];
+  const selectedLanguage = useSelector((state: RootStoreState) => state.language);
+  const [pickedLanguage, setPickedLanguage] = useState("")
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleListItemText = (languageCode: string) => {
-    localStorage.setItem("language", DataBasePoints.LANGUAGE)
+  const handleLanguage = useCallback((e: React.MouseEvent<HTMLElement>, languageCode: string) => {
+    if (selectedLanguage) {
+      setAnchorEl(e.currentTarget);
+      setPickedLanguage(languageCode);
+      return;
+    }
+    selectLanguage(languageCode);
+  }, [selectedLanguage]);
+
+  const selectLanguage = useCallback((languageCode: string) => {
+    localStorage.setItem("language", DataBasePoints.LANGUAGE);
     dispatch(setLanguage(languageCode));
     updateLanguage(languageCode);
-    dispatch(toggleVisibilityMenuItem(""))
-
-  };
+    dispatch(toggleVisibilityMenuItem(""));
+  }, []);
 
   return (
     <List>
@@ -38,19 +40,23 @@ const ChooseLanguage: React.FC = () => {
         const keyName = Object.keys(language)[0];
         const languageCode = language[keyName];
         return (
-          <ListItemButton key={languageCode} dense>
-            <ListItemText
-              primary={keyName}
-              onClick={() => handleListItemText(languageCode)}
-            />
-            {selectedLanguage && selectedLanguage == languageCode ? (
-              <CheckIcon />
-            ) : null}
-          </ListItemButton>
+          <div key={languageCode}>
+            <ListItemButton dense onClick={(e) => handleLanguage(e, languageCode)}
+            >
+              <ListItemText
+                primary={keyName}
+              />
+              {selectedLanguage && selectedLanguage == languageCode ? (
+                <CheckIcon />
+              ) : null}
+            </ListItemButton>
+          </div>
         );
       })}
+      <UpdateLanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} selectLanguage={selectLanguage} pickedLanguage={pickedLanguage} />
     </List>
   );
+
 };
 
 export default ChooseLanguage;
