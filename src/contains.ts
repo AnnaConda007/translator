@@ -14,6 +14,9 @@ export const generateUserDatabaseURL_point = (point: string, wordToDelete?: stri
 // адрес сервера
 export const serverUrl = "http://localhost:3000";
 
+// адрес контактной почты
+export const contactAppMail = "annahrulkova@yandex.ru"
+
 // переменные для flachCards
 export const amountOfTestCard = 2;
 export const amountAnswerOption = 4;

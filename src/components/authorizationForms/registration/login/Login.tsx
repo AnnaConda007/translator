@@ -1,13 +1,15 @@
+
 import { TextField, Typography, Box } from '@mui/material';
-import { formData } from '../Registration';
+import { useSelector } from 'react-redux';
+import { RootStoreState } from '../../../../redux/store';
 
 interface LoginProps {
-  formData: formData
-  onChangeValue: (e: React.ChangeEvent<HTMLInputElement>)
-    => void
-  errorEmailMessage: string
+  onChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Login: React.FC<LoginProps> = ({ formData, onChangeValue, errorEmailMessage }) => {
+
+const Login: React.FC<LoginProps> = ({ onChangeValue }) => {
+  const errorEmailMessage = useSelector((state: RootStoreState) => state.authorization.errorEmailMessage)
+  const formData = useSelector((state: RootStoreState) => state.authorization.formData)
 
   return (
     <Box>    <TextField

@@ -1,12 +1,13 @@
 import { TextField, Typography, Box } from '@mui/material';
-import { formData } from '../Registration';
+import { useSelector } from 'react-redux';
+import { RootStoreState } from '../../../../redux/store';
+
 interface PasswordProps {
-  formData: formData
-  errorPasswordMessage: string
   onChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
-
-const Password: React.FC<PasswordProps> = ({ formData, errorPasswordMessage, onChangeValue }) => {
+const Password: React.FC<PasswordProps> = ({ onChangeValue }) => {
+  const errorPasswordMessage = useSelector((state: RootStoreState) => state.authorization.errorPasswordMessage)
+  const formData = useSelector((state: RootStoreState) => state.authorization.formData)
 
   return (
     <Box>
