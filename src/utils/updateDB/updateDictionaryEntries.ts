@@ -1,7 +1,7 @@
 
 import { generateUserDatabaseURL_point } from '../../contains';
 import { dataFromBD } from '../../redux/dictionarySlice';
-import { DataBasePoints } from '../../enums/enum';
+import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 
 
 export const updateDictionaryEntries = async (dictionaryEntries: {

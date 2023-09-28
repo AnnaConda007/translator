@@ -6,7 +6,7 @@ import { RootStoreState } from "../../../redux/store";
 import {
   stepToChangeTestType
 } from "../../../contains";
-import { languageMatchTested } from "../../../enums/enum";
+import { LanguageMatchTested } from '../../../enums/dictionaryEnum';
 interface CardIdentifierProp {
   activeCardNumber: number;
   currentCards: Array<IFlashCardData>;
@@ -34,7 +34,7 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
         * 2 && (
           <EnteredMatch
             flashCardData={currentCards}
-            languageTested={languageMatchTested.RUSSIAN}
+            languageTested={LanguageMatchTested.RUSSIAN}
           />
         )}
 
@@ -43,7 +43,7 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
         * 2 && (
           <EnteredMatch
             flashCardData={currentCards}
-            languageTested={languageMatchTested.FOREIGN}
+            languageTested={LanguageMatchTested.FOREIGN}
           />
         )}
     </>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../../../redux/store';
 import { useRegister } from '../../../../hooks/autentiification/useDoubleAuthenticationAndRegister';
-import { sendAutentiificationCode } from '../../../../utils/autentiification/sendAutentiificationCode';
+import { sendDoubleAuthenticationCode } from '../../../../utils/autentiification/sendDoubleAuthenticationCode';
 
 const AuthenticationCodeInput: React.FC = () => {
   const registrate = useRegister()
@@ -32,7 +32,7 @@ const AuthenticationCodeInput: React.FC = () => {
   }
 
   const handleRepeatCodeButton = () => {
-    sendAutentiificationCode(userEmail)
+    sendDoubleAuthenticationCode(userEmail)
   }
   return (
     <>

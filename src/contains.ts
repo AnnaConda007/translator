@@ -1,4 +1,4 @@
-import { DataBasePoints } from './enums/enum';
+import { DataBasePoints } from './enums/dataBasePointsEnum';
 
 // адреса для обращения к базе данных
 export const dataBaseURL = "https://books-31eba-default-rtdb.firebaseio.com/";

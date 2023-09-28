@@ -1,5 +1,5 @@
 import { generateUserDatabaseURL_point } from '../../contains';
-import { DataBasePoints } from '../../enums/enum';
+import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 
 export const updateLanguage = async (lang: string) => {
   const userFairbaseId = localStorage.getItem("userFairbaseId")

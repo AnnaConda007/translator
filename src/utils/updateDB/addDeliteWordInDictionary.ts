@@ -1,6 +1,6 @@
 import { generateUserDatabaseURL_point } from '../../contains';
-import { TypeActionWordDictionary } from '../../enums/enum';
-import { DataBasePoints } from '../../enums/enum';
+import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
+import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 
 interface addDeliteWordInBDArgs {
   russianWord?: string;

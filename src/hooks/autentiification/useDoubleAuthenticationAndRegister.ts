@@ -3,11 +3,11 @@ import { useValidationRegistrationForm, useHandleAuthorizationError } from './us
 import { RootStoreState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { setErrorPasswordMessage, setAutentificationCode } from '../../redux/authorizationSlise';
-import { registerWithEmail } from '../../utils/autentiification/firebase.utils';
+import { registerWithEmail } from '../../utils/autentiification/firebaseConfig';
 import { User } from 'firebase/auth/cordova';
 import { FirebaseError } from 'firebase/app';
-import { RoutesApp } from '../../enums/enum';
-import { sendAutentiificationCode } from '../../utils/autentiification/sendAutentiificationCode';
+import { RoutesApp } from '../../enums/routesAppEnum';  
+import { sendDoubleAuthenticationCode } from '../../utils/autentiification/sendDoubleAuthenticationCode';
 import { toggleAuthCodeInput } from '../../redux/visibilitySlice ';
 
 export const useDoubleAuthenticationBeforeRegistraton = () => {
@@ -23,7 +23,7 @@ export const useDoubleAuthenticationBeforeRegistraton = () => {
       dispatch(setErrorPasswordMessage("Пароли не совпадают"))
       return
     }
-    const autentificationCode = await sendAutentiificationCode(userEmail)
+    const autentificationCode = await sendDoubleAuthenticationCode(userEmail)
     batch(() => {
       dispatch(setAutentificationCode(autentificationCode))
       dispatch(toggleAuthCodeInput(true))

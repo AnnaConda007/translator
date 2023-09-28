@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, shallowEqual } from "react-redux";
 import { IBooks } from "../redux/librarySlice";
 import { useSelector } from "react-redux";
@@ -32,10 +31,9 @@ export const useFetchDictionaryFromDatabase = () => {
 export const useFetchBookAndDictionaryFromDatabase = () => {
   const fetchBooks = useFetchBooksFromDatabase()
   const fetchDictioary = useFetchDictionaryFromDatabase()
-  const fetchData = ()=>{
+  const fetchData = () => {
     fetchBooks();
     fetchDictioary();
-    console.log("ffff")
-  } 
+  }
   return fetchData
 };
