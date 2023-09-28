@@ -1,13 +1,13 @@
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { useValidationSignUpForm } from './useValidationRegistrationForm';
+import { useValidationAuthForm } from './useValidationAuthForm';
 import { RootStoreState } from '../../redux/store';
-import { setErrorPasswordMessage, setAutentificationCode } from '../../redux/authorizationSlise';
-import { sendDoubleAuthenticationCode } from '../../utils/autentiification/sendDoubleAuthenticationCode';
+import { setErrorPasswordMessage, setAutentificationCode } from '../../redux/authSlise';
+import { sendDoubleAuthenticationCode } from '../../utils/auth/sendDoubleAuthenticationCode';
 import { toggleAuthCodeInput } from '../../redux/visibilitySlice ';
 
 export const useDoubleAuthentication = () => {
   const dispatch = useDispatch()
-  const validate = useValidationSignUpForm()
+  const validate = useValidationAuthForm()
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
   const userEmail = formData.login
   const autentificate = async () => {

@@ -3,6 +3,7 @@ import { paginateText } from "../../utils/paginateText";
 import TextSelectedBook from './Text-selected-book/TextSelectedBook';
 import PaginateButton from "./paginate-button/PaginateButton";
 import { ButtonPaginnationDirection } from "../../enums/paginnationDirectionEnum";
+import { LoadedBookData } from '../../enums/bookEnum';
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };
@@ -10,9 +11,9 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
   loadedBook,
 }) => {
   const lastSavedPageFromlocalStorage: string | null =
-    localStorage.getItem("currentPageNumber");
+    localStorage.getItem(LoadedBookData.CURRENT_PAGE_NUMBER);
   const lastSavedBookTitleFromlocalStorage: string | null =
-    localStorage.getItem("currentBook");
+    localStorage.getItem(LoadedBookData.CURRENT_TITLE_BOOK);
   const lastSavedPage: number =
     lastSavedPageFromlocalStorage && lastSavedBookTitleFromlocalStorage
       ? parseInt(lastSavedPageFromlocalStorage)

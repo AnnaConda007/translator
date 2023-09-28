@@ -1,7 +1,7 @@
 import { generateUserDatabaseURL_point } from '../../contains';
 import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import { DataBasePoints } from '../../enums/dataBasePointsEnum';
-
+import { UserData } from '../../enums/authEnum';
 interface addDeliteWordInBDArgs {
   russianWord?: string;
   foreignWord: string;
@@ -13,7 +13,7 @@ export const addDeliteWordInBD = async ({
   foreignWord,
   actionType,
 }: addDeliteWordInBDArgs) => {
-  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  const userFairbaseId = localStorage.getItem(UserData.USER_ID)
   if (!userFairbaseId) return
   try {
     if (actionType === TypeActionWordDictionary.ADD) {

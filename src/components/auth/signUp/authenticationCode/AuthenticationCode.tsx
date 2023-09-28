@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../../../redux/store';
 import { useSignUp } from '../../../../hooks/autentiification/useSignUp';
-import { sendDoubleAuthenticationCode } from '../../../../utils/autentiification/sendDoubleAuthenticationCode';
+import { sendDoubleAuthenticationCode } from '../../../../utils/auth/sendDoubleAuthenticationCode';
 
 const AuthenticationCodeInput: React.FC = () => {
   const registrate = useSignUp()

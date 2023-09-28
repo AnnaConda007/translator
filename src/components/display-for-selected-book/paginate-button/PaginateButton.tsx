@@ -2,7 +2,7 @@ import { ButtonPaginnationDirection } from '../../../enums/paginnationDirectionE
 import { Button } from "@mui/material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-
+import { LoadedBookData } from '../../../enums/bookEnum';
 type PaginateButtonProps = {
   setCurrentPageNumber: (value: number) => void;
   buttonValue: string;
@@ -23,7 +23,7 @@ const PaginateButton: React.FC<PaginateButtonProps> = ({
 
   const handleButton = () => {
     setCurrentPageNumber(targetPageNumber);
-    localStorage.setItem("currentPageNumber", targetPageNumber.toString());
+    localStorage.setItem(LoadedBookData.CURRENT_PAGE_NUMBER, targetPageNumber.toString());
   };
 
   return (

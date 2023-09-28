@@ -1,16 +1,18 @@
 import { TextField, Typography, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { RootStoreState } from '../../../../redux/store';
+import { RootStoreState } from '../../../redux/store';
 import { IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
-import { useChangeValueForm } from '../../../../hooks/autentiification/useChangeValueForm';
+import { useChangeValueForm } from '../../../hooks/autentiification/useChangeValueForm';
 
-const SignUpPassword: React.FC = () => {
+interface AuthPasswordProps {
+  reEnterPassword: boolean
+}
+const AuthPassword: React.FC<AuthPasswordProps> = ({ reEnterPassword }) => {
   const onChangeValue = useChangeValueForm()
   const [showPassword, setShowPassword] = useState(false);
-
   const errorPasswordMessage = useSelector((state: RootStoreState) => state.authorization.errorPasswordMessage)
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
 
@@ -34,24 +36,23 @@ const SignUpPassword: React.FC = () => {
             </IconButton>
           )
         }}
+      >
+      </TextField>
 
+      {reEnterPassword && formData.password.length > 0 && (<TextField
+        name="reEnterPassword"
+        autoComplete='off'
+        value={formData.reEnterPassword}
+        onChange={onChangeValue}
+        variant="outlined"
+        label="Введите пароль еще раз"
+        type={showPassword ? "text" : "password"}
+        margin="normal"
       ></TextField>
-      {formData.password.length > 0 && (
-        <TextField
-          name="reEnterPassword"
-          autoComplete='off'
-          value={formData.reEnterPassword}
-          onChange={onChangeValue}
-          variant="outlined"
-          label="Введите пароль еще раз"
-          type={showPassword ? "text" : "password"}
-          margin="normal"
-
-        ></TextField>
       )}
       <Typography variant="body2" component="p">
         {errorPasswordMessage}          </Typography>
     </Box>
   )
 }
-export default SignUpPassword
+export default AuthPassword

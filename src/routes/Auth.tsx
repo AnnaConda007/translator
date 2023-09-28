@@ -1,8 +1,8 @@
-import { Box, Button } from '@mui/material'
-import SignUpForm from './signUp/SignUpForm'
-import SignInForm from './authorization/SignInForm'
+import { Box, Button } from '@mui/material/';
+import SignInForm from '../components/auth/signIn/SignIn';
+import SignUpForm from '../components/auth/signUp/SignUp';
+const Auth = () => {
 
-const Authentication = () => {
   return (
     <Box>
       <Button variant='contained'   > Регистрация</Button>
@@ -14,4 +14,5 @@ const Authentication = () => {
   )
 }
 
-export default Authentication
+
+export default Auth

@@ -38,6 +38,7 @@ const ButtonAddToDictionary: React.FC = () => {
       foreignWord: translationWord,
       actionType: TypeActionWordDictionary.ADD,
     });
+    console.log(fetchResponse)
     if (fetchResponse?.ok !== true) return;
     dispatch(
       addWord({
@@ -51,7 +52,7 @@ const ButtonAddToDictionary: React.FC = () => {
   return (
     <Button
       variant="contained"
-      color="primary"
+      color="secondary"
       startIcon={<LibraryAddRoundedIcon />}
       onClick={handleButtonAddInDictionary}
       disabled={disabledSwitch}

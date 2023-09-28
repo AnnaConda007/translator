@@ -8,10 +8,10 @@ import { dataFromBD } from "../redux/dictionarySlice";
 import { DataBasePoints } from '../enums/dataBasePointsEnum';
 import { batch } from 'react-redux';
 import { setLanguage } from '../redux/languageSlice';
-
+import { UserData } from '../enums/authEnum';
 
 export const fetchAndSetDictionary = () => {
-  const userFairbaseId = localStorage.getItem("userFairbaseId");
+  const userFairbaseId = localStorage.getItem(UserData.USER_ID);
   return async (dispatch: Dispatch) => {
     if (!userFairbaseId) return;
     const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY });

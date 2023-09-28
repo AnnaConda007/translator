@@ -1,7 +1,7 @@
 import { batch } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setErrorEmailMessage, setErrorPasswordMessage, setFormData } from '../../redux/authorizationSlise';
-import { IformData } from '../../redux/authorizationSlise';
+import { setErrorEmailMessage, setErrorPasswordMessage, setFormData } from '../../redux/authSlise';
+import { IformData } from '../../redux/authSlise';
 
 export const useChangeValueForm = () => {
   const dispatch = useDispatch()

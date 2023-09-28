@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-
-const initialState = localStorage.getItem("selectedLanguage") || null;
+import { DataBasePoints } from '../enums/dataBasePointsEnum';
+const initialState = localStorage.getItem(DataBasePoints.LANGUAGE) || null;
 
 const selectedLanguageSlice = createSlice({
   name: "language",

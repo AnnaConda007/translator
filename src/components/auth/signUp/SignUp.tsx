@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
-import RegistrationLogin from './signUpLogin/SignUpLogin';
-import SignUpPassword from './signUpPassword/SignUpPassword';
+import AuthLogin from '../authLogin/AuthLogin';
+import AuthPassword from '../authPassword/AuthPassword';
 import { useSelector } from 'react-redux';
-import SignUpButton from './signUpButton/SignUpButton';
-import { useDoubleAuthentication } from '../../../hooks/autentiification/useDoubleAuthenticationr';
+ import { useDoubleAuthentication } from '../../../hooks/autentiification/useDoubleAuthenticationr';
 import AuthenticationCodeInput from './authenticationCode/AuthenticationCode';
 import { RootStoreState } from '../../../redux/store';
+import AutButton from '../authButton/AuthButton';
 
 const SignUpForm = () => {
   const doubleAuthentication = useDoubleAuthentication()
@@ -20,9 +20,9 @@ const SignUpForm = () => {
         e.preventDefault();
         onSubmit()
       }}>
-        <RegistrationLogin />
-        <SignUpPassword />
-        <SignUpButton />
+        <AuthLogin />
+        <AuthPassword reEnterPassword={true} />
+        <AutButton valueButton={"Зарегистрироваться"} />
       </form>
       {authCodeInputToggle && (<AuthenticationCodeInput />)}
     </Box>

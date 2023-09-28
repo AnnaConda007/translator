@@ -15,8 +15,7 @@ interface ISetFormDataProps {
 interface IInitialState {
   formData: IformData,
   errorEmailMessage: string
-  errorPasswordMessage: string
-  otherError: string
+  errorPasswordMessage: string 
   autentificationCode: string
   languageRecorderInDB: boolean
 }
@@ -28,13 +27,12 @@ const initialState: IInitialState = {
     reEnterPassword: ""
   },
   errorEmailMessage: "",
-  errorPasswordMessage: "",
-  otherError: "",
+  errorPasswordMessage: "", 
   autentificationCode: "",
   languageRecorderInDB: false
 }
 
-const authorizationSlise = createSlice({
+const authSlise = createSlice({
   name: "authorization",
   initialState,
   reducers: {
@@ -47,9 +45,6 @@ const authorizationSlise = createSlice({
     setErrorPasswordMessage: (state, action: PayloadAction<string>) => {
       state.errorPasswordMessage = action.payload
     },
-    setOtherError: (state, action: PayloadAction<string>) => {
-      state.otherError = action.payload
-    },
     setAutentificationCode: (state, action: PayloadAction<string>) => {
       state.autentificationCode = action.payload
     }, setLanguageRecorderInDB: (state) => {
@@ -59,5 +54,5 @@ const authorizationSlise = createSlice({
 
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setOtherError, setAutentificationCode, setLanguageRecorderInDB } = authorizationSlise.actions;
-export default authorizationSlise.reducer;
+export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAutentificationCode, setLanguageRecorderInDB } = authSlise.actions;
+export default authSlise.reducer;
