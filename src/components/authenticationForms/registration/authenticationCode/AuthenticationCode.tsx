@@ -2,7 +2,7 @@ import { Typography, TextField, Button, Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../../../redux/store';
-import { useRegister } from '../../../../hooks/autentiification/useDoubleAuthenticationAndRegister';
+import { useRegister } from '../../../../hooks/autentiification/useRegister'; 
 import { sendDoubleAuthenticationCode } from '../../../../utils/autentiification/sendDoubleAuthenticationCode';
 
 const AuthenticationCodeInput: React.FC = () => {

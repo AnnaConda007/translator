@@ -4,7 +4,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 export interface IformData {
   login: string,
   password: string,
-  reEnterPassword: string
+  reEnterPassword?: string
 }
 
 interface ISetFormDataProps {

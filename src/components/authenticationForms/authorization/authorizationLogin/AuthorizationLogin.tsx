@@ -1,13 +1,11 @@
-
 import { TextField, Typography, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../../../redux/store';
+import { useChangeValueForm } from '../../../../hooks/autentiification/useChangeValueForm';
 
-interface LoginProps {
-  onChangeValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
-const Login: React.FC<LoginProps> = ({ onChangeValue }) => {
+const AuthorizationLogin: React.FC = () => {
+  const onChangeValue = useChangeValueForm()
   const errorEmailMessage = useSelector((state: RootStoreState) => state.authorization.errorEmailMessage)
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
 
@@ -27,4 +25,4 @@ const Login: React.FC<LoginProps> = ({ onChangeValue }) => {
   )
 }
 
-export default Login
+export default AuthorizationLogin

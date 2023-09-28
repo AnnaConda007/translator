@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
-import Registration from '../components/authorizationForms/registration/Registration';
+import Authentication from '../components/authenticationForms/Authentication';
 const Authorization = () => {
 
   return (
     <Box>
-      <Registration />
+      <Authentication />
     </Box>
   )
 }
