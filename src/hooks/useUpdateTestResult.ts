@@ -12,8 +12,7 @@ const useUpdateTestResult = () => {
   const currentCards = useSelector(
     (state: RootStoreState) => state.test.currentCards
   );
-
-  const updateTestResult = (isAnswerCorrect: boolean) => {
+  return (isAnswerCorrect: boolean) => {
     dispatch(
       setTestResult({
         russianWord: currentCards[activeCardNumber].russianWord,
@@ -22,7 +21,6 @@ const useUpdateTestResult = () => {
       })
     );
   };
-  return updateTestResult;
 };
 
 export default useUpdateTestResult;

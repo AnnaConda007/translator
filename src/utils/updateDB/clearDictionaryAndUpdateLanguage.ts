@@ -1,7 +1,7 @@
 import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 import { generateUserDatabaseURL_point } from '../../contains';
 import { UserData } from '../../enums/authEnum';
-export const clearDictionaryAndUpdateLanguage = async (
+export const clearDictionaryAndspecifyLanguage = async (
   newSelectedLanguage: string
 ) => {
   const userFairbaseId = localStorage.getItem(UserData.USER_ID)

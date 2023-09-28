@@ -5,7 +5,7 @@ import { IformData } from '../../redux/authSlise';
 
 export const useChangeValueForm = () => {
   const dispatch = useDispatch()
-  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  return (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     batch(() => {
       dispatch(setFormData({ name: name as keyof IformData, value }));
@@ -14,6 +14,6 @@ export const useChangeValueForm = () => {
       )
     })
   }
-  return onChangeValue
+
 }
 

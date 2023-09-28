@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../../../redux/store';
 import { useSignUp } from '../../../../hooks/autentiification/useSignUp';
-import { sendDoubleAuthenticationCode } from '../../../../utils/auth/sendDoubleAuthenticationCode';
+import { repeatCodeAuthentication } from '../../../../hooks/autentiification/useDoubleAuthenticationr';
 
 const AuthenticationCodeInput: React.FC = () => {
   const registrate = useSignUp()
+  const repeatCode = repeatCodeAuthentication()
   const [authenticationCodeValue, setAuthenticationCodeValue] = useState("")
   const [errorText, setErrorText] = useState("")
   const [seconds, setSeconds] = useState(90);
-  const userEmail = useSelector((state: RootStoreState) => state.authorization.formData.login)
   const sendedAutentificationCode = useSelector((state: RootStoreState) => state.authorization.autentificationCode)
   const onChange = (value: string) => {
     setAuthenticationCodeValue(value)
@@ -32,7 +32,7 @@ const AuthenticationCodeInput: React.FC = () => {
   }
 
   const handleRepeatCodeButton = () => {
-    sendDoubleAuthenticationCode(userEmail)
+    repeatCode()
   }
   return (
     <>
@@ -59,6 +59,7 @@ const AuthenticationCodeInput: React.FC = () => {
         </Box>
         <Button type="submit" variant='contained'>продолжить </Button>
       </form >
+      
       {seconds === 0 && (<Button variant='contained' onClick={handleRepeatCodeButton}  >Запросить код  </Button>)}
 
 

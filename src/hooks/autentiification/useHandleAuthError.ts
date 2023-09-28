@@ -13,7 +13,7 @@ const toManyAttemptErrorMessage = "Слишком много попыток, п�
 
 export const useHandleAuthError = () => {
   const dispatch = useDispatch()
-  const handle = (error: FirebaseError) => {
+  return (error: FirebaseError) => {
     switch (error.message) {
       case EmailError.ALREADY_IN_USE:
         dispatch(setErrorEmailMessage(alreadyUseMessage));
@@ -35,6 +35,5 @@ export const useHandleAuthError = () => {
         break;
     }
   }
-  return handle
 }
 

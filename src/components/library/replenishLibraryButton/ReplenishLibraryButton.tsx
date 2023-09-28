@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from "react"
 
 
-const AddNewBookButton = () => {
+const ReplenishLibraryButton = () => {
   const [clickedButton, setClickedButton] = useState(true)
   const dispatch = useDispatch()
   const handleButton = () => {
@@ -23,4 +23,4 @@ const AddNewBookButton = () => {
 }
 
 
-export default AddNewBookButton
+export default ReplenishLibraryButton

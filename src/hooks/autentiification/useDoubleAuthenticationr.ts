@@ -10,7 +10,7 @@ export const useDoubleAuthentication = () => {
   const validate = useValidationAuthForm()
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
   const userEmail = formData.login
-  const autentificate = async () => {
+  return async () => {
     const validation: boolean = validate()
     if (!validation) return
     const matchPassword = formData.password === formData.reEnterPassword
@@ -19,12 +19,22 @@ export const useDoubleAuthentication = () => {
       return
     }
     const autentificationCode = await sendDoubleAuthenticationCode(userEmail)
+    console.log(autentificationCode)
     batch(() => {
       dispatch(setAutentificationCode(autentificationCode))
       dispatch(toggleAuthCodeInput(true))
     })
-    console.log(autentificationCode)
   }
-  return autentificate
+}
+
+export const repeatCodeAuthentication = () => {
+  const dispatch = useDispatch()
+  const formData = useSelector((state: RootStoreState) => state.authorization.formData)
+  const userEmail = formData.login
+  return async () => {
+    const autentificationCode = await sendDoubleAuthenticationCode(userEmail)
+    console.log(autentificationCode)
+    dispatch(setAutentificationCode(autentificationCode))
+  }
 }
 

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { TextField, InputAdornment } from "@mui/material";
 import { setTitles } from '../../../redux/librarySlice';
-import AddNewBookButton from '../addNewBooksButton/addNewBooksButton';
+import ReplenishLibraryButton from '../replenishLibraryButton/ReplenishLibraryButton';
 
-const InputSearchingByBookTitle: React.FC = () => {
+const InputSearchingByTitle: React.FC = () => {
   const dispatch = useDispatch();
   const loadedBooks = useSelector((state: RootStoreState) => state.library.books);
   const bookTitles = Object.keys(loadedBooks);
@@ -29,7 +29,7 @@ const InputSearchingByBookTitle: React.FC = () => {
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <AddNewBookButton />
+            <ReplenishLibraryButton />
           </InputAdornment>
 
         ),
@@ -38,4 +38,4 @@ const InputSearchingByBookTitle: React.FC = () => {
   );
 };
 
-export default InputSearchingByBookTitle;
+export default InputSearchingByTitle;

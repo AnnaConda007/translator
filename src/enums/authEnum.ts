@@ -16,6 +16,10 @@ export enum signInErrorMessage {
 
 export enum UserData {
   USER_ID = "userId",
- 
+}
 
+
+export enum AuthType {
+  SIGN_IN = "signIn",
+  SIGN_UP = "signUp"
 }

@@ -1,4 +1,4 @@
-import BooksLibrary from "../books-library/BooksLibrary";
+import Library from '../library/Library';
 import { toggleVisibilityMenuItem } from "../../redux/visibilitySlice ";
 import { List, ListItemText, ListItemButton } from "@mui/material";
 import Dictionary from "../dictionary/Dictionary";
@@ -27,7 +27,7 @@ const Nav: React.FC = () => {
 
 
   const nawElemets: Array<INavElements> = [
-    { библиотека: <BooksLibrary /> },
+    { библиотека: <Library /> },
     { словарь: <Dictionary /> },
     { тестирование: <FlashCards /> },
     { "выбрать язык": <ChooseLanguage /> },

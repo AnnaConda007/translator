@@ -2,7 +2,7 @@ import { generateUserDatabaseURL_point } from '../../contains';
 import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 import { UserData } from '../../enums/authEnum';
 
-export const updateLanguage = async (lang: string) => {
+export const specifyLanguage = async (lang: string) => {
   const userFairbaseId = localStorage.getItem(UserData.USER_ID)
   if (!userFairbaseId) return
   const url = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })

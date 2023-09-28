@@ -1,20 +1,20 @@
-import InputSearchingByBookTitle from "./input-searching-by-book-title/inputSearchingByBookTitle";
+import InputSearchingByTitle from "./input-searching-by-title/InputSearchingByTitle";
 import { Box } from '@mui/material';
-import BookTitlesList from "./book-titles-list/bookTitlesList";
+import TitlesList from "./titles-list/TitlesList";
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { RootStoreState } from '../../redux/store';
 import AddNewBookInput from '../add-new-book-Input/AddNewBookInput';
 
-const BooksLibrary: React.FC = () => {
+const Library: React.FC = () => {
   const clickedAddBookButton: boolean = useSelector((state: RootStoreState) => state.visibility.addNewBookInput)
   return (
     <><Box>
-      <InputSearchingByBookTitle />
-      <BookTitlesList />
+      <InputSearchingByTitle />
+      <TitlesList />
     </Box>
       <Box>
         {clickedAddBookButton && (
-        <AddNewBookInput/>
+          <AddNewBookInput />
         )}
 
       </Box>
@@ -23,4 +23,4 @@ const BooksLibrary: React.FC = () => {
   );
 };
 
-export default BooksLibrary;
+export default Library;

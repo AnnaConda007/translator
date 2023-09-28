@@ -12,7 +12,7 @@ export const addNewBookInLibrary = async (titleBook: string, bookContent: string
     );
     return true
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return false
 
   }
