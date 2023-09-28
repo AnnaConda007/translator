@@ -17,7 +17,7 @@ const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 
 
-export const useValidationRegistrationForm = () => {
+export const useValidationSignUpForm = () => {
   const dispatch = useDispatch()
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
   const validate = (): boolean => {

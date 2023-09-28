@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { UserCredential, User } from 'firebase/auth/cordova';
 import { FirebaseError } from 'firebase/app';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXGAcFyO4yWey26BgEkqAoeEq4rVA5e7k",
@@ -13,9 +14,9 @@ const firebaseConfig = {
   appId: "1:436605099313:web:810f388c2c04c5fd786410"
 };
 const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth();
 
-export const auth = getAuth();
-export const registerWithEmail = async (email: string, password: string): Promise<User> => {
+export const SignUpWithEmail = async (email: string, password: string): Promise<User> => {
   try {
     const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
     return userCredential.user
@@ -28,4 +29,15 @@ export const registerWithEmail = async (email: string, password: string): Promis
   }
 };
 
- 
+export const signInWithEmail = async (email: string, password: string): Promise<User> => {
+  try {
+    const userCredential: UserCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      throw error;
+    } else {
+      throw error;
+    }
+  }
+};

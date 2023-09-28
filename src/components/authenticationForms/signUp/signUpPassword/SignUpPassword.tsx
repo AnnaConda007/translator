@@ -7,7 +7,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
 import { useChangeValueForm } from '../../../../hooks/autentiification/useChangeValueForm';
 
-const RegistrationPassword: React.FC = () => {
+const SignUpPassword: React.FC = () => {
   const onChangeValue = useChangeValueForm()
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,4 +54,4 @@ const RegistrationPassword: React.FC = () => {
     </Box>
   )
 }
-export default RegistrationPassword
+export default SignUpPassword

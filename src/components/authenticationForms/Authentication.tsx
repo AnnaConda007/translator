@@ -1,15 +1,15 @@
 import { Box, Button } from '@mui/material'
-import RegistrationForm from './registration/RegistrationForm'
-import AuthorizationForm from './authorization/AuthorizationForm'
+import SignUpForm from './signUp/SignUpForm'
+import SignInForm from './authorization/SignInForm'
 
 const Authentication = () => {
   return (
     <Box>
       <Button variant='contained'   > Регистрация</Button>
-      <RegistrationForm />
+      <SignUpForm />
 
       <Button variant='contained'   > Войти</Button>
-      <AuthorizationForm/>
+      <SignInForm />
     </Box>
   )
 }

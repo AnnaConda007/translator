@@ -1,14 +1,14 @@
 import { Box } from '@mui/material';
-import RegistrationLogin from './registrationLogin/RegistrationLogin';
-import RegistrationPassword from './registrationPassword/registrationPassword';
+import RegistrationLogin from './signUpLogin/SignUpLogin';
+import SignUpPassword from './signUpPassword/SignUpPassword';
 import { useSelector } from 'react-redux';
-import RegistrationButton from './registrationButton/RegistrationButton';
-import { useDoubleAuthenticationBeforeRegistraton } from '../../../hooks/autentiification/useDoubleAuthenticationr';
+import SignUpButton from './signUpButton/SignUpButton';
+import { useDoubleAuthentication } from '../../../hooks/autentiification/useDoubleAuthenticationr';
 import AuthenticationCodeInput from './authenticationCode/AuthenticationCode';
 import { RootStoreState } from '../../../redux/store';
 
-const RegistrationForm = () => {
-  const doubleAuthentication = useDoubleAuthenticationBeforeRegistraton()
+const SignUpForm = () => {
+  const doubleAuthentication = useDoubleAuthentication()
   const authCodeInputToggle = useSelector((state: RootStoreState) => state.visibility.authCodeInput)
   const onSubmit = async () => {
     await doubleAuthentication()
@@ -21,8 +21,8 @@ const RegistrationForm = () => {
         onSubmit()
       }}>
         <RegistrationLogin />
-        <RegistrationPassword />
-        <RegistrationButton />
+        <SignUpPassword />
+        <SignUpButton />
       </form>
       {authCodeInputToggle && (<AuthenticationCodeInput />)}
     </Box>
@@ -34,4 +34,4 @@ const RegistrationForm = () => {
 
 }
 
-export default RegistrationForm
+export default SignUpForm

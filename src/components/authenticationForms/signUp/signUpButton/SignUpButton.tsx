@@ -4,7 +4,7 @@ import { Button, Typography, Box } from '@mui/material';
 import { RootStoreState } from '../../../../redux/store';
 import { useSelector } from 'react-redux';
 
-const RegistrationButton: React.FC = () => {
+const SignUpButton: React.FC = () => {
   const otherErrorMessage = useSelector((state: RootStoreState) => state.authorization.otherError)
 
 
@@ -17,4 +17,4 @@ const RegistrationButton: React.FC = () => {
     </Box>
   )
 }
-export default RegistrationButton
+export default SignUpButton
