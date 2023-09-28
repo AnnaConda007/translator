@@ -1,26 +1,20 @@
-import { validationRegistrationForm } from '../../../../utils/autentiification/validationRegistrationForms';
-
-const RegistrationButton = ({})=>{
 
 
+import { Button, Typography, Box } from '@mui/material';
+import { RootStoreState } from '../../../../redux/store';
+import { useSelector } from 'react-redux';
 
-  const handleButtonRegistration = async () => {
-    const validation: boolean = validationRegistrationForm({ setErrorEmailMessage, setErrorPasswordMessage, formData })
-    const matchPassword = formData.password === formData.reEnterPassword
-    if (!matchPassword) {
-      setErrorPasswordMessage("Пароли не совпадают")
-      return
-    }
+const RegistrationButton: React.FC = () => {
+  const otherErrorMessage = useSelector((state: RootStoreState) => state.authorization.otherError)
 
-    if (!validation) return
-    try {
-      const user: User = await registerWithEmail(formData.login, formData.password);
-      localStorage.setItem("userFairbaseId", user.uid)
-      navigate(RoutesApp.HOME)
-    } catch (error) {
-      if ((error instanceof FirebaseError)) {
-        handleAuthorizationError({ setErrorEmailMessage, setErrorPasswordMessage, setOtherError, error })
-      }
-    }
-  };
+
+  return (
+    <Box>
+      <Typography variant="body2" component="p">
+        {otherErrorMessage}          </Typography>
+      <Button type="submit" variant='contained'   > Зарегистрироваться</Button>
+
+    </Box>
+  )
 }
+export default RegistrationButton

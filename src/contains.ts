@@ -1,14 +1,13 @@
 import { DataBasePoints } from './enums/enum';
 
 // адреса для обращения к базе данных
-export const userFairbaseId = localStorage.getItem("userFairbaseId")
 export const dataBaseURL = "https://books-31eba-default-rtdb.firebaseio.com/";
 export const dataBaseURL_books = `${dataBaseURL}${DataBasePoints.LIBRARY}/.json`;
 export const addNewBook_libraryURL = (titleBook: string) => {
   return `${dataBaseURL}${DataBasePoints.LIBRARY}/${titleBook}/.json`
 };
-export const generateUserDatabaseURL_point = (point: string, wordToDelete?: string) => {
-  return `${dataBaseURL}${userFairbaseId}/${point}${wordToDelete ? `/${wordToDelete}` : ''}/.json`;
+export const generateUserDatabaseURL_point = ({ userFairbaseId, dbPoint, wordToDelete }: { userFairbaseId: string, dbPoint: string, wordToDelete?: string }) => {
+  return `${dataBaseURL}${userFairbaseId}/${dbPoint}${wordToDelete ? `/${wordToDelete}` : ''}/.json`;
 };
 
 // адрес сервера

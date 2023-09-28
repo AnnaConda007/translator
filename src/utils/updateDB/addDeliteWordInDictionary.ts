@@ -13,9 +13,11 @@ export const addDeliteWordInBD = async ({
   foreignWord,
   actionType,
 }: addDeliteWordInBDArgs) => {
+  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  if (!userFairbaseId) return
   try {
     if (actionType === TypeActionWordDictionary.ADD) {
-      const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+      const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
       const newEntryInDictionary = {
         [foreignWord]: {
           [DataBasePoints.FOREIGN_WORD_IN_DB]: foreignWord,
@@ -32,7 +34,7 @@ export const addDeliteWordInBD = async ({
       });
       return response;
     } else {
-      const wordInDictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY, foreignWord)
+      const wordInDictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY, wordToDelete: foreignWord })
       await fetch(wordInDictionaryUserURL, {
         method: "DELETE",
         headers: {

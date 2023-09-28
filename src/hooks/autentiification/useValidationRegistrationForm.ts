@@ -1,11 +1,11 @@
-
 import { FirebaseError } from 'firebase/app';
-import { EmailError, PasswordError } from '../enums/authorizationEnum';
+import { EmailError, PasswordError } from '../../enums/authorizationEnum';
 import { useSelector } from 'react-redux';
-import { setErrorEmailMessage, setErrorPasswordMessage, setOtherError } from '../redux/authorizationSlise';
-import { RootStoreState } from '../redux/store';
+import { setErrorEmailMessage, setErrorPasswordMessage, setOtherError } from '../../redux/authorizationSlise';
+import { RootStoreState } from '../../redux/store';
 import { useDispatch } from 'react-redux';
-import { batch } from 'react-redux';
+
+
 const invalidEmailMessage = "Неверный формат. Убедитесь, что ваша почта соответствует формату example@example.ru"
 const alreadyUseMessage = "Пользователь с такой почтой уже зарегистрирован"
 const weakPasswordMessage = "Ненадежный или слишком короткий пароль, пароль должен содержать не менее 6 символов"
@@ -43,7 +43,6 @@ export const useValidationRegistrationForm = () => {
 
 export const useHandleAuthorizationError = () => {
   const dispatch = useDispatch()
-
   const handle = (error: FirebaseError) => {
     switch (error.message) {
       case EmailError.ALREADY_IN_USE:

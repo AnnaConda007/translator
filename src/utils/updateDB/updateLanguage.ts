@@ -2,7 +2,9 @@ import { generateUserDatabaseURL_point } from '../../contains';
 import { DataBasePoints } from '../../enums/enum';
 
 export const updateLanguage = async (lang: string) => {
-  const url = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  if (!userFairbaseId) return
+  const url = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
   try {
     await fetch(url, {
       method: "PATCH",

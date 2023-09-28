@@ -12,22 +12,30 @@ export const useFetchBooksFromDatabase = () => {
     (state: RootStoreState) => state.library.books,
     shallowEqual
   );
-  useEffect(() => {
+
+  return () => {
     if (Object.keys(loadedBooks).length > 0) return;
     dispatch(fetchAndSetLibrary());
-  }, [dispatch, loadedBooks]);
+  };
 };
 
 export const useFetchDictionaryFromDatabase = () => {
   const dispatch: AppDispatch = useDispatch();
   const dictionary = useSelector((state: RootStoreState) => state.dictionary.words);
-  useEffect(() => {
+
+  return () => {
     if (dictionary.length > 0) return;
     dispatch(fetchAndSetDictionary());
-  }, [dictionary, dispatch]);
+  };
 };
 
 export const useFetchBookAndDictionaryFromDatabase = () => {
-  useFetchBooksFromDatabase();
-  useFetchDictionaryFromDatabase();
+  const fetchBooks = useFetchBooksFromDatabase()
+  const fetchDictioary = useFetchDictionaryFromDatabase()
+  const fetchData = ()=>{
+    fetchBooks();
+    fetchDictioary();
+    console.log("ffff")
+  } 
+  return fetchData
 };

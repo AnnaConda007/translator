@@ -8,15 +8,20 @@ import { dataFromBD } from "../redux/dictionarySlice";
 import { DataBasePoints } from '../enums/enum';
 import { batch } from 'react-redux';
 import { setLanguage } from '../redux/languageSlice';
+
+
+
 export const fetchAndSetDictionary = () => {
+  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  if (!userFairbaseId) return
+  const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
   return async (dispatch: Dispatch) => {
     try {
-      const dictionaryAndLanguage = await fetchDictionary();
+      const dictionaryAndLanguage = await fetchDictionary(dictionaryUserURL);
       const { dictionary, language } = dictionaryAndLanguage
       batch(() => {
         dispatch(setDictionary(dictionary));
         dispatch(setLanguage(language))
-
       })
     } catch (error) {
       console.error(error);
@@ -24,12 +29,12 @@ export const fetchAndSetDictionary = () => {
   };
 };
 
-const fetchDictionary = async () => {
-  const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+const fetchDictionary = async (dictionaryUserURL: string) => {
   const response = await fetch(dictionaryUserURL);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
+
   const data = await response.json()
   const language: string = data[DataBasePoints.LANGUAGE]
   delete data.language;

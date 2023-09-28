@@ -17,6 +17,8 @@ interface IInitialState {
   errorEmailMessage: string
   errorPasswordMessage: string
   otherError: string
+  autentificationCode: string
+  languageRecorderInDB: boolean
 }
 
 const initialState: IInitialState = {
@@ -27,7 +29,9 @@ const initialState: IInitialState = {
   },
   errorEmailMessage: "",
   errorPasswordMessage: "",
-  otherError: ""
+  otherError: "",
+  autentificationCode: "",
+  languageRecorderInDB: false
 }
 
 const authorizationSlise = createSlice({
@@ -46,9 +50,14 @@ const authorizationSlise = createSlice({
     setOtherError: (state, action: PayloadAction<string>) => {
       state.otherError = action.payload
     },
+    setAutentificationCode: (state, action: PayloadAction<string>) => {
+      state.autentificationCode = action.payload
+    }, setLanguageRecorderInDB: (state) => {
+      state.languageRecorderInDB = true
+    }
   },
 
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setOtherError } = authorizationSlise.actions;
+export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setOtherError, setAutentificationCode, setLanguageRecorderInDB } = authorizationSlise.actions;
 export default authorizationSlise.reducer;

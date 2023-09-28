@@ -27,3 +27,5 @@ export const registerWithEmail = async (email: string, password: string): Promis
     }
   }
 };
+
+ 

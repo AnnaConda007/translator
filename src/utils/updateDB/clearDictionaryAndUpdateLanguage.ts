@@ -4,7 +4,9 @@ import { generateUserDatabaseURL_point } from '../../contains';
 export const clearDictionaryAndUpdateLanguage = async (
   newSelectedLanguage: string
 ) => {
-  const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  if (!userFairbaseId) return
+  const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
   const data = {
     [DataBasePoints.LANGUAGE]: newSelectedLanguage
   }

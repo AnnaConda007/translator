@@ -7,7 +7,9 @@ import { DataBasePoints } from '../../enums/enum';
 export const updateDictionaryEntries = async (dictionaryEntries: {
   [key: string]: dataFromBD | null;
 }) => {
-  const dictionaryUserURL = generateUserDatabaseURL_point(DataBasePoints.DICTIONARY)
+  const userFairbaseId = localStorage.getItem("userFairbaseId")
+  if (!userFairbaseId) return
+  const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
   try {
     await fetch(dictionaryUserURL, {
       method: "PATCH",

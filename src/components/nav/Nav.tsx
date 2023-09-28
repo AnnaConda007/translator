@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import FlashCards from '../flashCards/FlashCards';
 import { AppDispatch } from '../../redux/store';
-import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase';
 import { DataBasePoints } from '../../enums/enum';
 interface INavElements {
 
@@ -16,7 +15,7 @@ interface INavElements {
 
 const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  useFetchBookAndDictionaryFromDatabase()
+
   const localSelectedLanguage = localStorage.getItem(`${DataBasePoints.LANGUAGE}`)
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
@@ -25,6 +24,8 @@ const Nav: React.FC = () => {
   const selectedMenuItem = useSelector(
     (state: RootStoreState) => state.visibility.menuItem
   );
+
+
   const nawElemets: Array<INavElements> = [
     { библиотека: <BooksLibrary /> },
     { словарь: <Dictionary /> },

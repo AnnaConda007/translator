@@ -11,7 +11,8 @@ import { DataBasePoints } from '../../enums/enum';
 import UpdateLanguagePopover from './updateLanguagePopover/UpdateLanguagePopover';
 import { languages } from './languages';
 import { useCallback } from 'react';
-
+import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase';
+import { setLanguageRecorderInDB } from '../../redux/authorizationSlise';
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector((state: RootStoreState) => state.language);
@@ -19,6 +20,7 @@ const ChooseLanguage: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleLanguage = useCallback((e: React.MouseEvent<HTMLElement>, languageCode: string) => {
+
     if (selectedLanguage) {
       setAnchorEl(e.currentTarget);
       setPickedLanguage(languageCode);
@@ -27,10 +29,11 @@ const ChooseLanguage: React.FC = () => {
     selectLanguage(languageCode);
   }, [selectedLanguage]);
 
-  const selectLanguage = useCallback((languageCode: string) => {
-    localStorage.setItem("language", DataBasePoints.LANGUAGE);
+  const selectLanguage = useCallback(async (languageCode: string) => {
+    localStorage.setItem(DataBasePoints.LANGUAGE, languageCode);
     dispatch(setLanguage(languageCode));
-    updateLanguage(languageCode);
+    await updateLanguage(languageCode);
+    dispatch(setLanguageRecorderInDB())
     dispatch(toggleVisibilityMenuItem(""));
   }, []);
 
