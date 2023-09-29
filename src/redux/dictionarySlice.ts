@@ -17,11 +17,13 @@ export interface ICounter {
 export type IDictionary = {
   words: Array<IEntry>;
   counters: ICounter;
+  loaded: boolean
 };
 
 const initialState: IDictionary = {
   words: [],
   counters: {},
+  loaded: false
 };
 
 const dictionary = createSlice({
@@ -66,9 +68,12 @@ const dictionary = createSlice({
         (word) => !wordsToDelete.has(word.foreignWord)
       );
     },
+    setLoaded: (state ) => {
+      state.loaded = true
+    },
   },
 });
 
-export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary } =
+export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary, setLoaded } =
   dictionary.actions;
 export default dictionary.reducer;

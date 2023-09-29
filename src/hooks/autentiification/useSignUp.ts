@@ -8,9 +8,7 @@ import { User } from 'firebase/auth/cordova';
 import { FirebaseError } from 'firebase/app';
 import { RoutesApp } from '../../enums/routesAppEnum';
 import { UserData } from '../../enums/authEnum';
-import { setAuthType } from '../../redux/authSlise';
-import { useDispatch } from 'react-redux';
-import { AuthType } from '../../enums/authEnum';
+ import { useDispatch } from 'react-redux'; 
 import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
 
 export const useSignUp = () => {
@@ -23,8 +21,7 @@ export const useSignUp = () => {
       const user: User = await SignUpWithEmail(formData.login, formData.password);
       localStorage.setItem(UserData.USER_ID, user.uid)
       await specifyLanguage("")
-      navigate(RoutesApp.HOME)
-      dispatch(setAuthType(AuthType.SIGN_UP))
+      navigate(RoutesApp.HOME) 
     } catch (error) {
       if ((error instanceof FirebaseError)) {
         handleAuthorizationError(error)
