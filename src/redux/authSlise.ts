@@ -50,10 +50,13 @@ const authSlise = createSlice({
     },
     setAuthType: (state, action: PayloadAction<string>) => {
       state.authType = action.payload
+    },
+    resetForms: (state) => {
+      return initialState;
     }
   },
 
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAuthType, setAutentificationCode } = authSlise.actions;
+export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAuthType, setAutentificationCode, resetForms } = authSlise.actions;
 export default authSlise.reducer;
