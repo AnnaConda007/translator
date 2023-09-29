@@ -2,32 +2,37 @@ import CheckIcon from "@mui/icons-material/Check";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { setLanguage } from "../../redux/languageSlice";
 import { useDispatch } from "react-redux";
-import { updateLanguagetoBdAndLS } from "../../utils/updateLanguagetoBdAndLS";
+import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
+import { useState } from 'react';
+import { DataBasePoints } from '../../enums/dataBasePointsEnum';
+import LanguagePopover from './updateLanguagePopover/UpdateLanguagePopover';
+import { languages } from './languages';
+import { useCallback } from 'react';
+
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
-  const selectedLanguage = useSelector(
-    (state: RootStoreState) => state.language
-  );
-  const languages: Array<{ [key: string]: string }> = [
-    { английский: "en" },
-    { грузинский: "ka" },
-    { испанский: "es" },
-    { итальянский: "it" },
-    { немецкий: "de" },
-    { французский: "fr" },
-    { украинский: "uk" },
-    { турецкий: "tr" },
-    { корейский: "ko" },
-  ];
+  const selectedLanguage = useSelector((state: RootStoreState) => state.language);
+  const [pickedLanguage, setPickedLanguage] = useState("")
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleListItemText = (languageCode: string) => {
-     dispatch(setLanguage(languageCode));
-    updateLanguagetoBdAndLS(languageCode);
-    dispatch(toggleVisibilityMenuItem(""))
-  };
+  const handleLanguage = useCallback((e: React.MouseEvent<HTMLElement>, languageCode: string) => {
+    if (selectedLanguage) {
+      setAnchorEl(e.currentTarget);
+      setPickedLanguage(languageCode);
+      return;
+    }
+    selectLanguage(languageCode);
+  }, [selectedLanguage]);
+
+  const selectLanguage = useCallback(async (languageCode: string) => {
+    localStorage.setItem(DataBasePoints.LANGUAGE, languageCode);
+    dispatch(setLanguage(languageCode));
+    await specifyLanguage(languageCode);
+    dispatch(toggleVisibilityMenuItem(""));
+  }, []);
 
   return (
     <List>
@@ -35,19 +40,23 @@ const ChooseLanguage: React.FC = () => {
         const keyName = Object.keys(language)[0];
         const languageCode = language[keyName];
         return (
-          <ListItemButton key={languageCode} dense>
-            <ListItemText
-              primary={keyName}
-              onClick={() => handleListItemText(languageCode)}
-            />
-            {selectedLanguage && selectedLanguage == languageCode ? (
-              <CheckIcon />
-            ) : null}
-          </ListItemButton>
+          <div key={languageCode}>
+            <ListItemButton dense onClick={(e) => handleLanguage(e, languageCode)}
+            >
+              <ListItemText
+                primary={keyName}
+              />
+              {selectedLanguage && selectedLanguage == languageCode ? (
+                <CheckIcon />
+              ) : null}
+            </ListItemButton>
+          </div>
         );
       })}
+      <LanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} selectLanguage={selectLanguage} pickedLanguage={pickedLanguage} />
     </List>
   );
+
 };
 
 export default ChooseLanguage;

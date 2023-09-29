@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { toggleAddNewBookInput } from '../../redux/visibilitySlice ';
 import { useDispatch } from 'react-redux';
 import { addNewBook } from '../../redux/librarySlice';
-import { addNewBookInLibrary } from '../../utils/updateDictionaryToBD';
+import { addNewBookInLibrary } from '../../utils/updateDB/addNewBook';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
 import jschardet from 'jschardet';
@@ -25,7 +25,7 @@ const AddNewBookInput: React.FC = () => {
       if (!e.target) return;
 
       const arrayBuffer = e.target.result as ArrayBuffer;
-      const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer));
+      const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer) as any);
       const detectedCharset = charsetDetectionResult && charsetDetectionResult.encoding;
       if (!detectedCharset) {
         setErrorLoad(true);

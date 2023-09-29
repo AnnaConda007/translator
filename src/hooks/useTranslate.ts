@@ -10,19 +10,17 @@ const useTranslate = () => {
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
-  const translateWord = async (word: string) => {
+  return async (word: string) => {
     if (!selectedLanguage) return;
     const formatedWord = cleanAndNormalize(word);
     const translation: string | null = await translate(
       selectedLanguage,
       formatedWord
     );
-
     if (!translation) return;
     dispatch(setRussianWord(translation));
     dispatch(setForeignWord(formatedWord));
   };
-  return translateWord;
 };
 
 export default useTranslate;

@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { RootStoreState } from "../redux/store";
 import { IBooks } from "../redux/librarySlice";
-import { useFetchBookAndDictionaryFromDatabase } from "../hooks/useFetchDataFromDatabase";
 import DisplayForSelectedBook from "../components/display-for-selected-book/DisplayForSelectedBook";
+
+
 const SelectedBookContent = () => {
   type RouteParams = {
     bookTitle: string;
   };
-  useFetchBookAndDictionaryFromDatabase();
   const { bookTitle } = useParams() as RouteParams;
   const loadedBooks: IBooks = useSelector(
     (state: RootStoreState) => state.library.books

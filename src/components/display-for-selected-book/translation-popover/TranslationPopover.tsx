@@ -4,7 +4,7 @@ import Button from "@mui/material/Button/Button";
 import TranslationInput from "../../translation-input/TranslationInput";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
-import ButtonAddToDictionary from "../button-add-to-dictionary/ButtonAddToDictionary";
+import ButtonAddToDictionary from "../../button-add-to-dictionary/ButtonAddToDictionary";
 interface ITranslationPopover {
   anchorEl: Element | null;
   setAnchorEl: (el: HTMLSpanElement | null) => void;

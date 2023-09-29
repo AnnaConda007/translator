@@ -1,4 +1,4 @@
-import BooksLibrary from "../books-library/BooksLibrary";
+import Library from '../library/Library';
 import { toggleVisibilityMenuItem } from "../../redux/visibilitySlice ";
 import { List, ListItemText, ListItemButton } from "@mui/material";
 import Dictionary from "../dictionary/Dictionary";
@@ -6,26 +6,28 @@ import ChooseLanguage from "../choose-language/ChooseLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import FlashCards from '../flashCards/FlashCards';
-import { AppDispatch } from '../../redux/store'; 
- import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase'; 
-
+import { AppDispatch } from '../../redux/store';
+import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 interface INavElements {
 
   [key: string]: React.ReactElement;
 }
 
-const Nav: React.FC = () => { 
+const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  useFetchBookAndDictionaryFromDatabase()
 
+  const localSelectedLanguage = localStorage.getItem(`${DataBasePoints.LANGUAGE}`)
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language
   );
+  const language = localSelectedLanguage || selectedLanguage
   const selectedMenuItem = useSelector(
     (state: RootStoreState) => state.visibility.menuItem
   );
+
+
   const nawElemets: Array<INavElements> = [
-    { библиотека: <BooksLibrary /> },
+    { библиотека: <Library /> },
     { словарь: <Dictionary /> },
     { тестирование: <FlashCards /> },
     { "выбрать язык": <ChooseLanguage /> },
@@ -50,7 +52,7 @@ const Nav: React.FC = () => {
               key={index}
               dense
               disabled={
-                !selectedLanguage && keyName !== "выбрать язык" ? true : false
+                !language && keyName !== "выбрать язык" ? true : false
               }
             >
               <ListItemText

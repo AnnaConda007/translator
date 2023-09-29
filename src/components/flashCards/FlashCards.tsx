@@ -14,7 +14,7 @@ import { IFlashCardData } from "../../redux/testSlice";
 import { createFlashCardData } from "../../utils/createFlashCardData";
 import CardIdentifier from "./card-identifier/CardIdentifier";
 
- export interface flashCardProp {
+export interface flashCardProp {
   flashCardData: Array<IFlashCardData>;
 }
 
@@ -29,6 +29,7 @@ const FlashCards = () => {
   const words: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
+
 
   useEffect(() => {
     const flashCardData = createFlashCardData(words);

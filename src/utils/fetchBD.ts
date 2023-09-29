@@ -1,31 +1,43 @@
-import { dictionary_dataBaseURL, books_dataBaseURL } from "../contains";
+import { generateUserDatabaseURL_point, dataBaseURL_books } from "../contains";
 import { Dispatch } from "redux";
 import { setDictionary } from "../redux/dictionarySlice";
 import { setBooks } from "../redux/librarySlice";
 import { IBooks } from "../redux/librarySlice";
 import { setTitles } from "../redux/librarySlice";
 import { dataFromBD } from "../redux/dictionarySlice";
+import { DataBasePoints } from '../enums/dataBasePointsEnum';
+import { batch } from 'react-redux';
+import { setLanguage } from '../redux/languageSlice';
+import { UserData } from '../enums/authEnum';
+
 export const fetchAndSetDictionary = () => {
+  const userFairbaseId = localStorage.getItem(UserData.USER_ID);
   return async (dispatch: Dispatch) => {
+    if (!userFairbaseId) return;
+    const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY });
     try {
-      const dictionary = await fetchDictionary();
-      dispatch(setDictionary(dictionary));
+      const dictionaryAndLanguage = await fetchDictionary(dictionaryUserURL);
+      const { dictionary, language } = dictionaryAndLanguage;
+      batch(() => {
+        dispatch(setDictionary(dictionary));
+        dispatch(setLanguage(language));
+      });
     } catch (error) {
       console.error(error);
     }
   };
 };
-const fetchDictionary = async () => {
-  const response = await fetch(dictionary_dataBaseURL);
+const fetchDictionary = async (dictionaryUserURL: string) => {
+  const response = await fetch(dictionaryUserURL);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
-  const data = await response.json();
-  if (!data) {
-    return [];
-  }
-  const dictionary: Array<dataFromBD> = Object.values(data);
-  return dictionary;
+
+  const data = await response.json()
+  const language: string = data[DataBasePoints.LANGUAGE]
+  delete data.language;
+  const dictionary: Array<dataFromBD> = Object.values(data) || []
+  return { dictionary, language };
 };
 
 export const fetchAndSetLibrary = () => {
@@ -41,7 +53,7 @@ export const fetchAndSetLibrary = () => {
   };
 };
 const fetchLibrary = async () => {
-  const response = await fetch(books_dataBaseURL);
+  const response = await fetch(dataBaseURL_books);
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }

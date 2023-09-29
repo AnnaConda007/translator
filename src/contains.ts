@@ -1,10 +1,24 @@
-export const newsApiKey: string = "88c0a633c11544df8d7cf255718e2334";
+import { DataBasePoints } from './enums/dataBasePointsEnum';
+
+// адреса для обращения к базе данных
 export const dataBaseURL = "https://books-31eba-default-rtdb.firebaseio.com/";
-export const books_dataBaseURL = `${dataBaseURL}books/.json`;
-export const dictionary_dataBaseURL = `${dataBaseURL}dictionary/.json`;
-export const dictionary_libraryURL = `${dataBaseURL}books/`;
+export const dataBaseURL_books = `${dataBaseURL}${DataBasePoints.LIBRARY}/.json`;
+export const addNewBook_libraryURL = (titleBook: string) => {
+  return `${dataBaseURL}${DataBasePoints.LIBRARY}/${titleBook}/.json`
+};
+export const generateUserDatabaseURL_point = ({ userFairbaseId, dbPoint, wordToDelete }: { userFairbaseId: string, dbPoint: string, wordToDelete?: string }) => {
+  return `${dataBaseURL}${userFairbaseId}/${dbPoint}${wordToDelete ? `/${wordToDelete}` : ''}/.json`;
+};
+
+// адрес сервера
 export const serverUrl = "http://localhost:3000";
+
+// адрес контактной почты
+export const contactAppMail = "annahrulkova@yandex.ru"
+
+// переменные для flachCards
 export const amountOfTestCard = 2;
 export const amountAnswerOption = 4;
-export const determineOfTypeTest = 2;
+export const stepToChangeTestType
+  = 2;
 

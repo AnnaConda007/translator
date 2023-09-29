@@ -9,10 +9,10 @@ import {
 import useAnswerMatchingChecker from "../../../hooks/useAnswerMatchingChecker";
 import { useState } from "react";
 import CorrectAnswer from "../correct-answer/CorrectAnswer";
-import { languageMatchTested } from "../../enum";
+import { LanguageMatchTested } from '../../../enums/dictionaryEnum';
 interface EnteredMatchProps {
   flashCardData: Array<IFlashCardData>;
-  languageTested: languageMatchTested;
+  languageTested: LanguageMatchTested;
 }
 const EnteredMatch: React.FC<EnteredMatchProps> = ({
   flashCardData,

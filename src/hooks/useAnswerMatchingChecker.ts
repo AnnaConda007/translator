@@ -10,14 +10,12 @@ const useAnswerMatchingChecker = () => {
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-
-  const checkAnswer = (selectedAnswerOption: string) => {
+  return (selectedAnswerOption: string) => {
     const isAnswerCorrect =
       currentCards[activeCardNumber].russianWord === selectedAnswerOption ||
       currentCards[activeCardNumber].foreignWord === selectedAnswerOption;
     updateTestResult(isAnswerCorrect);
   };
-  return checkAnswer;
 };
 
 export default useAnswerMatchingChecker;

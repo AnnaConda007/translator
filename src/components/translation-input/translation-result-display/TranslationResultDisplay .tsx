@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
-import ButtonAddToDictionary from "../../display-for-selected-book/button-add-to-dictionary/ButtonAddToDictionary";
+import ButtonAddToDictionary from "../../button-add-to-dictionary/ButtonAddToDictionary";
 
-const TranslationResultDisplay : React.FC = () => {
+const TranslationResultDisplay: React.FC = () => {
   const addBtnVisible = useSelector(
     (state: RootStoreState) => state.visibility.translationInput
   );
@@ -22,4 +22,4 @@ const TranslationResultDisplay : React.FC = () => {
   );
 };
 
-export default TranslationResultDisplay ;
+export default TranslationResultDisplay;

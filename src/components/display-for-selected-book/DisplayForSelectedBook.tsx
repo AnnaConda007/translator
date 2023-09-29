@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { paginateText } from "../../utils/paginateText";
 import TextSelectedBook from './Text-selected-book/TextSelectedBook';
 import PaginateButton from "./paginate-button/PaginateButton";
-import { ButtonDirection } from "../enum";
+import { ButtonPaginnationDirection } from "../../enums/paginnationDirectionEnum";
+import { LoadedBookData } from '../../enums/bookEnum';
 type DisplayForSelectedBookProps = {
   loadedBook: string;
 };
@@ -10,9 +11,9 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
   loadedBook,
 }) => {
   const lastSavedPageFromlocalStorage: string | null =
-    localStorage.getItem("currentPageNumber");
+    localStorage.getItem(LoadedBookData.CURRENT_PAGE_NUMBER);
   const lastSavedBookTitleFromlocalStorage: string | null =
-    localStorage.getItem("currentBook");
+    localStorage.getItem(LoadedBookData.CURRENT_TITLE_BOOK);
   const lastSavedPage: number =
     lastSavedPageFromlocalStorage && lastSavedBookTitleFromlocalStorage
       ? parseInt(lastSavedPageFromlocalStorage)
@@ -40,7 +41,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
         <PaginateButton
           setCurrentPageNumber={setCurrentPageNumber}
           buttonValue={"back"}
-          buttonDirection={ButtonDirection.BACK}
+          ButtonPaginnationDirection={ButtonPaginnationDirection.BACK}
           currentPageNumber={currentPageNumber}
         />
         <span>
@@ -49,7 +50,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
         <PaginateButton
           setCurrentPageNumber={setCurrentPageNumber}
           buttonValue={"next"}
-          buttonDirection={ButtonDirection.NEXT}
+          ButtonPaginnationDirection={ButtonPaginnationDirection.NEXT}
           currentPageNumber={currentPageNumber}
         />
       </div>

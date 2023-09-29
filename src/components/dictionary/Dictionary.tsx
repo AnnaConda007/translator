@@ -3,8 +3,8 @@ import { RootStoreState } from "../../redux/store";
 import { IEntry } from "../../redux/dictionarySlice";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { removeWord } from "../../redux/dictionarySlice";
-import { add_deliteWordInBD } from "../../utils/updateDictionaryToBD";
-import { TypeAction } from "../enum";
+import { addDeliteWordInBD } from '../../utils/updateDB/addDeliteWordInDictionary';
+import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import TranslationInput from "../translation-input/TranslationInput";
 import { AppDispatch } from "../../redux/store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -18,10 +18,10 @@ const Dictionary: React.FC = () => {
   const handleDelete = (word: string, translation: string) => {
     batch(() => {
       dispatch(removeWord(translation));
-      add_deliteWordInBD({
+      addDeliteWordInBD({
         russianWord: word,
         foreignWord: translation,
-        actionType: TypeAction.REMOVE,
+        actionType: TypeActionWordDictionary.REMOVE,
       });
     });
   };
