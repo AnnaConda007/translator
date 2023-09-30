@@ -8,11 +8,10 @@ import { LoadedBookData } from '../../../enums/bookEnum';
 const TitlesList: React.FC = () => {
   const navigate = useNavigate();
   const filteredBookTitles = useSelector(
-    (state: RootStoreState) => state.library.titlesBook
+    (state: RootStoreState) => state.library.filteredTitles
   );
   const handleBookClick = (bookName: string) => {
     navigate(`/${bookName}`);
-    localStorage.setItem(LoadedBookData.CURRENT_TITLE_BOOK, bookName);
   };
   return (
     <List>

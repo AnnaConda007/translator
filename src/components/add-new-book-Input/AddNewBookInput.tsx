@@ -7,8 +7,8 @@ import { addNewBookInLibrary } from '../../utils/updateDB/addNewBook';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
 import jschardet from 'jschardet';
-
-
+import { setTitles } from '../../redux/librarySlice';
+import { addTitles } from '../../redux/librarySlice';
 const AddNewBookInput: React.FC = () => {
   const dispatch = useDispatch()
   const [titleBook, setTitleBook] = useState("")
@@ -49,7 +49,7 @@ const AddNewBookInput: React.FC = () => {
       }
       const additionBook = await addNewBookInLibrary(titleBook, content)
       setTitleBook("")
-      dispatch(addNewBook({ title: titleBook, bookContent: content }))
+      dispatch(addTitles(titleBook))
       if (!additionBook) return
       setTimeout(() => {
         dispatch(toggleAddNewBookInput(false))
