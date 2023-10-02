@@ -44,6 +44,11 @@ const test = createSlice({
     setCurrentCards: (state, action: PayloadAction<Array<IFlashCardData>>) => {
       state.currentCards = action.payload;
     },
+    resetTest: (state) => {
+      state.activeCardNumber = 0
+        state.testResult = []
+        state.currentCards = []
+    }
   },
 });
 
@@ -52,6 +57,6 @@ export const {
   resetActiveCardNumber,
   setTestResult,
   setCurrentCards,
-  resetTestResult,
+  resetTestResult, resetTest
 } = test.actions;
 export default test.reducer;

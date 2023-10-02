@@ -6,7 +6,7 @@ import { useDoubleAuthentication } from '../../../hooks/autentiification/useDoub
 import AuthenticationCodeInput from './authenticationCode/AuthenticationCode';
 import { RootStoreState } from '../../../redux/store';
 import AutButton from '../authButton/AuthButton';
-import ChooseLanguage from '../../choose-language/ChooseLanguage';
+import ChooseLanguage from './ChooseLanguage';
 const SignUpForm = () => {
   const doubleAuthentication = useDoubleAuthentication()
   const authCodeInputToggle = useSelector((state: RootStoreState) => state.visibility.authCodeInput)

@@ -4,11 +4,11 @@ import { RootStoreState } from "../redux/store";
 import { fetchAndSetDictionary } from "../utils/fetchAndSetDictionary";
 import { fetchAndSetLibraryTitles } from '../utils/fetchAndSetLibraryTitles';
 import { AppDispatch } from "../redux/store";
-import { setLoaded } from '../redux/dictionarySlice';
+import { setLoaded } from '../redux/authSlise';
 
 export const useFetchBookAndDictionaryFromDatabase = () => {
   const dispatch: AppDispatch = useDispatch();
-  const loaded = useSelector((state: RootStoreState) => state.dictionary.loaded)
+  const loaded = useSelector((state: RootStoreState) => state.authorization.loaded)
 
   const dictionary = useSelector((state: RootStoreState) => state.dictionary.words);
   if (loaded) return

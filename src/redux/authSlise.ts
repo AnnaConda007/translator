@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit"; 
+import { PayloadAction } from "@reduxjs/toolkit";
 export interface IformData {
   login: string,
   password: string,
@@ -15,7 +15,8 @@ interface IInitialState {
   formData: IformData,
   errorEmailMessage: string
   errorPasswordMessage: string
-  autentificationCode: string 
+  autentificationCode: string
+  loaded: boolean
 }
 
 const initialState: IInitialState = {
@@ -26,7 +27,8 @@ const initialState: IInitialState = {
   },
   errorEmailMessage: "",
   errorPasswordMessage: "",
-  autentificationCode: "", 
+  autentificationCode: "",
+  loaded: false
 }
 
 const authSlise = createSlice({
@@ -47,10 +49,13 @@ const authSlise = createSlice({
     },
     resetForms: (state) => {
       return initialState;
-    }
+    },
+    setLoaded: (state) => {
+      state.loaded = true
+    },
   },
 
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAutentificationCode, resetForms } = authSlise.actions;
+export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAutentificationCode, resetForms, setLoaded } = authSlise.actions;
 export default authSlise.reducer;

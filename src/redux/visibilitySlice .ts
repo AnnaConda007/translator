@@ -30,11 +30,17 @@ const visibilitySlice = createSlice({
     ) => {
       state.authCodeInput = action.payload;
     },
+    resetVisibility: (state) => {
+      state.menuItem = ""
+      state.translationInput = false
+      state.addNewBookInput = false
+      state.authCodeInput = false
+    }
 
   },
 });
 
-export const { toggleVisibilityMenuItem, toggleTranslationInputVisibility, toggleAddNewBookInput, toggleAuthCodeInput } =
+export const { toggleVisibilityMenuItem, toggleTranslationInputVisibility, toggleAddNewBookInput, toggleAuthCodeInput, resetVisibility } =
   visibilitySlice.actions;
 export default visibilitySlice.reducer;
 
