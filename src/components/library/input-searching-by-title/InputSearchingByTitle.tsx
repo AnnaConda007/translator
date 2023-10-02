@@ -23,6 +23,7 @@ const InputSearchingByTitle: React.FC = () => {
       id="standard-basic"
       label="Найти книгу"
       variant="standard"
+      autoComplete='off'
       value={inputValue}
       onChange={(e) => filterBooksByTitle(e.target.value)}
       InputProps={{

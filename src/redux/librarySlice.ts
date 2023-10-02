@@ -28,10 +28,13 @@ const librarySlice = createSlice({
       state.filteredTitles = action.payload;
     },
     addTitles: (state, action: PayloadAction<string>) => {
-      state.titlesBook = [...state.titlesBook, action.payload];
+      state.filteredTitles = [...state.filteredTitles, action.payload];
     },
     setSelectedBookText: (state, action: PayloadAction<string>) => {
       state.selectedBookText = action.payload
+    },
+    deliteTitle: (state, action: PayloadAction<string>) => {
+      state.filteredTitles = state.filteredTitles.filter((title) => title !== action.payload)
     },
     resetLibrary: (state) => {
       state.selectedBookText = "",
@@ -41,5 +44,5 @@ const librarySlice = createSlice({
 
   }
 });
-export const { setTitles, addTitles, setFiltered, setSelectedBookText, resetLibrary } = librarySlice.actions;
+export const { setTitles, addTitles, setFiltered, setSelectedBookText, deliteTitle, resetLibrary } = librarySlice.actions;
 export default librarySlice.reducer;

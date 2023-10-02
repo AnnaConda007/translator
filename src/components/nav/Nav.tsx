@@ -13,9 +13,12 @@ const Nav: React.FC = () => {
 
   const handleNavElem = (menuItem: string) => {
     if (menuItem === visibilityMenuItem) {
-       return;
+      dispatch(toggleVisibilityMenuItem(""));
+      return;
     }
-   };
+    dispatch(toggleVisibilityMenuItem(menuItem));
+  };
+
   const ComponentToRender = visibilityMenuItem === "библиотека" || visibilityMenuItem === "словарь" ? navItems[visibilityMenuItem] : null;
   return (
     <nav>
