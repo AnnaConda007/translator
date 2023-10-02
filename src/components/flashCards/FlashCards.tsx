@@ -12,7 +12,7 @@ import { shuffleArr } from "../../utils/shuffleArr";
 import { IEntry } from "../../redux/dictionarySlice";
 import { IFlashCardData } from "../../redux/testSlice";
 import { createFlashCardData } from "../../utils/createFlashCardData";
-import CardIdentifier from "./card-identifier/CardIdentifier";
+import CardIdentifier from './card-identifier/CardIdentifier';
 
 export interface flashCardProp {
   flashCardData: Array<IFlashCardData>;
@@ -20,7 +20,7 @@ export interface flashCardProp {
 
 const FlashCards = () => {
   const dispatch = useDispatch();
-  const activeCardNumber = useSelector(
+  const activeCardNumber : number = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
   const currentCards = useSelector(
@@ -30,7 +30,6 @@ const FlashCards = () => {
     (state: RootStoreState) => state.dictionary.words
   );
 
-
   useEffect(() => {
     const flashCardData = createFlashCardData(words);
     dispatch(setCurrentCards(shuffleArr(flashCardData)));
@@ -39,8 +38,8 @@ const FlashCards = () => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {!currentCards.length && <p> нет слов для теста </p>}
+        <Typography gutterBottom variant="body1" component="div">
+          {!currentCards.length && <p>нет слов для теста</p>}
           {activeCardNumber === amountOfTestCard ? (
             <CardWithResult />
           ) : (

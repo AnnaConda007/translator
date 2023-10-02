@@ -7,6 +7,7 @@ import {
   stepToChangeTestType
 } from "../../../contains";
 import { LanguageMatchTested } from '../../../enums/dictionaryEnum';
+
 interface CardIdentifierProp {
   activeCardNumber: number;
   currentCards: Array<IFlashCardData>;
@@ -22,13 +23,13 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
   const currentCount = counters[currentWord];
   return (
     <>
-      {currentCount !== undefined && currentCount < stepToChangeTestType
+      {/*currentCount == undefined && null*/}
+      {currentCount < stepToChangeTestType
         && (
           <AnswerOptions flashCardData={currentCards} />
         )}
 
-      {currentCount !== undefined &&
-        currentCount >= stepToChangeTestType
+      {currentCount >= stepToChangeTestType
         &&
         currentCount < stepToChangeTestType
         * 2 && (
@@ -38,8 +39,7 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
           />
         )}
 
-      {currentCount !== undefined &&
-        currentCount >= stepToChangeTestType
+      {currentCount >= stepToChangeTestType
         * 2 && (
           <EnteredMatch
             flashCardData={currentCards}

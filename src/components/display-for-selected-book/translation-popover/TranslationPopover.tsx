@@ -1,4 +1,4 @@
-import { Popover } from "@mui/material";
+import { Popover, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import Button from "@mui/material/Button/Button";
 import TranslationInput from "../../translation-input/TranslationInput";
@@ -41,20 +41,18 @@ const TranslationPopover: React.FC<ITranslationPopover> = ({
           horizontal: "center",
         }}
       >
-        <div>
+        <Box>
           {openAdditionalTranslation ? null : (
             <>
-              <ButtonAddToDictionary />
-              <span>{translatedWord}</span>
+              <Box>
+                <Typography gutterBottom variant="body1" component="span">{translatedWord}</Typography>
+                <ButtonAddToDictionary />
+              </Box>
               <Button variant="outlined" onClick={() => handleNewTranslation()}>
-                перевести другое слово на английский
+                еще
               </Button></>
           )}
-
-
-
-
-        </div>
+        </Box>
         {openAdditionalTranslation ? <TranslationInput /> : null}
       </Popover>
     </>

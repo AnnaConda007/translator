@@ -4,7 +4,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   menuItem: "",
   translationInput: false,
-  addNewBookInput: true,
+  addNewBookInput: false,
   authCodeInput: false
 };
 const visibilitySlice = createSlice({
@@ -30,7 +30,6 @@ const visibilitySlice = createSlice({
     ) => {
       state.authCodeInput = action.payload;
     },
-
 
   },
 });

@@ -1,71 +1,43 @@
-import Library from '../library/Library';
 import { toggleVisibilityMenuItem } from "../../redux/visibilitySlice ";
 import { List, ListItemText, ListItemButton } from "@mui/material";
-import Dictionary from "../dictionary/Dictionary";
-import ChooseLanguage from "../choose-language/ChooseLanguage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
-import FlashCards from '../flashCards/FlashCards';
 import { AppDispatch } from '../../redux/store';
-import { DataBasePoints } from '../../enums/dataBasePointsEnum';
-interface INavElements {
-
-  [key: string]: React.ReactElement;
-}
+import { navItems } from './navItems';
 
 const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-
-  const localSelectedLanguage = localStorage.getItem(`${DataBasePoints.LANGUAGE}`)
-  const selectedLanguage = useSelector(
-    (state: RootStoreState) => state.language
-  );
-  const language = localSelectedLanguage || selectedLanguage
-  const selectedMenuItem = useSelector(
+  const visibilityMenuItem: string = useSelector(
     (state: RootStoreState) => state.visibility.menuItem
   );
 
-
-  const nawElemets: Array<INavElements> = [
-    { библиотека: <Library /> },
-    { словарь: <Dictionary /> },
-    { тестирование: <FlashCards /> },
-    { "выбрать язык": <ChooseLanguage /> },
-  ];
-
-  const handleNavElem = (elem: string) => {
-    if (elem === selectedMenuItem) {
+  const handleNavElem = (menuItem: string) => {
+    if (menuItem === visibilityMenuItem) {
       dispatch(toggleVisibilityMenuItem(""));
       return;
     }
-    dispatch(toggleVisibilityMenuItem(elem));
+    dispatch(toggleVisibilityMenuItem(menuItem));
   };
-
+  const ComponentToRender = visibilityMenuItem === "библиотека" || visibilityMenuItem === "словарь" ? navItems[visibilityMenuItem] : null;
   return (
     <nav>
       <List>
-        {nawElemets.map((elem, index) => {
-          const keyName = Object.keys(elem)[0];
-          return (
-            <ListItemButton
-              onClick={() => handleNavElem(keyName)}
-              key={index}
-              dense
-              disabled={
-                !language && keyName !== "выбрать язык" ? true : false
-              }
-            >
-              <ListItemText
-                primary={keyName}
-                onClick={() => handleNavElem(keyName)}
-              />
-              {selectedMenuItem && selectedMenuItem === keyName ? (
-                <div onClick={(e) => e.stopPropagation()}>{elem[keyName]}</div>
-              ) : null}
-            </ListItemButton>
-          );
-        })}
+        {Object.keys(navItems).map((menuItem) => (
+          <ListItemButton
+            onClick={() => handleNavElem(menuItem)}
+            key={menuItem}
+            dense
+          >
+            <ListItemText
+              primary={menuItem}
+            />
+          </ListItemButton>
+        ))}
       </List>
+
+      <div>
+        {ComponentToRender && <ComponentToRender />}
+      </div>
     </nav>
   );
 };

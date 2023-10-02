@@ -1,20 +1,21 @@
 import { useSelector, useDispatch, batch } from "react-redux";
-import { RootStoreState } from "../../redux/store";
-import { IEntry } from "../../redux/dictionarySlice";
-import { List, ListItem, ListItemText } from "@mui/material";
-import { removeWord } from "../../redux/dictionarySlice";
+import { RootStoreState, AppDispatch } from "../../redux/store";
+import { IEntry, removeWord } from "../../redux/dictionarySlice";
+import { List, ListItem, ListItemText, IconButton } from "@mui/material";
 import { addDeliteWordInBD } from '../../utils/updateDB/addDeliteWordInDictionary';
 import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import TranslationInput from "../translation-input/TranslationInput";
-import { AppDispatch } from "../../redux/store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useState } from "react";
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import CloseIcon from '@mui/icons-material/Close';
+
 const Dictionary: React.FC = () => {
-  batch;
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
   const dispatch: AppDispatch = useDispatch();
-
+  const [clickedAddButton, setClickedAddButton] = useState<boolean>(false)
   const handleDelete = (word: string, translation: string) => {
     batch(() => {
       dispatch(removeWord(translation));
@@ -25,10 +26,14 @@ const Dictionary: React.FC = () => {
       });
     });
   };
+  const toggleInputVisibility = () => {
+    setClickedAddButton(!clickedAddButton)
+  }
 
   return (
     <>
-      <TranslationInput />
+      <IconButton color="primary" onClick={toggleInputVisibility}>{clickedAddButton ? <CloseIcon /> : <AddToPhotosIcon />} </IconButton >
+      {clickedAddButton && <TranslationInput />}
       <List>
         {dictionary.map((entry) => {
           return (
@@ -36,13 +41,14 @@ const Dictionary: React.FC = () => {
               <ListItemText
                 primary={`${entry.foreignWord} : ${entry.russianWord}`}
               />
-              <button
-                onClick={() =>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation()
                   handleDelete(`${entry.russianWord}`, `${entry.foreignWord}`)
-                }
+                }}
               >
                 <DeleteForeverIcon />
-              </button>
+              </IconButton>
             </ListItem>
           );
         })}

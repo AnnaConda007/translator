@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { toggleAddNewBookInput } from '../../../redux/visibilitySlice ';
 import { useDispatch } from 'react-redux';
@@ -15,8 +15,8 @@ const ReplenishLibraryButton = () => {
 
   return (
     <>
-      <Button onClick={handleButton}>  <LibraryAddIcon />
-      </Button>
+      <IconButton color="primary" onClick={handleButton}>  <LibraryAddIcon />
+      </IconButton>
     </>
 
   )
