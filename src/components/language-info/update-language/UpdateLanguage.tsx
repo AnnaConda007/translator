@@ -1,14 +1,14 @@
 import CheckIcon from "@mui/icons-material/Check";
 import { List, ListItemButton, ListItemText } from "@mui/material";
-import { setLanguage } from "../../redux/languageSlice";
+import { setLanguage } from '../../../redux/languageSlice';
 import { useDispatch, useSelector } from "react-redux";
-import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
-import { RootStoreState } from "../../redux/store";
-import { toggleVisibilityMenuItem } from '../../redux/visibilitySlice ';
+import { specifyLanguage } from '../../../utils/updateDB/specifyLanguage';
+import { RootStoreState } from '../../../redux/store';
+import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
 import { useState, useCallback } from 'react';
-import { DataBasePoints } from '../../enums/dataBasePointsEnum';
-import LanguagePopover from './updateLanguagePopover/UpdateLanguagePopover';
-import { languages } from '../../contains';
+import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
+import LanguagePopover from '../updateLanguagePopover/UpdateLanguagePopover';
+import { languages } from '../../../contains';
 
 interface UpdateLanguageProps {
   setLanguageClicked: (value: boolean) => void

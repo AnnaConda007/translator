@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootStoreState } from '../../../redux/store';
 import { useState } from 'react';
-import UpdateLanguage from '../UpdateLanguage';
+import UpdateLanguage from '../update-language/UpdateLanguage';
 
 const SelectedLanguage: React.FC = () => {
   const selectedLanguage = useSelector((state: RootStoreState) => state.language);
