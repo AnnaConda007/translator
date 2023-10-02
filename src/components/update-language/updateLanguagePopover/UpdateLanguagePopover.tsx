@@ -1,6 +1,5 @@
 import { Popover, Typography, Button } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
 import { clearDictionaryAndspecifyLanguage } from '../../../utils/updateDB/clearDictionaryAndUpdateLanguage';
 import { clearDictionary } from '../../../redux/dictionarySlice';
 interface LanguagePopoverProps {
@@ -8,23 +7,23 @@ interface LanguagePopoverProps {
   setAnchorEl: (value: null | HTMLElement) => void
   selectLanguage: (value: string) => void
   pickedLanguage: string
+  setLanguageClicked: (value: boolean) => void
 }
 
-const LanguagePopover: React.FC<LanguagePopoverProps> = ({ anchorEl, setAnchorEl, selectLanguage, pickedLanguage }) => {
+const LanguagePopover: React.FC<LanguagePopoverProps> = ({ anchorEl, setAnchorEl, selectLanguage, pickedLanguage, setLanguageClicked }) => {
   const dispatch = useDispatch()
   const handleClose = () => {
     setAnchorEl(null);
   };
   const handleCancellation = () => {
-    dispatch(toggleVisibilityMenuItem(""))
+    setLanguageClicked(false)
   }
   const handleContinue = async () => {
     await clearDictionaryAndspecifyLanguage(pickedLanguage)
     dispatch(clearDictionary())
+    setLanguageClicked(false)
     selectLanguage(pickedLanguage)
   }
-
-
   return (
     <Popover
       open={Boolean(anchorEl)}

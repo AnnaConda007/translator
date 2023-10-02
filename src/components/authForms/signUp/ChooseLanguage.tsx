@@ -5,7 +5,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { setLanguage } from "../../../redux/languageSlice";
 import { RootStoreState } from "../../../redux/store";
 import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
-import { languages } from '../../choose-language/languages';
+import { languages } from '../../../contains'; 
 
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();

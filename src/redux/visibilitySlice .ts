@@ -5,7 +5,7 @@ const initialState = {
   menuItem: "",
   translationInput: false,
   addNewBookInput: false,
-  authCodeInput: false
+  authCodeInput: false,
 };
 const visibilitySlice = createSlice({
   name: "visibility",
