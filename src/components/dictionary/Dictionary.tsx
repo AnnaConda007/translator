@@ -1,24 +1,30 @@
 import { useSelector, useDispatch, batch } from "react-redux";
-import { RootStoreState } from "../../redux/store";
-import { IEntry } from "../../redux/dictionarySlice";
-import { List, ListItem, ListItemText } from "@mui/material";
-import { removeWord } from "../../redux/dictionarySlice";
-import { addDeliteWordInBD } from '../../utils/updateDB/addDeliteWordInDictionary';
+import { RootStoreState, AppDispatch } from "../../redux/store";
+import { IEntry, removeWord } from "../../redux/dictionarySlice";
+import { List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { add_DeliteWordInBD } from '../../utils/updateData/add_DeliteWordInDictionary';
 import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import TranslationInput from "../translation-input/TranslationInput";
-import { AppDispatch } from "../../redux/store";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useState } from "react";
+import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
+import CloseIcon from '@mui/icons-material/Close';
+import AuthPopove from '../authPopover/AuthPopover';
+import { UserData } from '../../enums/authEnum';
+
 const Dictionary: React.FC = () => {
-  batch;
+  const userIsRegistered = localStorage.getItem(UserData.USER_ID)
+  const [OpenAuthPopover, setOpenAuthPopover] = useState<HTMLElement | null>(null);
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
   const dispatch: AppDispatch = useDispatch();
+  const [clickedAddButton, setClickedAddButton] = useState<boolean>(false)
 
   const handleDelete = (word: string, translation: string) => {
     batch(() => {
       dispatch(removeWord(translation));
-      addDeliteWordInBD({
+      add_DeliteWordInBD({
         russianWord: word,
         foreignWord: translation,
         actionType: TypeActionWordDictionary.REMOVE,
@@ -26,9 +32,19 @@ const Dictionary: React.FC = () => {
     });
   };
 
+  const toggleInputVisibility = (currentTarget: HTMLElement | null) => {
+    if (!userIsRegistered) {
+      setOpenAuthPopover(currentTarget);
+      return
+    }
+    setClickedAddButton(!clickedAddButton)
+  }
+
   return (
     <>
-      <TranslationInput />
+      <IconButton color="primary" onClick={(e) => toggleInputVisibility(e.currentTarget)}>{clickedAddButton ? <CloseIcon /> : <AddToPhotosIcon />} </IconButton >
+      {clickedAddButton && <TranslationInput />}
+      <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />
       <List>
         {dictionary.map((entry) => {
           return (
@@ -36,13 +52,14 @@ const Dictionary: React.FC = () => {
               <ListItemText
                 primary={`${entry.foreignWord} : ${entry.russianWord}`}
               />
-              <button
-                onClick={() =>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation()
                   handleDelete(`${entry.russianWord}`, `${entry.foreignWord}`)
-                }
+                }}
               >
                 <DeleteForeverIcon />
-              </button>
+              </IconButton>
             </ListItem>
           );
         })}

@@ -1,35 +1,57 @@
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import { useState } from "react";
-import TranslationResultDisplay from "./translation-result-display/TranslationResultDisplay ";
 import TranslateActionButton from "./translate-action-button/TranslateActionButton";
+import TranslationResultDisplay from './translation-result-display/TranslationResultDisplay ';
+import { useCallback } from 'react';
+import { useHandleTranslate } from '../../hooks/autentiification/useHandleTranslate';
 
 const TranslationInput: React.FC = () => {
+  const translateInputValue = useHandleTranslate()
   const [inputValue, setInputValue] = useState<string>("");
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^[a-zA-Zа-яА-Я]/.test(value) || value === "") {
       setInputValue(value);
     }
-  };
+  }, []);
+
+  const translate = async (inputValue: string) => {
+    await translateInputValue(inputValue);
+    setInputValue("")
+  }
 
   return (
-    <div>
+    <Box>
       <TextField
-        type="search"
+        type="text"
         autoComplete="off"
-        label="перевести"
+        label="введите слово для перевода"
         variant="outlined"
         fullWidth
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           handleChangeValue(e);
         }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            translate(inputValue);
+          }
+        }}
+        InputProps={{
+          endAdornment: (
+            <TranslateActionButton value={inputValue} setInputValue={setInputValue} />
+          )
+        }}
       />
-      <TranslateActionButton value={inputValue} setInputValue={setInputValue} />
       <TranslationResultDisplay />
-    </div>
+    </Box>
   );
 };
 
 export default TranslationInput;
+
+
+
+
+

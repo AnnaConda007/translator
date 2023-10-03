@@ -1,4 +1,4 @@
-import { addDeliteWordInBD } from '../../utils/updateDB/addDeliteWordInDictionary';
+import { add_DeliteWordInBD } from '../../utils/updateData/add_DeliteWordInDictionary';
 import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const ButtonAddToDictionary: React.FC = () => {
 
   const handleButtonAddInDictionary = async () => {
     setDisabledSwitch(true);
-    const fetchResponse = await addDeliteWordInBD({
+    const fetchResponse = await add_DeliteWordInBD({
       russianWord: translatedWord,
       foreignWord: translationWord,
       actionType: TypeActionWordDictionary.ADD,

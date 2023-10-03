@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { AuthType } from '../enums/authEnum';
 export interface IformData {
   login: string,
   password: string,
@@ -17,7 +16,7 @@ interface IInitialState {
   errorEmailMessage: string
   errorPasswordMessage: string
   autentificationCode: string
-  authType: string
+  loaded: boolean
 }
 
 const initialState: IInitialState = {
@@ -29,7 +28,7 @@ const initialState: IInitialState = {
   errorEmailMessage: "",
   errorPasswordMessage: "",
   autentificationCode: "",
-  authType: AuthType.SIGN_IN
+  loaded: false
 }
 
 const authSlise = createSlice({
@@ -48,15 +47,15 @@ const authSlise = createSlice({
     setAutentificationCode: (state, action: PayloadAction<string>) => {
       state.autentificationCode = action.payload
     },
-    setAuthType: (state, action: PayloadAction<string>) => {
-      state.authType = action.payload
-    },
     resetForms: (state) => {
       return initialState;
-    }
+    },
+    setLoaded: (state) => {
+      state.loaded = true
+    },
   },
 
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAuthType, setAutentificationCode, resetForms } = authSlise.actions;
+export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAutentificationCode, resetForms, setLoaded } = authSlise.actions;
 export default authSlise.reducer;

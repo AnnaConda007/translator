@@ -2,6 +2,7 @@ import { useState } from "react";
 import TranslationPopover from "../translation-popover/TranslationPopover";
 import { Paper, Typography } from "@mui/material";
 import Word from "../word/Word";
+
 type TextSelectedTextProps = {
   currentPageText: string;
 };
@@ -9,11 +10,12 @@ type TextSelectedTextProps = {
 const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   currentPageText,
 }) => {
+
   const [clickedWord, setClickedWord] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-   const selectedText = () : string=> {
+  const selectedText = (): string => {
     const text = window.getSelection()?.toString().trim() || "";
-     return text;
+    return text;
   };
 
   return (

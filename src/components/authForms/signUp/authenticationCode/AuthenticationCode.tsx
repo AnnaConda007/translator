@@ -59,7 +59,6 @@ const AuthenticationCodeInput: React.FC = () => {
         </Box>
         <Button type="submit" variant='contained'>продолжить </Button>
       </form >
-      
       {seconds === 0 && (<Button variant='contained' onClick={handleRepeatCodeButton}  >Запросить код  </Button>)}
 
 

@@ -11,7 +11,7 @@ const unforeseenErrorMessage = "Непредвиденная ошибка, по�
 const invalidLoginOrPasswordErrorMessage = "Неверный логин или пароль"
 const toManyAttemptErrorMessage = "Слишком много попыток, попробуйте позже"
 
-export const useHandleAuthError = () => {
+export const useCatchAuthError = () => {
   const dispatch = useDispatch()
   return (error: FirebaseError) => {
     switch (error.message) {

@@ -2,20 +2,19 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { TextField, InputAdornment } from "@mui/material";
-import { setTitles } from '../../../redux/librarySlice';
+import { setFiltered } from '../../../redux/librarySlice';
 import ReplenishLibraryButton from '../replenishLibraryButton/ReplenishLibraryButton';
 
 const InputSearchingByTitle: React.FC = () => {
   const dispatch = useDispatch();
-  const loadedBooks = useSelector((state: RootStoreState) => state.library.books);
-  const bookTitles = Object.keys(loadedBooks);
+  const titlesBook: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook);
   const [inputValue, setInputValue] = useState<string>("");
 
   const filterBooksByTitle = (value: string) => {
-    const filteredArr = bookTitles.filter((titleBook) =>
-      titleBook.toLowerCase().includes(value.toLowerCase())
+    const filteredArr = titlesBook.filter((title) =>
+      title.toLowerCase().includes(value.toLowerCase())
     );
-    dispatch(setTitles(filteredArr));
+    dispatch(setFiltered(filteredArr));
     setInputValue(value);
   };
 
@@ -24,6 +23,7 @@ const InputSearchingByTitle: React.FC = () => {
       id="standard-basic"
       label="Найти книгу"
       variant="standard"
+      autoComplete='off'
       value={inputValue}
       onChange={(e) => filterBooksByTitle(e.target.value)}
       InputProps={{

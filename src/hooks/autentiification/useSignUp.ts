@@ -1,6 +1,6 @@
 
 import { useSelector } from 'react-redux';
-import { useHandleAuthError } from './useHandleAuthError';
+import { useCatchAuthError } from './useCatchAuthError';
 import { RootStoreState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { SignUpWithEmail } from '../../utils/auth/firebaseConfig';
@@ -8,23 +8,21 @@ import { User } from 'firebase/auth/cordova';
 import { FirebaseError } from 'firebase/app';
 import { RoutesApp } from '../../enums/routesAppEnum';
 import { UserData } from '../../enums/authEnum';
-import { setAuthType } from '../../redux/authSlise';
-import { useDispatch } from 'react-redux';
-import { AuthType } from '../../enums/authEnum';
-import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
+import { specifyLanguage } from '../../utils/updateData/specifyLanguage';
+import { createFolerAtYandexDisk } from '../../utils/auth/createFolderAtYandexDisk';
 
 export const useSignUp = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const handleAuthorizationError = useHandleAuthError()
+  const language: string = useSelector((state: RootStoreState) => state.language)
+  const handleAuthorizationError = useCatchAuthError()
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
   return async () => {
     try {
       const user: User = await SignUpWithEmail(formData.login, formData.password);
       localStorage.setItem(UserData.USER_ID, user.uid)
-      await specifyLanguage("")
+      await createFolerAtYandexDisk(user.uid)
+      await specifyLanguage(language)
       navigate(RoutesApp.HOME)
-      dispatch(setAuthType(AuthType.SIGN_UP))
     } catch (error) {
       if ((error instanceof FirebaseError)) {
         handleAuthorizationError(error)

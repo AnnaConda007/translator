@@ -66,9 +66,13 @@ const dictionary = createSlice({
         (word) => !wordsToDelete.has(word.foreignWord)
       );
     },
+    resetDictionary: (state) => {
+      state.words = [];
+      state.counters = {};
+    },
   },
 });
 
-export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary } =
+export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary, resetDictionary } =
   dictionary.actions;
 export default dictionary.reducer;

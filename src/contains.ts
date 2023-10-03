@@ -22,3 +22,15 @@ export const amountAnswerOption = 4;
 export const stepToChangeTestType
   = 2;
 
+  export const languages: Array<{ [key: string]: string }> = [
+    { английский: "en" },
+    { грузинский: "ka" },
+    { испанский: "es" },
+    { итальянский: "it" },
+    { немецкий: "de" },
+    { французский: "fr" },
+    { украинский: "uk" },
+    { турецкий: "tr" },
+    { корейский: "ko" },
+  ];
+  

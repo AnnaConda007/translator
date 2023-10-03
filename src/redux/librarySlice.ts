@@ -6,30 +6,43 @@ export interface IBooks {
 }
 
 interface IInitialState {
-  books: IBooks;
   titlesBook: Array<string>;
+  selectedBookText: string
+  filteredTitles: Array<string>;
 }
 
 const initialState: IInitialState = {
-  books: {},
+  selectedBookText: "",
   titlesBook: [],
+  filteredTitles: []
 };
 const librarySlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    setBooks: (state, action: PayloadAction<IBooks>) => {
-      state.books = { ...state.books, ...action.payload };
-    },
     setTitles: (state, action: PayloadAction<Array<string>>) => {
       state.titlesBook = action.payload;
+      state.filteredTitles = action.payload;
     },
-    addNewBook: (state, action: PayloadAction<{ title: string, bookContent: string }>) => {
-      const { title, bookContent } = action.payload;
-      state.books[title] = bookContent;
-      state.titlesBook.push(title);
+    setFiltered: (state, action: PayloadAction<Array<string>>) => {
+      state.filteredTitles = action.payload;
     },
+    addTitles: (state, action: PayloadAction<string>) => {
+      state.filteredTitles = [...state.filteredTitles, action.payload];
+    },
+    setSelectedBookText: (state, action: PayloadAction<string>) => {
+      state.selectedBookText = action.payload
+    },
+    deliteTitle: (state, action: PayloadAction<string>) => {
+      state.filteredTitles = state.filteredTitles.filter((title) => title !== action.payload)
+    },
+    resetLibrary: (state) => {
+      state.selectedBookText = "",
+        state.titlesBook = [],
+        state.filteredTitles = []
+    },
+
   }
 });
-export const { setBooks, setTitles, addNewBook } = librarySlice.actions;
+export const { setTitles, addTitles, setFiltered, setSelectedBookText, deliteTitle, resetLibrary } = librarySlice.actions;
 export default librarySlice.reducer;

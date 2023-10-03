@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { updateCounter } from "../../redux/dictionarySlice";
-import { updateDictionaryEntries } from '../../utils/updateDB/updateDictionaryEntries';
+import { updateDictionaryEntries } from '../../utils/updateData/updateDictionaryEntries';
 import { transformationObjToBD } from "../../utils/transformationObjToBD";
 import { ITestResult } from "../../redux/testSlice";
 import { IDictionary } from "../../redux/dictionarySlice";

@@ -4,8 +4,8 @@ import { PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   menuItem: "",
   translationInput: false,
-  addNewBookInput: true,
-  authCodeInput: false
+  addNewBookInput: false,
+  authCodeInput: false,
 };
 const visibilitySlice = createSlice({
   name: "visibility",
@@ -30,12 +30,17 @@ const visibilitySlice = createSlice({
     ) => {
       state.authCodeInput = action.payload;
     },
-
+    resetVisibility: (state) => {
+      state.menuItem = ""
+      state.translationInput = false
+      state.addNewBookInput = false
+      state.authCodeInput = false
+    }
 
   },
 });
 
-export const { toggleVisibilityMenuItem, toggleTranslationInputVisibility, toggleAddNewBookInput, toggleAuthCodeInput } =
+export const { toggleVisibilityMenuItem, toggleTranslationInputVisibility, toggleAddNewBookInput, toggleAuthCodeInput, resetVisibility } =
   visibilitySlice.actions;
 export default visibilitySlice.reducer;
 

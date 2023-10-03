@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { toggleAddNewBookInput } from '../../redux/visibilitySlice ';
 import { useDispatch } from 'react-redux';
-import { addNewBook } from '../../redux/librarySlice';
-import { addNewBookInLibrary } from '../../utils/updateDB/addNewBook';
+import { addNewBookInLibrary } from '../../utils/updateData/addNewBook';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
 import jschardet from 'jschardet';
-
+import { addTitles } from '../../redux/librarySlice';
 
 const AddNewBookInput: React.FC = () => {
   const dispatch = useDispatch()
@@ -23,7 +22,6 @@ const AddNewBookInput: React.FC = () => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       if (!e.target) return;
-
       const arrayBuffer = e.target.result as ArrayBuffer;
       const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer) as any);
       const detectedCharset = charsetDetectionResult && charsetDetectionResult.encoding;
@@ -49,7 +47,7 @@ const AddNewBookInput: React.FC = () => {
       }
       const additionBook = await addNewBookInLibrary(titleBook, content)
       setTitleBook("")
-      dispatch(addNewBook({ title: titleBook, bookContent: content }))
+      dispatch(addTitles(titleBook))
       if (!additionBook) return
       setTimeout(() => {
         dispatch(toggleAddNewBookInput(false))
@@ -68,6 +66,10 @@ const AddNewBookInput: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files: FileList | null = event.target.files;
+    if (!titleBook) {
+      alert("Пожалуйста, введите название книги перед загрузкой файла.");
+      return;
+    }
     if (!files || files.length === 0) return;
     const file: File = files[0];
     handleFileUpload(file);

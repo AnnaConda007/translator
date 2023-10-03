@@ -1,4 +1,4 @@
-import Button from "@mui/material/Button";
+import IconButton from '@mui/material/IconButton';
 import { useSelector, batch } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import {
 } from "../../../redux/testSlice";
 import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
 import { shuffleArr } from "../../../utils/shuffleArr";
+
 
 const NextButton: React.FC = () => {
   const dispatch = useDispatch();
@@ -26,9 +27,10 @@ const NextButton: React.FC = () => {
   };
 
   return (
-    <Button variant="contained" color="primary" onClick={handleButton}>
+
+    <IconButton color="primary" onClick={handleButton}>
       <RestartAltOutlinedIcon />
-    </Button>
+    </IconButton>
   );
 };
 

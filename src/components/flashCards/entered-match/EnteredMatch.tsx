@@ -49,7 +49,7 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
     <>
       <List>
         <Typography gutterBottom variant="h5" component="p">
-          {languageTested === languageMatchTested.RUSSIAN
+          {languageTested === LanguageMatchTested.RUSSIAN
             ? flashCardData[activeCardNumber].foreignWord
             : flashCardData[activeCardNumber].russianWord}
         </Typography>
@@ -60,6 +60,7 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
           onKeyDown={handleKeyPress}
           value={answerValue}
           autoComplete="off"
+
         />
         <button aria-label="Submit Answer" onClick={handleAnswer}>
           <ArrowForwardIosRoundedIcon />
