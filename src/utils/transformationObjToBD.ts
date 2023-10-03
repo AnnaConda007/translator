@@ -1,6 +1,13 @@
 import { IDictionary } from "../redux/dictionarySlice";
 import { ITestResult } from "../redux/testSlice";
-import { IDataToUpdateDictionaryBD } from "./updateDictionaryToBD";
+import { DataBasePoints } from '../enums/dataBasePointsEnum';
+interface IDictionaryToBD {
+  [key: string]: {
+    [DataBasePoints.FOREIGN_WORD_IN_DB]: string
+    [DataBasePoints.RUSSIAN_WORD_IN_DB]: string
+    [DataBasePoints.COUNTERCOUNTER_IN_DB]: number
+  } | null
+}
 
 export const transformationObjToBD = (
   dictionary: IDictionary,
@@ -10,7 +17,7 @@ export const transformationObjToBD = (
     dictionary.words.map((word) => word.foreignWord)
   );
 
-  const combiningCounterAndDictionary: IDataToUpdateDictionaryBD = {};
+  const combiningCounterAndDictionary: IDictionaryToBD = {};
   testResults.forEach((testWord) => {
     if (!foreignWordsInDictionary.has(testWord.foreignWord)) {
       combiningCounterAndDictionary[testWord.foreignWord] = null;
@@ -26,6 +33,5 @@ export const transformationObjToBD = (
       };
     }
   });
-
   return combiningCounterAndDictionary;
 };

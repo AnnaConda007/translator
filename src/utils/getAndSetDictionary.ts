@@ -1,7 +1,6 @@
 import { generateUserDatabaseURL_point } from "../contains";
 import { Dispatch } from "redux";
-import { setDictionary } from "../redux/dictionarySlice";
-import { setTitles } from "../redux/librarySlice";
+import { setDictionary } from "../redux/dictionarySlice"; 
 import { dataFromBD } from "../redux/dictionarySlice";
 import { DataBasePoints } from '../enums/dataBasePointsEnum';
 import { batch } from 'react-redux';
@@ -31,6 +30,7 @@ const fetchDictionary = async (dictionaryUserURL: string) => {
     throw new Error("Ошибка при запросе к БД");
   }
   const data = await response.json()
+  console.log(data)
   const language: string = data[DataBasePoints.LANGUAGE]
   delete data.language;
   const dictionary: Array<dataFromBD> = Object.values(data) || []

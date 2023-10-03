@@ -29,7 +29,7 @@ const Nav: React.FC = () => {
     dispatch(toggleVisibilityMenuItem(menuItem));
   };
 
-  const ComponentToRender = visibilityMenuItem === "библиотека" || visibilityMenuItem === "словарь" ? navItems[visibilityMenuItem] : null;
+  const ComponentToRender = visibilityMenuItem === "словарь" || visibilityMenuItem === "тестирование" ? navItems[visibilityMenuItem] : null;
   return (
     <nav>
       <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />

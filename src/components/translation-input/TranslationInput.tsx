@@ -16,6 +16,10 @@ const TranslationInput: React.FC = () => {
     }
   }, []);
 
+  const translate = async (inputValue: string) => {
+    await translateInputValue(inputValue);
+    setInputValue("")
+  }
 
   return (
     <Box>
@@ -31,7 +35,7 @@ const TranslationInput: React.FC = () => {
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            translateInputValue(inputValue);
+            translate(inputValue);
           }
         }}
         InputProps={{
