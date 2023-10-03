@@ -3,7 +3,7 @@ import axios from 'axios';
 import { serverUrl } from '../contains';
 import { Dispatch } from "redux";
 import { setTitles } from '../redux/librarySlice';
-
+import { UserData } from '../enums/authEnum';
 
 
 
@@ -17,7 +17,10 @@ export const fetchAndSetLibraryTitles = () => {
 
 const fetchLibrary = async () => {
   try {
-    const titleResponse = await axios.post(`${serverUrl}/getBookTitles`);
+    const userId: string | null = localStorage.getItem(UserData.USER_ID)
+    const titleResponse = await axios.post(`${serverUrl}/getBookTitles`, {
+      userId: userId
+    })
     return titleResponse.data.bookTitles
   } catch (error) {
     console.error("Ошибка при получении названий книг из Яндекс.Диск", error)

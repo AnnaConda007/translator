@@ -9,13 +9,18 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useState } from "react";
 import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import CloseIcon from '@mui/icons-material/Close';
+import AuthPopove from '../authPopover/AuthPopover';
+import { UserData } from '../../enums/authEnum';
 
 const Dictionary: React.FC = () => {
+  const userIsRegistered = localStorage.getItem(UserData.USER_ID)
+  const [OpenAuthPopover, setOpenAuthPopover] = useState<HTMLElement | null>(null);
   const dictionary: Array<IEntry> = useSelector(
     (state: RootStoreState) => state.dictionary.words
   );
   const dispatch: AppDispatch = useDispatch();
   const [clickedAddButton, setClickedAddButton] = useState<boolean>(false)
+
   const handleDelete = (word: string, translation: string) => {
     batch(() => {
       dispatch(removeWord(translation));
@@ -26,14 +31,20 @@ const Dictionary: React.FC = () => {
       });
     });
   };
-  const toggleInputVisibility = () => {
+
+  const toggleInputVisibility = (currentTarget: HTMLElement | null) => {
+    if (!userIsRegistered) {
+      setOpenAuthPopover(currentTarget);
+      return
+    }
     setClickedAddButton(!clickedAddButton)
   }
 
   return (
     <>
-      <IconButton color="primary" onClick={toggleInputVisibility}>{clickedAddButton ? <CloseIcon /> : <AddToPhotosIcon />} </IconButton >
+      <IconButton color="primary" onClick={(e) => toggleInputVisibility(e.currentTarget)}>{clickedAddButton ? <CloseIcon /> : <AddToPhotosIcon />} </IconButton >
       {clickedAddButton && <TranslationInput />}
+      <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />
       <List>
         {dictionary.map((entry) => {
           return (

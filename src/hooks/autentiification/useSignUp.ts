@@ -9,6 +9,7 @@ import { FirebaseError } from 'firebase/app';
 import { RoutesApp } from '../../enums/routesAppEnum';
 import { UserData } from '../../enums/authEnum';
 import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
+import { createFolerAtYandexDisk } from '../../utils/createFolerAtYandexDisk';
 
 export const useSignUp = () => {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export const useSignUp = () => {
     try {
       const user: User = await SignUpWithEmail(formData.login, formData.password);
       localStorage.setItem(UserData.USER_ID, user.uid)
+      await createFolerAtYandexDisk(user.uid)
       await specifyLanguage(language)
       navigate(RoutesApp.HOME)
     } catch (error) {
