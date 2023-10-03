@@ -2,8 +2,9 @@ import { Dispatch } from 'redux';
 import axios from 'axios';
 import { serverUrl } from '../contains';
 import { setSelectedBookText } from '../redux/librarySlice';
+import { UserData } from '../enums/authEnum';
 
-export const fetchAndSetSelectedText = (titleBook: string) => {
+export const getAndSetSelectedText = (titleBook: string) => {
   return async (dispatch: Dispatch) => {
     dispatch(setSelectedBookText(""))
     const text = await fetchSelectedBook(titleBook);
@@ -14,8 +15,10 @@ export const fetchAndSetSelectedText = (titleBook: string) => {
 
 const fetchSelectedBook = async (titleBook: string) => {
   try {
+    const userId = localStorage.getItem(UserData.USER_ID)
     const booksText = await axios.post(`${serverUrl}/getBookText`, {
-      titleBook: titleBook
+      titleBook: titleBook,
+      userId: userId
     })
     return booksText.data.content
   } catch (error) {

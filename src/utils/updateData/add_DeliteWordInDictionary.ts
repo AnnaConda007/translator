@@ -2,17 +2,17 @@ import { generateUserDatabaseURL_point } from '../../contains';
 import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
 import { DataBasePoints } from '../../enums/dataBasePointsEnum';
 import { UserData } from '../../enums/authEnum';
-interface addDeliteWordInBDArgs {
+interface add_DeliteWordInBDArgs {
   russianWord?: string;
   foreignWord: string;
   actionType: TypeActionWordDictionary;
 }
 
-export const addDeliteWordInBD = async ({
+export const add_DeliteWordInBD = async ({
   russianWord,
   foreignWord,
   actionType,
-}: addDeliteWordInBDArgs) => {
+}: add_DeliteWordInBDArgs) => {
   const userFairbaseId = localStorage.getItem(UserData.USER_ID)
   if (!userFairbaseId) return
   try {

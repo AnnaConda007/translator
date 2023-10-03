@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import { List, ListItem, ListItemText, Divider, IconButton, Typography } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { addNewBookInLibrary } from '../../../utils/deliteBook';
+import { addNewBookInLibrary } from '../../../utils/updateData/deliteBook';
 import { deliteTitle } from '../../../redux/librarySlice';
 const TitlesList: React.FC = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { Popover, Typography, Button } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { clearDictionaryAndspecifyLanguage } from '../../../utils/updateDB/clearDictionaryAndUpdateLanguage';
+import { clearDictionaryAndspecifyLanguage } from '../../../utils/updateData/clearDictionaryAndUpdateLanguage';
 import { clearDictionary } from '../../../redux/dictionarySlice';
 interface LanguagePopoverProps {
   anchorEl: null | HTMLElement

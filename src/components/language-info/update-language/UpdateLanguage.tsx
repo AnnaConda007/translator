@@ -2,7 +2,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { setLanguage } from '../../../redux/languageSlice';
 import { useDispatch, useSelector } from "react-redux";
-import { specifyLanguage } from '../../../utils/updateDB/specifyLanguage';
+import { specifyLanguage } from '../../../utils/updateData/specifyLanguage';
 import { RootStoreState } from '../../../redux/store';
 import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
 import { useState, useCallback } from 'react';

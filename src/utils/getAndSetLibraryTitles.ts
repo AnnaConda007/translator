@@ -7,7 +7,7 @@ import { UserData } from '../enums/authEnum';
 
 
 
-export const fetchAndSetLibraryTitles = () => {
+export const getAndSetLibraryTitles = () => {
   return async (dispatch: Dispatch) => {
     const titles = await fetchLibrary();
     dispatch(setTitles(titles));

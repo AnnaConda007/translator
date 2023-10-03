@@ -8,7 +8,7 @@ import { batch } from 'react-redux';
 import { setLanguage } from '../redux/languageSlice';
 import { UserData } from '../enums/authEnum';
 
-export const fetchAndSetDictionary = () => {
+export const getAndSetDictionary = () => {
   const userFairbaseId = localStorage.getItem(UserData.USER_ID);
   return async (dispatch: Dispatch) => {
     if (!userFairbaseId) return;

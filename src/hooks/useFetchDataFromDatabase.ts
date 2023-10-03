@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
-import { fetchAndSetDictionary } from "../utils/fetchAndSetDictionary";
-import { fetchAndSetLibraryTitles } from '../utils/fetchAndSetLibraryTitles';
+import { getAndSetDictionary } from "../utils/getAndSetDictionary";
+import { getAndSetLibraryTitles } from '../utils/getAndSetLibraryTitles';
 import { AppDispatch } from "../redux/store";
 import { setLoaded } from '../redux/authSlise';
 
@@ -14,10 +14,10 @@ export const useFetchBookAndDictionaryFromDatabase = () => {
   if (loaded) return
 
 
-  dispatch(fetchAndSetLibraryTitles());
+  dispatch(getAndSetLibraryTitles());
 
   if (dictionary.length === 0) {
-    dispatch(fetchAndSetDictionary());
+    dispatch(getAndSetDictionary());
   }
   dispatch(setLoaded())
 };

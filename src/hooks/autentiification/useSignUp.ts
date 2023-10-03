@@ -1,6 +1,6 @@
 
 import { useSelector } from 'react-redux';
-import { useHandleAuthError } from './useHandleAuthError';
+import { useCatchAuthError } from './useCatchAuthError';
 import { RootStoreState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { SignUpWithEmail } from '../../utils/auth/firebaseConfig';
@@ -8,13 +8,13 @@ import { User } from 'firebase/auth/cordova';
 import { FirebaseError } from 'firebase/app';
 import { RoutesApp } from '../../enums/routesAppEnum';
 import { UserData } from '../../enums/authEnum';
-import { specifyLanguage } from '../../utils/updateDB/specifyLanguage';
-import { createFolerAtYandexDisk } from '../../utils/createFolerAtYandexDisk';
+import { specifyLanguage } from '../../utils/updateData/specifyLanguage';
+import { createFolerAtYandexDisk } from '../../utils/auth/createFolderAtYandexDisk';
 
 export const useSignUp = () => {
   const navigate = useNavigate()
   const language: string = useSelector((state: RootStoreState) => state.language)
-  const handleAuthorizationError = useHandleAuthError()
+  const handleAuthorizationError = useCatchAuthError()
   const formData = useSelector((state: RootStoreState) => state.authorization.formData)
   return async () => {
     try {

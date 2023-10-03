@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { toggleAddNewBookInput } from '../../redux/visibilitySlice ';
 import { useDispatch } from 'react-redux';
-import { addNewBookInLibrary } from '../../utils/updateDB/addNewBook';
+import { addNewBookInLibrary } from '../../utils/updateData/addNewBook';
 import { useSelector } from 'react-redux';
 import { RootStoreState } from '../../redux/store';
 import jschardet from 'jschardet';

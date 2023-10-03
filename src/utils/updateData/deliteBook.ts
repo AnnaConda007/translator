@@ -1,6 +1,6 @@
-import { UserData } from '../enums/authEnum';
+import { UserData } from '../../enums/authEnum';
 import axios from 'axios';
-import { serverUrl } from '../contains';
+import { serverUrl } from '../../contains';
 
 export const addNewBookInLibrary = async (titleBook: string): Promise<boolean> => {
   try {
