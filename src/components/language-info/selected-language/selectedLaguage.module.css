@@ -1,0 +1,15 @@
+@import url('../../../App.css');
+
+.languageButton {
+  position: "relative";
+  width: 86px;
+  border-radius: 0;
+}
+
+.languageButton:hover {
+  background-color: var(--primary-color);
+}
+
+.languageButtonClicked {
+  background-color: var(--primary-color);
+}

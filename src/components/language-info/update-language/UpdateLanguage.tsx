@@ -1,5 +1,4 @@
-import CheckIcon from "@mui/icons-material/Check";
-import { List, ListItemButton, ListItemText } from "@mui/material";
+import { List, ListItemButton, ListItemText, Box } from "@mui/material";
 import { setLanguage } from '../../../redux/languageSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { specifyLanguage } from '../../../utils/updateData/specifyLanguage';
@@ -9,6 +8,7 @@ import { useState, useCallback } from 'react';
 import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
 import LanguagePopover from '../updateLanguagePopover/UpdateLanguagePopover';
 import { languages } from '../../../contains';
+import styles from "./updateLanguage.module.css"
 
 interface UpdateLanguageProps {
   setLanguageClicked: (value: boolean) => void
@@ -34,26 +34,27 @@ const UpdateLanguage: React.FC<UpdateLanguageProps> = ({ setLanguageClicked }) =
   }, []);
 
   return (
-    <List>
-      {languages.map((language) => {
-        const keyName = Object.keys(language)[0];
-        const languageCode = language[keyName];
-        return (
-          <div key={languageCode}>
-            <ListItemButton dense onClick={(e) => handleLanguage(e, languageCode)}
+    <Box className={styles.languageList}>
+      <List>
+        {languages.map((language) => {
+          const keyName = Object.keys(language)[0];
+          const languageCode = language[keyName];
+          return (
+            <ListItemButton key={languageCode} sx={{
+              padding: '2px 0',
+              backgroundColor: selectedLanguage === languageCode ? 'lightblue' : 'inherit'
+            }} dense onClick={(e) => handleLanguage(e, languageCode)}
             >
               <ListItemText
                 primary={keyName}
               />
-              {selectedLanguage && selectedLanguage == languageCode ? (
-                <CheckIcon />
-              ) : null}
             </ListItemButton>
-          </div>
-        );
-      })}
-      <LanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} selectLanguage={selectLanguage} pickedLanguage={pickedLanguage} setLanguageClicked={setLanguageClicked} />
-    </List>
+          );
+        })}
+        <LanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} selectLanguage={selectLanguage} pickedLanguage={pickedLanguage} setLanguageClicked={setLanguageClicked} />
+      </List>
+    </Box>
+
   );
 
 };

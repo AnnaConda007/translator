@@ -8,7 +8,7 @@ import { UserData } from '../../enums/authEnum';
 import { NavItemKeys } from '../../enums/navItemKeysEnum';
 import { useState } from 'react';
 import AuthPopove from '../authPopover/AuthPopover';
-
+import styles from "./nav.module.css"
 const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const visibilityMenuItem: string = useSelector(
@@ -33,9 +33,9 @@ const Nav: React.FC = () => {
   return (
     <nav>
       <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />
-      <List>
+      <List >
         {Object.keys(navItems).map((menuItem) => (
-          <ListItemButton
+          <ListItemButton className={styles.nawItem}
             onClick={(e) => handleNavElem(menuItem, e.currentTarget)}
             key={menuItem}
             dense

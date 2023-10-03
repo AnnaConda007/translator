@@ -1,0 +1,7 @@
+ @import url('../../App.css');
+
+ .nawItem {
+   background-color: var(--secondary-color);
+   max-width: 300px;
+   margin: 20px;
+ }

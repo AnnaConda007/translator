@@ -4,3 +4,9 @@
   height: 100%;
   margin: 0 auto;
 }
+
+
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #FFC107;
+}

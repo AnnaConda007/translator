@@ -1,14 +1,14 @@
-import { resetActiveCardNumber } from '../../../redux/testSlice'
+import { resetActiveCardNumber, resetTest } from '../../../redux/testSlice'
 import { resetDictionary } from '../../../redux/dictionarySlice'
 import { resetLanguage } from '../../../redux/languageSlice'
-import { resetTest } from '../../../redux/testSlice'
 import { resetVisibility } from '../../../redux/visibilitySlice '
 import { resetTranslator } from '../../../redux/translatorSlice'
 import { Button } from '@mui/material'
-import { batch } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, batch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RoutesApp } from '../../../enums/routesAppEnum'
+import styles from "./logOutButton.module.css"
+
 
 const LogOutButton = () => {
   const dispanch = useDispatch()
@@ -26,7 +26,7 @@ const LogOutButton = () => {
     localStorage.clear();
   }
   return (
-    <Button variant="contained" onClick={handleButton}>
+    <Button className={styles.logOutButtonClicked} variant="contained" onClick={handleButton}>
       выйти
     </Button>
   )
