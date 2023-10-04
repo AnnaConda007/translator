@@ -1,14 +1,15 @@
 import { toggleVisibilityMenuItem } from "../../redux/visibilitySlice ";
-import { List, ListItemText, ListItemButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../redux/store";
 import { AppDispatch } from '../../redux/store';
-import { navItems } from './navItems';
+import { navItemsList } from './navItemsList';
 import { UserData } from '../../enums/authEnum';
 import { NavItemKeys } from '../../enums/navItemKeysEnum';
 import { useState } from 'react';
 import AuthPopove from '../authPopover/AuthPopover';
-import styles from "./nav.module.css"
+import { StyledListItemButton, StyledListItemText, StyledList } from './styled'
+import { buttonStylesConfig } from './styled';
+
 const Nav: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const visibilityMenuItem: string = useSelector(
@@ -29,29 +30,40 @@ const Nav: React.FC = () => {
     dispatch(toggleVisibilityMenuItem(menuItem));
   };
 
-  const ComponentToRender = visibilityMenuItem === "словарь" || visibilityMenuItem === "тестирование" ? navItems[visibilityMenuItem] : null;
   return (
     <nav>
       <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />
-      <List >
-        {Object.keys(navItems).map((menuItem) => (
-          <ListItemButton className={styles.nawItem}
-            onClick={(e) => handleNavElem(menuItem, e.currentTarget)}
-            key={menuItem}
-            dense
-          >
-            <ListItemText
-              primary={menuItem}
-            />
-          </ListItemButton>
-        ))}
-      </List>
-
-      <div>
-        {ComponentToRender && <ComponentToRender />}
-      </div>
+      <StyledList >
+        {Object.keys(navItemsList).map((menuItem) => {
+          if (!(menuItem in buttonStylesConfig)) return
+          return (
+            <StyledListItemButton
+              onClick={(e) => handleNavElem(menuItem, e.currentTarget)}
+              key={menuItem}
+              {...buttonStylesConfig[menuItem as NavItemKeys]}
+            >
+              <StyledListItemText primary={menuItem} />
+            </StyledListItemButton>
+          );
+        })
+        }
+      </StyledList>
     </nav>
   );
 };
-
 export default Nav;
+
+
+/*
+
+
+
+
+
+  const ComponentToRender = visibilityMenuItem === "словарь" || visibilityMenuItem === "тестирование" ? navItems[visibilityMenuItem] : null;
+
+
+  <div>
+        {ComponentToRender && <ComponentToRender />}
+      </div>
+*/

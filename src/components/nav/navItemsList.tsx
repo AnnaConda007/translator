@@ -7,7 +7,7 @@ interface INavElements {
   [key: string]: React.FC;
 }
 
-export const navItems: INavElements = {
+export const navItemsList: INavElements = {
   [NavItemKeys.LIBRARY]: Library,
   [NavItemKeys.DICTIONARY]: Dictionary,
   [NavItemKeys.TESTING]: FlashCards,
