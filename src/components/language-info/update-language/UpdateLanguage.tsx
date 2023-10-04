@@ -7,9 +7,8 @@ import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
 import { useState, useCallback } from 'react';
 import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
 import LanguagePopover from '../updateLanguagePopover/UpdateLanguagePopover';
-import { languages } from '../../../contains';
-import styles from "./updateLanguage.module.css"
-
+import { languages } from '../../../contains'; 
+import { StyledLanguageBox } from './updateLanguageStyled';
 interface UpdateLanguageProps {
   setLanguageClicked: (value: boolean) => void
 }
@@ -34,7 +33,7 @@ const UpdateLanguage: React.FC<UpdateLanguageProps> = ({ setLanguageClicked }) =
   }, []);
 
   return (
-    <Box className={styles.languageList}>
+    <StyledLanguageBox  >
       <List>
         {languages.map((language) => {
           const keyName = Object.keys(language)[0];
@@ -53,7 +52,7 @@ const UpdateLanguage: React.FC<UpdateLanguageProps> = ({ setLanguageClicked }) =
         })}
         <LanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} selectLanguage={selectLanguage} pickedLanguage={pickedLanguage} setLanguageClicked={setLanguageClicked} />
       </List>
-    </Box>
+    </StyledLanguageBox>
 
   );
 

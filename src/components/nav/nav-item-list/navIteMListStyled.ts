@@ -1,13 +1,13 @@
 import { styled } from '@mui/system';
 import { ListItemButton, ListItemText, List } from "@mui/material";
-import { NavItemKeys } from '../../enums/navItemKeysEnum';
+import { NavItemKeys } from '../../../enums/navItemKeysEnum';
 
 export const buttonStylesConfig = {
   [NavItemKeys.LIBRARY]: {
     padding: "20px",
-    width: "80%",
+    width: "90%",
     alignSelf: "flex-end",
-    margin: "20px 10px"
+    margin: "30px 10px"
   },
   [NavItemKeys.DICTIONARY]: {
     padding: "10px",
@@ -16,7 +16,7 @@ export const buttonStylesConfig = {
   },
   [NavItemKeys.TESTING]: {
     padding: "15px",
-    width: "80%",
+    width: "85%",
     alignSelf: "flex-end"
   },
 };
@@ -25,7 +25,7 @@ interface StyledListItemButtonProps {
   padding: string;
   width: string;
   alignSelf: string
-  margin: string
+  margin?: string
 }
 
 
@@ -42,7 +42,8 @@ export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonP
   ({ padding, width, alignSelf, margin }) => ({
     backgroundColor: 'var(--secondary-color)',
     borderRadius: "30px",
-    minWidth: width,
+    width: width,
+    minWidth: "250px",
     flexGrow: "0",
     margin: margin || '20px  0px',
     alignSelf: alignSelf,
@@ -53,7 +54,7 @@ export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonP
       flexGrow: "1",
       margin: '5px  0px',
       alignSelf: "center",
-      padding: "10px"
+      padding: "10px 0px",
     },
   })
 );

@@ -7,7 +7,6 @@ import { Button } from '@mui/material'
 import { useDispatch, batch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RoutesApp } from '../../../enums/routesAppEnum'
-import styles from "./logOutButton.module.css"
 
 
 const LogOutButton = () => {
@@ -26,7 +25,7 @@ const LogOutButton = () => {
     localStorage.clear();
   }
   return (
-    <Button className={styles.logOutButtonClicked} variant="contained" onClick={handleButton}>
+    <Button sx={{ backgroundColor: "var(--primary-color)" }} variant="contained" onClick={handleButton}>
       выйти
     </Button>
   )

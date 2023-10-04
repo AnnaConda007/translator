@@ -1,10 +1,9 @@
-import { Button, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootStoreState } from '../../../redux/store';
 import { useState } from 'react';
 import UpdateLanguage from '../update-language/UpdateLanguage';
-import styles from "./SelectedLaguage.module.css"
-
+import { StyledLanguageButton } from './selectedLanguageStyled';
 
 const SelectedLanguage: React.FC = () => {
   const selectedLanguage = useSelector((state: RootStoreState) => state.language);
@@ -16,9 +15,9 @@ const SelectedLanguage: React.FC = () => {
 
   return (
     <Box >
-      <Button className={`${styles.languageButton} ${languageClicked && styles.languageButtonClicked}`} onClick={toogleVisibilityUpdateLang}>
+      <StyledLanguageButton active={languageClicked} onClick={toogleVisibilityUpdateLang}>
         {selectedLanguage}
-      </Button>
+      </StyledLanguageButton>
       {languageClicked && <UpdateLanguage setLanguageClicked={setLanguageClicked} />}
     </Box>
   )
