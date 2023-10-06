@@ -1,0 +1,21 @@
+.image {
+  margin-right: 50px;
+}
+
+@media (max-width:750px) {
+  .image {
+    margin-right: 0
+  }
+}
+
+@media (max-width: 500px) {
+  .image {
+    width: 170px;
+  }
+}
+
+@media (max-width: 450px) {
+  .image {
+    display: none;
+  }
+}

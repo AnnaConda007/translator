@@ -43,7 +43,7 @@ export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonP
   margin: margin || '20px  0px',
   alignSelf: alignself,
   padding: padding
-  , '@media (max-width: 350px)': {
+  , '@media (max-width: 450px)': {
     flexGrow: "1",
     alignSelf: "center",
     padding: "10px 0px",

@@ -1,6 +1,6 @@
-import Library from '../../library/Library';
-import Dictionary from '../../dictionary/Dictionary';
-import FlashCards from '../../flashCards/FlashCards';
+import Library from '../../educationalСontent/library/Library';
+import Dictionary from '../../educationalСontent/dictionary/Dictionary';
+import FlashCards from '../../educationalСontent/flashCards/FlashCards';
 import { NavItemKeys } from '../../../enums/navItemKeysEnum';
 
 interface INavElements {

@@ -15,16 +15,3 @@ const Nav: React.FC = () => {
 export default Nav;
 
 
-/*
-
-
-
-
-
-  const ComponentToRender = visibilityMenuItem === "словарь" || visibilityMenuItem === "тестирование" ? navItems[visibilityMenuItem] : null;
-
-
-  <div>
-        {ComponentToRender && <ComponentToRender />}
-      </div>
-*/
