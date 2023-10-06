@@ -30,9 +30,6 @@ interface StyledListItemButtonProps {
 
 
 export const StyledList = styled(List)({
-  backgroundColor: "red",
-  maxWidth: '400px',
-  width: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center"
@@ -48,7 +45,6 @@ export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonP
   padding: padding
   , '@media (max-width: 350px)': {
     flexGrow: "1",
-    margin: '5px  0px',
     alignSelf: "center",
     padding: "10px 0px",
     width: "90%"

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import LanguagePopover from '../updateLanguagePopover/UpdateLanguagePopover';
 import { StyledLanguageBox } from './LanguageBoxStyled';
 import LanguageList from '../language-list/LanguageList';
-import { setActiveLanguageBox } from '../../../redux/languageUpdateSlice';
+import { setActiveLanguageBox } from '../../../../redux/languageUpdateSlice';
 import { useDispatch } from 'react-redux';
 interface UpdateLanguageProps {
   buttonRef: React.RefObject<HTMLElement>;

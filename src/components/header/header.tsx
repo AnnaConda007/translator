@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import LogOutButton from './logOutButton/LogOutButton'
-import LanguageButton from '../language-info/language-button/LaguageButton'
+import LanguageButton from './language/language-button/LaguageButton'
 import styles from "./header.module.css"
 const Header = () => {
 

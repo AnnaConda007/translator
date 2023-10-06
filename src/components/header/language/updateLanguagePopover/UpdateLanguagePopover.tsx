@@ -1,15 +1,15 @@
 import { Popover, Typography, Button } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
-import { clearDictionaryAndspecifyLanguage } from '../../../utils/updateData/clearDictionaryAndUpdateLanguage';
-import { setActiveLanguageBox } from '../../../redux/languageUpdateSlice';
-import { clearDictionary } from '../../../redux/dictionarySlice';
-import { RootStoreState } from '../../../redux/store';
+import { clearDictionaryAndspecifyLanguage } from '../../../../utils/updateData/clearDictionaryAndUpdateLanguage';
+import { setActiveLanguageBox } from '../../../../redux/languageUpdateSlice';
+import { clearDictionary } from '../../../../redux/dictionarySlice';
+import { RootStoreState } from '../../../../redux/store';
 import { useCallback } from 'react';
-import { setLanguageCode } from '../../../redux/languageUpdateSlice';
-import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
-import { setLanguage } from '../../../redux/languageSlice';
-import { specifyLanguage } from '../../../utils/updateData/specifyLanguage';
-import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
+import { setLanguageCode } from '../../../../redux/languageUpdateSlice';
+import { toggleVisibilityMenuItem } from '../../../../redux/visibilitySlice ';
+import { setLanguage } from '../../../../redux/languageSlice';
+import { specifyLanguage } from '../../../../utils/updateData/specifyLanguage';
+import { DataBasePoints } from '../../../../enums/dataBasePointsEnum';
 
 interface LanguagePopoverProps {
   anchorEl: null | HTMLElement

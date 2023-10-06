@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { RootStoreState } from '../../../redux/store';
+import { RootStoreState } from '../../../../redux/store';
 import { Box } from "@mui/material";
 import LanguageBox from '../language-box/LanguageBox';
 import { StyledLanguageButton } from './LaguageButtonStyled';
-import { setActiveLanguageBox } from '../../../redux/languageUpdateSlice';
+import { setActiveLanguageBox } from '../../../../redux/languageUpdateSlice';
 import { useTheme } from '@mui/material/styles';
 
 const LanguageButton: React.FC = () => {

@@ -1,9 +1,9 @@
 import { List, ListItemButton, ListItemText } from "@mui/material";
-import { languages } from '../../../contains';
+import { languages } from '../../../../contains';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStoreState } from '../../../redux/store';
+import { RootStoreState } from '../../../../redux/store';
 import { useCallback } from 'react';
-import { setLanguageCode } from '../../../redux/languageUpdateSlice';
+import { setLanguageCode } from '../../../../redux/languageUpdateSlice';
 
 interface LanguageListProps {
   setAnchorEl: (value: HTMLElement | null) => void

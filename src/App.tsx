@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./routes/Home";
+import Home from "./routes/home/Home";
 import { Provider } from "react-redux";
 import SelectedBookContent from "./routes/SelectedBookPage";
 import Auth from './routes/Auth';
