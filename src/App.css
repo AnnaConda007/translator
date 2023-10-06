@@ -4,11 +4,3 @@
   height: 100%;
   margin: 0 auto;
 }
-
-
-:root {
-  --primary-color: #23286b;
-  --secondary-color: #f4d745;
-  --hover-color: #ff98ea;
-  --text-color: #120810;
-}

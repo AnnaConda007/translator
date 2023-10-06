@@ -6,7 +6,7 @@ import selectedLanguageSlice from "./languageSlice";
 import visibilitySlice from "./visibilitySlice ";
 import testSlice from "./testSlice";
 import authSlise from './authSlise';
-
+import languageUpdateSlice from './languageUpdateSlice';
 const store = configureStore({
   reducer: {
     library: librarySlice,
@@ -15,7 +15,8 @@ const store = configureStore({
     language: selectedLanguageSlice,
     visibility: visibilitySlice,
     test: testSlice,
-    authorization: authSlise
+    authorization: authSlise,
+    languageBox: languageUpdateSlice
   },
 });
 export type RootStoreState = ReturnType<typeof store.getState>;

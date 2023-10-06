@@ -1,28 +1,45 @@
 import { Popover, Typography, Button } from "@mui/material";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { clearDictionaryAndspecifyLanguage } from '../../../utils/updateData/clearDictionaryAndUpdateLanguage';
+import { setActiveLanguageBox } from '../../../redux/languageUpdateSlice';
 import { clearDictionary } from '../../../redux/dictionarySlice';
+import { RootStoreState } from '../../../redux/store';
+import { useCallback } from 'react';
+import { setLanguageCode } from '../../../redux/languageUpdateSlice';
+import { toggleVisibilityMenuItem } from '../../../redux/visibilitySlice ';
+import { setLanguage } from '../../../redux/languageSlice';
+import { specifyLanguage } from '../../../utils/updateData/specifyLanguage';
+import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
+
 interface LanguagePopoverProps {
   anchorEl: null | HTMLElement
   setAnchorEl: (value: null | HTMLElement) => void
-  selectLanguage: (value: string) => void
-  pickedLanguage: string
-  setLanguageClicked: (value: boolean) => void
 }
 
-const LanguagePopover: React.FC<LanguagePopoverProps> = ({ anchorEl, setAnchorEl, selectLanguage, pickedLanguage, setLanguageClicked }) => {
+const LanguagePopover: React.FC<LanguagePopoverProps> = ({ anchorEl, setAnchorEl }) => {
   const dispatch = useDispatch()
+  const languageCode = useSelector((state: RootStoreState) => state.languageBox.languageCode)
+
+  const selectLanguage = useCallback(async (languageCode: string) => {
+    dispatch(setLanguageCode(languageCode))
+    localStorage.setItem(DataBasePoints.LANGUAGE, languageCode);
+    dispatch(setLanguage(languageCode));
+    await specifyLanguage(languageCode);
+    dispatch(toggleVisibilityMenuItem(""));
+  }, []);
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleCancellation = () => {
-    setLanguageClicked(false)
+    dispatch(setActiveLanguageBox(false))
   }
   const handleContinue = async () => {
-    await clearDictionaryAndspecifyLanguage(pickedLanguage)
+    await clearDictionaryAndspecifyLanguage(languageCode)
     dispatch(clearDictionary())
-    setLanguageClicked(false)
-    selectLanguage(pickedLanguage)
+    dispatch(setActiveLanguageBox(false))
+    selectLanguage(languageCode)
   }
   return (
     <Popover

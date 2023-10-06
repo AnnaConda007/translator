@@ -25,7 +25,7 @@ const LogOutButton = () => {
     localStorage.clear();
   }
   return (
-    <Button sx={{ backgroundColor: "var(--primary-color)" }} variant="contained" onClick={handleButton}>
+    <Button variant="contained" onClick={handleButton}>
       выйти
     </Button>
   )

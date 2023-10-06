@@ -6,25 +6,25 @@ export const buttonStylesConfig = {
   [NavItemKeys.LIBRARY]: {
     padding: "20px",
     width: "90%",
-    alignSelf: "flex-end",
+    alignself: "flex-end",
     margin: "30px 10px"
   },
   [NavItemKeys.DICTIONARY]: {
     padding: "10px",
     width: "80%",
-    alignSelf: "flex-start"
+    alignself: "flex-start"
   },
   [NavItemKeys.TESTING]: {
     padding: "15px",
     width: "85%",
-    alignSelf: "flex-end"
+    alignself: "flex-end"
   },
 };
 
 interface StyledListItemButtonProps {
   padding: string;
   width: string;
-  alignSelf: string
+  alignself: string
   margin?: string
 }
 
@@ -38,35 +38,44 @@ export const StyledList = styled(List)({
   alignItems: "center"
 });
 
-export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonProps>(
-  ({ padding, width, alignSelf, margin }) => ({
-    backgroundColor: 'var(--secondary-color)',
-    borderRadius: "30px",
-    width: width,
-    minWidth: "250px",
-    flexGrow: "0",
-    margin: margin || '20px  0px',
-    alignSelf: alignSelf,
-    padding: padding,
-    '&:hover': {
-      backgroundColor: 'var(--hover-color)',
-    }, '@media (max-width: 350px)': {
-      flexGrow: "1",
-      margin: '5px  0px',
-      alignSelf: "center",
-      padding: "10px 0px",
-    },
-  })
+export const StyledListItemButton = styled(ListItemButton)<StyledListItemButtonProps>(({ padding, width, alignself, margin, theme }) => ({
+  backgroundColor: theme.palette.secondary.main, borderRadius: "30px",
+  width: width,
+  minWidth: "250px",
+  flexGrow: "0",
+  margin: margin || '20px  0px',
+  alignSelf: alignself,
+  padding: padding
+  , '@media (max-width: 350px)': {
+    flexGrow: "1",
+    margin: '5px  0px',
+    alignSelf: "center",
+    padding: "10px 0px",
+    width: "90%"
+  },
+})
 );
 
-export const StyledListItemText = styled(ListItemText)({
-  color: 'var(--dark-color)',
-  textAlign: "center",
-  '& span': {
-    fontSize: '30px',
-    fontWeight: '900',
-  }
-})
+export const StyledListItemText = styled(ListItemText)(
+  ({ theme }) => ({
+    color: theme.palette.text.primary,
+    textAlign: "center",
+    '& span': {
+      fontSize: '30px',
+      fontWeight: '900',
+    }
+  })
+)
+
+
+
+
+
+
+
+
+
+
 
 
 

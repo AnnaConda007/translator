@@ -6,6 +6,8 @@ import SelectedBookContent from "./routes/SelectedBookPage";
 import Auth from './routes/Auth';
 import store from "./redux/store";
 import Header from './components/header/header';
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './muiThem';
 
 const MainRoutes: React.FC = () => (
   <>
@@ -20,12 +22,14 @@ const MainRoutes: React.FC = () => (
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/authorization" element={<Auth />} />
-          <Route path="/*" element={<MainRoutes />} />
-        </Routes>
-      </Router>
+      <ThemeProvider theme={theme}> {/* Обертка приложения в ThemeProvider */}
+        <Router>
+          <Routes>
+            <Route path="/authorization" element={<Auth />} />
+            <Route path="/*" element={<MainRoutes />} />
+          </Routes>
+        </Router>
+      </ThemeProvider> {/* Закрытие тега ThemeProvider */}
     </Provider>
   );
 }

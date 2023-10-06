@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import LogOutButton from './logOutButton/LogOutButton'
-import SelectedLanguage from '../language-info/selected-language/SelectedLaguage'
+import LanguageButton from '../language-info/language-button/LaguageButton'
 import styles from "./header.module.css"
 const Header = () => {
 
   return (
     <Box className={styles.header}>
-      <SelectedLanguage />
+      <LanguageButton />
       <LogOutButton />
     </Box>
   )
