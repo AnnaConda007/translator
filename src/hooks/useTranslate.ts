@@ -18,6 +18,7 @@ const useTranslate = () => {
       formatedWord
     );
     if (!translation) return;
+    console.log(translation, formatedWord)
     dispatch(setRussianWord(translation));
     dispatch(setForeignWord(formatedWord));
   };

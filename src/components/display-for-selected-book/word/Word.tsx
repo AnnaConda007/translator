@@ -3,7 +3,7 @@ import React from "react";
 
 interface IWord {
   word: string;
-  getSelectedWords: ()=>string;
+  getSelectedWords: () => string;
   setClickedWord: (arg: string) => void;
   setAnchorEl: (arg: HTMLSpanElement) => void;
 }
@@ -13,7 +13,7 @@ const Word: React.FC<IWord> = ({
   getSelectedWords,
   setClickedWord,
   setAnchorEl,
- }) => {
+}) => {
   const toTranslate = useTranslate();
 
   const handleWordClick = async (
@@ -24,7 +24,7 @@ const Word: React.FC<IWord> = ({
   ) => {
     const selectedText = getSelectedWords();
     const wordToTranslate = selectedText || word;
-   await toTranslate(wordToTranslate);
+    await toTranslate(wordToTranslate);
     setClickedWord(word);
     setAnchorEl(currentTarget);
   };
@@ -37,7 +37,7 @@ const Word: React.FC<IWord> = ({
         marginRight: "5px",
         display: "inline-block",
       }}
-      onMouseUp ={async (e) => handleWordClick(word, e)}
+      onMouseUp={async (e) => handleWordClick(word, e)}
       onTouchStart={async (e) => handleWordClick(word, e)}
     >
       {word}

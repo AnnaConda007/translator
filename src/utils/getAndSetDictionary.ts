@@ -29,8 +29,7 @@ const fetchDictionary = async (dictionaryUserURL: string) => {
   if (!response.ok) {
     throw new Error("Ошибка при запросе к БД");
   }
-  const data = await response.json()
-  console.log(data)
+  const data = await response.json() 
   const language: string = data[DataBasePoints.LANGUAGE]
   delete data.language;
   const dictionary: Array<dataFromBD> = Object.values(data) || []

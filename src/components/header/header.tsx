@@ -1,12 +1,24 @@
-import { Box } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import LogOutButton from './logOutButton/LogOutButton'
 import LanguageButton from './language/language-button/LaguageButton'
 import styles from "./header.module.css"
-const Header = () => {
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { useNavigate } from 'react-router-dom';
+import { RoutesApp } from '../../enums/routesAppEnum';
 
+const Header = () => {
+  const navigate = useNavigate()
+  const handleHome = () => {
+    navigate(RoutesApp.HOME)
+  }
   return (
     <Box className={styles.header}>
-      <LanguageButton />
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <LanguageButton />
+        <IconButton onClick={handleHome}>
+          <HomeOutlinedIcon />
+        </IconButton>
+      </Box>
       <LogOutButton />
     </Box>
   )

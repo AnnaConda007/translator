@@ -4,8 +4,7 @@ import { serverUrl } from '../../contains'
 
 export const createFolerAtYandexDisk = async (userId: string) => {
   try {
-    if (!userId) return false
-    console.log(userId)
+    if (!userId) return false 
     const response = await axios.post(`${serverUrl}/createFolder`, {
       userId: userId
     })

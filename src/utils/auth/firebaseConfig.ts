@@ -30,8 +30,7 @@ export const SignUpWithEmail = async (email: string, password: string): Promise<
 };
 
 export const signInWithEmail = async (email: string, password: string): Promise<User> => {
-  try {
-    console.log(email, password)
+  try { 
     const userCredential: UserCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error: unknown) {

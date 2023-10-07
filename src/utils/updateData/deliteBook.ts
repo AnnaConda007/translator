@@ -9,8 +9,7 @@ export const addNewBookInLibrary = async (titleBook: string): Promise<boolean> =
     const response = await axios.post(`${serverUrl}/deliteBook`, {
       bookTitle: titleBook,
       userId: userId
-    })
-    console.log(response)
+    }) 
     return true
   } catch (error) {
     return false

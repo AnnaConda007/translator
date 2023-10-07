@@ -1,21 +1,25 @@
 .image {
-  margin-right: 50px;
+  width: 380px;
 }
+
+.imageSmal {
+  display: none;
+}
+
 
 @media (max-width:750px) {
   .image {
-    margin-right: 0
+    display: none;
+  }
+
+  .imageSmal {
+    display: block;
   }
 }
 
-@media (max-width: 500px) {
-  .image {
-    width: 170px;
-  }
-}
 
 @media (max-width: 450px) {
-  .image {
+  .imageSmal {
     display: none;
   }
 }
