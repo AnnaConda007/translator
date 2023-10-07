@@ -10,6 +10,9 @@ import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker
 import { useState } from "react";
 import CorrectAnswer from "../correct-answer/CorrectAnswer";
 import { LanguageMatchTested } from '../../../../enums/dictionaryEnum';
+import theme from '../../../../muiThem';
+
+
 interface EnteredMatchProps {
   flashCardData: Array<IFlashCardData>;
   languageTested: LanguageMatchTested;
@@ -18,6 +21,7 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
   flashCardData,
   languageTested,
 }) => {
+  const [anwerColor, setAnswerColor] = useState("")
   const dispatch = useDispatch();
   const checkAnswer = useAnswerMatchingChecker();
   const [answerButtonClicked, setAnswerButtonClicked] = useState(false);
@@ -25,17 +29,20 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
+
   const handleChange = (value: string) => {
     setAnswerValue(value.toLowerCase());
   };
   const handleAnswer = () => {
     batch(() => {
       setAnswerButtonClicked(true);
-      checkAnswer(answerValue);
+      const check = checkAnswer(answerValue);
+      setAnswerColor(check ? theme.palette.success.light : theme.palette.error.light)
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
         setAnswerValue("");
         setAnswerButtonClicked(false);
+        setAnswerColor("")
       }, 1500);
     });
   };
@@ -53,7 +60,7 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
             ? flashCardData[activeCardNumber].foreignWord
             : flashCardData[activeCardNumber].russianWord}
         </Typography>
-        <TextField
+        <TextField sx={{ backgroundColor: anwerColor }}
           id="standard-basic"
           variant="standard"
           onChange={(e) => handleChange(e.target.value)}

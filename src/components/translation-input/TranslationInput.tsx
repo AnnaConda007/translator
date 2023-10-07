@@ -4,6 +4,9 @@ import TranslateActionButton from "./translate-action-button/TranslateActionButt
 import TranslationResultDisplay from './translation-result-display/TranslationResultDisplay ';
 import { useCallback } from 'react';
 import { useHandleTranslate } from '../../hooks/autentiification/useHandleTranslate';
+import theme from '../../muiThem';
+
+
 
 const TranslationInput: React.FC = () => {
   const translateInputValue = useHandleTranslate()
@@ -22,7 +25,7 @@ const TranslationInput: React.FC = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{ position: "absolute", zIndex: "2", backgroundColor: theme.palette.secondary.main }}>
       <TextField
         type="text"
         autoComplete="off"

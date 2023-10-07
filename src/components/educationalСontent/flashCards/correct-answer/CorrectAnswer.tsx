@@ -1,10 +1,11 @@
 import { IFlashCardData } from "../../../../redux/testSlice";
 import { LanguageMatchTested } from '../../../../enums/dictionaryEnum';
+
 interface CorrectAnswerProps {
   flashCardData: Array<IFlashCardData>;
   activeCardNumber: number;
   answerValue: string;
-  ruWord: LanguageMatchTested;
+  ruWord : LanguageMatchTested;
 }
 
 const CorrectAnswer: React.FC<CorrectAnswerProps> = ({

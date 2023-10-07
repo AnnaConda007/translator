@@ -38,14 +38,16 @@ const FlashCards = () => {
     dispatch(setCurrentCards(shuffleArr(flashCardData)));
   }, [words, dispatch]);
 
+  const amountOfCads = words.length > amountOfTestCard ? amountOfTestCard : words.length
+
   return (
     <Backing>
       <StyledContentBox>
-        <Card sx={{ height: "100%" }}>
+        <Card sx={{ height: "100%", overflow:"auto" }}>
           <CardContent >
             <Typography gutterBottom variant="body1" component="div">
               {!currentCards.length && <p>нет слов для теста</p>}
-              {activeCardNumber === amountOfTestCard ? (
+              {activeCardNumber === amountOfCads ? (
                 <CardWithResult />
               ) : (
                 <CardIdentifier

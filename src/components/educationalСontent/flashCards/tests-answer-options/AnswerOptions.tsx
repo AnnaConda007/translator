@@ -1,10 +1,11 @@
-import { List, ListItemButton, Radio, FormControlLabel } from "@mui/material";
+import { List, ListItemButton, Radio, FormControlLabel, Typography } from "@mui/material";
 import { useDispatch, useSelector, batch } from "react-redux";
 import { RootStoreState } from "../../../../redux/store";
 import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker";
 import { increaseActiveCardNumber } from "../../../../redux/testSlice";
 import { flashCardProp } from "../FlashCards";
 import { useState } from "react";
+import theme from '../../../../muiThem';
 
 const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
   const dispatch = useDispatch();
@@ -13,25 +14,35 @@ const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
   const activeCardNumber = useSelector(
     (state: RootStoreState) => state.test.activeCardNumber
   );
-
+  const [anwerColor, setAnswerColor] = useState("")
   const handleRadio = (answerOption: string) => {
     batch(() => {
       setSelectedAnswerOption(answerOption);
-      checkAnswer(answerOption);
+      const check = checkAnswer(answerOption);
+      setAnswerColor(check ? theme.palette.success.light : theme.palette.error.light)
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
         setSelectedAnswerOption("");
+
       }, 500);
     });
   };
 
   return (
     <>
-      {flashCardData[activeCardNumber].russianWord}
+      <Typography variant="h5" sx={{ textAlign: "center" }}>
+        {flashCardData[activeCardNumber].russianWord}
+      </Typography>
       <List>
         {flashCardData[activeCardNumber].answerOptionsInForeign.map(
           (answerOption: string) => (
-            <ListItemButton key={answerOption}>
+            <ListItemButton sx={{
+              backgroundColor: (selectedAnswerOption === answerOption) ? anwerColor : "",
+              '&:hover': {
+                backgroundColor: (selectedAnswerOption === answerOption) ? anwerColor : "initial"
+              }
+            }}
+              key={answerOption}>
               <FormControlLabel
                 value={answerOption}
                 control={

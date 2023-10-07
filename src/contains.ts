@@ -17,20 +17,19 @@ export const serverUrl = "http://localhost:3000";
 export const contactAppMail = "annahrulkova@yandex.ru"
 
 // переменные для flachCards
-export const amountOfTestCard = 2;
+export const amountOfTestCard = 10;
 export const amountAnswerOption = 4;
 export const stepToChangeTestType
-  = 2;
+  = 5;
 
-  export const languages: Array<{ [key: string]: string }> = [
-    { английский: "en" },
-    { грузинский: "ka" },
-    { испанский: "es" },
-    { итальянский: "it" },
-    { немецкий: "de" },
-    { французский: "fr" },
-    { украинский: "uk" },
-    { турецкий: "tr" },
-    { корейский: "ko" },
-  ];
-  
+export const languages: Array<{ [key: string]: string }> = [
+  { английский: "en" },
+  { грузинский: "ka" },
+  { испанский: "es" },
+  { итальянский: "it" },
+  { немецкий: "de" },
+  { французский: "fr" },
+  { украинский: "uk" },
+  { турецкий: "tr" },
+  { корейский: "ko" },
+];

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch, batch } from "react-redux";
 import { RootStoreState, AppDispatch } from "../../../redux/store";
 import { IEntry, removeWord } from "../../../redux/dictionarySlice";
-import { List, ListItem, ListItemText, IconButton, Box } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { add_DeliteWordInBD } from '../../../utils/updateData/add_DeliteWordInDictionary';
 import { TypeActionWordDictionary } from '../../../enums/dictionaryEnum';
 import TranslationInput from "../../translation-input/TranslationInput";
@@ -11,7 +11,7 @@ import AddToPhotosIcon from '@mui/icons-material/AddToPhotos';
 import CloseIcon from '@mui/icons-material/Close';
 import AuthPopove from '../../authPopover/AuthPopover';
 import { UserData } from '../../../enums/authEnum';
-import { StyledContentBox } from '../Styled';
+import { StyledContentBox, ListItemStyled, ListItemTextStyled, ListStyled } from '../Styled';
 import Backing from '../Backing';
 
 const Dictionary: React.FC = () => {
@@ -44,15 +44,15 @@ const Dictionary: React.FC = () => {
 
   return (
     <Backing>
-      <StyledContentBox>
+      <StyledContentBox >
         <IconButton color="primary" onClick={(e) => toggleInputVisibility(e.currentTarget)}>{clickedAddButton ? <CloseIcon /> : <AddToPhotosIcon />} </IconButton >
         {clickedAddButton && <TranslationInput />}
         <AuthPopove anchorEl={OpenAuthPopover} setAnchorEl={setOpenAuthPopover} popoverValue={"что бы добавить свои cлова в словарь"} />
-        <List>
+        <ListStyled >
           {dictionary.map((entry) => {
             return (
-              <ListItem key={entry.foreignWord} dense>
-                <ListItemText
+              <ListItemStyled key={entry.foreignWord} dense>
+                <ListItemTextStyled
                   primary={`${entry.foreignWord} : ${entry.russianWord}`}
                 />
                 <IconButton
@@ -63,10 +63,10 @@ const Dictionary: React.FC = () => {
                 >
                   <DeleteForeverIcon />
                 </IconButton>
-              </ListItem>
+              </ListItemStyled>
             );
           })}
-        </List>
+        </ListStyled>
       </StyledContentBox>
     </Backing>
 

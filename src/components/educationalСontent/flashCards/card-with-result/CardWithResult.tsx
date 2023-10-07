@@ -1,4 +1,4 @@
-import { List, ListItemText, ListItem } from "@mui/material";
+import { ListItemText, Box, List } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { RootStoreState } from "../../../../redux/store";
 import NextButton from "../next-button/NextButton";
@@ -6,6 +6,8 @@ import { ITestResult } from "../../../../redux/testSlice";
 import { useEffect } from "react";
 import { updateAndPullDictionary } from "../../../../redux/thunks/dictionaryActions";
 import { AppDispatch } from "../../../../redux/store";
+import { ListItemStyled, ListItemTextStyled } from '../../Styled';
+
 
 const CardWithResult: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -17,18 +19,18 @@ const CardWithResult: React.FC = () => {
   }, [dispatch, testResults]);
 
   return (
-    <>
-      <List>
+    <Box sx={{ padding: "0" }}>
+      <List sx={{}}>
         {testResults.map((result, index) => (
-          <ListItem key={`${result.foreignWord}${index}`}>
-            <ListItemText
+          <ListItemStyled sx={{ padding: "0px" }} key={`${result.foreignWord}${index}`}>
+            <ListItemTextStyled 
               primary={`${result.foreignWord} : ${result.russianWord}`}
             />
-          </ListItem>
+          </ListItemStyled>
         ))}
       </List>
       <NextButton />
-    </>
+    </Box>
   );
 };
 

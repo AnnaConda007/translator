@@ -15,21 +15,27 @@ const LanguageBox: React.FC<UpdateLanguageProps> = ({ buttonRef }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        popOverRef.current &&
-        event.target instanceof Node &&
-        !popOverRef.current.contains(event.target) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target)
-      ) {
-        dispatch(setActiveLanguageBox(false));
-      }
+      setTimeout(() => {
+        if (
+          popOverRef.current &&
+          event.target instanceof Node &&
+          !popOverRef.current.contains(event.target) &&
+          buttonRef.current &&
+          !buttonRef.current.contains(event.target) &&
+          !popOverRef.current.contains(anchorEl) &&
+          !buttonRef.current.contains(anchorEl)
+        ) {
+          dispatch(setActiveLanguageBox(false));
+        }
+      }, 0);
     };
-    document.addEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [anchorEl, buttonRef, dispatch]);
+
 
   return (
     <StyledLanguageBox ref={popOverRef}  >

@@ -15,6 +15,7 @@ const useAnswerMatchingChecker = () => {
       currentCards[activeCardNumber].russianWord === selectedAnswerOption ||
       currentCards[activeCardNumber].foreignWord === selectedAnswerOption;
     updateTestResult(isAnswerCorrect);
+    return isAnswerCorrect
   };
 };
 

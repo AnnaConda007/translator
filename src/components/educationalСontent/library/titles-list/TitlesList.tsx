@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootStoreState } from "../../../../redux/store";
-import { List, ListItem, ListItemText, Divider, IconButton, Typography } from "@mui/material";
+import { Divider, IconButton, Typography } from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { addNewBookInLibrary } from '../../../../utils/updateData/deliteBook';
 import { deliteTitle } from '../../../../redux/librarySlice';
+import { ListStyled, ListItemStyled, ListItemTextStyled } from '../../Styled';
+
 const TitlesList: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -28,18 +30,17 @@ const TitlesList: React.FC = () => {
           Добавьте свою книгу
         </Typography>
       )}
-      <List>
+      <ListStyled>
         {filteredBookTitles.map((bookName) => (
           <React.Fragment key={bookName}>
-            <ListItem onClick={() => handleBookClick(bookName)}>
-              <ListItemText primary={bookName} />
+            <ListItemStyled onClick={() => handleBookClick(bookName)}>
+              <ListItemTextStyled primary={bookName} />
               <IconButton onClick={(e) => handleDelite(e, bookName)} ><DeleteForeverIcon /></IconButton>
-
-            </ListItem>
+            </ListItemStyled>
             <Divider />
           </React.Fragment>
         ))}
-      </List>
+      </ListStyled>
     </>
 
   );

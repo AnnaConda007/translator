@@ -1,0 +1,8 @@
+.paper {
+  height: fit-content;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}

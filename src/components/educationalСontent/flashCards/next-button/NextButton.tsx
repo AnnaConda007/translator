@@ -28,7 +28,7 @@ const NextButton: React.FC = () => {
 
   return (
 
-    <IconButton color="primary" onClick={handleButton}>
+    <IconButton sx={{ display: "flex", justifyContent: "justify-content", width:"100%"}} color="primary" onClick={handleButton}>
       <RestartAltOutlinedIcon />
     </IconButton>
   );
