@@ -1,20 +1,19 @@
-import IconButton from '@mui/material/IconButton';
+import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
+import IconButton from "@mui/material/IconButton";
 import { useSelector, batch } from "react-redux";
-import { RootStoreState } from "../../../../redux/store";
 import { useDispatch } from "react-redux";
+import { RootStoreState } from "../../../../redux/store";
 import {
   setCurrentCards,
   resetActiveCardNumber,
   resetTestResult,
 } from "../../../../redux/testSlice";
-import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
 import { shuffleArr } from "../../../../utils/shuffleArr";
-
 
 const NextButton: React.FC = () => {
   const dispatch = useDispatch();
   const currentCards = useSelector(
-    (state: RootStoreState) => state.test.currentCards
+    (state: RootStoreState) => state.test.currentCards,
   );
 
   const handleButton = async () => {
@@ -27,8 +26,11 @@ const NextButton: React.FC = () => {
   };
 
   return (
-
-    <IconButton sx={{ display: "flex", justifyContent: "justify-content", width:"100%"}} color="primary" onClick={handleButton}>
+    <IconButton
+      sx={{ display: "flex", justifyContent: "justify-content", width: "100%" }}
+      color="primary"
+      onClick={handleButton}
+    >
       <RestartAltOutlinedIcon />
     </IconButton>
   );

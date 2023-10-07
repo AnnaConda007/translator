@@ -7,14 +7,14 @@ export interface IBooks {
 
 interface IInitialState {
   titlesBook: Array<string>;
-  selectedBookText: string
+  selectedBookText: string;
   filteredTitles: Array<string>;
 }
 
 const initialState: IInitialState = {
   selectedBookText: "",
   titlesBook: [],
-  filteredTitles: []
+  filteredTitles: [],
 };
 const librarySlice = createSlice({
   name: "books",
@@ -31,18 +31,26 @@ const librarySlice = createSlice({
       state.filteredTitles = [...state.filteredTitles, action.payload];
     },
     setSelectedBookText: (state, action: PayloadAction<string>) => {
-      state.selectedBookText = action.payload
+      state.selectedBookText = action.payload;
     },
     deliteTitle: (state, action: PayloadAction<string>) => {
-      state.filteredTitles = state.filteredTitles.filter((title) => title !== action.payload)
+      state.filteredTitles = state.filteredTitles.filter(
+        (title) => title !== action.payload,
+      );
     },
     resetLibrary: (state) => {
-      state.selectedBookText = "",
-        state.titlesBook = [],
-        state.filteredTitles = []
+      (state.selectedBookText = ""),
+      (state.titlesBook = []),
+      (state.filteredTitles = []);
     },
-
-  }
+  },
 });
-export const { setTitles, addTitles, setFiltered, setSelectedBookText, deliteTitle, resetLibrary } = librarySlice.actions;
+export const {
+  setTitles,
+  addTitles,
+  setFiltered,
+  setSelectedBookText,
+  deliteTitle,
+  resetLibrary,
+} = librarySlice.actions;
 export default librarySlice.reducer;

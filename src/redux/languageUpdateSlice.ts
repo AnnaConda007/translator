@@ -4,24 +4,25 @@ import { PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   pickedLang: "",
   activeLanguageBox: false,
-  languageCode : ""
-}
+  languageCode: "",
+};
 
 const languageUpdateSlice = createSlice({
   name: "language",
   initialState,
   reducers: {
     setPickedLang: (state, action: PayloadAction<string>) => {
-      state.pickedLang = action.payload
+      state.pickedLang = action.payload;
     },
     setActiveLanguageBox: (state, action: PayloadAction<boolean>) => {
-      state.activeLanguageBox = action.payload
+      state.activeLanguageBox = action.payload;
     },
     setLanguageCode: (state, action: PayloadAction<string>) => {
-      state.languageCode = action.payload
+      state.languageCode = action.payload;
     },
   },
 });
 
-export const { setPickedLang, setActiveLanguageBox , setLanguageCode} = languageUpdateSlice.actions;
+export const { setPickedLang, setActiveLanguageBox, setLanguageCode } =
+  languageUpdateSlice.actions;
 export default languageUpdateSlice.reducer;

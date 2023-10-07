@@ -1,6 +1,10 @@
-export const paginateText = (text: string, maxLinesPerPage = 18, maxCharsPerLine = 100) => {
+export const paginateText = (
+  text: string,
+  maxLinesPerPage = 18,
+  maxCharsPerLine = 100,
+) => {
   const pages: string[] = [];
-  const lines = text.split('\n');
+  const lines = text.split("\n");
 
   let currentPage: string[] = [];
   let currentLineCount = 0;
@@ -17,7 +21,7 @@ export const paginateText = (text: string, maxLinesPerPage = 18, maxCharsPerLine
         let endIdx = startIdx + maxCharsPerLine;
         if (endIdx < line.length) {
           // Ищем ближайший пробел для корректного разбиения
-          while (line[endIdx] !== ' ' && endIdx > startIdx) {
+          while (line[endIdx] !== " " && endIdx > startIdx) {
             endIdx--;
           }
           if (endIdx === startIdx) {
@@ -32,7 +36,7 @@ export const paginateText = (text: string, maxLinesPerPage = 18, maxCharsPerLine
 
         // Проверяем, не достигли ли мы максимума строк на текущей странице
         if (currentLineCount === maxLinesPerPage) {
-          pages.push(currentPage.join('\n'));
+          pages.push(currentPage.join("\n"));
           currentPage = [];
           currentLineCount = 0;
         }
@@ -41,7 +45,7 @@ export const paginateText = (text: string, maxLinesPerPage = 18, maxCharsPerLine
 
     // Проверяем, не нужно ли добавить страницу после добавления строки
     if (currentLineCount === maxLinesPerPage) {
-      pages.push(currentPage.join('\n'));
+      pages.push(currentPage.join("\n"));
       currentPage = [];
       currentLineCount = 0;
     }
@@ -49,7 +53,7 @@ export const paginateText = (text: string, maxLinesPerPage = 18, maxCharsPerLine
 
   // Добавляем оставшиеся строки, если они есть
   if (currentPage.length > 0) {
-    pages.push(currentPage.join('\n'));
+    pages.push(currentPage.join("\n"));
   }
 
   return pages;

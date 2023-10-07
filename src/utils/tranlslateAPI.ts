@@ -1,6 +1,6 @@
 import axios from "axios";
 import { serverUrl } from "../contains";
-let IAM_TOKEN: string ;
+let IAM_TOKEN: string;
 
 const getIAMToken = async () => {
   try {
@@ -9,7 +9,7 @@ const getIAMToken = async () => {
   } catch (error) {
     console.error(
       "Ошибка при попытке получения токена API Яндекс.Переводчик",
-      error
+      error,
     );
   }
 };
@@ -17,13 +17,13 @@ setInterval(getIAMToken, 60 * 60 * 1000);
 
 export const translate = async (
   sourceLanguage: string,
-  translationWords: string
+  translationWords: string,
 ) => {
   try {
     if (!IAM_TOKEN) {
       await getIAMToken();
     }
-     const response = await axios.post(`${serverUrl}/translate`, {
+    const response = await axios.post(`${serverUrl}/translate`, {
       IAM_TOKEN: IAM_TOKEN,
       sourceLanguage: sourceLanguage,
       targetLanguage: "ru",

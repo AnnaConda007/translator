@@ -3,9 +3,7 @@ export enum TypeActionWordDictionary {
   ADD = "add",
 }
 
-
- 
 export enum LanguageMatchTested {
   RUSSIAN = "russian",
   FOREIGN = "foreign",
-} 
+}

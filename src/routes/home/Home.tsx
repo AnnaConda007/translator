@@ -1,20 +1,16 @@
-import { useFetchBookAndDictionaryFromDatabase } from '../../hooks/useFetchDataFromDatabase';
+import Box from "@mui/material/Box";
+import styles from "./home.module.css";
+import ActiveNawItemsContentBox from "../../components/educationalСontent/ActiveNawItemsContentBox/ActiveNawItemsContentBox";
 import Nav from "../../components/nav/Nav";
-import ActiveNawItemsContentBox from '../../components/educationalСontent/ActiveNawItemsContentBox/ActiveNawItemsContentBox';
-import styles from "./home.module.css"
-import Box from '@mui/material/Box';
-
+import { useFetchBookAndDictionaryFromDatabase } from "../../hooks/useFetchDataFromDatabase";
 
 const Home: React.FC = () => {
-  useFetchBookAndDictionaryFromDatabase()
-
-
+  useFetchBookAndDictionaryFromDatabase();
 
   return (
     <Box className={styles.mainBox}>
       <Nav />
       <ActiveNawItemsContentBox />
-
     </Box>
   );
 };

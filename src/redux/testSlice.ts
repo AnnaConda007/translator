@@ -45,10 +45,10 @@ const test = createSlice({
       state.currentCards = action.payload;
     },
     resetTest: (state) => {
-      state.activeCardNumber = 0
-        state.testResult = []
-        state.currentCards = []
-    }
+      state.activeCardNumber = 0;
+      state.testResult = [];
+      state.currentCards = [];
+    },
   },
 });
 
@@ -57,6 +57,7 @@ export const {
   resetActiveCardNumber,
   setTestResult,
   setCurrentCards,
-  resetTestResult, resetTest
+  resetTestResult,
+  resetTest,
 } = test.actions;
 export default test.reducer;

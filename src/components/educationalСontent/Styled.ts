@@ -1,7 +1,6 @@
-import { styled } from '@mui/system';
 import { Box, ListItem, ListItemText, List } from "@mui/material";
-import { alpha } from '@mui/system';
-
+import { styled } from "@mui/system";
+import { alpha } from "@mui/system";
 
 export const StyledWrapBox = styled(Box)`
   ${({ theme }) => `
@@ -37,33 +36,23 @@ export const StyledContentBox = styled(Box)(({ theme }) => ({
   height: "300px",
   marginTop: "5px",
   marginBottom: "20px",
-  position: "relative"
-}))
+  position: "relative",
+}));
 
 export const ListStyled = styled(List)({
-  overflowY: 'auto',
+  overflowY: "auto",
   maxHeight: "80%",
-})
-
-
+});
 
 export const ListItemStyled = styled(ListItem)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.primary.light, 0.3),
   marginTop: "2px",
-  paddingLeft: "5px"
-}))
-
+  paddingLeft: "5px",
+}));
 
 export const ListItemTextStyled = styled(ListItemText)({
-  overflowWrap: 'break-word',
-  '& span': {
-    fontSize: "15px"
-  }
-})
-
-
-
-
-
-
-
+  overflowWrap: "break-word",
+  "& span": {
+    fontSize: "15px",
+  },
+});

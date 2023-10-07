@@ -1,8 +1,8 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { UserCredential, User } from 'firebase/auth/cordova';
-import { FirebaseError } from 'firebase/app';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+import { FirebaseError } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { UserCredential, User } from "firebase/auth/cordova";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBXGAcFyO4yWey26BgEkqAoeEq4rVA5e7k",
@@ -11,15 +11,24 @@ const firebaseConfig = {
   projectId: "books-31eba",
   storageBucket: "books-31eba.appspot.com",
   messagingSenderId: "436605099313",
-  appId: "1:436605099313:web:810f388c2c04c5fd786410"
+  appId: "1:436605099313:web:810f388c2c04c5fd786410",
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export const SignUpWithEmail = async (email: string, password: string): Promise<User> => {
+export const SignUpWithEmail = async (
+  email: string,
+  password: string,
+): Promise<User> => {
   try {
-    const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return userCredential.user
+    const userCredential: UserCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    return userCredential.user;
   } catch (error: unknown) {
     if (error instanceof FirebaseError) {
       throw error;
@@ -29,9 +38,16 @@ export const SignUpWithEmail = async (email: string, password: string): Promise<
   }
 };
 
-export const signInWithEmail = async (email: string, password: string): Promise<User> => {
-  try { 
-    const userCredential: UserCredential = await signInWithEmailAndPassword(auth, email, password);
+export const signInWithEmail = async (
+  email: string,
+  password: string,
+): Promise<User> => {
+  try {
+    const userCredential: UserCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
     return userCredential.user;
   } catch (error: unknown) {
     if (error instanceof FirebaseError) {

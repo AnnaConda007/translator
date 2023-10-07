@@ -1,21 +1,20 @@
+import { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
-import { RootStoreState } from "../../../redux/store";
+import { useDispatch } from "react-redux";
+import CardIdentifier from "./card-identifier/CardIdentifier";
 import CardWithResult from "./card-with-result/CardWithResult";
 import { amountOfTestCard } from "../../../contains";
-import { useEffect } from "react";
-import { setCurrentCards } from "../../../redux/testSlice";
-import { useDispatch } from "react-redux";
-import { shuffleArr } from "../../../utils/shuffleArr";
 import { IEntry } from "../../../redux/dictionarySlice";
+import { RootStoreState } from "../../../redux/store";
+import { setCurrentCards } from "../../../redux/testSlice";
 import { IFlashCardData } from "../../../redux/testSlice";
 import { createFlashCardData } from "../../../utils/createFlashCardData";
-import CardIdentifier from './card-identifier/CardIdentifier';
-import { StyledContentBox } from '../Styled';
-import Backing from '../Backing';
-
+import { shuffleArr } from "../../../utils/shuffleArr";
+import Backing from "../Backing";
+import { StyledContentBox } from "../Styled";
 
 export interface flashCardProp {
   flashCardData: Array<IFlashCardData>;
@@ -24,13 +23,13 @@ export interface flashCardProp {
 const FlashCards = () => {
   const dispatch = useDispatch();
   const activeCardNumber: number = useSelector(
-    (state: RootStoreState) => state.test.activeCardNumber
+    (state: RootStoreState) => state.test.activeCardNumber,
   );
   const currentCards = useSelector(
-    (state: RootStoreState) => state.test.currentCards
+    (state: RootStoreState) => state.test.currentCards,
   );
   const words: Array<IEntry> = useSelector(
-    (state: RootStoreState) => state.dictionary.words
+    (state: RootStoreState) => state.dictionary.words,
   );
 
   useEffect(() => {
@@ -38,13 +37,14 @@ const FlashCards = () => {
     dispatch(setCurrentCards(shuffleArr(flashCardData)));
   }, [words, dispatch]);
 
-  const amountOfCads = words.length > amountOfTestCard ? amountOfTestCard : words.length
+  const amountOfCads =
+    words.length > amountOfTestCard ? amountOfTestCard : words.length;
 
   return (
     <Backing>
       <StyledContentBox>
-        <Card sx={{ height: "100%", overflow:"auto" }}>
-          <CardContent >
+        <Card sx={{ height: "100%", overflow: "auto" }}>
+          <CardContent>
             <Typography gutterBottom variant="body1" component="div">
               {!currentCards.length && <p>нет слов для теста</p>}
               {activeCardNumber === amountOfCads ? (
@@ -60,8 +60,6 @@ const FlashCards = () => {
         </Card>
       </StyledContentBox>
     </Backing>
-
-
   );
 };
 

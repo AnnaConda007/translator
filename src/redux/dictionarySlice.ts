@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ITestResult } from "./testSlice";
+import { stepToChangeTestType } from "../contains";
 export interface dataFromBD {
   counter: number;
   russianWord: string;
@@ -48,7 +49,7 @@ const dictionary = createSlice({
     },
     removeWord: (state, action: PayloadAction<string>) => {
       state.words = state.words.filter(
-        (word) => word.foreignWord !== action.payload
+        (word) => word.foreignWord !== action.payload,
       );
       delete state.counters[action.payload];
     },
@@ -57,13 +58,13 @@ const dictionary = createSlice({
       action.payload.forEach((result) => {
         const foreignWord = result.foreignWord;
         state.counters[foreignWord] += result.correctAnswer ? 1 : -1;
-        if (state.counters[foreignWord] > 3) {
+        if (state.counters[foreignWord] > stepToChangeTestType * 3) {
           delete state.counters[foreignWord];
           wordsToDelete.add(foreignWord);
         }
       });
       state.words = state.words.filter(
-        (word) => !wordsToDelete.has(word.foreignWord)
+        (word) => !wordsToDelete.has(word.foreignWord),
       );
     },
     resetDictionary: (state) => {
@@ -73,6 +74,12 @@ const dictionary = createSlice({
   },
 });
 
-export const { setDictionary, addWord, removeWord, updateCounter, clearDictionary, resetDictionary } =
-  dictionary.actions;
+export const {
+  setDictionary,
+  addWord,
+  removeWord,
+  updateCounter,
+  clearDictionary,
+  resetDictionary,
+} = dictionary.actions;
 export default dictionary.reducer;

@@ -1,0 +1,24 @@
+{
+  "overrides": [
+    {
+      "files": [],
+      "options": {
+        "printWidth": 160,
+        "useTabs": false,
+        "tabWidth": 2,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "semi": false,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "bracketSameLine": false
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

@@ -1,23 +1,24 @@
 import React from "react";
-import { Box } from '@mui/material';
-import TextSelectedBook from './Text-selected-book/TextSelectedBook';
+import { Box } from "@mui/material";
+import styles from "./DisplayForSelectedBook.module.css";
 import PaginateButton from "./paginate-button/PaginateButton";
+import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
 import { ButtonPaginnationDirection } from "../../enums/paginnationDirectionEnum";
-import styles from "./DisplayForSelectedBook.module.css"
 import { usePaginate } from "../../hooks/usePaginate";
-import Load from '../Load';
+import Load from "../Load";
 interface DisplayForSelectedBookProps {
-  currentPage: number
+  currentPage: number;
 }
 
-const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({ currentPage }) => {
+const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
+  currentPage,
+}) => {
   const {
     bookPages,
     currentPageText,
     setCurrentPageNumber,
-    currentPageNumber
+    currentPageNumber,
   } = usePaginate(currentPage);
-
 
   if (!currentPageText) {
     return <Load />;

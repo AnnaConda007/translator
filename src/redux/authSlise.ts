@@ -1,35 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 export interface IformData {
-  login: string,
-  password: string,
-  reEnterPassword?: string
+  login: string;
+  password: string;
+  reEnterPassword?: string;
 }
 
 interface ISetFormDataProps {
   name: keyof IformData;
-  value: string
+  value: string;
 }
 
 interface IInitialState {
-  formData: IformData,
-  errorEmailMessage: string
-  errorPasswordMessage: string
-  autentificationCode: string
-  loaded: boolean
+  formData: IformData;
+  errorEmailMessage: string;
+  errorPasswordMessage: string;
+  autentificationCode: string;
+  loaded: boolean;
 }
 
 const initialState: IInitialState = {
   formData: {
     login: "",
     password: "",
-    reEnterPassword: ""
+    reEnterPassword: "",
   },
   errorEmailMessage: "",
   errorPasswordMessage: "",
   autentificationCode: "",
-  loaded: false
-}
+  loaded: false,
+};
 
 const authSlise = createSlice({
   name: "authorization",
@@ -38,24 +38,31 @@ const authSlise = createSlice({
     setFormData: (state, action: PayloadAction<ISetFormDataProps>) => {
       const { name, value } = action.payload;
       state.formData[name] = value;
-    }, setErrorEmailMessage: (state, action: PayloadAction<string>) => {
-      state.errorEmailMessage = action.payload
+    },
+    setErrorEmailMessage: (state, action: PayloadAction<string>) => {
+      state.errorEmailMessage = action.payload;
     },
     setErrorPasswordMessage: (state, action: PayloadAction<string>) => {
-      state.errorPasswordMessage = action.payload
+      state.errorPasswordMessage = action.payload;
     },
     setAutentificationCode: (state, action: PayloadAction<string>) => {
-      state.autentificationCode = action.payload
+      state.autentificationCode = action.payload;
     },
-    resetForms: (state) => {
+    resetForms: () => {
       return initialState;
     },
     setLoaded: (state) => {
-      state.loaded = true
+      state.loaded = true;
     },
   },
-
 });
 
-export const { setFormData, setErrorEmailMessage, setErrorPasswordMessage, setAutentificationCode, resetForms, setLoaded } = authSlise.actions;
+export const {
+  setFormData,
+  setErrorEmailMessage,
+  setErrorPasswordMessage,
+  setAutentificationCode,
+  resetForms,
+  setLoaded,
+} = authSlise.actions;
 export default authSlise.reducer;

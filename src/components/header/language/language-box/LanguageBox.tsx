@@ -1,15 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
-import LanguagePopover from '../updateLanguagePopover/UpdateLanguagePopover';
-import { StyledLanguageBox } from './LanguageBoxStyled';
-import LanguageList from '../language-list/LanguageList';
-import { setActiveLanguageBox } from '../../../../redux/languageUpdateSlice';
-import { useDispatch } from 'react-redux';
+import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { StyledLanguageBox } from "./LanguageBoxStyled";
+import { setActiveLanguageBox } from "../../../../redux/languageUpdateSlice";
+import LanguageList from "../language-list/LanguageList";
+import LanguagePopover from "../updateLanguagePopover/UpdateLanguagePopover";
 interface UpdateLanguageProps {
   buttonRef: React.RefObject<HTMLElement>;
 }
 
 const LanguageBox: React.FC<UpdateLanguageProps> = ({ buttonRef }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const popOverRef = useRef<HTMLElement | null>(null);
 
@@ -30,24 +30,21 @@ const LanguageBox: React.FC<UpdateLanguageProps> = ({ buttonRef }) => {
       }, 0);
     };
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [anchorEl, buttonRef, dispatch]);
 
-
   return (
-    <StyledLanguageBox ref={popOverRef}  >
+    <StyledLanguageBox ref={popOverRef}>
       <LanguageList setAnchorEl={setAnchorEl} />
       <LanguagePopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
     </StyledLanguageBox>
-
   );
 };
 
 export default LanguageBox;
-
 
 /*
 

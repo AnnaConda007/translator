@@ -1,5 +1,5 @@
-import useTranslate from "../../../hooks/useTranslate";
 import React from "react";
+import useTranslate from "../../../hooks/useTranslate";
 
 interface IWord {
   word: string;
@@ -20,7 +20,7 @@ const Word: React.FC<IWord> = ({
     word: string,
     {
       currentTarget,
-    }: React.MouseEvent<HTMLSpanElement> | React.TouchEvent<HTMLSpanElement>
+    }: React.MouseEvent<HTMLSpanElement> | React.TouchEvent<HTMLSpanElement>,
   ) => {
     const selectedText = getSelectedWords();
     const wordToTranslate = selectedText || word;
@@ -28,7 +28,6 @@ const Word: React.FC<IWord> = ({
     setClickedWord(word);
     setAnchorEl(currentTarget);
   };
-
 
   return (
     <span

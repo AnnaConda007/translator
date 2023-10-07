@@ -1,29 +1,36 @@
-import { List, ListItemButton, Radio, FormControlLabel, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  List,
+  ListItemButton,
+  Radio,
+  FormControlLabel,
+  Typography,
+} from "@mui/material";
 import { useDispatch, useSelector, batch } from "react-redux";
-import { RootStoreState } from "../../../../redux/store";
 import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker";
+import theme from "../../../../muiThem";
+import { RootStoreState } from "../../../../redux/store";
 import { increaseActiveCardNumber } from "../../../../redux/testSlice";
 import { flashCardProp } from "../FlashCards";
-import { useState } from "react";
-import theme from '../../../../muiThem';
 
 const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
   const dispatch = useDispatch();
   const checkAnswer = useAnswerMatchingChecker();
   const [selectedAnswerOption, setSelectedAnswerOption] = useState("");
   const activeCardNumber = useSelector(
-    (state: RootStoreState) => state.test.activeCardNumber
+    (state: RootStoreState) => state.test.activeCardNumber,
   );
-  const [anwerColor, setAnswerColor] = useState("")
+  const [anwerColor, setAnswerColor] = useState("");
   const handleRadio = (answerOption: string) => {
     batch(() => {
       setSelectedAnswerOption(answerOption);
       const check = checkAnswer(answerOption);
-      setAnswerColor(check ? theme.palette.success.light : theme.palette.error.light)
+      setAnswerColor(
+        check ? theme.palette.success.light : theme.palette.error.light,
+      );
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
         setSelectedAnswerOption("");
-
       }, 500);
     });
   };
@@ -36,13 +43,19 @@ const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
       <List>
         {flashCardData[activeCardNumber].answerOptionsInForeign.map(
           (answerOption: string) => (
-            <ListItemButton sx={{
-              backgroundColor: (selectedAnswerOption === answerOption) ? anwerColor : "",
-              '&:hover': {
-                backgroundColor: (selectedAnswerOption === answerOption) ? anwerColor : "initial"
-              }
-            }}
-              key={answerOption}>
+            <ListItemButton
+              sx={{
+                backgroundColor:
+                  selectedAnswerOption === answerOption ? anwerColor : "",
+                "&:hover": {
+                  backgroundColor:
+                    selectedAnswerOption === answerOption
+                      ? anwerColor
+                      : "initial",
+                },
+              }}
+              key={answerOption}
+            >
               <FormControlLabel
                 value={answerOption}
                 control={
@@ -58,7 +71,7 @@ const AnswerOptions: React.FC<flashCardProp> = ({ flashCardData }) => {
                 label={answerOption}
               />
             </ListItemButton>
-          )
+          ),
         )}
       </List>
     </>

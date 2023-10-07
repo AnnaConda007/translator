@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
@@ -6,20 +6,19 @@ const theme = createTheme({
       main: "#9751F2",
     },
     secondary: {
-      main: "#FFFFFF"
+      main: "#FFFFFF",
     },
     text: {
-      primary: '#000000',
+      primary: "#000000",
     },
   },
   components: {
     MuiListItemButton: {
       styleOverrides: {
-        root: {
-        },
-      }
+        root: {},
+      },
     },
-  }
+  },
 });
 
 export default theme;

@@ -16,32 +16,30 @@ const visibilitySlice = createSlice({
     },
     toggleTranslationInputVisibility: (
       state,
-      action: PayloadAction<boolean>
+      action: PayloadAction<boolean>,
     ) => {
       state.translationInput = action.payload;
-    }, toggleAddNewBookInput: (
-      state,
-      action: PayloadAction<boolean>
-    ) => {
+    },
+    toggleAddNewBookInput: (state, action: PayloadAction<boolean>) => {
       state.addNewBookInput = action.payload;
-    }, toggleAuthCodeInput: (
-      state,
-      action: PayloadAction<boolean>
-    ) => {
+    },
+    toggleAuthCodeInput: (state, action: PayloadAction<boolean>) => {
       state.authCodeInput = action.payload;
     },
     resetVisibility: (state) => {
-      state.menuItem = ""
-      state.translationInput = false
-      state.addNewBookInput = false
-      state.authCodeInput = false
-    }
-
+      state.menuItem = "";
+      state.translationInput = false;
+      state.addNewBookInput = false;
+      state.authCodeInput = false;
+    },
   },
 });
 
-export const { toggleVisibilityMenuItem, toggleTranslationInputVisibility, toggleAddNewBookInput, toggleAuthCodeInput, resetVisibility } =
-  visibilitySlice.actions;
+export const {
+  toggleVisibilityMenuItem,
+  toggleTranslationInputVisibility,
+  toggleAddNewBookInput,
+  toggleAuthCodeInput,
+  resetVisibility,
+} = visibilitySlice.actions;
 export default visibilitySlice.reducer;
-
-

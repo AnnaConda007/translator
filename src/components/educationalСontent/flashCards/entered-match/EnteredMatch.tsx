@@ -1,17 +1,16 @@
-import { useDispatch, useSelector, batch } from "react-redux";
-import { RootStoreState } from "../../../../redux/store";
-import { List, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { List, TextField, Typography } from "@mui/material";
+import { useDispatch, useSelector, batch } from "react-redux";
+import { LanguageMatchTested } from "../../../../enums/dictionaryEnum";
+import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker";
+import theme from "../../../../muiThem";
+import { RootStoreState } from "../../../../redux/store";
 import {
   IFlashCardData,
   increaseActiveCardNumber,
 } from "../../../../redux/testSlice";
-import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker";
-import { useState } from "react";
 import CorrectAnswer from "../correct-answer/CorrectAnswer";
-import { LanguageMatchTested } from '../../../../enums/dictionaryEnum';
-import theme from '../../../../muiThem';
-
 
 interface EnteredMatchProps {
   flashCardData: Array<IFlashCardData>;
@@ -21,13 +20,13 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
   flashCardData,
   languageTested,
 }) => {
-  const [anwerColor, setAnswerColor] = useState("")
+  const [anwerColor, setAnswerColor] = useState("");
   const dispatch = useDispatch();
   const checkAnswer = useAnswerMatchingChecker();
   const [answerButtonClicked, setAnswerButtonClicked] = useState(false);
   const [answerValue, setAnswerValue] = useState("");
   const activeCardNumber = useSelector(
-    (state: RootStoreState) => state.test.activeCardNumber
+    (state: RootStoreState) => state.test.activeCardNumber,
   );
 
   const handleChange = (value: string) => {
@@ -37,12 +36,14 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
     batch(() => {
       setAnswerButtonClicked(true);
       const check = checkAnswer(answerValue);
-      setAnswerColor(check ? theme.palette.success.light : theme.palette.error.light)
+      setAnswerColor(
+        check ? theme.palette.success.light : theme.palette.error.light,
+      );
       setTimeout(() => {
         dispatch(increaseActiveCardNumber());
         setAnswerValue("");
         setAnswerButtonClicked(false);
-        setAnswerColor("")
+        setAnswerColor("");
       }, 1500);
     });
   };
@@ -60,14 +61,14 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
             ? flashCardData[activeCardNumber].foreignWord
             : flashCardData[activeCardNumber].russianWord}
         </Typography>
-        <TextField sx={{ backgroundColor: anwerColor }}
+        <TextField
+          sx={{ backgroundColor: anwerColor }}
           id="standard-basic"
           variant="standard"
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyPress}
           value={answerValue}
           autoComplete="off"
-
         />
         <button aria-label="Submit Answer" onClick={handleAnswer}>
           <ArrowForwardIosRoundedIcon />
