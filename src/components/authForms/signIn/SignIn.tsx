@@ -1,28 +1,38 @@
-import { Box } from "@mui/material";
-import { useSignIn } from "../../../hooks/autentiification/useSignIn";
+ import { useSignIn } from "../../../hooks/autentiification/useSignIn";
 import AutButton from "../authButton/AuthButton";
 import AuthLogin from "../authLogin/AuthLogin";
 import AuthPassword from "../authPassword/AuthPassword";
+import { StyledFormBox } from '../styles/authStyled'; 
+ import CloseFormButton from '../closeFormButton';
 
-const SignInForm = () => {
+interface SignInFormProps{
+  valueButton:string 
+}
+const SignInForm : React.FC<SignInFormProps>= ({valueButton}) => {
   const signIn = useSignIn();
+
   const onSubmit = async () => {
     signIn();
   };
+
   return (
-    <Box>
-      <form
+    <StyledFormBox >
+      <form  
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
       >
+        <CloseFormButton/>
         <AuthLogin />
         <AuthPassword reEnterPassword={false} />
-        <AutButton valueButton={"войти"} />
+        <AutButton valueButton={valueButton} />
       </form>
-    </Box>
+    </StyledFormBox>
   );
 };
 
 export default SignInForm;
+
+
+ 

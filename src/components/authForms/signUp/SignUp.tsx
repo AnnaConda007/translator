@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import AuthenticationCodeInput from "./authenticationCode/AuthenticationCode";
 import ChooseLanguage from "./ChooseLanguage";
@@ -7,30 +6,40 @@ import { RootStoreState } from "../../../redux/store";
 import AutButton from "../authButton/AuthButton";
 import AuthLogin from "../authLogin/AuthLogin";
 import AuthPassword from "../authPassword/AuthPassword";
-const SignUpForm = () => {
+import { StyledFormBox } from '../styles/authStyled'; 
+import CloseFormButton from '../closeFormButton';
+
+interface SignUpFormProps{
+  buttonValue:string
+}
+const SignUpForm :React.FC<SignUpFormProps> = ({buttonValue}) => {
   const doubleAuthentication = useDoubleAuthentication();
   const authCodeInputToggle = useSelector(
     (state: RootStoreState) => state.visibility.authCodeInput,
   );
+ 
+
   const onSubmit = async () => {
-    await doubleAuthentication();
+    await doubleAuthentication(); 
   };
 
   return (
-    <Box>
+    <StyledFormBox>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
       >
+        <CloseFormButton/>
         <AuthLogin />
         <AuthPassword reEnterPassword={true} />
         <ChooseLanguage />
-        <AutButton valueButton={"Зарегистрироваться"} />
+        {   <AutButton valueButton={buttonValue} />}
+  
       </form>
       {authCodeInputToggle && <AuthenticationCodeInput />}
-    </Box>
+    </StyledFormBox>
   );
 };
 

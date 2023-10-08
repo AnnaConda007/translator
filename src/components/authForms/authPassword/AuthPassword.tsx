@@ -21,7 +21,7 @@ const AuthPassword: React.FC<AuthPasswordProps> = ({ reEnterPassword }) => {
   );
 
   return (
-    <Box>
+    <Box sx={{marginBottom:"10px"}} > 
       <TextField
         name="password"
         autoComplete="off"

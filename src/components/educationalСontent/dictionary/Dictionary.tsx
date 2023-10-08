@@ -18,6 +18,7 @@ import {
   ListItemTextStyled,
   ListStyled,
 } from "../Styled";
+import { toggleVisibilityTranlsation } from '../../../redux/visibilitySlice ';
 
 const Dictionary: React.FC = () => {
   const userIsRegistered = localStorage.getItem(UserData.USER_ID);
@@ -28,7 +29,7 @@ const Dictionary: React.FC = () => {
     (state: RootStoreState) => state.dictionary.words,
   );
   const dispatch: AppDispatch = useDispatch();
-  const [clickedAddButton, setClickedAddButton] = useState<boolean>(false);
+  const clickedAddButton = useSelector((state:RootStoreState)=> state.visibility.translate)
 
   const handleDelete = (word: string, translation: string) => {
     batch(() => {
@@ -46,7 +47,7 @@ const Dictionary: React.FC = () => {
       setOpenAuthPopover(currentTarget);
       return;
     }
-    setClickedAddButton(!clickedAddButton);
+    dispatch(toggleVisibilityTranlsation(!clickedAddButton));
   };
 
   return (

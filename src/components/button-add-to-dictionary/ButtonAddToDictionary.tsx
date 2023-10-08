@@ -8,8 +8,9 @@ import { addWord } from "../../redux/dictionarySlice";
 import { IEntry } from "../../redux/dictionarySlice";
 import { RootStoreState } from "../../redux/store";
 import { AppDispatch } from "../../redux/store";
-import { toggleTranslationInputVisibility } from "../../redux/visibilitySlice ";
+import { toggleTranslationInputVisibility, toggleVisibilityTranlsation } from "../../redux/visibilitySlice ";
 import { add_DeliteWordInBD } from "../../utils/updateData/add_DeliteWordInDictionary";
+import { batch } from 'react-redux';
 
 const ButtonAddToDictionary: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -39,13 +40,17 @@ const ButtonAddToDictionary: React.FC = () => {
       actionType: TypeActionWordDictionary.ADD,
     });
     if (fetchResponse?.ok !== true) return;
-    dispatch(
-      addWord({
-        russianWord: translatedWord,
-        foreignWord: translationWord,
-      }),
-    );
-    dispatch(toggleTranslationInputVisibility(false));
+    batch(()=>{
+      dispatch(
+        addWord({
+          russianWord: translatedWord,
+          foreignWord: translationWord,
+        }),
+      ); 
+      dispatch(toggleVisibilityTranlsation(false))
+      dispatch(toggleTranslationInputVisibility(false));
+    })
+   
   };
 
   return (
