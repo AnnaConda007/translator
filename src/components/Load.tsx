@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import load from "../assets/load.gif";
+import load from "../assets/img/load.gif";
 
 const Load = () => {
   return (

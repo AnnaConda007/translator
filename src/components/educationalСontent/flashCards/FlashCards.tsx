@@ -15,6 +15,7 @@ import { createFlashCardData } from "../../../utils/createFlashCardData";
 import { shuffleArr } from "../../../utils/shuffleArr";
 import Backing from "../Backing";
 import { StyledContentBox } from "../Styled";
+import Instructions from '../../instructions/Instructions';
 
 export interface flashCardProp {
   flashCardData: Array<IFlashCardData>;
@@ -46,8 +47,8 @@ const FlashCards = () => {
         <Card sx={{ height: "100%", overflow: "auto" }}>
           <CardContent>
             <Typography gutterBottom variant="body1" component="div">
-              {!currentCards.length && <p>нет слов для теста</p>}
-              {activeCardNumber === amountOfCads ? (
+              {!currentCards.length && <Instructions/>}
+              {amountOfCads!=0 && activeCardNumber === amountOfCads ? (
                 <CardWithResult />
               ) : (
                 <CardIdentifier

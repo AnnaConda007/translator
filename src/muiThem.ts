@@ -12,6 +12,9 @@ const theme = createTheme({
       primary: "#000000",
     },
   },
+  typography: {
+    fontFamily: "SofiaSansCondensed, sans-serif",
+  },
   components: {
     MuiListItemButton: {
       styleOverrides: {

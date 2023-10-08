@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { List, TextField, Typography } from "@mui/material";
+import { List, TextField, Typography, IconButton } from "@mui/material";
 import { useDispatch, useSelector, batch } from "react-redux";
 import { LanguageMatchTested } from "../../../../enums/dictionaryEnum";
 import useAnswerMatchingChecker from "../../../../hooks/useAnswerMatchingChecker";
@@ -69,10 +69,15 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
           onKeyDown={handleKeyPress}
           value={answerValue}
           autoComplete="off"
+          InputProps={{
+            endAdornment: (
+              <IconButton aria-label="Submit Answer"  onClick={handleAnswer} >
+                   <ArrowForwardIosRoundedIcon />
+              </IconButton>
+            ),
+          }}
         />
-        <button aria-label="Submit Answer" onClick={handleAnswer}>
-          <ArrowForwardIosRoundedIcon />
-        </button>
+       
 
         {answerButtonClicked && (
           <CorrectAnswer

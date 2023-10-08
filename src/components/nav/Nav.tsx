@@ -12,7 +12,7 @@ const Nav: React.FC = () => {
       <AuthPopove
         anchorEl={OpenAuthPopover}
         setAnchorEl={setOpenAuthPopover}
-        popoverValue={"что бы добавить свои cлова в словарь"}
+        popoverValue={"что бы проверить себя"}
       />
       <NawItemList setOpenAuthPopover={setOpenAuthPopover} />
     </nav>
