@@ -14,8 +14,7 @@ const firebaseConfig = {
   appId: "1:436605099313:web:810f388c2c04c5fd786410",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const firebaseApp = initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 const auth = getAuth();
 
 export const SignUpWithEmail = async (
