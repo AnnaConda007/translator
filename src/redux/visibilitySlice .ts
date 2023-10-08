@@ -7,7 +7,7 @@ const initialState = {
   translate: false,
   addNewBookInput: false,
   authCodeInput: false,
-  authForm:""
+  authForm: "",
 };
 const visibilitySlice = createSlice({
   name: "visibility",

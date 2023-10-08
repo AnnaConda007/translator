@@ -1,14 +1,14 @@
- import { useSignIn } from "../../../hooks/autentiification/useSignIn";
+import { useSignIn } from "../../../hooks/autentiification/useSignIn";
 import AutButton from "../authButton/AuthButton";
 import AuthLogin from "../authLogin/AuthLogin";
 import AuthPassword from "../authPassword/AuthPassword";
-import { StyledFormBox } from '../styles/authStyled'; 
- import CloseFormButton from '../closeFormButton';
+import CloseFormButton from "../closeFormButton";
+import { StyledFormBox } from "../styles/authStyled";
 
-interface SignInFormProps{
-  valueButton:string 
+interface SignInFormProps {
+  valueButton: string;
 }
-const SignInForm : React.FC<SignInFormProps>= ({valueButton}) => {
+const SignInForm: React.FC<SignInFormProps> = ({ valueButton }) => {
   const signIn = useSignIn();
 
   const onSubmit = async () => {
@@ -16,14 +16,14 @@ const SignInForm : React.FC<SignInFormProps>= ({valueButton}) => {
   };
 
   return (
-    <StyledFormBox >
-      <form  
+    <StyledFormBox>
+      <form
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit();
         }}
       >
-        <CloseFormButton/>
+        <CloseFormButton />
         <AuthLogin />
         <AuthPassword reEnterPassword={false} />
         <AutButton valueButton={valueButton} />
@@ -33,6 +33,3 @@ const SignInForm : React.FC<SignInFormProps>= ({valueButton}) => {
 };
 
 export default SignInForm;
-
-
- 

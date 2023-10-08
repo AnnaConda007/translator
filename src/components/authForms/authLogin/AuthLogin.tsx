@@ -13,8 +13,9 @@ const AuthLogin: React.FC = () => {
   );
 
   return (
-    <Box> 
-      <TextField  sx={{width:"100%"}}
+    <Box>
+      <TextField
+        sx={{ width: "100%" }}
         name="login"
         autoComplete="off"
         value={formData.login}

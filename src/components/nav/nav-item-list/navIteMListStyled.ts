@@ -59,6 +59,7 @@ export const StyledListItemText = styled(ListItemText)(({ theme }) => ({
   color: theme.palette.text.primary,
   textAlign: "center",
   "& span": {
-    fontSize: "30px",  
+    fontSize: "30px",
+    fontWeight: "bold",
   },
 }));

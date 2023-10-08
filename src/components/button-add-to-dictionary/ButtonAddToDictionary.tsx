@@ -3,14 +3,17 @@ import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import Button from "@mui/material/Button/Button";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { batch } from "react-redux";
 import { TypeActionWordDictionary } from "../../enums/dictionaryEnum";
 import { addWord } from "../../redux/dictionarySlice";
 import { IEntry } from "../../redux/dictionarySlice";
 import { RootStoreState } from "../../redux/store";
 import { AppDispatch } from "../../redux/store";
-import { toggleTranslationInputVisibility, toggleVisibilityTranlsation } from "../../redux/visibilitySlice ";
+import {
+  toggleTranslationInputVisibility,
+  toggleVisibilityTranlsation,
+} from "../../redux/visibilitySlice ";
 import { add_DeliteWordInBD } from "../../utils/updateData/add_DeliteWordInDictionary";
-import { batch } from 'react-redux';
 
 const ButtonAddToDictionary: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -40,17 +43,16 @@ const ButtonAddToDictionary: React.FC = () => {
       actionType: TypeActionWordDictionary.ADD,
     });
     if (fetchResponse?.ok !== true) return;
-    batch(()=>{
+    batch(() => {
       dispatch(
         addWord({
           russianWord: translatedWord,
           foreignWord: translationWord,
         }),
-      ); 
-      dispatch(toggleVisibilityTranlsation(false))
+      );
+      dispatch(toggleVisibilityTranlsation(false));
       dispatch(toggleTranslationInputVisibility(false));
-    })
-   
+    });
   };
 
   return (

@@ -1,17 +1,21 @@
+import React from "react";
 import { Button } from "@mui/material/";
-import React from 'react';
-import { toggleVisibilityAuthForm } from '../../redux/visibilitySlice ';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootStoreState } from '../../redux/store';
+import {  useSelector } from "react-redux";
+import { RootStoreState } from "../../redux/store"; 
 
-interface OpenFormButtonProps{
+interface OpenFormButtonProps {
   value: string;
-  handleButton: (value: string) => void; 
+  handleButton: (value: string) => void;
 }
 
-const OpenFormButton: React.FC<OpenFormButtonProps> = ({value, handleButton}) => {
- const selectedButton = useSelector((state:RootStoreState)=>state.visibility.authForm)
-  
+const OpenFormButton: React.FC<OpenFormButtonProps> = ({
+  value,
+  handleButton,
+}) => {
+  const selectedButton = useSelector(
+    (state: RootStoreState) => state.visibility.authForm,
+  );
+
   return (
     <>
       {selectedButton == "" && (
@@ -21,6 +25,6 @@ const OpenFormButton: React.FC<OpenFormButtonProps> = ({value, handleButton}) =>
       )}
     </>
   );
-}
+};
 
 export default OpenFormButton;

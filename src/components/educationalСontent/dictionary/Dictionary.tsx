@@ -8,6 +8,7 @@ import { UserData } from "../../../enums/authEnum";
 import { TypeActionWordDictionary } from "../../../enums/dictionaryEnum";
 import { IEntry, removeWord } from "../../../redux/dictionarySlice";
 import { RootStoreState, AppDispatch } from "../../../redux/store";
+import { toggleVisibilityTranlsation } from "../../../redux/visibilitySlice ";
 import { add_DeliteWordInBD } from "../../../utils/updateData/add_DeliteWordInDictionary";
 import AuthPopove from "../../authPopover/AuthPopover";
 import TranslationInput from "../../translation-input/TranslationInput";
@@ -18,7 +19,6 @@ import {
   ListItemTextStyled,
   ListStyled,
 } from "../Styled";
-import { toggleVisibilityTranlsation } from '../../../redux/visibilitySlice ';
 
 const Dictionary: React.FC = () => {
   const userIsRegistered = localStorage.getItem(UserData.USER_ID);
@@ -29,7 +29,9 @@ const Dictionary: React.FC = () => {
     (state: RootStoreState) => state.dictionary.words,
   );
   const dispatch: AppDispatch = useDispatch();
-  const clickedAddButton = useSelector((state:RootStoreState)=> state.visibility.translate)
+  const clickedAddButton = useSelector(
+    (state: RootStoreState) => state.visibility.translate,
+  );
 
   const handleDelete = (word: string, translation: string) => {
     batch(() => {

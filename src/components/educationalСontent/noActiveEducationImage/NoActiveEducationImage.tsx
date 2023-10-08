@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import styles from "./noActiveEducationImage.module.css";
-import catImg from "../../../assets/img/cat.png";
 import smallCatImg from "../../../assets//img/catSmall.png";
+import catImg from "../../../assets/img/cat.png";
 
 const NoActiveEducationImage = () => {
   return (

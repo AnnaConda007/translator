@@ -6,21 +6,20 @@ import { RootStoreState } from "../../../redux/store";
 import AutButton from "../authButton/AuthButton";
 import AuthLogin from "../authLogin/AuthLogin";
 import AuthPassword from "../authPassword/AuthPassword";
-import { StyledFormBox } from '../styles/authStyled'; 
-import CloseFormButton from '../closeFormButton';
+import CloseFormButton from "../closeFormButton";
+import { StyledFormBox } from "../styles/authStyled";
 
-interface SignUpFormProps{
-  buttonValue:string
+interface SignUpFormProps {
+  buttonValue: string;
 }
-const SignUpForm :React.FC<SignUpFormProps> = ({buttonValue}) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({ buttonValue }) => {
   const doubleAuthentication = useDoubleAuthentication();
   const authCodeInputToggle = useSelector(
     (state: RootStoreState) => state.visibility.authCodeInput,
   );
- 
 
   const onSubmit = async () => {
-    await doubleAuthentication(); 
+    await doubleAuthentication();
   };
 
   return (
@@ -31,12 +30,11 @@ const SignUpForm :React.FC<SignUpFormProps> = ({buttonValue}) => {
           onSubmit();
         }}
       >
-        <CloseFormButton/>
+        <CloseFormButton />
         <AuthLogin />
         <AuthPassword reEnterPassword={true} />
         <ChooseLanguage />
-        {   <AutButton valueButton={buttonValue} />}
-  
+        {<AutButton valueButton={buttonValue} />}
       </form>
       {authCodeInputToggle && <AuthenticationCodeInput />}
     </StyledFormBox>

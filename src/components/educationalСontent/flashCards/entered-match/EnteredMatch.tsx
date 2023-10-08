@@ -71,13 +71,12 @@ const EnteredMatch: React.FC<EnteredMatchProps> = ({
           autoComplete="off"
           InputProps={{
             endAdornment: (
-              <IconButton aria-label="Submit Answer"  onClick={handleAnswer} >
-                   <ArrowForwardIosRoundedIcon />
+              <IconButton aria-label="Submit Answer" onClick={handleAnswer}>
+                <ArrowForwardIosRoundedIcon />
               </IconButton>
             ),
           }}
         />
-       
 
         {answerButtonClicked && (
           <CorrectAnswer
