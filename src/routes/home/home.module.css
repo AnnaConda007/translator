@@ -1,0 +1,12 @@
+.mainBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 750px) {
+  .mainBox {
+    margin-top: 0px;
+  }
+}

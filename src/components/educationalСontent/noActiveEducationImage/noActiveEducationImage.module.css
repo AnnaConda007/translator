@@ -1,0 +1,23 @@
+.image {
+  width: 370px;
+}
+
+.imageSmal {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .image {
+    display: none;
+  }
+
+  .imageSmal {
+    display: block;
+  }
+}
+
+@media (max-width: 450px) {
+  .imageSmal {
+    display: none;
+  }
+}

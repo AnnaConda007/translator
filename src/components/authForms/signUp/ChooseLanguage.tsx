@@ -1,15 +1,17 @@
 import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { languages } from "../../../contains";
+import { DataBasePoints } from "../../../enums/dataBasePointsEnum";
 import { setLanguage } from "../../../redux/languageSlice";
 import { RootStoreState } from "../../../redux/store";
-import { DataBasePoints } from '../../../enums/dataBasePointsEnum';
-import { languages } from '../../../contains'; 
 
 const ChooseLanguage: React.FC = () => {
   const dispatch = useDispatch();
-  const selectedLanguage = useSelector((state: RootStoreState) => state.language);
+  const selectedLanguage = useSelector(
+    (state: RootStoreState) => state.language,
+  );
 
   const selectLanguage = useCallback(async (languageCode: string) => {
     localStorage.setItem(DataBasePoints.LANGUAGE, languageCode);
@@ -18,7 +20,9 @@ const ChooseLanguage: React.FC = () => {
 
   return (
     <FormControl fullWidth variant="outlined">
-      <InputLabel id="language-selector-label">Выберите язык для изучения</InputLabel>
+      <InputLabel id="language-selector-label">
+        Выберите язык для изучения
+      </InputLabel>
       <Select
         labelId="language-selector-label"
         id="language-selector"
@@ -37,7 +41,6 @@ const ChooseLanguage: React.FC = () => {
         })}
       </Select>
     </FormControl>
-
   );
 };
 

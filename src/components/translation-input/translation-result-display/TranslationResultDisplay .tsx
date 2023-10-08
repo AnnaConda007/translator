@@ -1,22 +1,28 @@
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../../../redux/store";
 import ButtonAddToDictionary from "../../button-add-to-dictionary/ButtonAddToDictionary";
-
 const TranslationResultDisplay: React.FC = () => {
   const addBtnVisible = useSelector(
-    (state: RootStoreState) => state.visibility.translationInput
+    (state: RootStoreState) => state.visibility.translationInput,
   );
   const translatedWord = useSelector(
-    (state: RootStoreState) => state.translator.russianWord
+    (state: RootStoreState) => state.translator.russianWord,
   );
 
   return (
     <>
       {addBtnVisible ? (
-        <div>
-          <ButtonAddToDictionary />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "5px",
+          }}
+        >
           <span>{translatedWord}</span>
-        </div>
+          <ButtonAddToDictionary />
+        </Box>
       ) : null}
     </>
   );

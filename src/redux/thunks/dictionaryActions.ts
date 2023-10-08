@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { updateCounter } from "../../redux/dictionarySlice";
-import { updateDictionaryEntries } from '../../utils/updateData/updateDictionaryEntries';
-import { transformationObjToBD } from "../../utils/transformationObjToBD";
-import { ITestResult } from "../../redux/testSlice";
 import { IDictionary } from "../../redux/dictionarySlice";
+import { ITestResult } from "../../redux/testSlice";
+import { transformationObjToBD } from "../../utils/transformationObjToBD";
+import { updateDictionaryEntries } from "../../utils/updateData/updateDictionaryEntries";
 
 export const updateAndPullDictionary = createAsyncThunk(
   "dictionary/updateAndSave",
@@ -13,5 +13,5 @@ export const updateAndPullDictionary = createAsyncThunk(
       .dictionary;
     const entriesObject = transformationObjToBD(updatedDictionary, testResults);
     await updateDictionaryEntries(entriesObject);
-  }
+  },
 );

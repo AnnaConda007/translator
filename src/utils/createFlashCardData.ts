@@ -1,7 +1,6 @@
-import { IFlashCardData } from "../redux/testSlice";
-import { IEntry } from "../redux/dictionarySlice";
 import { randomForeignWords } from "./shuffleArr";
-
+import { IEntry } from "../redux/dictionarySlice";
+import { IFlashCardData } from "../redux/testSlice";
 
 export const createFlashCardData = (words: Array<IEntry>) => {
   const foreignWords: Array<string> = words.map((entry) => entry.foreignWord);
@@ -10,7 +9,7 @@ export const createFlashCardData = (words: Array<IEntry>) => {
       russianWord: entry.russianWord,
       answerOptionsInForeign: randomForeignWords(
         foreignWords,
-        entry.foreignWord
+        entry.foreignWord,
       ),
       foreignWord: entry.foreignWord,
     };

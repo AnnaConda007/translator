@@ -1,7 +1,7 @@
-import { generateUserDatabaseURL_point } from '../../contains';
-import { TypeActionWordDictionary } from '../../enums/dictionaryEnum';
-import { DataBasePoints } from '../../enums/dataBasePointsEnum';
-import { UserData } from '../../enums/authEnum';
+import { generateUserDatabaseURL_point } from "../../contains";
+import { UserData } from "../../enums/authEnum";
+import { DataBasePoints } from "../../enums/dataBasePointsEnum";
+import { TypeActionWordDictionary } from "../../enums/dictionaryEnum";
 interface add_DeliteWordInBDArgs {
   russianWord?: string;
   foreignWord: string;
@@ -13,11 +13,14 @@ export const add_DeliteWordInBD = async ({
   foreignWord,
   actionType,
 }: add_DeliteWordInBDArgs) => {
-  const userFairbaseId = localStorage.getItem(UserData.USER_ID)
-  if (!userFairbaseId) return
+  const userFairbaseId = localStorage.getItem(UserData.USER_ID);
+  if (!userFairbaseId) return;
   try {
     if (actionType === TypeActionWordDictionary.ADD) {
-      const dictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY })
+      const dictionaryUserURL = generateUserDatabaseURL_point({
+        userFairbaseId,
+        dbPoint: DataBasePoints.DICTIONARY,
+      });
       const newEntryInDictionary = {
         [foreignWord]: {
           [DataBasePoints.FOREIGN_WORD_IN_DB]: foreignWord,
@@ -34,7 +37,11 @@ export const add_DeliteWordInBD = async ({
       });
       return response;
     } else {
-      const wordInDictionaryUserURL = generateUserDatabaseURL_point({ userFairbaseId, dbPoint: DataBasePoints.DICTIONARY, wordToDelete: foreignWord })
+      const wordInDictionaryUserURL = generateUserDatabaseURL_point({
+        userFairbaseId,
+        dbPoint: DataBasePoints.DICTIONARY,
+        wordToDelete: foreignWord,
+      });
       await fetch(wordInDictionaryUserURL, {
         method: "DELETE",
         headers: {

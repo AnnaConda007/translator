@@ -1,0 +1,8 @@
+.addNewBookInput {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 230px;
+}

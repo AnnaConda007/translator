@@ -1,6 +1,7 @@
 import { useState } from "react";
-import TranslationPopover from "../translation-popover/TranslationPopover";
 import { Paper, Typography } from "@mui/material";
+import styles from "./TextSelectedBook.module.css";
+import TranslationPopover from "../translation-popover/TranslationPopover";
 import Word from "../word/Word";
 
 type TextSelectedTextProps = {
@@ -10,7 +11,6 @@ type TextSelectedTextProps = {
 const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   currentPageText,
 }) => {
-
   const [clickedWord, setClickedWord] = useState<string>("");
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const selectedText = (): string => {
@@ -20,6 +20,8 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
 
   return (
     <Paper
+      sx={{ backgroundColor: "#FFE4B5" }}
+      className={styles.paper}
       onMouseUp={selectedText}
       onTouchEnd={selectedText}
     >

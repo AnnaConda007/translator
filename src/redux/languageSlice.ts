@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { DataBasePoints } from '../enums/dataBasePointsEnum';
+import { DataBasePoints } from "../enums/dataBasePointsEnum";
 
-const initialState = localStorage.getItem(DataBasePoints.LANGUAGE) || "";
+const initialState = localStorage.getItem(DataBasePoints.LANGUAGE) || "en";
 
 const selectedLanguageSlice = createSlice({
   name: "language",
@@ -11,8 +11,8 @@ const selectedLanguageSlice = createSlice({
     setLanguage: (state, action: PayloadAction<string>) => {
       return action.payload;
     },
-    resetLanguage: (state) => {
-      return ""
+    resetLanguage: () => {
+      return "";
     },
   },
 });

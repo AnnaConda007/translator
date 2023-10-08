@@ -1,0 +1,13 @@
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0px;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 10px 0px;
+  }
+}

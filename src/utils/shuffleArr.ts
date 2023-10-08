@@ -14,13 +14,13 @@ export const shuffleArr = <T>(array: Array<T>) => {
 
 export const randomForeignWords = (
   foreignWords: Array<string>,
-  correctAnswer: string
+  correctAnswer: string,
 ): Array<string> => {
   const filteredForeignWords = foreignWords.filter(
-    (word) => word !== correctAnswer
+    (word) => word !== correctAnswer,
   );
   const shuffledForeignWords: Array<string> = shuffleArr(
-    filteredForeignWords
+    filteredForeignWords,
   ).slice(0, amountAnswerOption - 1);
   const answerOptions = [...shuffledForeignWords, correctAnswer];
   return shuffleArr(answerOptions);

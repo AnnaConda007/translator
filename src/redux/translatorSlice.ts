@@ -16,11 +16,12 @@ export const wordsSlice = createSlice({
       state.foreignWord = action.payload;
     },
     resetTranslator: (state) => {
-      state.russianWord = ""
-      state.foreignWord = ""
-    }
+      state.russianWord = "";
+      state.foreignWord = "";
+    },
   },
 });
 
-export const { setRussianWord, setForeignWord, resetTranslator } = wordsSlice.actions;
+export const { setRussianWord, setForeignWord, resetTranslator } =
+  wordsSlice.actions;
 export default wordsSlice.reducer;

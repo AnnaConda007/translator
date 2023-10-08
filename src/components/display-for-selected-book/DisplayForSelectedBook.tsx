@@ -1,35 +1,30 @@
-import { useState, useEffect } from "react";
-import { paginateText } from "../../utils/paginateText";
-import TextSelectedBook from './Text-selected-book/TextSelectedBook';
+import React from "react";
+import { Box } from "@mui/material";
+import styles from "./DisplayForSelectedBook.module.css";
 import PaginateButton from "./paginate-button/PaginateButton";
+import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
 import { ButtonPaginnationDirection } from "../../enums/paginnationDirectionEnum";
-import { useSelector } from 'react-redux';
-import { RootStoreState } from '../../redux/store';
-
+import { usePaginate } from "../../hooks/usePaginate";
+import Load from "../Load";
 interface DisplayForSelectedBookProps {
-  currentPage: number
+  currentPage: number;
 }
-const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({ currentPage }) => {
-  const bookText = useSelector((state: RootStoreState) => state.library.selectedBookText)
-  const [bookPages, setBookPages] = useState<string[]>([]);
-  const [currentPageNumber, setCurrentPageNumber] = useState<number>(currentPage);
-  const [currentPageText, setCurrentPageText] = useState<string>("");
 
-  useEffect(() => {
-    if (!bookText) return;
-    const pages: string[] = paginateText(bookText);
-    setBookPages(pages);
-  }, [bookText]);
+const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
+  currentPage,
+}) => {
+  const {
+    bookPages,
+    currentPageText,
+    setCurrentPageNumber,
+    currentPageNumber,
+  } = usePaginate(currentPage);
 
-  useEffect(() => {
-    if (!bookPages.length) return;
-    setCurrentPageText(bookPages[currentPageNumber - 1]);
-  }, [bookPages, currentPageNumber]);
-  if (!bookText) {
-    return ("load")
+  if (!currentPageText) {
+    return <Load />;
   }
   return (
-    <>
+    <Box className={styles.Box}>
       <TextSelectedBook currentPageText={currentPageText} />
       <div>
         {currentPageNumber > 1 && (
@@ -43,15 +38,16 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({ current
         <span>
           {currentPageNumber}/{bookPages.length}
         </span>
-        {currentPageNumber <= bookPages.length - 1 && (<PaginateButton
-          setCurrentPageNumber={setCurrentPageNumber}
-          buttonValue={"next"}
-          direction={ButtonPaginnationDirection.NEXT}
-          currentPageNumber={currentPageNumber}
-        />)}
-
+        {currentPageNumber < bookPages.length && (
+          <PaginateButton
+            setCurrentPageNumber={setCurrentPageNumber}
+            buttonValue={"next"}
+            direction={ButtonPaginnationDirection.NEXT}
+            currentPageNumber={currentPageNumber}
+          />
+        )}
       </div>
-    </>
+    </Box>
   );
 };
 

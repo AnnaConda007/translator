@@ -1,11 +1,13 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./routes/Home";
+import { ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
-import SelectedBookContent from "./routes/SelectedBookPage";
-import Auth from './routes/Auth';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/header/header";
+import theme from "./muiThem";
 import store from "./redux/store";
-import Header from './components/header/header';
+import Auth from "./routes/Auth";
+import Home from "./routes/home/Home";
+import SelectedBookContent from "./routes/SelectedBookPage";
 
 const MainRoutes: React.FC = () => (
   <>
@@ -20,12 +22,17 @@ const MainRoutes: React.FC = () => (
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/authorization" element={<Auth />} />
-          <Route path="/*" element={<MainRoutes />} />
-        </Routes>
-      </Router>
+      <ThemeProvider theme={theme}>
+        {" "}
+        {/* Обертка приложения в ThemeProvider */}
+        <Router>
+          <Routes>
+            <Route path="/authorization" element={<Auth />} />
+            <Route path="/*" element={<MainRoutes />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>{" "}
+      {/* Закрытие тега ThemeProvider */}
     </Provider>
   );
 }

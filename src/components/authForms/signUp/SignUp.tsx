@@ -1,33 +1,44 @@
-import { Box } from '@mui/material';
-import AuthLogin from '../authLogin/AuthLogin';
-import AuthPassword from '../authPassword/AuthPassword';
-import { useSelector } from 'react-redux';
-import { useDoubleAuthentication } from '../../../hooks/autentiification/useDoubleAuthenticationr';
-import AuthenticationCodeInput from './authenticationCode/AuthenticationCode';
-import { RootStoreState } from '../../../redux/store';
-import AutButton from '../authButton/AuthButton';
-import ChooseLanguage from './ChooseLanguage';
-const SignUpForm = () => {
-  const doubleAuthentication = useDoubleAuthentication()
-  const authCodeInputToggle = useSelector((state: RootStoreState) => state.visibility.authCodeInput)
+import { useSelector } from "react-redux";
+import AuthenticationCodeInput from "./authenticationCode/AuthenticationCode";
+import ChooseLanguage from "./ChooseLanguage";
+import { useDoubleAuthentication } from "../../../hooks/autentiification/useDoubleAuthenticationr";
+import { RootStoreState } from "../../../redux/store";
+import AutButton from "../authButton/AuthButton";
+import AuthLogin from "../authLogin/AuthLogin";
+import AuthPassword from "../authPassword/AuthPassword";
+import CloseFormButton from "../closeFormButton";
+import { StyledFormBox } from "../styles/authStyled";
+
+interface SignUpFormProps {
+  buttonValue: string;
+}
+const SignUpForm: React.FC<SignUpFormProps> = ({ buttonValue }) => {
+  const doubleAuthentication = useDoubleAuthentication();
+  const authCodeInputToggle = useSelector(
+    (state: RootStoreState) => state.visibility.authCodeInput,
+  );
+
   const onSubmit = async () => {
-    await doubleAuthentication()
-  }
+    await doubleAuthentication();
+  };
 
   return (
-    <Box>
-      <form onSubmit={e => {
-        e.preventDefault();
-        onSubmit()
-      }}>
+    <StyledFormBox>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
+      >
+        <CloseFormButton />
         <AuthLogin />
         <AuthPassword reEnterPassword={true} />
         <ChooseLanguage />
-        <AutButton valueButton={"Зарегистрироваться"} />
+        {<AutButton valueButton={buttonValue} />}
       </form>
-      {authCodeInputToggle && (<AuthenticationCodeInput />)}
-    </Box>
-  )
-}
+      {authCodeInputToggle && <AuthenticationCodeInput />}
+    </StyledFormBox>
+  );
+};
 
-export default SignUpForm
+export default SignUpForm;

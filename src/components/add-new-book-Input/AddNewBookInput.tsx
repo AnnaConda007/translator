@@ -1,64 +1,74 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { toggleAddNewBookInput } from '../../redux/visibilitySlice ';
-import { useDispatch } from 'react-redux';
-import { addNewBookInLibrary } from '../../utils/updateData/addNewBook';
-import { useSelector } from 'react-redux';
-import { RootStoreState } from '../../redux/store';
-import jschardet from 'jschardet';
-import { addTitles } from '../../redux/librarySlice';
+import React, { useState } from "react";
+import { TextField, Box } from "@mui/material";
+import jschardet from "jschardet";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styles from "./addNewBookInput.module.css";
+import theme from "../../muiThem";
+import { addTitles } from "../../redux/librarySlice";
+import { RootStoreState } from "../../redux/store";
+import { toggleAddNewBookInput } from "../../redux/visibilitySlice ";
+import { addNewBookInLibrary } from "../../utils/updateData/addNewBook";
 
 const AddNewBookInput: React.FC = () => {
-  const dispatch = useDispatch()
-  const [titleBook, setTitleBook] = useState("")
-  const [errorLoad, setErrorLoad] = useState(false)
-  const [matchedTitle, setMatchedTitle] = useState(false)
-  const titles: Array<string> = useSelector((state: RootStoreState) => state.library.titlesBook)
-  const titlesBooks = new Set(titles)
-  const titleMatchErrorText = "Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название"
-  const unrecognizedErrorText = "Текст содержит нераспознаваемые символы, проблема кодировки текста"
+  const dispatch = useDispatch();
+  const [titleBook, setTitleBook] = useState("");
+  const [errorLoad, setErrorLoad] = useState(false);
+  const [matchedTitle, setMatchedTitle] = useState(false);
+  const titles: Array<string> = useSelector(
+    (state: RootStoreState) => state.library.titlesBook,
+  );
+  const titlesBooks = new Set(titles);
+  const titleMatchErrorText =
+    "Книга с таким названием уже добавлена в библиотеку, проверьте библиотеку или измените название";
+  const unrecognizedErrorText =
+    "Текст содержит нераспознаваемые символы, проблема кодировки текста";
 
   const handleFileUpload = (file: File) => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       if (!e.target) return;
       const arrayBuffer = e.target.result as ArrayBuffer;
-      const charsetDetectionResult = jschardet.detect(new Uint8Array(arrayBuffer) as any);
-      const detectedCharset = charsetDetectionResult && charsetDetectionResult.encoding;
+      const charsetDetectionResult = jschardet.detect(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        new Uint8Array(arrayBuffer) as any,
+      );
+      const detectedCharset =
+        charsetDetectionResult && charsetDetectionResult.encoding;
       if (!detectedCharset) {
         setErrorLoad(true);
         return;
       }
       const decoder = new TextDecoder(detectedCharset);
       const content = decoder.decode(arrayBuffer);
-      const matchTitle = titlesBooks.has(titleBook)
+      const matchTitle = titlesBooks.has(titleBook);
       if (matchTitle) {
-        setMatchedTitle(matchTitle)
+        setMatchedTitle(matchTitle);
         setTimeout(() => {
-          dispatch(toggleAddNewBookInput(false))
+          dispatch(toggleAddNewBookInput(false));
         }, 4000);
-        return
+        return;
       } else if (!titleBook) {
-        alert("выделить красным")
-        return
+        alert("выделить красным");
+        return;
       } else if (content.includes("\ufffd") || /¿½/g.test(content)) {
-        setErrorLoad(true)
+        setErrorLoad(true);
         return;
       }
-      const additionBook = await addNewBookInLibrary(titleBook, content)
-      setTitleBook("")
-      dispatch(addTitles(titleBook))
-      if (!additionBook) return
+      const additionBook = await addNewBookInLibrary(titleBook, content);
+      setTitleBook("");
+      dispatch(addTitles(titleBook));
+      if (!additionBook) return;
       setTimeout(() => {
-        dispatch(toggleAddNewBookInput(false))
+        dispatch(toggleAddNewBookInput(false));
       }, 2000);
     };
     reader.readAsArrayBuffer(file);
   };
 
   const inputTextOnChange = (value: string) => {
-    setTitleBook(value)
-  }
+    setTitleBook(value);
+  };
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
@@ -84,19 +94,22 @@ const AddNewBookInput: React.FC = () => {
   };
 
   return (
-    <div
+    <Box
+      className={styles.addNewBookInput}
+      sx={{ backgroundColor: theme.palette.secondary.main }}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      style={{ border: '2px dashed #ccc', padding: '20px', textAlign: 'center' }}
+      style={{ textAlign: "center" }}
     >
       <TextField
+        autoComplete="off"
         id="standard-basic"
         label="Название книги"
         variant="standard"
         onChange={(e) => inputTextOnChange(e.target.value)}
         value={titleBook}
       />
-      {matchedTitle && (<span> {titleMatchErrorText}</span>)}
+      {matchedTitle && <span> {titleMatchErrorText}</span>}
       <input
         type="file"
         accept=".txt"
@@ -106,9 +119,8 @@ const AddNewBookInput: React.FC = () => {
         }}
       />
       <p>Перетащите файл сюда или нажмите, чтобы выбрать файл</p>
-      {errorLoad && (<span> {unrecognizedErrorText} </span>)}
-    </div>
-
+      {errorLoad && <span> {unrecognizedErrorText} </span>}
+    </Box>
   );
 };
 

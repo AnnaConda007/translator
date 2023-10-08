@@ -1,51 +1,57 @@
-import { Typography, TextField, Button, Box } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { RootStoreState } from '../../../../redux/store';
-import { useSignUp } from '../../../../hooks/autentiification/useSignUp';
-import { repeatCodeAuthentication } from '../../../../hooks/autentiification/useDoubleAuthenticationr';
+import { useState, useEffect } from "react";
+import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
+import { Typography, TextField, Button, Box, IconButton } from "@mui/material";
+import { useSelector } from "react-redux";
+import { repeatCodeAuthentication } from "../../../../hooks/autentiification/useDoubleAuthenticationr";
+import { useSignUp } from "../../../../hooks/autentiification/useSignUp";
+import { RootStoreState } from "../../../../redux/store";
 
 const AuthenticationCodeInput: React.FC = () => {
-  const registrate = useSignUp()
-  const repeatCode = repeatCodeAuthentication()
-  const [authenticationCodeValue, setAuthenticationCodeValue] = useState("")
-  const [errorText, setErrorText] = useState("")
+  const registrate = useSignUp();
+  const repeatCode = repeatCodeAuthentication();
+  const [authenticationCodeValue, setAuthenticationCodeValue] = useState("");
+  const [errorText, setErrorText] = useState("");
   const [seconds, setSeconds] = useState(90);
-  const sendedAutentificationCode = useSelector((state: RootStoreState) => state.authorization.autentificationCode)
+  const sendedAutentificationCode = useSelector(
+    (state: RootStoreState) => state.authorization.autentificationCode,
+  );
   const onChange = (value: string) => {
-    setAuthenticationCodeValue(value)
-    setErrorText("")
-  }
+    setAuthenticationCodeValue(value);
+    setErrorText("");
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds > 0 ? prevSeconds - 1 : 0);
+      setSeconds((prevSeconds) => (prevSeconds > 0 ? prevSeconds - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
   }, []);
 
   const handleMatchCodsButton = () => {
-    if (sendedAutentificationCode != authenticationCodeValue) {
-      setErrorText("неверный код")
-      return
-    } else registrate()
-  }
+    if (sendedAutentificationCode !== authenticationCodeValue) {
+      setErrorText("неверный код");
+      return;
+    } else registrate();
+  };
 
   const handleRepeatCodeButton = () => {
-    repeatCode()
-  }
+    repeatCode();
+    setSeconds(90);
+  };
   return (
-    <>
+    <Box>
       <Typography variant="body2" component="p">
-        Введите код, отправленный на почту пропс формДаты
+        Введите код, отправленный на почту
       </Typography>
-      <form onSubmit={e => {
-        e.preventDefault();
-        handleMatchCodsButton()
-      }}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleMatchCodsButton();
+        }}
+      >
         <Box>
           <TextField
-            autoComplete='off'
+            autoComplete="off"
             value={authenticationCodeValue}
             onChange={(e) => onChange(e.target.value)}
             variant="outlined"
@@ -54,18 +60,22 @@ const AuthenticationCodeInput: React.FC = () => {
           <Typography variant="body2" component="p">
             Вы можете запросить повторный код через {seconds} секунд
           </Typography>
-          <Typography variant="body2" component="p">{errorText}
+          <Typography variant="body2" component="p">
+            {errorText}
           </Typography>
         </Box>
-        <Button type="submit" variant='contained'>продолжить </Button>
-      </form >
-      {seconds === 0 && (<Button variant='contained' onClick={handleRepeatCodeButton}  >Запросить код  </Button>)}
-
-
-
-
-
-    </>
-  )
-}
-export default AuthenticationCodeInput
+        <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+          <Button type="submit" variant="contained">
+            продолжить{" "}
+          </Button>
+          {seconds === 0 && (
+            <IconButton color="primary" onClick={handleRepeatCodeButton}>
+              <ReplayOutlinedIcon />
+            </IconButton>
+          )}
+        </Box>
+      </form>
+    </Box>
+  );
+};
+export default AuthenticationCodeInput;

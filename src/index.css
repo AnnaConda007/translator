@@ -1,13 +1,31 @@
-:root {    /*html*/
+@font-face {
+  font-family: "SofiaSansCondensed";
+  src: url("../src/assets/fonts/Inter-Regular.ttf");
+}
+@font-face {
+  font-family: "SofiaSansCondensed";
+  src: url("../src/assets/fonts/Inter-ExtraBold.ttf");
+  font-weight: 700; /* Bold weight */
+  font-style: normal;
+}
+
+:root {
+  /*html*/
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  height: 100%; 
+  height: 100%;
 }
 
 body {
   height: 100%;
-  margin: 0; 
- }
+  margin: 0;
+  background-color: #e7d9d9;
+  background-image: url("./assets/img/background.svg");
+  background-repeat: no-repeat;
+  background-position: 0px -30px;
+  background-attachment: fixed;
+  font-family: "SofiaSansCondensed";
+}

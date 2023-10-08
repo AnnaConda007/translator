@@ -1,9 +1,9 @@
-import useTranslate from "../../../hooks/useTranslate";
 import React from "react";
+import useTranslate from "../../../hooks/useTranslate";
 
 interface IWord {
   word: string;
-  getSelectedWords: ()=>string;
+  getSelectedWords: () => string;
   setClickedWord: (arg: string) => void;
   setAnchorEl: (arg: HTMLSpanElement) => void;
 }
@@ -13,22 +13,21 @@ const Word: React.FC<IWord> = ({
   getSelectedWords,
   setClickedWord,
   setAnchorEl,
- }) => {
+}) => {
   const toTranslate = useTranslate();
 
   const handleWordClick = async (
     word: string,
     {
       currentTarget,
-    }: React.MouseEvent<HTMLSpanElement> | React.TouchEvent<HTMLSpanElement>
+    }: React.MouseEvent<HTMLSpanElement> | React.TouchEvent<HTMLSpanElement>,
   ) => {
     const selectedText = getSelectedWords();
     const wordToTranslate = selectedText || word;
-   await toTranslate(wordToTranslate);
+    await toTranslate(wordToTranslate);
     setClickedWord(word);
     setAnchorEl(currentTarget);
   };
-
 
   return (
     <span
@@ -37,7 +36,7 @@ const Word: React.FC<IWord> = ({
         marginRight: "5px",
         display: "inline-block",
       }}
-      onMouseUp ={async (e) => handleWordClick(word, e)}
+      onMouseUp={async (e) => handleWordClick(word, e)}
       onTouchStart={async (e) => handleWordClick(word, e)}
     >
       {word}

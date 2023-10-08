@@ -1,20 +1,20 @@
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AppDispatch } from '../redux/store';
 import DisplayForSelectedBook from "../components/display-for-selected-book/DisplayForSelectedBook";
-import { getAndSetSelectedText } from '../utils/getAndSetSelectedBook';
-import { useDispatch } from 'react-redux';
-import { LoadedBookData } from '../enums/bookEnum';
-import { determineCurrentPage } from '../utils/determineCurrentPage';
+import { LoadedBookData } from "../enums/bookEnum";
+import { AppDispatch } from "../redux/store";
+import { determineCurrentPage } from "../utils/determineCurrentPage";
+import { getAndSetSelectedText } from "../utils/getAndSetSelectedBook";
 
 type RouteParams = {
   bookTitle: string;
 };
 
 const SelectedBookContent = () => {
-  const dispatch: AppDispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch();
   const { bookTitle } = useParams() as RouteParams;
-  dispatch(getAndSetSelectedText(bookTitle))
-  const currentPage = determineCurrentPage(bookTitle)
+  dispatch(getAndSetSelectedText(bookTitle));
+  const currentPage = determineCurrentPage(bookTitle);
   localStorage.setItem(LoadedBookData.CURRENT_TITLE_BOOK, bookTitle);
   return (
     <>

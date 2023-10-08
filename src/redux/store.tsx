@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import librarySlice from './librarySlice';
+import authSlise from "./authSlise";
 import dictionarySlice from "./dictionarySlice";
-import wordsSlice from "./translatorSlice";
 import selectedLanguageSlice from "./languageSlice";
-import visibilitySlice from "./visibilitySlice ";
+import languageUpdateSlice from "./languageUpdateSlice";
+import librarySlice from "./librarySlice";
 import testSlice from "./testSlice";
-import authSlise from './authSlise';
-
+import wordsSlice from "./translatorSlice";
+import visibilitySlice from "./visibilitySlice ";
 const store = configureStore({
   reducer: {
     library: librarySlice,
@@ -15,7 +15,8 @@ const store = configureStore({
     language: selectedLanguageSlice,
     visibility: visibilitySlice,
     test: testSlice,
-    authorization: authSlise
+    authorization: authSlise,
+    languageBox: languageUpdateSlice,
   },
 });
 export type RootStoreState = ReturnType<typeof store.getState>;
