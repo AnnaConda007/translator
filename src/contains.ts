@@ -21,7 +21,7 @@ export const generateUserDatabaseURL_point = ({
 };
 
 // Адрес сервера
-export const serverUrl = "http://localhost:3000";
+export const serverUrl = "https://translator-vzvr.onrender.com";
 
 // Адрес контактной почты
 export const contactAppMail = "annahrulkova@yandex.ru";
