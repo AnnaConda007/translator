@@ -4,7 +4,8 @@ import DisplayForSelectedBook from "../components/display-for-selected-book/Disp
 import { LoadedBookData } from "../enums/bookEnum";
 import { AppDispatch } from "../redux/store";
 import { determineCurrentPage } from "../utils/determineCurrentPage";
-import { getAndSetSelectedText } from "../utils/getAndSetSelectedBook";
+import { getAndSetSelectedText } from "../utils/getAndSetSelectedBook"; 
+import { PageContainer } from './routesStyled';
 
 type RouteParams = {
   bookTitle: string;
@@ -17,9 +18,9 @@ const SelectedBookContent = () => {
   const currentPage = determineCurrentPage(bookTitle);
   localStorage.setItem(LoadedBookData.CURRENT_TITLE_BOOK, bookTitle);
   return (
-    <>
+    <PageContainer>
       <DisplayForSelectedBook currentPage={currentPage} />
-    </>
+    </PageContainer>
   );
 };
 

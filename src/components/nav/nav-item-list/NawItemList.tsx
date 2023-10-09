@@ -1,21 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  StyledList,
-  StyledListItemButton,
-  StyledListItemText,
-} from "./navIteMListStyled";
+import { StyledList, StyledListItemButton, StyledListItemText} from "./navIteMListStyled";
 import { buttonStylesConfig } from "./navIteMListStyled";
 import { navItemsList } from "./navItemsList";
 import { UserData } from "../../../enums/authEnum";
 import { NavItemKeys } from "../../../enums/navItemKeysEnum";
 import { AppDispatch, RootStoreState } from "../../../redux/store";
 import { toggleVisibilityMenuItem } from "../../../redux/visibilitySlice ";
+import { toggleVisibilityMenuOpen } from '../../../redux/visibilitySlice ';
 
 interface NawItemListProps {
   setOpenAuthPopover: (value: HTMLElement | null) => void;
 }
 
-const NawItemList: React.FC<NawItemListProps> = ({ setOpenAuthPopover }) => {
+const NawItemList: React.FC<NawItemListProps> = ({ setOpenAuthPopover }) => {  
   const dispatch: AppDispatch = useDispatch();
   const visibilityMenuItem: string = useSelector(
     (state: RootStoreState) => state.visibility.menuItem,
@@ -31,10 +28,13 @@ const NawItemList: React.FC<NawItemListProps> = ({ setOpenAuthPopover }) => {
       return;
     }
     if (menuItem === visibilityMenuItem) {
-      dispatch(toggleVisibilityMenuItem(""));
+      dispatch(toggleVisibilityMenuItem("")); 
+      dispatch(toggleVisibilityMenuOpen(true))
       return;
+    } else {
+      dispatch(toggleVisibilityMenuOpen(false))
+      dispatch(toggleVisibilityMenuItem(menuItem)); 
     }
-    dispatch(toggleVisibilityMenuItem(menuItem));
   };
 
   return (

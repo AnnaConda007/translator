@@ -2,42 +2,34 @@ import { Box, ListItem, ListItemText, List } from "@mui/material";
 import { styled } from "@mui/system";
 import { alpha } from "@mui/system";
 
-export const StyledWrapBox = styled(Box)`
-  ${({ theme }) => `
-    width: 280px; 
-    height: 360px;  
-    border-radius: 10px;
-    margin-right: 50px;
-    box-sizing: border-box;
-    display: flex; 
-    justify-content: center;
-    flex-wrap: wrap;
-    background: linear-gradient(to bottom right, ${theme.palette.primary.light}, ${theme.palette.primary.light});
-  
-    box-shadow: 0 0 10px 5px ${theme.palette.secondary.light};
  
-    @media (max-width: 900px) { 
-      margin-right: 0;
-      box-shadow: 0 0 20px 25px ${theme.palette.primary.light};
-    }
-    @media (max-width: 705px) { 
-
-      width: 100%;    
-      position: absolute;  
-      z-index:0
-    }
-  `}
-`;
-
-export const StyledContentBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.main,
+export const StyledContentBacking = styled(Box)( {
+  boxSizing:"border-box", 
   borderRadius: "10px",
-  width: "230px",
-  height: "300px",
-  marginTop: "5px",
-  marginBottom: "20px",
-  position: "relative",
-}));
+  width:"100%", 
+  height:"75%",
+  maxWidth:"350px", 
+  marginRight: "50px", 
+  padding:"15px",
+  display: "flex", 
+  flexDirection:"column",
+  '@media (max-width: 900px)': { 
+  maxWidth: "none",
+      width: "100%", 
+  height:"100%",
+      marginRight: "0px", 
+  }
+});
+
+
+export const StyledContentBox = styled(Box)( { 
+  display: "flex", 
+  justifyContent:"center", 
+  width:"100%",  
+  flexGrow:"1",
+  boxSizing:"border-box",   
+});
+
 
 export const ListStyled = styled(List)({
   overflowY: "auto",

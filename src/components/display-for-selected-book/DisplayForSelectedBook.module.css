@@ -1,8 +1,10 @@
-.Box {
-  max-width: 900px;
+.Box { 
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-  justify-content: center;
+  height: 100%; 
+  width: 100%;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center; 
 }

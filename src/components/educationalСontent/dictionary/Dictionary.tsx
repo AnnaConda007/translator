@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { IconButton } from "@mui/material";
+import { IconButton ,Box} from "@mui/material";
 import { useSelector, useDispatch, batch } from "react-redux";
 import { UserData } from "../../../enums/authEnum";
 import { TypeActionWordDictionary } from "../../../enums/dictionaryEnum";
@@ -11,15 +11,10 @@ import { RootStoreState, AppDispatch } from "../../../redux/store";
 import { toggleVisibilityTranlsation } from "../../../redux/visibilitySlice ";
 import { add_DeliteWordInBD } from "../../../utils/updateData/add_DeliteWordInDictionary";
 import AuthPopove from "../../authPopover/AuthPopover";
-import TranslationInput from "../../translation-input/TranslationInput";
-import Backing from "../Backing";
-import {
-  StyledContentBox,
-  ListItemStyled,
-  ListItemTextStyled,
-  ListStyled,
-} from "../Styled";
-
+import TranslationInput from "../../translation-input/TranslationInput"; 
+import {   ListItemStyled, ListItemTextStyled, ListStyled} from "../Styled";
+import ContentConteiner from '../content-conteiner/ContentConteiner';
+import theme from '../../../muiThem';
 const Dictionary: React.FC = () => {
   const userIsRegistered = localStorage.getItem(UserData.USER_ID);
   const [OpenAuthPopover, setOpenAuthPopover] = useState<HTMLElement | null>(
@@ -52,9 +47,9 @@ const Dictionary: React.FC = () => {
     dispatch(toggleVisibilityTranlsation(!clickedAddButton));
   };
 
-  return (
-    <Backing>
-      <StyledContentBox>
+  return ( 
+      <ContentConteiner>
+        <Box sx={{width:"100%"}}>
         <IconButton
           color="primary"
           onClick={(e) => toggleInputVisibility(e.currentTarget)}
@@ -67,7 +62,7 @@ const Dictionary: React.FC = () => {
           setAnchorEl={setOpenAuthPopover}
           popoverValue={"что бы добавить свои cлова в словарь"}
         />
-        <ListStyled>
+        <ListStyled  >
           {dictionary.map((entry) => {
             return (
               <ListItemStyled key={entry.foreignWord} dense>
@@ -89,8 +84,8 @@ const Dictionary: React.FC = () => {
             );
           })}
         </ListStyled>
-      </StyledContentBox>
-    </Backing>
+        </Box>
+      </ContentConteiner> 
   );
 };
 

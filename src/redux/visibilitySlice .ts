@@ -3,6 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   menuItem: "",
+  menuOpen :true,
   translationInput: false,
   translate: false,
   addNewBookInput: false,
@@ -13,6 +14,9 @@ const visibilitySlice = createSlice({
   name: "visibility",
   initialState,
   reducers: {
+    toggleVisibilityMenuOpen: (state, action: PayloadAction<boolean>) => {
+      state.menuOpen = action.payload;
+    },
     toggleVisibilityMenuItem: (state, action: PayloadAction<string>) => {
       state.menuItem = action.payload;
     },
@@ -39,6 +43,7 @@ const visibilitySlice = createSlice({
       state.translationInput = false;
       state.addNewBookInput = false;
       state.authCodeInput = false;
+      state.menuOpen = true;
     },
   },
 });
@@ -50,6 +55,7 @@ export const {
   toggleAuthCodeInput,
   resetVisibility,
   toggleVisibilityTranlsation,
+  toggleVisibilityMenuOpen,
   toggleVisibilityAuthForm,
 } = visibilitySlice.actions;
 export default visibilitySlice.reducer;

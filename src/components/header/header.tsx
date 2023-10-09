@@ -1,26 +1,19 @@
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import { Box, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import styles from "./header.module.css";
+import { Box } from "@mui/material"; 
 import LanguageButton from "./language/language-button/LaguageButton";
-import LogOutButton from "./logOutButton/LogOutButton";
-import { RoutesApp } from "../../enums/routesAppEnum";
+import LogOutButton from "./logOutButton/LogOutButton"; 
+import HeaderStyled from './HeaderStyled';
+import HomeButton from './HomeButton';
 
-const Header = () => {
-  const navigate = useNavigate();
-  const handleHome = () => {
-    navigate(RoutesApp.HOME);
-  };
+const Header = () => { 
   return (
-    <Box className={styles.header}>
+    <HeaderStyled>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <LanguageButton />
-        <IconButton onClick={handleHome}>
-          <HomeOutlinedIcon />
-        </IconButton>
+        <LanguageButton /> 
+          <HomeButton />
+      
       </Box>
       <LogOutButton />
-    </Box>
+    </HeaderStyled>
   );
 };
 

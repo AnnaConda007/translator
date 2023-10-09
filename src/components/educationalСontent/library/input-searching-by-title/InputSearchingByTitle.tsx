@@ -22,7 +22,7 @@ const InputSearchingByTitle: React.FC = () => {
 
   return (
     <TextField
-      sx={{}}
+      sx={{  width:"100%"}}
       id="standard-basic"
       label="Найти книгу"
       variant="standard"

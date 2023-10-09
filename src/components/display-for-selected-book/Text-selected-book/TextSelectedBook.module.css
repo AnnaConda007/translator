@@ -1,8 +1,10 @@
-.paper {
-  height: fit-content;
-  max-width: 900px;
-  width: 100%;
-  padding: 20px;
+.paper {   
+  width: 100%;  
+  flex-grow: 1;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
+  align-items: center;
 }
+
+
+ 

@@ -2,11 +2,11 @@ import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/header/header";
+import Header from "./components/header/Header";
 import theme from "./muiThem";
 import store from "./redux/store";
 import Auth from "./routes/Auth";
-import Home from "./routes/home/Home";
+import Home from "./routes/Home";
 import SelectedBookContent from "./routes/SelectedBookPage";
 
 const MainRoutes: React.FC = () => (

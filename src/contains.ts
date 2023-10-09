@@ -42,3 +42,11 @@ export const languages: Array<{ [key: string]: string }> = [
   { турецкий: "tr" },
   { корейский: "ko" },
 ];
+
+
+
+export const breakpoints = {
+  mobile:450,
+  tablet: 750,
+  desktop: 1024,
+};

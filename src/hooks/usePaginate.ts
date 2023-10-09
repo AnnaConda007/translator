@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootStoreState } from "../redux/store";
 import { paginateText } from "../utils/paginateText";
-
+import { breakpoints } from '../contains';
 export const usePaginate = (initialCurrentPage: number) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [maxLinesPerPage, setMaxLinesPerPage] = useState(10);
@@ -26,15 +26,15 @@ export const usePaginate = (initialCurrentPage: number) => {
   }, []);
 
   useEffect(() => {
-    if (windowWidth <= 480) {
-      setMaxLinesPerPage(13);
-      setMaxCharsPerLine(30);
-    } else if (windowWidth <= 768) {
-      setMaxLinesPerPage(25);
-      setMaxCharsPerLine(60);
+    if (windowWidth <= breakpoints.mobile) {
+      setMaxLinesPerPage(30);
+      setMaxCharsPerLine(40);
+    } else if (windowWidth <= breakpoints.desktop) {
+      setMaxLinesPerPage(40);
+      setMaxCharsPerLine(80);
     } else {
-      setMaxLinesPerPage(18);
-      setMaxCharsPerLine(90);
+      setMaxLinesPerPage(20);
+      setMaxCharsPerLine(110);
     }
   }, [windowWidth]);
 

@@ -19,8 +19,8 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   };
 
   return (
-    <Paper
-      sx={{ backgroundColor: "#FFE4B5" }}
+    <Paper  
+    
       className={styles.paper}
       onMouseUp={selectedText}
       onTouchEnd={selectedText}
