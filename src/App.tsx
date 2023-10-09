@@ -2,7 +2,7 @@ import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from './components/header/Header';
+import Header from './components/header/HHeader';
 import theme from "./muiThem";
 import store from "./redux/store";
 import Auth from "./routes/Auth";
