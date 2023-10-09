@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import HeaderStyled from "./HeaderStyled";
-import HomeButton from "./HomeButton";
-import LanguageButton from "./language/language-button/LaguageButton";
-import LogOutButton from "./logOutButton/LogOutButton";
+import HeaderStyled from "./header/HeaderStyled";
+import HomeButton from "./header/HomeButton";
+import LanguageButton from "./header/language/language-button/LaguageButton";
+import LogOutButton from "./header/logOutButton/LogOutButton";
 
 const Header = () => {
   return (
