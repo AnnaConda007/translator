@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material/";
-import {  useSelector } from "react-redux";
-import { RootStoreState } from "../../redux/store"; 
+import { useSelector } from "react-redux";
+import { RootStoreState } from "../../redux/store";
 
 interface OpenFormButtonProps {
   value: string;
@@ -18,7 +18,7 @@ const OpenFormButton: React.FC<OpenFormButtonProps> = ({
 
   return (
     <>
-      {selectedButton == "" && (
+      {selectedButton === "" && (
         <Button variant="contained" onClick={() => handleButton(value)}>
           {value}
         </Button>

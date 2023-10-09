@@ -19,8 +19,7 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   };
 
   return (
-    <Paper  
-    
+    <Paper
       className={styles.paper}
       onMouseUp={selectedText}
       onTouchEnd={selectedText}

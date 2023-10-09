@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { breakpoints } from "../contains";
 import { RootStoreState } from "../redux/store";
 import { paginateText } from "../utils/paginateText";
-import { breakpoints } from '../contains';
 export const usePaginate = (initialCurrentPage: number) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [maxLinesPerPage, setMaxLinesPerPage] = useState(10);

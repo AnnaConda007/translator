@@ -31,7 +31,7 @@ const TranslationInput: React.FC = () => {
         position: "absolute",
         zIndex: "2",
         backgroundColor: theme.palette.secondary.main,
-        width:"100%"
+        width: "100%",
       }}
     >
       <TextField

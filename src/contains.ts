@@ -43,10 +43,8 @@ export const languages: Array<{ [key: string]: string }> = [
   { корейский: "ko" },
 ];
 
-
-
 export const breakpoints = {
-  mobile:450,
+  mobile: 450,
   tablet: 750,
   desktop: 1024,
 };

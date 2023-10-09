@@ -2,34 +2,31 @@ import { Box, ListItem, ListItemText, List } from "@mui/material";
 import { styled } from "@mui/system";
 import { alpha } from "@mui/system";
 
- 
-export const StyledContentBacking = styled(Box)( {
-  boxSizing:"border-box", 
+export const StyledContentBacking = styled(Box)({
+  boxSizing: "border-box",
   borderRadius: "10px",
-  width:"100%", 
-  height:"75%",
-  maxWidth:"350px", 
-  marginRight: "50px", 
-  padding:"15px",
-  display: "flex", 
-  flexDirection:"column",
-  '@media (max-width: 900px)': { 
-  maxWidth: "none",
-      width: "100%", 
-  height:"100%",
-      marginRight: "0px", 
-  }
+  width: "100%",
+  height: "75%",
+  maxWidth: "350px",
+  marginRight: "50px",
+  padding: "15px",
+  display: "flex",
+  flexDirection: "column",
+  "@media (max-width: 900px)": {
+    maxWidth: "none",
+    width: "100%",
+    height: "100%",
+    marginRight: "0px",
+  },
 });
 
-
-export const StyledContentBox = styled(Box)( { 
-  display: "flex", 
-  justifyContent:"center", 
-  width:"100%",  
-  flexGrow:"1",
-  boxSizing:"border-box",   
+export const StyledContentBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+  flexGrow: "1",
+  boxSizing: "border-box",
 });
-
 
 export const ListStyled = styled(List)({
   overflowY: "auto",

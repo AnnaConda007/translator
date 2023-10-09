@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   menuItem: "",
-  menuOpen :true,
+  menuOpen: true,
   translationInput: false,
   translate: false,
   addNewBookInput: false,

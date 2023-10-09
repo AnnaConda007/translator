@@ -1,20 +1,16 @@
- 
-import { StyledContentBox, StyledContentBacking} from '../Styled'
-import CloaeContentButton from '../cloaeContentButton/CloaeContentButton';
-interface ContentConteinerProps{
+import CloaeContentButton from "../cloaeContentButton/CloaeContentButton";
+import { StyledContentBox, StyledContentBacking } from "../Styled";
+interface ContentConteinerProps {
   children: React.ReactNode;
 }
 
-const ContentConteiner:React.FC<ContentConteinerProps> = ({children})=>{
-return(
-<StyledContentBacking>
-<CloaeContentButton/>
-<StyledContentBox>
-{children}
-</StyledContentBox>
-</StyledContentBacking>
+const ContentConteiner: React.FC<ContentConteinerProps> = ({ children }) => {
+  return (
+    <StyledContentBacking>
+      <CloaeContentButton />
+      <StyledContentBox>{children}</StyledContentBox>
+    </StyledContentBacking>
+  );
+};
 
-)
-}
-
-export default ContentConteiner
+export default ContentConteiner;

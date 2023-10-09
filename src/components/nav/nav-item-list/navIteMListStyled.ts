@@ -1,8 +1,7 @@
 import { ListItemButton, ListItemText, List } from "@mui/material";
 import { styled } from "@mui/system";
+import { breakpoints } from "../../../contains";
 import { NavItemKeys } from "../../../enums/navItemKeysEnum";
-import { breakpoints } from '../../../contains';
-
 
 export const buttonStylesConfig = {
   [NavItemKeys.LIBRARY]: {
@@ -48,10 +47,10 @@ export const StyledListItemButton = styled(
     margin: margin || "20px  0px",
     alignSelf: alignself,
     padding: padding,
-   [ `@media (max-width: ${breakpoints.mobile}px)`]: { 
+    [`@media (max-width: ${breakpoints.mobile}px)`]: {
       alignSelf: "center",
-      padding: "10px 0px", 
-      width: "90%", 
+      padding: "10px 0px",
+      width: "90%",
     },
   }),
 );

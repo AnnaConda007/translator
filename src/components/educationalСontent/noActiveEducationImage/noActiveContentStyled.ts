@@ -1,16 +1,15 @@
-import styled from 'styled-components'; 
-import { breakpoints } from '../../../contains';
+import styled from "styled-components";
+import { breakpoints } from "../../../contains";
 
 export const MainImage = styled.img`
-width: 370px;
+  width: 370px;
   @media (max-width: ${breakpoints.tablet}px) {
     display: none;
   }
 `;
- 
 
 export const SmallImage = styled.img`
-display: none;
+  display: none;
   @media (max-width: ${breakpoints.tablet}px) {
     display: block;
   }
@@ -18,4 +17,3 @@ display: none;
     display: none;
   }
 `;
- 
