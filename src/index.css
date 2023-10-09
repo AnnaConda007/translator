@@ -17,6 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   height: 100%;
+  
 }
 
 body {
@@ -28,4 +29,9 @@ body {
   background-position: 0px -30px;
   background-attachment: fixed;
   font-family: "SofiaSansCondensed";
+}
+
+::selection {
+  background-color: rgba(185, 253, 101, 0.5); /* полупрозрачный синий */
+  color: rgb(0, 0, 0);
 }
