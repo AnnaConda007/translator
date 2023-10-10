@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import  { useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { DataBasePoints } from "../../../enums/dataBasePointsEnum";
 import { setLanguage } from "../../../redux/languageSlice";
 import { RootStoreState } from "../../../redux/store";
 
-const ChooseLanguage: React.FC = () => {
+function ChooseLanguage () {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector(
     (state: RootStoreState) => state.language,

@@ -9,7 +9,7 @@ import { RootStoreState } from "../../redux/store";
 import { toggleAddNewBookInput } from "../../redux/visibilitySlice ";
 import { addNewBookInLibrary } from "../../utils/updateData/addNewBook";
 
-const AddNewBookInput: React.FC = () => {
+function AddNewBookInput () {
   const dispatch = useDispatch();
   const [titleBook, setTitleBook] = useState("");
   const [errorLoad, setErrorLoad] = useState(false);
