@@ -1,6 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
-import styles from "./DisplayForSelectedBook.module.css";
+import { StyledBoxForBook } from "./DisplayForSelectedBookStyled";
 import PaginateButton from "./paginate-button/PaginateButton";
 import TextSelectedBook from "./Text-selected-book/TextSelectedBook";
 import { ButtonPaginnationDirection } from "../../enums/paginnationDirectionEnum";
@@ -24,7 +23,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
     return <Load />;
   }
   return (
-    <Box className={styles.Box}>
+    <StyledBoxForBook>
       <TextSelectedBook currentPageText={currentPageText} />
       <div>
         {currentPageNumber > 1 && (
@@ -47,7 +46,7 @@ const DisplayForSelectedBook: React.FC<DisplayForSelectedBookProps> = ({
           />
         )}
       </div>
-    </Box>
+    </StyledBoxForBook>
   );
 };
 

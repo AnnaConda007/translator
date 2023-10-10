@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Box } from "@mui/material";
+import { TextField } from "@mui/material";
 import jschardet from "jschardet";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import styles from "./addNewBookInput.module.css";
-import theme from "../../muiThem";
+import { AddNewBookBox } from "./AddNewBookStyled";
 import { addTitles } from "../../redux/librarySlice";
 import { RootStoreState } from "../../redux/store";
 import { toggleAddNewBookInput } from "../../redux/visibilitySlice ";
@@ -94,9 +93,7 @@ const AddNewBookInput: React.FC = () => {
   };
 
   return (
-    <Box
-      className={styles.addNewBookInput}
-      sx={{ backgroundColor: theme.palette.secondary.main }}
+    <AddNewBookBox
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       style={{ textAlign: "center" }}
@@ -120,7 +117,7 @@ const AddNewBookInput: React.FC = () => {
       />
       <p>Перетащите файл сюда или нажмите, чтобы выбрать файл</p>
       {errorLoad && <span> {unrecognizedErrorText} </span>}
-    </Box>
+    </AddNewBookBox>
   );
 };
 

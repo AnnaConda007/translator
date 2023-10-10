@@ -24,7 +24,7 @@ export const useDoubleAuthentication = () => {
       return;
     }
     const autentificationCode = await sendDoubleAuthenticationCode(userEmail);
-     batch(() => {
+    batch(() => {
       dispatch(setAutentificationCode(autentificationCode));
       dispatch(toggleAuthCodeInput(true));
     });

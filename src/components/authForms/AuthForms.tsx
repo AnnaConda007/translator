@@ -1,11 +1,10 @@
 import { useCallback } from "react";
-import { Box } from "@mui/material/";
 import { useDispatch, useSelector } from "react-redux";
+import { StyledAuthFormBox } from "./authStyled";
+import { StyledButtonsConteiner, StyledButtonBox } from "./authStyled";
 import OpenFormButton from "./OpenFormButton";
 import SignInForm from "./signIn/SignIn";
 import SignUpForm from "./signUp/SignUp";
-import styles from "./styles/authForm.module.css";
-import { StyledButtonsConteiner, StyledButtonBox } from "./styles/authStyled";
 import { resetForms } from "../../redux/authSlise";
 import { RootStoreState } from "../../redux/store";
 import { toggleVisibilityAuthForm } from "../../redux/visibilitySlice ";
@@ -33,7 +32,7 @@ const AuthForms = () => {
   );
 
   return (
-    <Box className={styles.authForm}>
+    <StyledAuthFormBox>
       <StyledButtonsConteiner>
         <StyledButtonBox>
           <OpenFormButton
@@ -54,7 +53,7 @@ const AuthForms = () => {
           )}
         </StyledButtonBox>
       </StyledButtonsConteiner>
-    </Box>
+    </StyledAuthFormBox>
   );
 };
 

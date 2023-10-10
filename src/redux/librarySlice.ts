@@ -40,8 +40,8 @@ const librarySlice = createSlice({
     },
     resetLibrary: (state) => {
       (state.selectedBookText = ""),
-      (state.titlesBook = []),
-      (state.filteredTitles = []);
+        (state.titlesBook = []),
+        (state.filteredTitles = []);
     },
   },
 });

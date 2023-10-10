@@ -6,8 +6,8 @@ import { RootStoreState } from "../../../redux/store";
 import AutButton from "../authButton/AuthButton";
 import AuthLogin from "../authLogin/AuthLogin";
 import AuthPassword from "../authPassword/AuthPassword";
+import { StyledFormBox } from "../authStyled";
 import CloseFormButton from "../closeFormButton";
-import { StyledFormBox } from "../styles/authStyled";
 
 interface SignUpFormProps {
   buttonValue: string;

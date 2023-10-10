@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Paper, Typography } from "@mui/material";
-import styles from "./TextSelectedBook.module.css";
+import { Typography } from "@mui/material";
+import { StyledPaper } from "./TextSelectedBookStyled";
 import TranslationPopover from "../translation-popover/TranslationPopover";
 import Word from "../word/Word";
 
@@ -19,11 +19,7 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
   };
 
   return (
-    <Paper
-      className={styles.paper}
-      onMouseUp={selectedText}
-      onTouchEnd={selectedText}
-    >
+    <StyledPaper onMouseUp={selectedText} onTouchEnd={selectedText}>
       <Typography variant="body1">
         {currentPageText.split("\n").map((paragraph, idx1) => (
           <span key={idx1}>
@@ -43,7 +39,7 @@ const TextSelectedBook: React.FC<TextSelectedTextProps> = ({
       {clickedWord ? (
         <TranslationPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
       ) : null}
-    </Paper>
+    </StyledPaper>
   );
 };
 

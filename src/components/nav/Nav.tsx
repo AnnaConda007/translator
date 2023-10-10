@@ -1,10 +1,11 @@
-import { useState} from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import NawItemList from "./nav-item-list/NawItemList";
-import styles from "./nav.module.css";
+import { NavStyled } from "./NavStyled";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { RootStoreState } from "../../redux/store";
 import AuthPopove from "../authPopover/AuthPopover";
+
 const Nav: React.FC = () => {
   const [OpenAuthPopover, setOpenAuthPopover] = useState<HTMLElement | null>(
     null,
@@ -15,17 +16,14 @@ const Nav: React.FC = () => {
   const isMobile = useScreenSize();
 
   return (
-    <nav
-      className={styles.nav}
-      style={{ display: isMobile && !isMenuOpen ? "none" : "block" }}
-    >
+    <NavStyled style={{ display: isMobile && !isMenuOpen ? "none" : "block" }}>
       <AuthPopove
         anchorEl={OpenAuthPopover}
         setAnchorEl={setOpenAuthPopover}
         popoverValue={"что бы проверить себя"}
       />
       <NawItemList setOpenAuthPopover={setOpenAuthPopover} />
-    </nav>
+    </NavStyled>
   );
 };
 export default Nav;

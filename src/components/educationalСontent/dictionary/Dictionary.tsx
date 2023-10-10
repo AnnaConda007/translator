@@ -5,7 +5,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { IconButton, Box } from "@mui/material";
 import { useSelector, useDispatch, batch } from "react-redux";
 import { UserData } from "../../../enums/authEnum";
-import { TypeActionWordDictionary } from "../../../enums/dictionaryEnum"; 
+import { TypeActionWordDictionary } from "../../../enums/dictionaryEnum";
 import { IEntry, removeWord } from "../../../redux/dictionarySlice";
 import { RootStoreState, AppDispatch } from "../../../redux/store";
 import { toggleVisibilityTranlsation } from "../../../redux/visibilitySlice ";

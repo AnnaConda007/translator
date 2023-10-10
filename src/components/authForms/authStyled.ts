@@ -28,3 +28,11 @@ export const StyledButtonBox = styled(Box)({
   width: "100%",
   margin: "10px",
 });
+
+export const StyledAuthFormBox = styled(Box)({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignContent: "center",
+  height: "100%",
+});

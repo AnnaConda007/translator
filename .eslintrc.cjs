@@ -20,6 +20,8 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint", "import"],
   rules: {
+    quotes: ["error", "single"],
+    indent: ["error", 2],
     "import/order": [
       "error",
       {

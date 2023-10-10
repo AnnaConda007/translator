@@ -27,11 +27,11 @@ const CardIdentifier: React.FC<CardIdentifierProp> = ({
 
       {currentCount >= stepToChangeTestType &&
         currentCount < stepToChangeTestType * 2 && (
-        <EnteredMatch
-          flashCardData={currentCards}
-          languageTested={LanguageMatchTested.RUSSIAN}
-        />
-      )}
+          <EnteredMatch
+            flashCardData={currentCards}
+            languageTested={LanguageMatchTested.RUSSIAN}
+          />
+        )}
 
       {currentCount >= stepToChangeTestType * 2 && (
         <EnteredMatch
