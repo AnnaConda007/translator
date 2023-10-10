@@ -7,11 +7,14 @@ import { resetLanguage } from "../../../redux/languageSlice";
 import { resetActiveCardNumber, resetTest } from "../../../redux/testSlice";
 import { resetTranslator } from "../../../redux/translatorSlice";
 import { resetVisibility } from "../../../redux/visibilitySlice ";
+import { UserData } from '../../../enums/authEnum';
 
 const LogOutButton = () => {
   const dispanch = useDispatch();
-  const navigate = useNavigate();
-  const handleButton = () => {
+  const navigate = useNavigate(); 
+  const userId = localStorage.getItem(UserData.USER_ID)
+
+  const handleButtonLogOut = () => {
     batch(() => {
       dispanch(resetActiveCardNumber());
       dispanch(resetDictionary());
@@ -23,10 +26,18 @@ const LogOutButton = () => {
     navigate(RoutesApp.AUTHORIZATION);
     localStorage.clear();
   };
+
+  const handleButtonAuth = ()=>{
+    navigate(RoutesApp.AUTHORIZATION)
+  }
   return (
-    <Button variant="contained" onClick={handleButton}>
+    <>  
+   {userId ? ( <Button variant="contained" onClick={handleButtonLogOut}>
       выйти
-    </Button>
+    </Button>) : (<Button variant="contained" onClick={handleButtonAuth}>
+      Авторизация
+    </Button>)} 
+    </>
   );
 };
 
