@@ -1,6 +1,6 @@
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
-import { generateUserDatabaseURL_point } from "../contains";
+import { generateUserDatabaseURL_point } from "../constants";
 import { UserData } from "../enums/authEnum";
 import { DataBasePoints } from "../enums/dataBasePointsEnum";
 import { setDictionary } from "../redux/dictionarySlice";

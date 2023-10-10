@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { List, ListItemButton, ListItemText } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { languages } from "../../../../contains";
+import { languages } from "../../../../constants";
 import { setLanguageCode } from "../../../../redux/languageUpdateSlice";
 import { RootStoreState } from "../../../../redux/store";
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverUrl } from "../contains";
+import { serverUrl } from "../constants";
 let IAM_TOKEN: string;
 
 const getIAMToken = async () => {

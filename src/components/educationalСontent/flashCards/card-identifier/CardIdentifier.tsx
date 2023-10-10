@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { stepToChangeTestType } from "../../../../contains";
+import { stepToChangeTestType } from "../../../../constants";
 import { LanguageMatchTested } from "../../../../enums/dictionaryEnum";
 import { RootStoreState } from "../../../../redux/store";
 import { IFlashCardData } from "../../../../redux/testSlice";

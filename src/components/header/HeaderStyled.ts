@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
-import { breakpoints } from "../../contains";
+import { breakpoints } from "../../constants";
 
 const HeaderStyled = styled(Box)`
   position: relative;

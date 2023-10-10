@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { languages } from "../../../contains";
+import { languages } from "../../../constants";
 import { DataBasePoints } from "../../../enums/dataBasePointsEnum";
 import { setLanguage } from "../../../redux/languageSlice";
 import { RootStoreState } from "../../../redux/store";

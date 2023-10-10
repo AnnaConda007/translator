@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoints } from "../../../contains";
+import { breakpoints } from "../../../constants";
 
 export const MainImage = styled.img`
   width: 370px;

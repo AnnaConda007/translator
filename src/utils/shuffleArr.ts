@@ -1,4 +1,4 @@
-import { amountAnswerOption } from "../contains";
+import { amountAnswerOption } from "../constants";
 
 export const shuffleArr = <T>(array: Array<T>) => {
   const shuffleArray = [...array];

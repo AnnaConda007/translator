@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { breakpoints } from "../contains";
+import { breakpoints } from "../constants";
 
 export const useScreenSize = () => {
   const [isMobile, setIsMobile] = useState(

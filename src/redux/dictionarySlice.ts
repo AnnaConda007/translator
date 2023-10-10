@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ITestResult } from "./testSlice";
-import { stepToChangeTestType } from "../contains";
+import { stepToChangeTestType } from "../constants";
 export interface dataFromBD {
   counter: number;
   russianWord: string;

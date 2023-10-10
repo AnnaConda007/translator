@@ -1,6 +1,6 @@
 import { ListItemButton, ListItemText, List } from "@mui/material";
 import { styled } from "@mui/system";
-import { breakpoints } from "../../../contains";
+import { breakpoints } from "../../../constants";
 import { NavItemKeys } from "../../../enums/navItemKeysEnum";
 
 export const buttonStylesConfig = {

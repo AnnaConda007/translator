@@ -1,4 +1,4 @@
-import { generateUserDatabaseURL_point } from "../../contains";
+import { generateUserDatabaseURL_point } from "../../constants";
 import { UserData } from "../../enums/authEnum";
 import { DataBasePoints } from "../../enums/dataBasePointsEnum";
 import { dataFromBD } from "../../redux/dictionarySlice";

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverUrl } from "../../contains";
+import { serverUrl } from "../../constants";
 import { UserData } from "../../enums/authEnum";
 
 export const addNewBookInLibrary = async (

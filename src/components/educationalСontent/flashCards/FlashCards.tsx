@@ -3,7 +3,7 @@ import { Card, Typography, CardContent } from "@mui/material/";
 import { useSelector, useDispatch } from "react-redux";
 import CardIdentifier from "./card-identifier/CardIdentifier";
 import CardWithResult from "./card-with-result/CardWithResult";
-import { amountOfTestCard } from "../../../contains";
+import { amountOfTestCard } from "../../../constants";
 import { IEntry } from "../../../redux/dictionarySlice";
 import { RootStoreState } from "../../../redux/store";
 import { setCurrentCards, IFlashCardData } from "../../../redux/testSlice";

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { serverUrl } from "../contains";
+import { serverUrl } from "../constants";
 import { UserData } from "../enums/authEnum";
 import { setSelectedBookText } from "../redux/librarySlice";
 

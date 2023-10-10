@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { breakpoints } from "../contains";
+import { breakpoints } from "../constants";
 import { RootStoreState } from "../redux/store";
 import { paginateText } from "../utils/paginateText";
 export const usePaginate = (initialCurrentPage: number) => {

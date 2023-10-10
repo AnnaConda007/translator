@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverUrl } from "../../contains";
+import { serverUrl } from "../../constants";
 
 export const createFolerAtYandexDisk = async (userId: string) => {
   try {
