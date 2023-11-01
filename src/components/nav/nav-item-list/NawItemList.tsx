@@ -27,7 +27,7 @@ const NawItemList: React.FC<NawItemListProps> = ({ setOpenAuthPopover }) => {
     currentTarget: HTMLElement | null,
   ) => {
     const userIsRegistered = localStorage.getItem(UserData.USER_ID);
-    if (!userIsRegistered && menuItem === NavItemKeys.TESTING) {
+    if (!userIsRegistered && menuItem === NavItemKeys.TESTING ||!userIsRegistered && menuItem === NavItemKeys.DICTIONARY ) {
       setOpenAuthPopover(currentTarget);
       return;
     }

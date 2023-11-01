@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 
 export const StyledFormBox = styled(Box)(({ theme }) => ({
   maxWidth: "230px",
-  height: "550px",
   display: "flex",
   flexWrap: "wrap",
   alignItems: "center",

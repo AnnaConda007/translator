@@ -26,7 +26,7 @@ const TitlesList: React.FC = () => {
   return (
     <>
       {!filteredBookTitles.length && (
-        <Typography>Добавьте свою книгу</Typography>
+        <Typography>Добавьте свою книгу в формате .txt</Typography>
       )}
       <ListStyled>
         {filteredBookTitles.map((bookName) => (
