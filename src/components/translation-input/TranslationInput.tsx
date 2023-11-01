@@ -5,6 +5,7 @@ import TranslateActionButton from "./translate-action-button/TranslateActionButt
 import TranslationResultDisplay from "./translation-result-display/TranslationResultDisplay ";
 import { useHandleTranslate } from "../../hooks/autentiification/useHandleTranslate";
 import theme from "../../muiThem";
+import { breakpoints } from "../../constants";
 
 const TranslationInput: React.FC = () => {
   const translateInputValue = useHandleTranslate();
@@ -31,7 +32,10 @@ const TranslationInput: React.FC = () => {
         position: "absolute",
         zIndex: "2",
         backgroundColor: theme.palette.secondary.main,
-        width: "100%",
+        width: "350px",
+        [`@media (max-width: ${breakpoints.tablet}px)`]: {
+          width: "95%",
+        },
       }}
     >
       <TextField
